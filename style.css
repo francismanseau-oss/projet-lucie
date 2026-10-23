@@ -4,3 +4,7 @@
 
 /* Navigation mobile : icône hamburger seule, à l'extrême droite */
 @media(max-width:760px){.header .languages{order:3}.header .menu-toggle{order:4;margin-left:0;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;font-size:0;line-height:1;border:0;background:transparent;color:#25201d;padding:8px}.header .menu-toggle::before{content:'☰';font-size:27px;line-height:1}.header .menu-toggle[aria-expanded="true"]::before{content:'✕';font-size:25px}.header nav{order:5}}
+
+/* Retour en haut : uniquement sur téléphone, après défilement */
+.back-to-top{display:none}
+@media(max-width:760px){.back-to-top{position:fixed;right:16px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:100;width:46px;height:46px;border:0;border-radius:50%;background:#865038;color:#fff;font-size:28px;line-height:1;box-shadow:0 3px 12px #0004;display:block;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(8px);transition:opacity .2s,transform .2s,visibility .2s}.back-to-top.visible{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}.back-to-top:focus-visible{outline:3px solid #222;outline-offset:3px}}
