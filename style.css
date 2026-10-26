@@ -270,3 +270,39 @@
   .cart-page .cart-actions .button{justify-content:center}
   .cart-summary{flex-direction:column;align-items:flex-start}
 }
+
+/* Paiement — boutons arrondis (même esprit que le panier) */
+.payment-page .cart-actions,
+.payment-demo .cart-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  margin-top:22px;
+}
+.payment-page .button,
+.payment-demo .button,
+.payment-page .button-checkout,
+.payment-page .button-ghost,
+.payment-demo .button-checkout,
+.payment-demo .button-ghost{
+  border-radius:999px !important;
+  padding:15px 26px;
+  font-size:14px;
+  font-weight:700;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+.payment-page .button-checkout,
+.payment-demo .button-checkout{
+  background:linear-gradient(135deg,#c9a227 0%,#e8c56b 45%,#a67c2a 100%);
+  color:#2a1c0c;
+  border:1px solid #d4af37;
+  box-shadow:0 6px 18px rgba(166,124,42,.28);
+}
+.payment-page .button-ghost,
+.payment-demo .button-ghost{
+  background:#fff;
+  color:#6b3f2a;
+  border:1.5px solid #b8926a;
+}
