@@ -1,1 +1,72 @@
-<!doctype html><html lang="fr-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Les Fourrures Boréales — créations artisanales québécoises."><title>Panier | Les Fourrures Boréales</title><link rel="stylesheet" href="style.css"><link rel="icon" type="image/svg+xml" href="favicon.svg"></head><body><header class="header"><a class="brand" href="index.html"><img src="assets/logo-fourrures-boreales.png" alt="Les Fourrures Boréales" onerror="this.hidden=true"><span>LES FOURRURES <strong>BORÉALES</strong></span></a><button class="menu-toggle" aria-expanded="false" aria-controls="main-menu" data-fr="Menu" data-en="Menu">☰ Menu</button><nav id="main-menu" aria-label="Navigation principale"><a href="index.html" data-fr="Accueil" data-en="Home">Accueil</a><a href="boutique.html" data-fr="Boutique" data-en="Shop">Boutique</a><a href="creations.html" data-fr="Nos créations" data-en="Our creations">Nos créations</a><a href="lucie.html" data-fr="À propos de Lucie" data-en="About Lucie">À propos de Lucie</a><a href="mailto:luciegosselin852@gmail.com?subject=Les%20Fourrures%20Bor%C3%A9ales" data-fr="Contact" data-en="Contact">Contact</a><a class="cart-link" href="panier.html" aria-label="Panier">🛍 <span data-fr="Panier" data-en="Cart">Panier</span> <span id="cart-count">0</span></a><div class="languages mobile-languages" aria-label="Langue"><button type="button" data-set-lang="fr" aria-pressed="true">FR</button><span>|</span><button type="button" data-set-lang="en" aria-pressed="false">EN</button></div></nav><div class="languages desktop-languages" aria-label="Langue"><button type="button" data-set-lang="fr" aria-pressed="true">FR</button><span>|</span><button type="button" data-set-lang="en" aria-pressed="false">EN</button></div></header><main><section class="page-heading"><p class="eyebrow">04 / PANIER</p><h1><span data-fr="Votre panier" data-en="Your cart">Votre panier</span></h1><p><span data-fr="Le panier est en préparation. Aucun paiement n’est activé pour le moment." data-en="The cart is being prepared. Payments are not enabled yet.">Le panier est en préparation. Aucun paiement n’est activé pour le moment.</span></p></section><section class="story"><p data-fr="Les articles pourront être ajoutés lorsque Lucie aura confirmé ses modèles, ses prix et ses tailles." data-en="Products can be added once Lucie confirms models, prices and sizes.">Les articles pourront être ajoutés lorsque Lucie aura confirmé ses modèles, ses prix et ses tailles.</p><a class="button" href="boutique.html" data-fr="Voir la boutique →" data-en="Visit the shop →">Voir la boutique →</a></section></main><footer>© <span id="year"></span> Les Fourrures Boréales</footer><script src="site.js" defer></script></body></html>
+<!doctype html><html lang="fr-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Les Fourrures Boréales — créations artisanales québécoises."><title>Panier | Les Fourrures Boréales</title><link rel="stylesheet" href="style.css"><link rel="icon" type="image/png" href="favicon.png" sizes="64x64"><link rel="apple-touch-icon" href="apple-touch-icon.png"></head><body class="cart-page"><header class="header"><a class="brand" href="index.html"><img src="assets/logo-fourrures-boreales.png" alt="Les Fourrures Boréales" onerror="this.hidden=true"><span>LES FOURRURES <strong>BORÉALES</strong></span></a><button class="menu-toggle" aria-expanded="false" aria-controls="main-menu" data-fr="Menu" data-en="Menu">☰ Menu</button><nav id="main-menu" aria-label="Navigation principale"><a href="index.html" data-fr="Accueil" data-en="Home">Accueil</a><a href="boutique.html" data-fr="Boutique" data-en="Shop">Boutique</a><a href="creations.html" data-fr="Nos créations" data-en="Our creations">Nos créations</a><a href="lucie.html" data-fr="À propos de Lucie" data-en="About Lucie">À propos de Lucie</a><a href="mailto:luciegosselin852@gmail.com?subject=Les%20Fourrures%20Bor%C3%A9ales" data-fr="Contact" data-en="Contact">Contact</a><a class="cart-link" href="panier.html" aria-label="Panier"><span data-fr="Panier" data-en="Cart">Panier</span><span id="cart-count" class="cart-count-badge is-empty" data-count="0">0</span></a><div class="languages mobile-languages" aria-label="Langue"><button type="button" data-set-lang="fr" aria-pressed="true">FR</button><span>|</span><button type="button" data-set-lang="en" aria-pressed="false">EN</button></div></nav><div class="languages desktop-languages" aria-label="Langue"><button type="button" data-set-lang="fr" aria-pressed="true">FR</button><span>|</span><button type="button" data-set-lang="en" aria-pressed="false">EN</button></div></header><main class="cart-main">
+<section class="cart-hero">
+  <h1 data-fr="Votre panier" data-en="Your cart">Votre panier</h1>
+  <p class="cart-subtitle" data-fr="Vos articles sélectionnés" data-en="Your selected items">Vos articles sélectionnés</p>
+  <p class="cart-note" data-fr="Ajoutez des articles depuis la boutique. Aucun paiement n’est activé pour le moment." data-en="Add items from the shop. Payments are not enabled yet.">Ajoutez des articles depuis la boutique. Aucun paiement n’est activé pour le moment.</p>
+</section>
+<section class="cart-panel">
+  <div id="cart-list" class="cart-list" aria-live="polite"></div>
+  <p id="cart-empty" class="cart-empty" data-fr="Votre panier est vide pour le moment." data-en="Your cart is empty for now.">Votre panier est vide pour le moment.</p>
+  <div id="cart-summary" class="cart-summary" hidden>
+    <p id="cart-total" class="cart-total-line"></p>
+    <p class="cart-secure"><span class="cart-secure-icon" aria-hidden="true">🛡️</span><span data-fr="Paiement sécurisé — aucun paiement n’est activé pour le moment." data-en="Secure payment — payments are not enabled yet.">Paiement sécurisé — aucun paiement n’est activé pour le moment.</span></p>
+  </div>
+  <div class="cart-actions">
+    <a class="button button-shop" href="boutique.html"><span aria-hidden="true">←</span> <span data-fr="Voir la boutique" data-en="Visit the shop">Voir la boutique</span></a>
+    <a id="cart-checkout" class="button button-checkout" href="paiement.html" hidden><span class="pay-icon" aria-hidden="true">💳</span> <span data-fr="Passer au paiement" data-en="Proceed to payment">Passer au paiement</span> <span aria-hidden="true">→</span></a>
+    <button type="button" id="cart-clear" class="button button-ghost" hidden><span aria-hidden="true">🗑</span> <span data-fr="Vider le panier" data-en="Clear cart">Vider le panier</span></button>
+  </div>
+</section>
+</main>
+<script>
+(()=>{
+  const key='boreales-cart';
+  const list=document.getElementById('cart-list');
+  const empty=document.getElementById('cart-empty');
+  const summary=document.getElementById('cart-summary');
+  const totalEl=document.getElementById('cart-total');
+  const clearBtn=document.getElementById('cart-clear');
+  const checkout=document.getElementById('cart-checkout');
+  const en=()=>document.documentElement.lang.startsWith('en');
+  function load(){try{const c=JSON.parse(localStorage.getItem(key)||'[]');return Array.isArray(c)?c:[]}catch(e){return[]}}
+  function save(cart){localStorage.setItem(key,JSON.stringify(cart));if(window.refreshCartCount)window.refreshCartCount();window.dispatchEvent(new Event('boreales-cart-updated'))}
+  function money(n){return n.toFixed(2).replace('.',',')+' $'}
+  function setQty(id,qty){let cart=load();const item=cart.find(x=>x.id===id);if(!item)return;item.qty=qty;if(item.qty<=0)cart=cart.filter(x=>x.id!==id);save(cart);render()}
+  function render(){
+    const cart=load();
+    list.innerHTML='';
+    if(!cart.length){
+      empty.hidden=false;summary.hidden=true;clearBtn.hidden=true;if(checkout)checkout.hidden=true;
+      return;
+    }
+    empty.hidden=true;summary.hidden=false;clearBtn.hidden=false;if(checkout)checkout.hidden=false;
+    let sum=0;
+    cart.forEach(item=>{
+      sum+=item.price*item.qty;
+      const row=document.createElement('div');
+      row.className='cart-row';
+      row.innerHTML=
+        '<div class="cart-row-info"><strong class="cart-row-name"></strong><span class="cart-row-price"></span></div>'+
+        '<div class="cart-row-controls">'+
+          '<div class="qty" role="group" aria-label="Quantité">'+
+            '<button type="button" class="qty-btn" data-act="minus" aria-label="Moins">−</button>'+
+            '<span class="qty-val"></span>'+
+            '<button type="button" class="qty-btn" data-act="plus" aria-label="Plus">+</button>'+
+          '</div>'+
+          '<button type="button" class="cart-remove" data-act="remove" aria-label="Retirer">🗑</button>'+
+        '</div>';
+      row.querySelector('.cart-row-name').textContent=item.name;
+      row.querySelector('.cart-row-price').textContent=money(item.price*item.qty);
+      row.querySelector('.qty-val').textContent=String(item.qty);
+      row.querySelector('[data-act="minus"]').addEventListener('click',()=>setQty(item.id,item.qty-1));
+      row.querySelector('[data-act="plus"]').addEventListener('click',()=>setQty(item.id,item.qty+1));
+      row.querySelector('[data-act="remove"]').addEventListener('click',()=>setQty(item.id,0));
+      list.appendChild(row);
+    });
+    totalEl.textContent=(en()?'Total: ':'Total : ')+money(sum);
+  }
+  clearBtn.addEventListener('click',()=>{localStorage.removeItem(key);save([]);render()});
+  render();
+  if(window.refreshCartCount)window.refreshCartCount();
+})();
+</script><footer>© <span id="year"></span> Les Fourrures Boréales</footer><script src="site.js" defer></script></body></html>
