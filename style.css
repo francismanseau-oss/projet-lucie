@@ -18,7 +18,7 @@
 
 /* Flèches latérales inspirées du portfolio mobile */
 .mobile-page-arrows{display:none}
-@media(max-width:760px){.mobile-page-arrows{display:block;position:fixed;inset:0;z-index:20;pointer-events:none}.mobile-page-arrows a{position:fixed;top:50%;transform:translateY(-50%);width:28px;height:44px;display:flex;align-items:center;justify-content:center;color:rgba(111,65,43,.58);background:transparent;border:0;box-shadow:none;text-decoration:none;pointer-events:auto;touch-action:manipulation}.mobile-page-arrows a:first-child{left:max(2px,env(safe-area-inset-left))}.mobile-page-arrows a:last-child{right:max(2px,env(safe-area-inset-right))}.mobile-page-arrows a svg{width:20px;height:32px;display:block}.mobile-page-arrows a:focus-visible{outline:2px solid #865038;outline-offset:2px}}
+@media(max-width:760px){.mobile-page-arrows{display:block;position:fixed;inset:0;z-index:20;pointer-events:none}.mobile-page-arrows a{position:fixed;top:50%;transform:translateY(-50%);width:28px;height:44px;display:flex;align-items:center;justify-content:center;color:rgba(111,65,43,.58);background:transparent;border:0;box-shadow:none;text-decoration:none;pointer-events:auto;touch-action:manipulation}.mobile-page-arrows a.arrow-prev{left:max(2px,env(safe-area-inset-left));right:auto}.mobile-page-arrows a.arrow-next{right:max(2px,env(safe-area-inset-right));left:auto}.mobile-page-arrows a svg{width:20px;height:32px;display:block}.mobile-page-arrows a:focus-visible{outline:2px solid #865038;outline-offset:2px}}
 
 .shop-product-desc{margin:0 0 10px;color:#666;font-size:13px;line-height:1.45;min-height:2.9em}
 .shop-product-info h3{min-height:2.6em}
@@ -305,4 +305,38 @@
   background:#fff;
   color:#6b3f2a;
   border:1.5px solid #b8926a;
+}
+
+/* Mobile : panier toujours visible dans le header (hors hamburger) */
+@media(max-width:760px){
+  .header{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .header .brand{order:1}
+  .header .cart-link{
+    order:3;
+    margin-left:auto;
+    display:inline-flex !important;
+    align-items:center;
+    gap:8px;
+    padding:8px 10px;
+    font-size:13px;
+    font-weight:700;
+    position:relative;
+    z-index:45;
+  }
+  .header .menu-toggle{
+    order:4;
+    margin-left:0 !important;
+  }
+  .header nav{order:5}
+  .header .desktop-languages{order:6}
+  .header .cart-count-badge{
+    min-width:22px;
+    height:22px;
+    font-size:12px;
+  }
+  .shop-page .header .cart-link{color:#25201d}
 }
