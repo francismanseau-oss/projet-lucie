@@ -13,30 +13,77 @@
 <header class="header"><a class="brand" href="index.html"><img src="assets/logo-fourrures-boreales.png" alt="Les Fourrures Boréales" onerror="this.hidden=true"><span>LES FOURRURES <strong>BORÉALES</strong></span></a><button class="menu-toggle" aria-expanded="false" aria-controls="main-menu" data-fr="Menu" data-en="Menu">☰ Menu</button><nav id="main-menu" aria-label="Navigation principale"><a href="index.html" data-fr="Accueil" data-en="Home">Accueil</a><a href="boutique.html" data-fr="Boutique" data-en="Shop">Boutique</a><a href="creations.html" data-fr="Nos créations" data-en="Our creations">Nos créations</a><a href="lucie.html" data-fr="À propos de Lucie" data-en="About Lucie">À propos de Lucie</a><a href="contact.html" data-fr="Contact" data-en="Contact">Contact</a><div class="languages mobile-languages" aria-label="Langue"><button type="button" data-set-lang="fr" aria-pressed="true">FR</button><span>|</span><button type="button" data-set-lang="en" aria-pressed="false">EN</button></div></nav><a class="cart-link" href="panier.html" aria-label="Panier"><span data-fr="Panier" data-en="Cart">Panier</span><span id="cart-count" class="cart-count-badge is-empty" data-count="0">0</span></a><div class="languages desktop-languages" aria-label="Langue"><button type="button" data-set-lang="fr" aria-pressed="true">FR</button><span>|</span><button type="button" data-set-lang="en" aria-pressed="false">EN</button></div></header>
 <main class="contact-main">
   <section class="contact-hero">
-    <p class="eyebrow" data-fr="ON EST LÀ" data-en="WE'RE HERE">ON EST LÀ</p>
     <h1 data-fr="Contact" data-en="Contact">Contact</h1>
-    <p class="contact-lead" data-fr="Pour une commande, une question de taille ou simplement jaser fourrure — choisissez le moyen qui vous convient." data-en="For an order, a sizing question, or a chat about fur — pick the way that suits you.">Pour une commande, une question de taille ou simplement jaser fourrure — choisissez le moyen qui vous convient.</p>
+    <p class="contact-lead" data-fr="Pour une commande, une question sur les tailles ou une création sur mesure, Lucie est là pour vous." data-en="For an order, a sizing question, or a custom piece, Lucie is here for you.">Pour une commande, une question sur les tailles ou une création sur mesure, Lucie est là pour vous.</p>
   </section>
 
   <section class="contact-cards" aria-label="Moyens de contact">
-    <a class="contact-card contact-card-phone" href="tel:+18194430304">
-      <span class="contact-card-icon" aria-hidden="true">📞</span>
+    <a class="contact-card" id="contact-phone" href="tel:+18194430304" data-phone="18194430304">
+      <span class="contact-card-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </span>
       <h2 data-fr="Téléphone" data-en="Phone">Téléphone</h2>
       <p class="contact-card-value">1 819 443-0304</p>
-      <p class="contact-card-hint" data-fr="Appuyer pour appeler" data-en="Tap to call">Appuyer pour appeler</p>
+      <p class="contact-card-hint" id="contact-phone-hint" data-fr="Appuyer pour appeler" data-en="Tap to call">Appuyer pour appeler</p>
     </a>
 
-    <a class="contact-card contact-card-mail" href="mailto:luciegosselin852@gmail.com?subject=Les%20Fourrures%20Bor%C3%A9ales">
-      <span class="contact-card-icon" aria-hidden="true">✉️</span>
+    <a class="contact-card" href="mailto:luciegosselin852@gmail.com?subject=Les%20Fourrures%20Bor%C3%A9ales">
+      <span class="contact-card-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      </span>
       <h2 data-fr="Courriel" data-en="Email">Courriel</h2>
       <p class="contact-card-value">luciegosselin852@gmail.com</p>
       <p class="contact-card-hint" data-fr="Ouvrir votre messagerie" data-en="Open your mail app">Ouvrir votre messagerie</p>
     </a>
   </section>
 
-  <p class="contact-note" data-fr="Lucie répond avec plaisir, souvent le jour même." data-en="Lucie is happy to reply, often the same day.">Lucie répond avec plaisir, souvent le jour même.</p>
+  <p class="contact-note" data-fr="Chaque création commence par une rencontre. N'hésitez pas à communiquer avec Lucie." data-en="Every creation starts with a conversation. Feel free to reach out to Lucie.">Chaque création commence par une rencontre. N'hésitez pas à communiquer avec Lucie.</p>
 </main>
 <footer>© <span id="year"></span> Les Fourrures Boréales</footer>
 <script src="site.js" defer></script>
+<script>
+(() => {
+  const link = document.getElementById("contact-phone");
+  const hint = document.getElementById("contact-phone-hint");
+  if (!link || !hint) return;
+
+  const coarse = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+  const narrow = window.matchMedia("(max-width: 768px)").matches;
+  const isPhoneLike = coarse || narrow;
+
+  const setHint = (fr, en) => {
+    hint.dataset.fr = fr;
+    hint.dataset.en = en;
+    hint.textContent = document.documentElement.lang.startsWith("en") ? en : fr;
+  };
+
+  if (!isPhoneLike) {
+    setHint("Cliquer pour copier le numéro", "Click to copy the number");
+  }
+
+  link.addEventListener("click", async (e) => {
+    if (isPhoneLike) return;
+    e.preventDefault();
+    const raw = link.dataset.phone || "18194430304";
+    const pretty = "1 819 443-0304";
+    try {
+      await navigator.clipboard.writeText(pretty);
+    } catch (_) {
+      const ta = document.createElement("textarea");
+      ta.value = pretty;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+    }
+    setHint("Numéro copié ✓", "Number copied ✓");
+    link.classList.add("is-copied");
+    setTimeout(() => {
+      setHint("Cliquer pour copier le numéro", "Click to copy the number");
+      link.classList.remove("is-copied");
+    }, 1800);
+  });
+})();
+</script>
 </body>
 </html>

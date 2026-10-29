@@ -341,12 +341,12 @@
   .shop-page .header .cart-link{color:#25201d}
 }
 
-/* ========== Page Contact — style boréal ========== */
+
+/* ========== Page Contact — raffiné artisan ========== */
 .contact-page{
   background:
     radial-gradient(ellipse at 12% 0%, #f3ebe1 0%, transparent 45%),
-    radial-gradient(ellipse at 88% 15%, #e8ddd2 0%, transparent 42%),
-    linear-gradient(180deg, #f7f1ea 0%, #f3ebe3 45%, #efe6dc 100%);
+    linear-gradient(180deg, #f7f1ea 0%, #f3ebe3 50%, #efe6dc 100%);
   color:#2b2420;
   min-height:100vh;
 }
@@ -356,88 +356,114 @@
   box-shadow:0 2px 10px rgba(70,40,20,.06);
 }
 .contact-main{
-  max-width:880px;
+  max-width:850px;
   margin:0 auto;
-  padding:48px 6% 100px;
+  padding:40px 6% 88px;
 }
-.contact-hero{text-align:center;margin-bottom:36px}
-.contact-hero .eyebrow{
-  margin:0 0 10px;
-  font-size:11px;
-  letter-spacing:.18em;
-  font-weight:700;
-  color:#8a5a3c;
+.contact-hero{
+  text-align:center;
+  margin-bottom:28px;
 }
 .contact-hero h1{
   font-family:Georgia,'Times New Roman',serif;
   font-weight:400;
-  font-size:clamp(42px,6vw,68px);
-  margin:0 0 14px;
+  font-size:clamp(40px,5.5vw,64px);
+  margin:0 0 12px;
   letter-spacing:-.02em;
+  color:#2a221c;
 }
 .contact-lead{
   margin:0 auto;
   max-width:520px;
-  line-height:1.7;
+  line-height:1.65;
   color:#6b5c50;
-  font-size:16px;
+  font-size:15px;
 }
 .contact-cards{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:20px;
+  gap:24px;
+  align-items:stretch;
 }
 .contact-card{
   display:flex;
   flex-direction:column;
   align-items:flex-start;
-  gap:8px;
+  gap:10px;
+  height:100%;
   padding:28px 26px;
-  background:#fff;
-  border:1px solid #efe6dc;
-  border-radius:22px;
-  box-shadow:0 8px 28px rgba(60,35,20,.08);
+  background:#FFFCF8;
+  border:1px solid #e5d8c8;
+  border-radius:18px;
+  box-shadow:0 6px 20px rgba(60,35,20,.07);
   text-decoration:none;
   color:inherit;
-  transition:transform .18s ease, box-shadow .18s ease;
+  transition:transform .25s ease, box-shadow .25s ease;
 }
 .contact-card:hover{
   transform:translateY(-3px);
-  box-shadow:0 14px 32px rgba(60,35,20,.12);
+  box-shadow:0 12px 28px rgba(60,35,20,.12);
 }
-.contact-card-icon{font-size:28px;line-height:1}
+.contact-card:focus-visible{
+  outline:3px solid #A65A35;
+  outline-offset:3px;
+}
+.contact-card-icon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  background:#f4ebe3;
+  color:#A65A35;
+  flex-shrink:0;
+}
+.contact-card-icon svg{
+  display:block;
+  width:30px;
+  height:30px;
+}
 .contact-card h2{
-  margin:4px 0 0;
-  font:400 26px/1.2 Georgia,'Times New Roman',serif;
+  margin:2px 0 0;
+  font:400 24px/1.25 Georgia,'Times New Roman',serif;
+  color:#2b2420;
 }
 .contact-card-value{
   margin:0;
-  font-size:18px;
+  font-size:17px;
   font-weight:700;
-  color:#9a4a2e;
+  color:#A65A35;
   word-break:break-word;
+  line-height:1.4;
 }
 .contact-card-hint{
-  margin:6px 0 0;
-  font-size:13px;
-  color:#8a7a6c;
-}
-.contact-card-phone{
-  background:linear-gradient(165deg,#fff 0%,#fff9f3 100%);
-  border-color:#e8d2bc;
-}
-.contact-card-mail{
-  background:linear-gradient(165deg,#fff 0%,#f7f1ea 100%);
+  margin:auto 0 0;
+  padding-top:6px;
+  font-size:14px;
+  color:#7a6a5c;
+  line-height:1.45;
 }
 .contact-note{
   text-align:center;
-  margin:34px auto 0;
-  max-width:420px;
+  margin:28px auto 0;
+  max-width:440px;
   color:#7a6a5c;
   font-size:14px;
-  line-height:1.6;
+  line-height:1.65;
 }
-@media(max-width:700px){
-  .contact-main{padding:32px 5% 90px}
-  .contact-cards{grid-template-columns:1fr}
+
+.contact-card.is-copied{
+  box-shadow:0 0 0 2px #A65A35, 0 10px 24px rgba(60,35,20,.1);
+}
+.contact-card.is-copied .contact-card-hint{
+  color:#A65A35;
+  font-weight:700;
+}
+
+@media(max-width:768px){
+  .contact-main{padding:28px 20px 80px}
+  .contact-cards{grid-template-columns:1fr;gap:18px}
+  .contact-hero{margin-bottom:22px}
+  .contact-card h2{font-size:23px}
 }
