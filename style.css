@@ -340,3 +340,104 @@
   }
   .shop-page .header .cart-link{color:#25201d}
 }
+
+/* ========== Page Contact — style boréal ========== */
+.contact-page{
+  background:
+    radial-gradient(ellipse at 12% 0%, #f3ebe1 0%, transparent 45%),
+    radial-gradient(ellipse at 88% 15%, #e8ddd2 0%, transparent 42%),
+    linear-gradient(180deg, #f7f1ea 0%, #f3ebe3 45%, #efe6dc 100%);
+  color:#2b2420;
+  min-height:100vh;
+}
+.contact-page .header{
+  background:#f3e6d8;
+  border-bottom:1px solid #e0d0c0;
+  box-shadow:0 2px 10px rgba(70,40,20,.06);
+}
+.contact-main{
+  max-width:880px;
+  margin:0 auto;
+  padding:48px 6% 100px;
+}
+.contact-hero{text-align:center;margin-bottom:36px}
+.contact-hero .eyebrow{
+  margin:0 0 10px;
+  font-size:11px;
+  letter-spacing:.18em;
+  font-weight:700;
+  color:#8a5a3c;
+}
+.contact-hero h1{
+  font-family:Georgia,'Times New Roman',serif;
+  font-weight:400;
+  font-size:clamp(42px,6vw,68px);
+  margin:0 0 14px;
+  letter-spacing:-.02em;
+}
+.contact-lead{
+  margin:0 auto;
+  max-width:520px;
+  line-height:1.7;
+  color:#6b5c50;
+  font-size:16px;
+}
+.contact-cards{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:20px;
+}
+.contact-card{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:8px;
+  padding:28px 26px;
+  background:#fff;
+  border:1px solid #efe6dc;
+  border-radius:22px;
+  box-shadow:0 8px 28px rgba(60,35,20,.08);
+  text-decoration:none;
+  color:inherit;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.contact-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 14px 32px rgba(60,35,20,.12);
+}
+.contact-card-icon{font-size:28px;line-height:1}
+.contact-card h2{
+  margin:4px 0 0;
+  font:400 26px/1.2 Georgia,'Times New Roman',serif;
+}
+.contact-card-value{
+  margin:0;
+  font-size:18px;
+  font-weight:700;
+  color:#9a4a2e;
+  word-break:break-word;
+}
+.contact-card-hint{
+  margin:6px 0 0;
+  font-size:13px;
+  color:#8a7a6c;
+}
+.contact-card-phone{
+  background:linear-gradient(165deg,#fff 0%,#fff9f3 100%);
+  border-color:#e8d2bc;
+}
+.contact-card-mail{
+  background:linear-gradient(165deg,#fff 0%,#f7f1ea 100%);
+}
+.contact-note{
+  text-align:center;
+  margin:34px auto 0;
+  max-width:420px;
+  color:#7a6a5c;
+  font-size:14px;
+  line-height:1.6;
+}
+@media(max-width:700px){
+  .contact-main{padding:32px 5% 90px}
+  .contact-cards{grid-template-columns:1fr}
+}
