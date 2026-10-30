@@ -1,0 +1,23 @@
+{
+  "name": "fourrures-boreales-checkout",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Stripe Checkout API (test) — Les Fourrures Boréales — Cloudflare Worker",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "dev:test": "wrangler dev -c wrangler.test.toml",
+    "test": "node --test test/phase-a.test.mjs test/preprod.test.mjs test/inventory-shipping.test.mjs test/integration-audit.test.mjs",
+    "test:catalog": "node scripts/verify-catalog.mjs",
+    "test:mocks": "node --test test/*.test.mjs",
+    "test:preprod": "node --test test/preprod.test.mjs",
+    "test:inventory": "node --test test/inventory-shipping.test.mjs",
+    "test:integration": "node --test test/integration-audit.test.mjs",
+    "check": "node scripts/verify-catalog.mjs && node --test test/phase-a.test.mjs test/preprod.test.mjs test/inventory-shipping.test.mjs test/integration-audit.test.mjs",
+    "sync:catalog": "node -e \"import('node:fs').then(fs=>{fs.copyFileSync('../catalog/products.json','src/products.json');console.log('synced')})\""
+  },
+  "devDependencies": {
+    "wrangler": "^4.20.0"
+  }
+}

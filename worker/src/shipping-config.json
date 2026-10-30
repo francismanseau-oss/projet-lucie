@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "policy": {
+    "no_invented_rates": true,
+    "real_charge_requires": [
+      "SHIPPING_CONFIGURED=true",
+      "rates_source filled by Lucie or Canada Post API credentials",
+      "manual validation for bus Québec when selected"
+    ]
+  },
+  "currency": "CAD",
+  "country": "CA",
+  "methods": {
+    "canada_post": {
+      "enabled": false,
+      "label_fr": "Postes Canada",
+      "rates_source": "unset",
+      "rates_source_options": [
+        "unset",
+        "lucie_manual_table",
+        "canada_post_rating_api"
+      ],
+      "rate_table_cad_cents": null,
+      "api": {
+        "configured": false,
+        "note": "Ne pas inventer de frais. Brancher l'API Rating Postes Canada ou une grille Lucie validée."
+      },
+      "package_profile": {
+        "weight_g": null,
+        "length_cm": null,
+        "width_cm": null,
+        "height_cm": null,
+        "note": "Dimensions/poids à mesurer par Lucie selon le colis réel — null = non saisi"
+      },
+      "destination": {
+        "allowed_countries": ["CA"],
+        "requires_postal_code": true,
+        "requires_province": true
+      }
+    },
+    "bus_quebec": {
+      "enabled": false,
+      "label_fr": "Autobus (Québec)",
+      "rates_source": "manual_lucie_only",
+      "fee_cad_cents": null,
+      "requires_manual_validation": true,
+      "coverage": "QC",
+      "note": "Frais validés manuellement par Lucie par commande — aucun montant par défaut"
+    },
+    "pickup": {
+      "enabled": false,
+      "label_fr": "Ramassage",
+      "fee_cad_cents": 0,
+      "note": "Activer seulement si Lucie confirme un lieu de ramassage"
+    }
+  },
+  "checkout_integration": {
+    "phase": "architecture_only",
+    "stripe_shipping_options": "forbidden_until_SHIPPING_CONFIGURED",
+    "metadata_placeholder": "not_charged_phase_a"
+  }
+}

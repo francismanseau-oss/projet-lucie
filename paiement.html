@@ -1,1 +1,139 @@
-<!doctype html><html lang="fr-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Paiement — Les Fourrures Boréales (démonstration)."><title>Paiement | Les Fourrures Boréales</title><link rel="stylesheet" href="style.css"><link rel="icon" type="image/png" href="favicon.png" sizes="64x64"><link rel="apple-touch-icon" href="apple-touch-icon.png"></head><body class="payment-page"><header class="header"><a class="brand" href="index.html"><img src="assets/logo-fourrures-boreales.png" alt="Les Fourrures Boréales" onerror="this.hidden=true"><span>LES FOURRURES <strong>BORÉALES</strong></span></a><button class="menu-toggle" aria-expanded="false" aria-controls="main-menu" data-fr="Menu" data-en="Menu">☰ Menu</button><nav id="main-menu" aria-label="Navigation principale"><a href="index.html" data-fr="Accueil" data-en="Home">Accueil</a><a href="boutique.html" data-fr="Boutique" data-en="Shop">Boutique</a><a href="creations.html" data-fr="Nos créations" data-en="Our creations">Nos créations</a><a href="lucie.html" data-fr="À propos de Lucie" data-en="About Lucie">À propos de Lucie</a><a href="contact.html" data-fr="Contact" data-en="Contact">Contact</a><div class="languages mobile-languages" aria-label="Langue"><button type="button" data-set-lang="fr" aria-pressed="true">FR</button><span>|</span><button type="button" data-set-lang="en" aria-pressed="false">EN</button></div></nav><a class="cart-link" href="panier.html" aria-label="Panier"><span data-fr="Panier" data-en="Cart">Panier</span><span id="cart-count" class="cart-count-badge is-empty" data-count="0">0</span></a><div class="languages desktop-languages" aria-label="Langue"><button type="button" data-set-lang="fr" aria-pressed="true">FR</button><span>|</span><button type="button" data-set-lang="en" aria-pressed="false">EN</button></div></header><main><section class="page-heading"><h1><span data-fr="Paiement" data-en="Payment">Paiement</span></h1><p><span data-fr="Ceci est une démonstration. Aucun vrai paiement n’est effectué." data-en="This is a demonstration. No real payment is processed.">Ceci est une démonstration. Aucun vrai paiement n’est effectué.</span></p></section><section class="story payment-demo"><p data-fr="Le module de paiement sera branché plus tard (carte, interac, etc.). Pour l’instant, ce bouton confirme seulement le parcours." data-en="The payment module will be connected later (card, Interac, etc.). For now, this button only confirms the flow.">Le module de paiement sera branché plus tard (carte, interac, etc.). Pour l’instant, ce bouton confirme seulement le parcours.</p><div class="cart-actions"><a class="button button-checkout" href="panier.html" data-fr="← Retour au panier" data-en="← Back to cart">← Retour au panier</a><a class="button button-ghost" href="boutique.html" data-fr="Continuer vos achats" data-en="Continue shopping">Continuer vos achats</a></div></section></main><footer>© <span id="year"></span> Les Fourrures Boréales</footer><script src="site.js" defer></script></body></html>
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Paiement — Les Fourrures Boréales (Stripe Checkout mode test).">
+<title>Paiement | Les Fourrures Boréales</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/png" href="favicon.png" sizes="64x64">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+</head>
+<body class="payment-page">
+<header class="header"><a class="brand" href="index.html"><img src="assets/logo-fourrures-boreales.png" alt="Les Fourrures Boréales" onerror="this.hidden=true"><span>LES FOURRURES <strong>BORÉALES</strong></span></a><button class="menu-toggle" aria-expanded="false" aria-controls="main-menu" data-fr="Menu" data-en="Menu">☰ Menu</button><nav id="main-menu" aria-label="Navigation principale"><a href="index.html" data-fr="Accueil" data-en="Home">Accueil</a><a href="boutique.html" data-fr="Boutique" data-en="Shop">Boutique</a><a href="creations.html" data-fr="Nos créations" data-en="Our creations">Nos créations</a><a href="lucie.html" data-fr="À propos de Lucie" data-en="About Lucie">À propos de Lucie</a><a href="contact.html" data-fr="Contact" data-en="Contact">Contact</a><div class="languages mobile-languages" aria-label="Langue"><button type="button" data-set-lang="fr" aria-pressed="true">FR</button><span>|</span><button type="button" data-set-lang="en" aria-pressed="false">EN</button></div></nav><a class="cart-link" href="panier.html" aria-label="Panier"><span data-fr="Panier" data-en="Cart">Panier</span><span id="cart-count" class="cart-count-badge is-empty" data-count="0">0</span></a><div class="languages desktop-languages" aria-label="Langue"><button type="button" data-set-lang="fr" aria-pressed="true">FR</button><span>|</span><button type="button" data-set-lang="en" aria-pressed="false">EN</button></div></header>
+
+<main>
+  <section class="page-heading">
+    <h1><span data-fr="Paiement" data-en="Payment">Paiement</span></h1>
+    <p id="pay-lead" data-fr="Mode test Stripe — aucun paiement réel. Les prix sont confirmés côté serveur." data-en="Stripe test mode — no real charges. Prices are confirmed on the server.">Mode test Stripe — aucun paiement réel. Les prix sont confirmés côté serveur.</p>
+  </section>
+
+  <section class="story payment-demo">
+    <p id="pay-status" class="cart-note" role="status" aria-live="polite"></p>
+    <div id="pay-summary" class="cart-summary" hidden>
+      <p id="pay-total" class="cart-total-line"></p>
+      <p class="cart-secure"><span class="cart-secure-icon" aria-hidden="true">🛡️</span>
+        <span data-fr="Paiement sécurisé via Stripe Checkout (test). Aucun frais de livraison n’est facturé à cette étape." data-en="Secure payment via Stripe Checkout (test). No shipping fee is charged at this stage.">Paiement sécurisé via Stripe Checkout (test). Aucun frais de livraison n’est facturé à cette étape.</span>
+      </p>
+    </div>
+    <div class="cart-actions">
+      <a class="button button-ghost" href="panier.html" data-fr="← Retour au panier" data-en="← Back to cart">← Retour au panier</a>
+      <button type="button" id="pay-stripe" class="button button-checkout" hidden>
+        <span class="pay-icon" aria-hidden="true">💳</span>
+        <span data-fr="Payer avec Stripe (test)" data-en="Pay with Stripe (test)">Payer avec Stripe (test)</span>
+        <span aria-hidden="true">→</span>
+      </button>
+      <a class="button button-ghost" href="boutique.html" data-fr="Continuer vos achats" data-en="Continue shopping">Continuer vos achats</a>
+    </div>
+  </section>
+</main>
+
+<footer>© <span id="year"></span> Les Fourrures Boréales</footer>
+<script src="checkout-config.js"></script>
+<script src="site.js" defer></script>
+<script>
+(() => {
+  const key = "boreales-cart";
+  const en = () => document.documentElement.lang.startsWith("en");
+  const statusEl = document.getElementById("pay-status");
+  const summary = document.getElementById("pay-summary");
+  const totalEl = document.getElementById("pay-total");
+  const btn = document.getElementById("pay-stripe");
+  const lead = document.getElementById("pay-lead");
+
+  function load() {
+    try {
+      const c = JSON.parse(localStorage.getItem(key) || "[]");
+      return Array.isArray(c) ? c : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function money(n) {
+    return n.toFixed(2).replace(".", ",") + " $";
+  }
+
+  function setStatus(fr, enText) {
+    statusEl.textContent = en() ? enText : fr;
+  }
+
+  const cart = load();
+  if (!cart.length) {
+    setStatus("Votre panier est vide.", "Your cart is empty.");
+    return;
+  }
+
+  if (cart.length) {
+    const sum = cart.reduce((s, x) => s + Number(x.price) * Number(x.qty), 0);
+    summary.hidden = false;
+    totalEl.textContent = (en() ? "Total (affichage panier) : " : "Total (affichage panier) : ") + money(sum);
+    btn.hidden = false;
+    setStatus(
+      "Le montant facturé sera recalculé côté serveur à partir du catalogue officiel (mêmes prix).",
+      "The charged amount will be recalculated server-side from the official catalog (same prices).",
+    );
+  }
+
+  btn.addEventListener("click", async () => {
+    const cfg = window.BOREALES_CHECKOUT || {};
+    const apiBase = (cfg.apiBase || "").replace(/\/$/, "");
+    if (!apiBase) {
+      setStatus("URL API manquante (checkout-config.js).", "Missing API URL (checkout-config.js).");
+      return;
+    }
+    btn.disabled = true;
+    setStatus("Création de la session Stripe (test)…", "Creating Stripe session (test)…");
+    try {
+      // id + qty seulement — jamais de prix (le serveur recalcule)
+      const items = load().map((x) => ({ id: x.id, qty: Number(x.qty) || 1 }));
+      const origin = location.origin + location.pathname.replace(/[^/]+$/, "");
+      const res = await fetch(apiBase + "/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items,
+          successUrl: origin + "commande-confirmee.html?session_id={CHECKOUT_SESSION_ID}",
+          cancelUrl: origin + "commande-annulee.html",
+        }),
+      });
+      let data = {};
+      try {
+        data = await res.json();
+      } catch (_) {
+        throw new Error(en() ? "Invalid server response" : "Réponse serveur invalide");
+      }
+      if (!res.ok) throw new Error(data.error || "Erreur checkout");
+      if (!data.url) throw new Error("URL Stripe absente");
+      location.href = data.url;
+    } catch (e) {
+      const msg = String(e && e.message ? e.message : e);
+      const network =
+        /Failed to fetch|NetworkError|Load failed|network|AbortError|aborted/i.test(msg) ||
+        e.name === "TypeError" ||
+        e.name === "AbortError";
+      if (network) {
+        setStatus(
+          "Connexion interrompue ou Worker injoignable. Vérifiez le Wi‑Fi / données mobiles, puis `wrangler dev` (http://127.0.0.1:8787).",
+          "Network interrupted or Worker unreachable. Check Wi‑Fi / mobile data, then `wrangler dev` (http://127.0.0.1:8787).",
+        );
+      } else {
+        setStatus("Échec : " + msg, "Failed: " + msg);
+      }
+      btn.disabled = false;
+    }
+  });
+})();
+</script>
+</body>
+</html>

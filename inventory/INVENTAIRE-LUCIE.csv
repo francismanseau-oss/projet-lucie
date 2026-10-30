@@ -1,0 +1,67 @@
+product_id,name_fr,category,fulfillment_type,qty_on_hand,notes_lucie,lucie_confirmed
+chapeau-fille-8-10-renard,Chapeau fille 8-10 — renard,chapeaux,pending_lucie,,,false
+chapeau-dame-m-l-coyote,Chapeau dame M-L — coyote,chapeaux,pending_lucie,,,false
+chapeau-dame-m-l-fourrure-recyclee,Chapeau dame M-L — fourrure recyclée,chapeaux,pending_lucie,,,false
+chapeau-dame-m-l-renard-argente,Chapeau dame M-L — renard argenté,chapeaux,pending_lucie,,,false
+chapeau-dame-m-l-renard-norvegien,Chapeau dame M-L — renard norvégien,chapeaux,pending_lucie,,,false
+chapeau-dame-m-l-renard-roux,Chapeau dame M-L — renard roux,chapeaux,pending_lucie,,,false
+chapeau-dame-m-l-vison,Chapeau dame M-L — vison,chapeaux,pending_lucie,,,false
+chapeau-dame-vison-et-renard,Chapeau dame — vison et renard,chapeaux,pending_lucie,,,false
+chapeau-homme-m-castor,Chapeau homme M — castor,chapeaux,pending_lucie,,,false
+chapeau-homme-m-l-coyote,Chapeau homme M-L — coyote,chapeaux,pending_lucie,,,false
+chapeau-homme-m-l-renard-argente,Chapeau homme M-L — renard argenté,chapeaux,pending_lucie,,,false
+chapeau-homme-m-l-renard-roux,Chapeau homme M-L — renard roux,chapeaux,pending_lucie,,,false
+chapeau-homme-l-xl-raton,Chapeau homme L-XL — raton,chapeaux,pending_lucie,,,false
+chapeau-vison-recyclee,Chapeau — vison recyclée,chapeaux,pending_lucie,,,false
+mitaines-bebe-sans-pouces-8-24-mois-castor,Mitaines bébé sans pouces 8-24 mois — castor,mitaines,pending_lucie,,,false
+mitaines-bebe-sans-pouces-8-24-mois-vison,Mitaines bébé sans pouces 8-24 mois — vison,mitaines,pending_lucie,,,false
+mitaines-bebe-sans-pouces-vison-fermeture-eclair,Mitaines bébé sans pouces — vison (fermeture éclair),mitaines,pending_lucie,,,false
+mitaines-enfant-2-4-ans-castor-fermeture-eclair,Mitaines enfant 2-4 ans — castor (fermeture éclair),mitaines,pending_lucie,,,false
+mitaines-enfant-4-6-vison-fermeture-eclair,Mitaines enfant 4-6 — vison (fermeture éclair),mitaines,pending_lucie,,,false
+mitaines-enfant-6-8-vison-fermeture-eclair,Mitaines enfant 6-8 — vison (fermeture éclair),mitaines,pending_lucie,,,false
+mitaines-enfant-8-10-chat-sauvage,Mitaines enfant 8-10 — chat sauvage,mitaines,pending_lucie,,,false
+mitaines-fille-8-10-renard,Mitaines fille 8-10 — renard,mitaines,pending_lucie,,,false
+mitaines-enfant-10-12-mouton-rase,Mitaines enfant 10-12 — mouton rasé,mitaines,pending_lucie,,,false
+mitaines-dame-m-renard,Mitaines dame M — renard,mitaines,pending_lucie,,,false
+mitaines-longues-dame-m-vison-et-renard,Mitaines longues dame M — vison et renard,mitaines,pending_lucie,,,false
+mitaines-dame-m-l-chat-sauvage,Mitaines dame M-L — chat sauvage,mitaines,pending_lucie,,,false
+mitaines-dame-m-l-fourrure-recyclee,Mitaines dame M-L — fourrure recyclée,mitaines,pending_lucie,,,false
+mitaines-dame-renard-roux,Mitaines dame — renard roux,mitaines,pending_lucie,,,false
+mitaines-dame-vison-et-renard,Mitaines dame — vison et renard,mitaines,pending_lucie,,,false
+mitaines-homme-m-l-castor,Mitaines homme M-L — castor,mitaines,pending_lucie,,,false
+mitaines-homme-m-l-coyote,Mitaines homme M-L — coyote,mitaines,pending_lucie,,,false
+mitaines-homme-m-l-renard-roux,Mitaines homme M-L — renard roux,mitaines,pending_lucie,,,false
+mitaines-8-10-vison-fermeture-eclair,Mitaines 8-10 — vison (fermeture éclair),mitaines,pending_lucie,,,false
+mitaines-small-vison,Mitaines Small — vison,mitaines,pending_lucie,,,false
+mitaines-m-renard,Mitaines M — renard,mitaines,pending_lucie,,,false
+mitaines-motoneige-m-renard-argente,Mitaines motoneige M — renard argenté,mitaines,pending_lucie,,,false
+mitaines-m-l-renard,Mitaines M-L — renard,mitaines,pending_lucie,,,false
+mitaines-m-l-vison-et-chat-sauvage,Mitaines M-L — vison et chat sauvage,mitaines,pending_lucie,,,false
+mitaines-m-l-vison-et-renard,Mitaines M-L — vison et renard,mitaines,pending_lucie,,,false
+mitaines-motoneige-m-l-renard-norvegien,Mitaines motoneige M-L — renard norvégien,mitaines,pending_lucie,,,false
+mitaines-style-inuit-coyote,Mitaines style Inuit — coyote,mitaines,pending_lucie,,,false
+foulard-dame-vison,Foulard dame — vison,foulards,pending_lucie,,,false
+foulard-dame-vison-et-renard,Foulard dame — vison et renard,foulards,pending_lucie,,,false
+cache-oreilles-enfant-8-10-12-coyote,Cache-oreilles enfant 8-10-12 — coyote,cache-oreilles,pending_lucie,,,false
+cache-oreilles-enfant-8-10-12-renard,Cache-oreilles enfant 8-10-12 — renard,cache-oreilles,pending_lucie,,,false
+cache-oreilles-ado-10-14-renard-et-vison,Cache-oreilles ado 10-14 — renard et vison,cache-oreilles,pending_lucie,,,false
+cache-oreilles-dame-m-vison-et-lapin,Cache-oreilles dame M — vison et lapin,cache-oreilles,pending_lucie,,,false
+semelles-fourrure-recyclee-pointures-5-a-12,Semelles fourrure recyclée — pointures 5 à 12,semelles,pending_lucie,,,false
+mukluks-bebe-7-18-mois-vison,Mukluks bébé 7-18 mois — vison,mukluks,pending_lucie,,,false
+mukluks-bebe-8-18-mois-vison,Mukluks bébé 8-18 mois — vison,mukluks,pending_lucie,,,false
+mukluks-bebe-8-24-mois-castor,Mukluks bébé 8-24 mois — castor,mukluks,pending_lucie,,,false
+mukluks-bebe-8-24-mois-vison,Mukluks bébé 8-24 mois — vison,mukluks,pending_lucie,,,false
+mukluks-bebe-a-18-mois-coyote,Mukluks bébé à 18 mois — coyote,mukluks,pending_lucie,,,false
+mukluks-bebe-vison-fermeture-eclair,Mukluks bébé — vison (fermeture éclair),mukluks,pending_lucie,,,false
+mukluks-adulte-mobilite-reduite-8-9-vison-et-renard,Mukluks adulte mobilité réduite 8-9 — vison et renard,mukluks,pending_lucie,,,false
+pantoufles-bebe-0-7-mois-fourrure-recyclee,Pantoufles bébé 0-7 mois — fourrure recyclée,pantoufles,pending_lucie,,,false
+pantoufles-bebe-5-12-mois-fourrure-recyclee,Pantoufles bébé 5-12 mois — fourrure recyclée,pantoufles,pending_lucie,,,false
+pantoufles-enfant-2-3-mouton-rase-et-coyote,Pantoufles enfant 2-3 — mouton rasé et coyote,pantoufles,pending_lucie,,,false
+pantoufles-enfant-2-3-renard,Pantoufles enfant 2-3 — renard,pantoufles,pending_lucie,,,false
+pantoufles-enfant-13-1-vison-et-coyote,Pantoufles enfant 13-1 — vison et coyote,pantoufles,pending_lucie,,,false
+pantoufles-dame-7-8-mouton-rase-et-chat-sauvage,Pantoufles dame 7-8 — mouton rasé et chat sauvage,pantoufles,pending_lucie,,,false
+pantoufles-dame-8-9-vison-et-coyote,Pantoufles dame 8-9 — vison et coyote,pantoufles,pending_lucie,,,false
+pantoufles-dame-8-9-vison-et-renard,Pantoufles dame 8-9 — vison et renard,pantoufles,pending_lucie,,,false
+pantoufles-dame-9-10-vison-et-renard,Pantoufles dame 9-10 — vison et renard,pantoufles,pending_lucie,,,false
+pantoufles-homme-10-11-chat-sauvage,Pantoufles homme 10-11 — chat sauvage,pantoufles,pending_lucie,,,false
+pantoufles-homme-10-11-mouton-et-renard-roux,Pantoufles homme 10-11 — mouton et renard roux,pantoufles,pending_lucie,,,false

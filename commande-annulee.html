@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Paiement annulé — Les Fourrures Boréales.">
+<title>Paiement annulé | Les Fourrures Boréales</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/png" href="favicon.png" sizes="64x64">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+</head>
+<body class="payment-page order-status-page">
+<header class="header"><a class="brand" href="index.html"><img src="assets/logo-fourrures-boreales.png" alt="Les Fourrures Boréales" onerror="this.hidden=true"><span>LES FOURRURES <strong>BORÉALES</strong></span></a><button class="menu-toggle" aria-expanded="false" aria-controls="main-menu" data-fr="Menu" data-en="Menu">☰ Menu</button><nav id="main-menu" aria-label="Navigation principale"><a href="index.html" data-fr="Accueil" data-en="Home">Accueil</a><a href="boutique.html" data-fr="Boutique" data-en="Shop">Boutique</a><a href="creations.html" data-fr="Nos créations" data-en="Our creations">Nos créations</a><a href="lucie.html" data-fr="À propos de Lucie" data-en="About Lucie">À propos de Lucie</a><a href="contact.html" data-fr="Contact" data-en="Contact">Contact</a><div class="languages mobile-languages" aria-label="Langue"><button type="button" data-set-lang="fr" aria-pressed="true">FR</button><span>|</span><button type="button" data-set-lang="en" aria-pressed="false">EN</button></div></nav><a class="cart-link" href="panier.html" aria-label="Panier"><span data-fr="Panier" data-en="Cart">Panier</span><span id="cart-count" class="cart-count-badge is-empty" data-count="0">0</span></a><div class="languages desktop-languages" aria-label="Langue"><button type="button" data-set-lang="fr" aria-pressed="true">FR</button><span>|</span><button type="button" data-set-lang="en" aria-pressed="false">EN</button></div></header>
+
+<main>
+  <section class="page-heading">
+    <h1 data-fr="Paiement annulé" data-en="Payment canceled">Paiement annulé</h1>
+    <p class="cart-note" data-fr="Aucun montant n’a été débité. Votre panier est intact." data-en="No amount was charged. Your cart is unchanged.">Aucun montant n’a été débité. Votre panier est intact.</p>
+  </section>
+
+  <section class="story payment-demo order-status-panel">
+    <p id="cancel-status" class="order-status-msg" role="status" aria-live="polite"
+      data-fr="Vous pouvez reprendre le paiement quand vous voulez, ou continuer vos achats."
+      data-en="You can resume checkout anytime, or keep shopping.">Vous pouvez reprendre le paiement quand vous voulez, ou continuer vos achats.</p>
+    <p class="cart-secure"><span class="cart-secure-icon" aria-hidden="true">🛡️</span>
+      <span data-fr="Mode test Stripe — aucune commande n’a été créée." data-en="Stripe test mode — no order was created.">Mode test Stripe — aucune commande n’a été créée.</span>
+    </p>
+    <div class="cart-actions">
+      <a class="button button-checkout" href="paiement.html"><span class="pay-icon" aria-hidden="true">💳</span> <span data-fr="Retour au paiement" data-en="Back to payment">Retour au paiement</span></a>
+      <a class="button button-ghost" href="panier.html" data-fr="Voir le panier" data-en="View cart">Voir le panier</a>
+      <a class="button button-ghost" href="boutique.html" data-fr="Boutique" data-en="Shop">Boutique</a>
+    </div>
+  </section>
+</main>
+
+<footer>© <span id="year"></span> Les Fourrures Boréales</footer>
+<script src="site.js" defer></script>
+</body>
+</html>
