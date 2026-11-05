@@ -1,0 +1,2379 @@
+{
+  "total": 66,
+  "schema_keys": [
+    "active",
+    "availability",
+    "category",
+    "description_fr",
+    "id",
+    "image",
+    "name_fr",
+    "price_cad",
+    "price_cad_cents",
+    "product_number"
+  ],
+  "has_variant_or_size_field": false,
+  "by_system": {
+    "lettre_SML": 26,
+    "tranche_age": 19,
+    "pointure": 11,
+    "audience_sans_taille": 8,
+    "aucune_taille": 2
+  },
+  "categories": {
+    "cache-oreilles": {
+      "count": 4,
+      "systems": {
+        "tranche_age": 3,
+        "lettre_SML": 1
+      },
+      "letters": [
+        "M"
+      ],
+      "age_bands": [
+        "10-14",
+        "8-10-12"
+      ],
+      "pointures": [],
+      "products": [
+        {
+          "n": 500,
+          "name": "Cache-oreilles ado 10-14 — renard et vison",
+          "system": "tranche_age",
+          "letters": [],
+          "age_band": "10-14",
+          "shoe": null,
+          "price": 60
+        },
+        {
+          "n": 501,
+          "name": "Cache-oreilles dame M — vison et lapin",
+          "system": "lettre_SML",
+          "letters": [
+            "M"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 60
+        },
+        {
+          "n": 502,
+          "name": "Cache-oreilles enfant 8-10-12 — coyote",
+          "system": "tranche_age",
+          "letters": [],
+          "age_band": "8-10-12",
+          "shoe": null,
+          "price": 60
+        },
+        {
+          "n": 503,
+          "name": "Cache-oreilles enfant 8-10-12 — renard",
+          "system": "tranche_age",
+          "letters": [],
+          "age_band": "8-10-12",
+          "shoe": null,
+          "price": 60
+        }
+      ]
+    },
+    "chapeaux": {
+      "count": 14,
+      "systems": {
+        "tranche_age": 1,
+        "lettre_SML": 11,
+        "audience_sans_taille": 1,
+        "aucune_taille": 1
+      },
+      "letters": [
+        "L-XL",
+        "M",
+        "M-L"
+      ],
+      "age_bands": [
+        "8-10"
+      ],
+      "pointures": [],
+      "products": [
+        {
+          "n": 200,
+          "name": "Chapeau — vison recyclée",
+          "system": "aucune_taille",
+          "letters": [],
+          "age_band": null,
+          "shoe": null,
+          "price": 80
+        },
+        {
+          "n": 201,
+          "name": "Chapeau dame — vison et renard",
+          "system": "audience_sans_taille",
+          "letters": [],
+          "age_band": null,
+          "shoe": null,
+          "price": 120
+        },
+        {
+          "n": 202,
+          "name": "Chapeau dame M-L — coyote",
+          "system": "lettre_SML",
+          "letters": [
+            "M-L"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 120
+        },
+        {
+          "n": 203,
+          "name": "Chapeau dame M-L — fourrure recyclée",
+          "system": "lettre_SML",
+          "letters": [
+            "M-L"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 120
+        },
+        {
+          "n": 204,
+          "name": "Chapeau dame M-L — renard argenté",
+          "system": "lettre_SML",
+          "letters": [
+            "M-L"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 120
+        },
+        {
+          "n": 205,
+          "name": "Chapeau dame M-L — renard norvégien",
+          "system": "lettre_SML",
+          "letters": [
+            "M-L"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 120
+        },
+        {
+          "n": 206,
+          "name": "Chapeau dame M-L — renard roux",
+          "system": "lettre_SML",
+          "letters": [
+            "M-L"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 120
+        },
+        {
+          "n": 207,
+          "name": "Chapeau dame M-L — vison",
+          "system": "lettre_SML",
+          "letters": [
+            "M-L"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 120
+        },
+        {
+          "n": 208,
+          "name": "Chapeau fille 8-10 — renard",
+          "system": "tranche_age",
+          "letters": [],
+          "age_band": "8-10",
+          "shoe": null,
+          "price": 60
+        },
+        {
+          "n": 209,
+          "name": "Chapeau homme L-XL — raton",
+          "system": "lettre_SML",
+          "letters": [
+            "L-XL"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 180
+        },
+        {
+          "n": 210,
+          "name": "Chapeau homme M — castor",
+          "system": "lettre_SML",
+          "letters": [
+            "M"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 180
+        },
+        {
+          "n": 211,
+          "name": "Chapeau homme M-L — coyote",
+          "system": "lettre_SML",
+          "letters": [
+            "M-L"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 180
+        },
+        {
+          "n": 212,
+          "name": "Chapeau homme M-L — renard argenté",
+          "system": "lettre_SML",
+          "letters": [
+            "M-L"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 180
+        },
+        {
+          "n": 213,
+          "name": "Chapeau homme M-L — renard roux",
+          "system": "lettre_SML",
+          "letters": [
+            "M-L"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 180
+        }
+      ]
+    },
+    "foulards": {
+      "count": 2,
+      "systems": {
+        "audience_sans_taille": 2
+      },
+      "letters": [],
+      "age_bands": [],
+      "pointures": [],
+      "products": [
+        {
+          "n": 600,
+          "name": "Foulard dame — vison",
+          "system": "audience_sans_taille",
+          "letters": [],
+          "age_band": null,
+          "shoe": null,
+          "price": 60
+        },
+        {
+          "n": 601,
+          "name": "Foulard dame — vison et renard",
+          "system": "audience_sans_taille",
+          "letters": [],
+          "age_band": null,
+          "shoe": null,
+          "price": 60
+        }
+      ]
+    },
+    "mitaines": {
+      "count": 27,
+      "systems": {
+        "tranche_age": 9,
+        "audience_sans_taille": 3,
+        "lettre_SML": 14,
+        "aucune_taille": 1
+      },
+      "letters": [
+        "M",
+        "M-L",
+        "S"
+      ],
+      "age_bands": [
+        "10-12",
+        "2-4 ans",
+        "4-6",
+        "6-8",
+        "8-10",
+        "8-24 mois"
+      ],
+      "pointures": [],
+      "products": [
+        {
+          "n": 100,
+          "name": "Mitaines 8-10 — vison (fermeture éclair)",
+          "system": "tranche_age",
+          "letters": [],
+          "age_band": "8-10",
+          "shoe": null,
+          "price": 80
+        },
+        {
+          "n": 101,
+          "name": "Mitaines bébé sans pouces — vison (fermeture éclair)",
+          "system": "audience_sans_taille",
+          "letters": [],
+          "age_band": null,
+          "shoe": null,
+          "price": 40
+        },
+        {
+          "n": 102,
+          "name": "Mitaines bébé sans pouces 8-24 mois — castor",
+          "system": "tranche_age",
+          "letters": [],
+          "age_band": "8-24 mois",
+          "shoe": null,
+          "price": 40
+        },
+        {
+          "n": 103,
+          "name": "Mitaines bébé sans pouces 8-24 mois — vison",
+          "system": "tranche_age",
+          "letters": [],
+          "age_band": "8-24 mois",
+          "shoe": null,
+          "price": 40
+        },
+        {
+          "n": 104,
+          "name": "Mitaines dame — renard roux",
+          "system": "audience_sans_taille",
+          "letters": [],
+          "age_band": null,
+          "shoe": null,
+          "price": 140
+        },
+        {
+          "n": 105,
+          "name": "Mitaines dame — vison et renard",
+          "system": "audience_sans_taille",
+          "letters": [],
+          "age_band": null,
+          "shoe": null,
+          "price": 160
+        },
+        {
+          "n": 106,
+          "name": "Mitaines dame M — renard",
+          "system": "lettre_SML",
+          "letters": [
+            "M"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 140
+        },
+        {
+          "n": 107,
+          "name": "Mitaines dame M-L — chat sauvage",
+          "system": "lettre_SML",
+          "letters": [
+            "M-L"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 140
+        },
+        {
+          "n": 108,
+          "name": "Mitaines dame M-L — fourrure recyclée",
+          "system": "lettre_SML",
+          "letters": [
+            "M-L"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 140
+        },
+        {
+          "n": 109,
+          "name": "Mitaines enfant 10-12 — mouton rasé",
+          "system": "tranche_age",
+          "letters": [],
+          "age_band": "10-12",
+          "shoe": null,
+          "price": 80
+        },
+        {
+          "n": 110,
+          "name": "Mitaines enfant 2-4 ans — castor (fermeture éclair)",
+          "system": "tranche_age",
+          "letters": [],
+          "age_band": "2-4 ans",
+          "shoe": null,
+          "price": 60
+        },
+        {
+          "n": 111,
+          "name": "Mitaines enfant 4-6 — vison (fermeture éclair)",
+          "system": "tranche_age",
+          "letters": [],
+          "age_band": "4-6",
+          "shoe": null,
+          "price": 60
+        },
+        {
+          "n": 112,
+          "name": "Mitaines enfant 6-8 — vison (fermeture éclair)",
+          "system": "tranche_age",
+          "letters": [],
+          "age_band": "6-8",
+          "shoe": null,
+          "price": 60
+        },
+        {
+          "n": 113,
+          "name": "Mitaines enfant 8-10 — chat sauvage",
+          "system": "tranche_age",
+          "letters": [],
+          "age_band": "8-10",
+          "shoe": null,
+          "price": 80
+        },
+        {
+          "n": 114,
+          "name": "Mitaines fille 8-10 — renard",
+          "system": "tranche_age",
+          "letters": [],
+          "age_band": "8-10",
+          "shoe": null,
+          "price": 40
+        },
+        {
+          "n": 115,
+          "name": "Mitaines homme M-L — castor",
+          "system": "lettre_SML",
+          "letters": [
+            "M-L"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 180
+        },
+        {
+          "n": 116,
+          "name": "Mitaines homme M-L — coyote",
+          "system": "lettre_SML",
+          "letters": [
+            "M-L"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 180
+        },
+        {
+          "n": 117,
+          "name": "Mitaines homme M-L — renard roux",
+          "system": "lettre_SML",
+          "letters": [
+            "M-L"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 180
+        },
+        {
+          "n": 118,
+          "name": "Mitaines longues dame M — vison et renard",
+          "system": "lettre_SML",
+          "letters": [
+            "M"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 160
+        },
+        {
+          "n": 119,
+          "name": "Mitaines M — renard",
+          "system": "lettre_SML",
+          "letters": [
+            "M"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 140
+        },
+        {
+          "n": 120,
+          "name": "Mitaines M-L — renard",
+          "system": "lettre_SML",
+          "letters": [
+            "M-L"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 140
+        },
+        {
+          "n": 121,
+          "name": "Mitaines M-L — vison et chat sauvage",
+          "system": "lettre_SML",
+          "letters": [
+            "M-L"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 160
+        },
+        {
+          "n": 122,
+          "name": "Mitaines M-L — vison et renard",
+          "system": "lettre_SML",
+          "letters": [
+            "M-L"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 160
+        },
+        {
+          "n": 123,
+          "name": "Mitaines motoneige M — renard argenté",
+          "system": "lettre_SML",
+          "letters": [
+            "M"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 160
+        },
+        {
+          "n": 124,
+          "name": "Mitaines motoneige M-L — renard norvégien",
+          "system": "lettre_SML",
+          "letters": [
+            "M-L"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 180
+        },
+        {
+          "n": 125,
+          "name": "Mitaines Small — vison",
+          "system": "lettre_SML",
+          "letters": [
+            "S"
+          ],
+          "age_band": null,
+          "shoe": null,
+          "price": 140
+        },
+        {
+          "n": 126,
+          "name": "Mitaines style Inuit — coyote",
+          "system": "aucune_taille",
+          "letters": [],
+          "age_band": null,
+          "shoe": null,
+          "price": 140
+        }
+      ]
+    },
+    "mukluks": {
+      "count": 7,
+      "systems": {
+        "tranche_age": 4,
+        "audience_sans_taille": 2,
+        "pointure": 1
+      },
+      "letters": [],
+      "age_bands": [
+        "7-18 mois",
+        "8-18 mois",
+        "8-24 mois"
+      ],
+      "pointures": [
+        "8-9"
+      ],
+      "products": [
+        {
+          "n": 400,
+          "name": "Mukluks adulte mobilité réduite 8-9 — vison et renard",
+          "system": "pointure",
+          "letters": [],
+          "age_band": null,
+          "shoe": "8-9",
+          "price": 140
+        },
+        {
+          "n": 401,
+          "name": "Mukluks bébé — vison (fermeture éclair)",
+          "system": "audience_sans_taille",
+          "letters": [],
+          "age_band": null,
+          "shoe": null,
+          "price": 120
+        },
+        {
+          "n": 402,
+          "name": "Mukluks bébé 7-18 mois — vison",
+          "system": "tranche_age",
+          "letters": [],
+          "age_band": "7-18 mois",
+          "shoe": null,
+          "price": 120
+        },
+        {
+          "n": 403,
+          "name": "Mukluks bébé 8-18 mois — vison",
+          "system": "tranche_age",
+          "letters": [],
+          "age_band": "8-18 mois",
+          "shoe": null,
+          "price": 120
+        },
+        {
+          "n": 404,
+          "name": "Mukluks bébé 8-24 mois — castor",
+          "system": "tranche_age",
+          "letters": [],
+          "age_band": "8-24 mois",
+          "shoe": null,
+          "price": 120
+        },
+        {
+          "n": 405,
+          "name": "Mukluks bébé 8-24 mois — vison",
+          "system": "tranche_age",
+          "letters": [],
+          "age_band": "8-24 mois",
+          "shoe": null,
+          "price": 120
+        },
+        {
+          "n": 406,
+          "name": "Mukluks bébé à 18 mois — coyote",
+          "system": "audience_sans_taille",
+          "letters": [],
+          "age_band": null,
+          "shoe": null,
+          "price": 120
+        }
+      ]
+    },
+    "pantoufles": {
+      "count": 11,
+      "systems": {
+        "tranche_age": 2,
+        "pointure": 9
+      },
+      "letters": [],
+      "age_bands": [
+        "0-7 mois",
+        "13-1",
+        "2-3",
+        "5-12 mois"
+      ],
+      "pointures": [
+        "10-11",
+        "13-1",
+        "2-3",
+        "7-8",
+        "8-9",
+        "9-10"
+      ],
+      "products": [
+        {
+          "n": 300,
+          "name": "Pantoufles bébé 0-7 mois — fourrure recyclée",
+          "system": "tranche_age",
+          "letters": [],
+          "age_band": "0-7 mois",
+          "shoe": null,
+          "price": 40
+        },
+        {
+          "n": 301,
+          "name": "Pantoufles bébé 5-12 mois — fourrure recyclée",
+          "system": "tranche_age",
+          "letters": [],
+          "age_band": "5-12 mois",
+          "shoe": null,
+          "price": 40
+        },
+        {
+          "n": 302,
+          "name": "Pantoufles dame 7-8 — mouton rasé et chat sauvage",
+          "system": "pointure",
+          "letters": [],
+          "age_band": null,
+          "shoe": "7-8",
+          "price": 120
+        },
+        {
+          "n": 303,
+          "name": "Pantoufles dame 8-9 — vison et coyote",
+          "system": "pointure",
+          "letters": [],
+          "age_band": null,
+          "shoe": "8-9",
+          "price": 120
+        },
+        {
+          "n": 304,
+          "name": "Pantoufles dame 8-9 — vison et renard",
+          "system": "pointure",
+          "letters": [],
+          "age_band": null,
+          "shoe": "8-9",
+          "price": 120
+        },
+        {
+          "n": 305,
+          "name": "Pantoufles dame 9-10 — vison et renard",
+          "system": "pointure",
+          "letters": [],
+          "age_band": null,
+          "shoe": "9-10",
+          "price": 120
+        },
+        {
+          "n": 306,
+          "name": "Pantoufles enfant 13-1 — vison et coyote",
+          "system": "pointure",
+          "letters": [],
+          "age_band": "13-1",
+          "shoe": "13-1",
+          "price": 60
+        },
+        {
+          "n": 307,
+          "name": "Pantoufles enfant 2-3 — mouton rasé et coyote",
+          "system": "pointure",
+          "letters": [],
+          "age_band": "2-3",
+          "shoe": "2-3",
+          "price": 60
+        },
+        {
+          "n": 308,
+          "name": "Pantoufles enfant 2-3 — renard",
+          "system": "pointure",
+          "letters": [],
+          "age_band": "2-3",
+          "shoe": "2-3",
+          "price": 60
+        },
+        {
+          "n": 309,
+          "name": "Pantoufles homme 10-11 — chat sauvage",
+          "system": "pointure",
+          "letters": [],
+          "age_band": null,
+          "shoe": "10-11",
+          "price": 120
+        },
+        {
+          "n": 310,
+          "name": "Pantoufles homme 10-11 — mouton et renard roux",
+          "system": "pointure",
+          "letters": [],
+          "age_band": null,
+          "shoe": "10-11",
+          "price": 120
+        }
+      ]
+    },
+    "semelles": {
+      "count": 1,
+      "systems": {
+        "pointure": 1
+      },
+      "letters": [],
+      "age_bands": [],
+      "pointures": [
+        "5-12"
+      ],
+      "products": [
+        {
+          "n": 700,
+          "name": "Semelles fourrure recyclée — pointures 5 à 12",
+          "system": "pointure",
+          "letters": [],
+          "age_band": null,
+          "shoe": "5-12",
+          "price": 20
+        }
+      ]
+    }
+  },
+  "multi_sku_families": [
+    {
+      "family": "mitaines | Mitaines enfant — vison (fermeture éclair)",
+      "skus": [
+        {
+          "n": 111,
+          "name": "Mitaines enfant 4-6 — vison (fermeture éclair)",
+          "tag": "4-6",
+          "price": 60
+        },
+        {
+          "n": 112,
+          "name": "Mitaines enfant 6-8 — vison (fermeture éclair)",
+          "tag": "6-8",
+          "price": 60
+        }
+      ]
+    },
+    {
+      "family": "mitaines | Mitaines — renard",
+      "skus": [
+        {
+          "n": 119,
+          "name": "Mitaines M — renard",
+          "tag": "M",
+          "price": 140
+        },
+        {
+          "n": 120,
+          "name": "Mitaines M-L — renard",
+          "tag": "M-L",
+          "price": 140
+        }
+      ]
+    },
+    {
+      "family": "mukluks | Mukluks bébé — vison",
+      "skus": [
+        {
+          "n": 402,
+          "name": "Mukluks bébé 7-18 mois — vison",
+          "tag": "7-18 mois",
+          "price": 120
+        },
+        {
+          "n": 403,
+          "name": "Mukluks bébé 8-18 mois — vison",
+          "tag": "8-18 mois",
+          "price": 120
+        },
+        {
+          "n": 405,
+          "name": "Mukluks bébé 8-24 mois — vison",
+          "tag": "8-24 mois",
+          "price": 120
+        }
+      ]
+    },
+    {
+      "family": "pantoufles | Pantoufles bébé — fourrure recyclée",
+      "skus": [
+        {
+          "n": 300,
+          "name": "Pantoufles bébé 0-7 mois — fourrure recyclée",
+          "tag": "0-7 mois",
+          "price": 40
+        },
+        {
+          "n": 301,
+          "name": "Pantoufles bébé 5-12 mois — fourrure recyclée",
+          "tag": "5-12 mois",
+          "price": 40
+        }
+      ]
+    },
+    {
+      "family": "pantoufles | Pantoufles dame — vison et renard",
+      "skus": [
+        {
+          "n": 304,
+          "name": "Pantoufles dame 8-9 — vison et renard",
+          "tag": "8-9",
+          "price": 120
+        },
+        {
+          "n": 305,
+          "name": "Pantoufles dame 9-10 — vison et renard",
+          "tag": "9-10",
+          "price": 120
+        }
+      ]
+    }
+  ],
+  "single_sku": [
+    {
+      "n": 500,
+      "name": "Cache-oreilles ado 10-14 — renard et vison",
+      "system": "tranche_age",
+      "tag": "10-14",
+      "price": 60,
+      "cat": "cache-oreilles"
+    },
+    {
+      "n": 501,
+      "name": "Cache-oreilles dame M — vison et lapin",
+      "system": "lettre_SML",
+      "tag": "M",
+      "price": 60,
+      "cat": "cache-oreilles"
+    },
+    {
+      "n": 502,
+      "name": "Cache-oreilles enfant 8-10-12 — coyote",
+      "system": "tranche_age",
+      "tag": "8-10-12",
+      "price": 60,
+      "cat": "cache-oreilles"
+    },
+    {
+      "n": 503,
+      "name": "Cache-oreilles enfant 8-10-12 — renard",
+      "system": "tranche_age",
+      "tag": "8-10-12",
+      "price": 60,
+      "cat": "cache-oreilles"
+    },
+    {
+      "n": 202,
+      "name": "Chapeau dame M-L — coyote",
+      "system": "lettre_SML",
+      "tag": "M-L",
+      "price": 120,
+      "cat": "chapeaux"
+    },
+    {
+      "n": 203,
+      "name": "Chapeau dame M-L — fourrure recyclée",
+      "system": "lettre_SML",
+      "tag": "M-L",
+      "price": 120,
+      "cat": "chapeaux"
+    },
+    {
+      "n": 204,
+      "name": "Chapeau dame M-L — renard argenté",
+      "system": "lettre_SML",
+      "tag": "M-L",
+      "price": 120,
+      "cat": "chapeaux"
+    },
+    {
+      "n": 205,
+      "name": "Chapeau dame M-L — renard norvégien",
+      "system": "lettre_SML",
+      "tag": "M-L",
+      "price": 120,
+      "cat": "chapeaux"
+    },
+    {
+      "n": 206,
+      "name": "Chapeau dame M-L — renard roux",
+      "system": "lettre_SML",
+      "tag": "M-L",
+      "price": 120,
+      "cat": "chapeaux"
+    },
+    {
+      "n": 207,
+      "name": "Chapeau dame M-L — vison",
+      "system": "lettre_SML",
+      "tag": "M-L",
+      "price": 120,
+      "cat": "chapeaux"
+    },
+    {
+      "n": 201,
+      "name": "Chapeau dame — vison et renard",
+      "system": "audience_sans_taille",
+      "tag": "AUCUNE",
+      "price": 120,
+      "cat": "chapeaux"
+    },
+    {
+      "n": 208,
+      "name": "Chapeau fille 8-10 — renard",
+      "system": "tranche_age",
+      "tag": "8-10",
+      "price": 60,
+      "cat": "chapeaux"
+    },
+    {
+      "n": 210,
+      "name": "Chapeau homme M — castor",
+      "system": "lettre_SML",
+      "tag": "M",
+      "price": 180,
+      "cat": "chapeaux"
+    },
+    {
+      "n": 211,
+      "name": "Chapeau homme M-L — coyote",
+      "system": "lettre_SML",
+      "tag": "M-L",
+      "price": 180,
+      "cat": "chapeaux"
+    },
+    {
+      "n": 209,
+      "name": "Chapeau homme L-XL — raton",
+      "system": "lettre_SML",
+      "tag": "L-XL",
+      "price": 180,
+      "cat": "chapeaux"
+    },
+    {
+      "n": 212,
+      "name": "Chapeau homme M-L — renard argenté",
+      "system": "lettre_SML",
+      "tag": "M-L",
+      "price": 180,
+      "cat": "chapeaux"
+    },
+    {
+      "n": 213,
+      "name": "Chapeau homme M-L — renard roux",
+      "system": "lettre_SML",
+      "tag": "M-L",
+      "price": 180,
+      "cat": "chapeaux"
+    },
+    {
+      "n": 200,
+      "name": "Chapeau — vison recyclée",
+      "system": "aucune_taille",
+      "tag": "AUCUNE",
+      "price": 80,
+      "cat": "chapeaux"
+    },
+    {
+      "n": 600,
+      "name": "Foulard dame — vison",
+      "system": "audience_sans_taille",
+      "tag": "AUCUNE",
+      "price": 60,
+      "cat": "foulards"
+    },
+    {
+      "n": 601,
+      "name": "Foulard dame — vison et renard",
+      "system": "audience_sans_taille",
+      "tag": "AUCUNE",
+      "price": 60,
+      "cat": "foulards"
+    },
+    {
+      "n": 102,
+      "name": "Mitaines bébé sans pouces 8-24 mois — castor",
+      "system": "tranche_age",
+      "tag": "8-24 mois",
+      "price": 40,
+      "cat": "mitaines"
+    },
+    {
+      "n": 103,
+      "name": "Mitaines bébé sans pouces 8-24 mois — vison",
+      "system": "tranche_age",
+      "tag": "8-24 mois",
+      "price": 40,
+      "cat": "mitaines"
+    },
+    {
+      "n": 101,
+      "name": "Mitaines bébé sans pouces — vison (fermeture éclair)",
+      "system": "audience_sans_taille",
+      "tag": "AUCUNE",
+      "price": 40,
+      "cat": "mitaines"
+    },
+    {
+      "n": 107,
+      "name": "Mitaines dame M-L — chat sauvage",
+      "system": "lettre_SML",
+      "tag": "M-L",
+      "price": 140,
+      "cat": "mitaines"
+    },
+    {
+      "n": 108,
+      "name": "Mitaines dame M-L — fourrure recyclée",
+      "system": "lettre_SML",
+      "tag": "M-L",
+      "price": 140,
+      "cat": "mitaines"
+    },
+    {
+      "n": 106,
+      "name": "Mitaines dame M — renard",
+      "system": "lettre_SML",
+      "tag": "M",
+      "price": 140,
+      "cat": "mitaines"
+    },
+    {
+      "n": 104,
+      "name": "Mitaines dame — renard roux",
+      "system": "audience_sans_taille",
+      "tag": "AUCUNE",
+      "price": 140,
+      "cat": "mitaines"
+    },
+    {
+      "n": 105,
+      "name": "Mitaines dame — vison et renard",
+      "system": "audience_sans_taille",
+      "tag": "AUCUNE",
+      "price": 160,
+      "cat": "mitaines"
+    },
+    {
+      "n": 110,
+      "name": "Mitaines enfant 2-4 ans — castor (fermeture éclair)",
+      "system": "tranche_age",
+      "tag": "2-4 ans",
+      "price": 60,
+      "cat": "mitaines"
+    },
+    {
+      "n": 113,
+      "name": "Mitaines enfant 8-10 — chat sauvage",
+      "system": "tranche_age",
+      "tag": "8-10",
+      "price": 80,
+      "cat": "mitaines"
+    },
+    {
+      "n": 109,
+      "name": "Mitaines enfant 10-12 — mouton rasé",
+      "system": "tranche_age",
+      "tag": "10-12",
+      "price": 80,
+      "cat": "mitaines"
+    },
+    {
+      "n": 114,
+      "name": "Mitaines fille 8-10 — renard",
+      "system": "tranche_age",
+      "tag": "8-10",
+      "price": 40,
+      "cat": "mitaines"
+    },
+    {
+      "n": 115,
+      "name": "Mitaines homme M-L — castor",
+      "system": "lettre_SML",
+      "tag": "M-L",
+      "price": 180,
+      "cat": "mitaines"
+    },
+    {
+      "n": 116,
+      "name": "Mitaines homme M-L — coyote",
+      "system": "lettre_SML",
+      "tag": "M-L",
+      "price": 180,
+      "cat": "mitaines"
+    },
+    {
+      "n": 117,
+      "name": "Mitaines homme M-L — renard roux",
+      "system": "lettre_SML",
+      "tag": "M-L",
+      "price": 180,
+      "cat": "mitaines"
+    },
+    {
+      "n": 118,
+      "name": "Mitaines longues dame M — vison et renard",
+      "system": "lettre_SML",
+      "tag": "M",
+      "price": 160,
+      "cat": "mitaines"
+    },
+    {
+      "n": 123,
+      "name": "Mitaines motoneige M — renard argenté",
+      "system": "lettre_SML",
+      "tag": "M",
+      "price": 160,
+      "cat": "mitaines"
+    },
+    {
+      "n": 124,
+      "name": "Mitaines motoneige M-L — renard norvégien",
+      "system": "lettre_SML",
+      "tag": "M-L",
+      "price": 180,
+      "cat": "mitaines"
+    },
+    {
+      "n": 126,
+      "name": "Mitaines style Inuit — coyote",
+      "system": "aucune_taille",
+      "tag": "AUCUNE",
+      "price": 140,
+      "cat": "mitaines"
+    },
+    {
+      "n": 125,
+      "name": "Mitaines Small — vison",
+      "system": "lettre_SML",
+      "tag": "S",
+      "price": 140,
+      "cat": "mitaines"
+    },
+    {
+      "n": 100,
+      "name": "Mitaines 8-10 — vison (fermeture éclair)",
+      "system": "tranche_age",
+      "tag": "8-10",
+      "price": 80,
+      "cat": "mitaines"
+    },
+    {
+      "n": 121,
+      "name": "Mitaines M-L — vison et chat sauvage",
+      "system": "lettre_SML",
+      "tag": "M-L",
+      "price": 160,
+      "cat": "mitaines"
+    },
+    {
+      "n": 122,
+      "name": "Mitaines M-L — vison et renard",
+      "system": "lettre_SML",
+      "tag": "M-L",
+      "price": 160,
+      "cat": "mitaines"
+    },
+    {
+      "n": 400,
+      "name": "Mukluks adulte mobilité réduite 8-9 — vison et renard",
+      "system": "pointure",
+      "tag": "8-9",
+      "price": 140,
+      "cat": "mukluks"
+    },
+    {
+      "n": 406,
+      "name": "Mukluks bébé à 18 mois — coyote",
+      "system": "audience_sans_taille",
+      "tag": "AUCUNE",
+      "price": 120,
+      "cat": "mukluks"
+    },
+    {
+      "n": 404,
+      "name": "Mukluks bébé 8-24 mois — castor",
+      "system": "tranche_age",
+      "tag": "8-24 mois",
+      "price": 120,
+      "cat": "mukluks"
+    },
+    {
+      "n": 401,
+      "name": "Mukluks bébé — vison (fermeture éclair)",
+      "system": "audience_sans_taille",
+      "tag": "AUCUNE",
+      "price": 120,
+      "cat": "mukluks"
+    },
+    {
+      "n": 302,
+      "name": "Pantoufles dame 7-8 — mouton rasé et chat sauvage",
+      "system": "pointure",
+      "tag": "7-8",
+      "price": 120,
+      "cat": "pantoufles"
+    },
+    {
+      "n": 303,
+      "name": "Pantoufles dame 8-9 — vison et coyote",
+      "system": "pointure",
+      "tag": "8-9",
+      "price": 120,
+      "cat": "pantoufles"
+    },
+    {
+      "n": 307,
+      "name": "Pantoufles enfant 2-3 — mouton rasé et coyote",
+      "system": "pointure",
+      "tag": "2-3",
+      "price": 60,
+      "cat": "pantoufles"
+    },
+    {
+      "n": 308,
+      "name": "Pantoufles enfant 2-3 — renard",
+      "system": "pointure",
+      "tag": "2-3",
+      "price": 60,
+      "cat": "pantoufles"
+    },
+    {
+      "n": 306,
+      "name": "Pantoufles enfant 13-1 — vison et coyote",
+      "system": "pointure",
+      "tag": "13-1",
+      "price": 60,
+      "cat": "pantoufles"
+    },
+    {
+      "n": 309,
+      "name": "Pantoufles homme 10-11 — chat sauvage",
+      "system": "pointure",
+      "tag": "10-11",
+      "price": 120,
+      "cat": "pantoufles"
+    },
+    {
+      "n": 310,
+      "name": "Pantoufles homme 10-11 — mouton et renard roux",
+      "system": "pointure",
+      "tag": "10-11",
+      "price": 120,
+      "cat": "pantoufles"
+    },
+    {
+      "n": 700,
+      "name": "Semelles fourrure recyclée — pointures 5 à 12",
+      "system": "pointure",
+      "tag": "5-12",
+      "price": 20,
+      "cat": "semelles"
+    }
+  ],
+  "all": [
+    {
+      "id": "chapeau-fille-8-10-renard",
+      "n": 208,
+      "cat": "chapeaux",
+      "name": "Chapeau fille 8-10 — renard",
+      "price": 60,
+      "letters": [],
+      "age_band": "8-10",
+      "audience": "fille",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "tranche_age",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "chapeau-dame-m-l-coyote",
+      "n": 202,
+      "cat": "chapeaux",
+      "name": "Chapeau dame M-L — coyote",
+      "price": 120,
+      "letters": [
+        "M-L"
+      ],
+      "age_band": null,
+      "audience": "dame",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "chapeau-dame-m-l-fourrure-recyclee",
+      "n": 203,
+      "cat": "chapeaux",
+      "name": "Chapeau dame M-L — fourrure recyclée",
+      "price": 120,
+      "letters": [
+        "M-L"
+      ],
+      "age_band": null,
+      "audience": "dame",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "chapeau-dame-m-l-renard-argente",
+      "n": 204,
+      "cat": "chapeaux",
+      "name": "Chapeau dame M-L — renard argenté",
+      "price": 120,
+      "letters": [
+        "M-L"
+      ],
+      "age_band": null,
+      "audience": "dame",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "chapeau-dame-m-l-renard-norvegien",
+      "n": 205,
+      "cat": "chapeaux",
+      "name": "Chapeau dame M-L — renard norvégien",
+      "price": 120,
+      "letters": [
+        "M-L"
+      ],
+      "age_band": null,
+      "audience": "dame",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "chapeau-dame-m-l-renard-roux",
+      "n": 206,
+      "cat": "chapeaux",
+      "name": "Chapeau dame M-L — renard roux",
+      "price": 120,
+      "letters": [
+        "M-L"
+      ],
+      "age_band": null,
+      "audience": "dame",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "chapeau-dame-m-l-vison",
+      "n": 207,
+      "cat": "chapeaux",
+      "name": "Chapeau dame M-L — vison",
+      "price": 120,
+      "letters": [
+        "M-L"
+      ],
+      "age_band": null,
+      "audience": "dame",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "chapeau-dame-vison-et-renard",
+      "n": 201,
+      "cat": "chapeaux",
+      "name": "Chapeau dame — vison et renard",
+      "price": 120,
+      "letters": [],
+      "age_band": null,
+      "audience": "dame",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "audience_sans_taille",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "chapeau-homme-m-castor",
+      "n": 210,
+      "cat": "chapeaux",
+      "name": "Chapeau homme M — castor",
+      "price": 180,
+      "letters": [
+        "M"
+      ],
+      "age_band": null,
+      "audience": "homme",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "chapeau-homme-m-l-coyote",
+      "n": 211,
+      "cat": "chapeaux",
+      "name": "Chapeau homme M-L — coyote",
+      "price": 180,
+      "letters": [
+        "M-L"
+      ],
+      "age_band": null,
+      "audience": "homme",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "chapeau-homme-m-l-renard-argente",
+      "n": 212,
+      "cat": "chapeaux",
+      "name": "Chapeau homme M-L — renard argenté",
+      "price": 180,
+      "letters": [
+        "M-L"
+      ],
+      "age_band": null,
+      "audience": "homme",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "chapeau-homme-m-l-renard-roux",
+      "n": 213,
+      "cat": "chapeaux",
+      "name": "Chapeau homme M-L — renard roux",
+      "price": 180,
+      "letters": [
+        "M-L"
+      ],
+      "age_band": null,
+      "audience": "homme",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "chapeau-homme-l-xl-raton",
+      "n": 209,
+      "cat": "chapeaux",
+      "name": "Chapeau homme L-XL — raton",
+      "price": 180,
+      "letters": [
+        "L-XL"
+      ],
+      "age_band": null,
+      "audience": "homme",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "chapeau-vison-recyclee",
+      "n": 200,
+      "cat": "chapeaux",
+      "name": "Chapeau — vison recyclée",
+      "price": 80,
+      "letters": [],
+      "age_band": null,
+      "audience": null,
+      "shoe": null,
+      "pointure_range": null,
+      "system": "aucune_taille",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-bebe-sans-pouces-8-24-mois-castor",
+      "n": 102,
+      "cat": "mitaines",
+      "name": "Mitaines bébé sans pouces 8-24 mois — castor",
+      "price": 40,
+      "letters": [],
+      "age_band": "8-24 mois",
+      "audience": "bebe",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "tranche_age",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-bebe-sans-pouces-8-24-mois-vison",
+      "n": 103,
+      "cat": "mitaines",
+      "name": "Mitaines bébé sans pouces 8-24 mois — vison",
+      "price": 40,
+      "letters": [],
+      "age_band": "8-24 mois",
+      "audience": "bebe",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "tranche_age",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-bebe-sans-pouces-vison-fermeture-eclair",
+      "n": 101,
+      "cat": "mitaines",
+      "name": "Mitaines bébé sans pouces — vison (fermeture éclair)",
+      "price": 40,
+      "letters": [],
+      "age_band": null,
+      "audience": "bebe",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "audience_sans_taille",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-enfant-2-4-ans-castor-fermeture-eclair",
+      "n": 110,
+      "cat": "mitaines",
+      "name": "Mitaines enfant 2-4 ans — castor (fermeture éclair)",
+      "price": 60,
+      "letters": [],
+      "age_band": "2-4 ans",
+      "audience": "enfant",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "tranche_age",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-enfant-4-6-vison-fermeture-eclair",
+      "n": 111,
+      "cat": "mitaines",
+      "name": "Mitaines enfant 4-6 — vison (fermeture éclair)",
+      "price": 60,
+      "letters": [],
+      "age_band": "4-6",
+      "audience": "enfant",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "tranche_age",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-enfant-6-8-vison-fermeture-eclair",
+      "n": 112,
+      "cat": "mitaines",
+      "name": "Mitaines enfant 6-8 — vison (fermeture éclair)",
+      "price": 60,
+      "letters": [],
+      "age_band": "6-8",
+      "audience": "enfant",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "tranche_age",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-enfant-8-10-chat-sauvage",
+      "n": 113,
+      "cat": "mitaines",
+      "name": "Mitaines enfant 8-10 — chat sauvage",
+      "price": 80,
+      "letters": [],
+      "age_band": "8-10",
+      "audience": "enfant",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "tranche_age",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-fille-8-10-renard",
+      "n": 114,
+      "cat": "mitaines",
+      "name": "Mitaines fille 8-10 — renard",
+      "price": 40,
+      "letters": [],
+      "age_band": "8-10",
+      "audience": "fille",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "tranche_age",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-enfant-10-12-mouton-rase",
+      "n": 109,
+      "cat": "mitaines",
+      "name": "Mitaines enfant 10-12 — mouton rasé",
+      "price": 80,
+      "letters": [],
+      "age_band": "10-12",
+      "audience": "enfant",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "tranche_age",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-dame-m-renard",
+      "n": 106,
+      "cat": "mitaines",
+      "name": "Mitaines dame M — renard",
+      "price": 140,
+      "letters": [
+        "M"
+      ],
+      "age_band": null,
+      "audience": "dame",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-longues-dame-m-vison-et-renard",
+      "n": 118,
+      "cat": "mitaines",
+      "name": "Mitaines longues dame M — vison et renard",
+      "price": 160,
+      "letters": [
+        "M"
+      ],
+      "age_band": null,
+      "audience": "dame",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-dame-m-l-chat-sauvage",
+      "n": 107,
+      "cat": "mitaines",
+      "name": "Mitaines dame M-L — chat sauvage",
+      "price": 140,
+      "letters": [
+        "M-L"
+      ],
+      "age_band": null,
+      "audience": "dame",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-dame-m-l-fourrure-recyclee",
+      "n": 108,
+      "cat": "mitaines",
+      "name": "Mitaines dame M-L — fourrure recyclée",
+      "price": 140,
+      "letters": [
+        "M-L"
+      ],
+      "age_band": null,
+      "audience": "dame",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-dame-renard-roux",
+      "n": 104,
+      "cat": "mitaines",
+      "name": "Mitaines dame — renard roux",
+      "price": 140,
+      "letters": [],
+      "age_band": null,
+      "audience": "dame",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "audience_sans_taille",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-dame-vison-et-renard",
+      "n": 105,
+      "cat": "mitaines",
+      "name": "Mitaines dame — vison et renard",
+      "price": 160,
+      "letters": [],
+      "age_band": null,
+      "audience": "dame",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "audience_sans_taille",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-homme-m-l-castor",
+      "n": 115,
+      "cat": "mitaines",
+      "name": "Mitaines homme M-L — castor",
+      "price": 180,
+      "letters": [
+        "M-L"
+      ],
+      "age_band": null,
+      "audience": "homme",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-homme-m-l-coyote",
+      "n": 116,
+      "cat": "mitaines",
+      "name": "Mitaines homme M-L — coyote",
+      "price": 180,
+      "letters": [
+        "M-L"
+      ],
+      "age_band": null,
+      "audience": "homme",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-homme-m-l-renard-roux",
+      "n": 117,
+      "cat": "mitaines",
+      "name": "Mitaines homme M-L — renard roux",
+      "price": 180,
+      "letters": [
+        "M-L"
+      ],
+      "age_band": null,
+      "audience": "homme",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-8-10-vison-fermeture-eclair",
+      "n": 100,
+      "cat": "mitaines",
+      "name": "Mitaines 8-10 — vison (fermeture éclair)",
+      "price": 80,
+      "letters": [],
+      "age_band": "8-10",
+      "audience": null,
+      "shoe": null,
+      "pointure_range": null,
+      "system": "tranche_age",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-small-vison",
+      "n": 125,
+      "cat": "mitaines",
+      "name": "Mitaines Small — vison",
+      "price": 140,
+      "letters": [
+        "S"
+      ],
+      "age_band": null,
+      "audience": null,
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-m-renard",
+      "n": 119,
+      "cat": "mitaines",
+      "name": "Mitaines M — renard",
+      "price": 140,
+      "letters": [
+        "M"
+      ],
+      "age_band": null,
+      "audience": null,
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-motoneige-m-renard-argente",
+      "n": 123,
+      "cat": "mitaines",
+      "name": "Mitaines motoneige M — renard argenté",
+      "price": 160,
+      "letters": [
+        "M"
+      ],
+      "age_band": null,
+      "audience": null,
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-m-l-renard",
+      "n": 120,
+      "cat": "mitaines",
+      "name": "Mitaines M-L — renard",
+      "price": 140,
+      "letters": [
+        "M-L"
+      ],
+      "age_band": null,
+      "audience": null,
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-m-l-vison-et-chat-sauvage",
+      "n": 121,
+      "cat": "mitaines",
+      "name": "Mitaines M-L — vison et chat sauvage",
+      "price": 160,
+      "letters": [
+        "M-L"
+      ],
+      "age_band": null,
+      "audience": null,
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-m-l-vison-et-renard",
+      "n": 122,
+      "cat": "mitaines",
+      "name": "Mitaines M-L — vison et renard",
+      "price": 160,
+      "letters": [
+        "M-L"
+      ],
+      "age_band": null,
+      "audience": null,
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-motoneige-m-l-renard-norvegien",
+      "n": 124,
+      "cat": "mitaines",
+      "name": "Mitaines motoneige M-L — renard norvégien",
+      "price": 180,
+      "letters": [
+        "M-L"
+      ],
+      "age_band": null,
+      "audience": null,
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mitaines-style-inuit-coyote",
+      "n": 126,
+      "cat": "mitaines",
+      "name": "Mitaines style Inuit — coyote",
+      "price": 140,
+      "letters": [],
+      "age_band": null,
+      "audience": null,
+      "shoe": null,
+      "pointure_range": null,
+      "system": "aucune_taille",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "foulard-dame-vison",
+      "n": 600,
+      "cat": "foulards",
+      "name": "Foulard dame — vison",
+      "price": 60,
+      "letters": [],
+      "age_band": null,
+      "audience": "dame",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "audience_sans_taille",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "foulard-dame-vison-et-renard",
+      "n": 601,
+      "cat": "foulards",
+      "name": "Foulard dame — vison et renard",
+      "price": 60,
+      "letters": [],
+      "age_band": null,
+      "audience": "dame",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "audience_sans_taille",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "cache-oreilles-enfant-8-10-12-coyote",
+      "n": 502,
+      "cat": "cache-oreilles",
+      "name": "Cache-oreilles enfant 8-10-12 — coyote",
+      "price": 60,
+      "letters": [],
+      "age_band": "8-10-12",
+      "audience": "enfant",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "tranche_age",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "cache-oreilles-enfant-8-10-12-renard",
+      "n": 503,
+      "cat": "cache-oreilles",
+      "name": "Cache-oreilles enfant 8-10-12 — renard",
+      "price": 60,
+      "letters": [],
+      "age_band": "8-10-12",
+      "audience": "enfant",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "tranche_age",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "cache-oreilles-ado-10-14-renard-et-vison",
+      "n": 500,
+      "cat": "cache-oreilles",
+      "name": "Cache-oreilles ado 10-14 — renard et vison",
+      "price": 60,
+      "letters": [],
+      "age_band": "10-14",
+      "audience": "ado",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "tranche_age",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "cache-oreilles-dame-m-vison-et-lapin",
+      "n": 501,
+      "cat": "cache-oreilles",
+      "name": "Cache-oreilles dame M — vison et lapin",
+      "price": 60,
+      "letters": [
+        "M"
+      ],
+      "age_band": null,
+      "audience": "dame",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "lettre_SML",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "semelles-fourrure-recyclee-pointures-5-a-12",
+      "n": 700,
+      "cat": "semelles",
+      "name": "Semelles fourrure recyclée — pointures 5 à 12",
+      "price": 20,
+      "letters": [],
+      "age_band": null,
+      "audience": null,
+      "shoe": null,
+      "pointure_range": "5-12",
+      "system": "pointure",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mukluks-bebe-7-18-mois-vison",
+      "n": 402,
+      "cat": "mukluks",
+      "name": "Mukluks bébé 7-18 mois — vison",
+      "price": 120,
+      "letters": [],
+      "age_band": "7-18 mois",
+      "audience": "bebe",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "tranche_age",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mukluks-bebe-8-18-mois-vison",
+      "n": 403,
+      "cat": "mukluks",
+      "name": "Mukluks bébé 8-18 mois — vison",
+      "price": 120,
+      "letters": [],
+      "age_band": "8-18 mois",
+      "audience": "bebe",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "tranche_age",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mukluks-bebe-8-24-mois-castor",
+      "n": 404,
+      "cat": "mukluks",
+      "name": "Mukluks bébé 8-24 mois — castor",
+      "price": 120,
+      "letters": [],
+      "age_band": "8-24 mois",
+      "audience": "bebe",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "tranche_age",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mukluks-bebe-8-24-mois-vison",
+      "n": 405,
+      "cat": "mukluks",
+      "name": "Mukluks bébé 8-24 mois — vison",
+      "price": 120,
+      "letters": [],
+      "age_band": "8-24 mois",
+      "audience": "bebe",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "tranche_age",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mukluks-bebe-a-18-mois-coyote",
+      "n": 406,
+      "cat": "mukluks",
+      "name": "Mukluks bébé à 18 mois — coyote",
+      "price": 120,
+      "letters": [],
+      "age_band": null,
+      "audience": "bebe",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "audience_sans_taille",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mukluks-bebe-vison-fermeture-eclair",
+      "n": 401,
+      "cat": "mukluks",
+      "name": "Mukluks bébé — vison (fermeture éclair)",
+      "price": 120,
+      "letters": [],
+      "age_band": null,
+      "audience": "bebe",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "audience_sans_taille",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "mukluks-adulte-mobilite-reduite-8-9-vison-et-renard",
+      "n": 400,
+      "cat": "mukluks",
+      "name": "Mukluks adulte mobilité réduite 8-9 — vison et renard",
+      "price": 140,
+      "letters": [],
+      "age_band": null,
+      "audience": "adulte",
+      "shoe": "8-9",
+      "pointure_range": null,
+      "system": "pointure",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "pantoufles-bebe-0-7-mois-fourrure-recyclee",
+      "n": 300,
+      "cat": "pantoufles",
+      "name": "Pantoufles bébé 0-7 mois — fourrure recyclée",
+      "price": 40,
+      "letters": [],
+      "age_band": "0-7 mois",
+      "audience": "bebe",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "tranche_age",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "pantoufles-bebe-5-12-mois-fourrure-recyclee",
+      "n": 301,
+      "cat": "pantoufles",
+      "name": "Pantoufles bébé 5-12 mois — fourrure recyclée",
+      "price": 40,
+      "letters": [],
+      "age_band": "5-12 mois",
+      "audience": "bebe",
+      "shoe": null,
+      "pointure_range": null,
+      "system": "tranche_age",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "pantoufles-enfant-2-3-mouton-rase-et-coyote",
+      "n": 307,
+      "cat": "pantoufles",
+      "name": "Pantoufles enfant 2-3 — mouton rasé et coyote",
+      "price": 60,
+      "letters": [],
+      "age_band": "2-3",
+      "audience": "enfant",
+      "shoe": "2-3",
+      "pointure_range": null,
+      "system": "pointure",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "pantoufles-enfant-2-3-renard",
+      "n": 308,
+      "cat": "pantoufles",
+      "name": "Pantoufles enfant 2-3 — renard",
+      "price": 60,
+      "letters": [],
+      "age_band": "2-3",
+      "audience": "enfant",
+      "shoe": "2-3",
+      "pointure_range": null,
+      "system": "pointure",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "pantoufles-enfant-13-1-vison-et-coyote",
+      "n": 306,
+      "cat": "pantoufles",
+      "name": "Pantoufles enfant 13-1 — vison et coyote",
+      "price": 60,
+      "letters": [],
+      "age_band": "13-1",
+      "audience": "enfant",
+      "shoe": "13-1",
+      "pointure_range": null,
+      "system": "pointure",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "pantoufles-dame-7-8-mouton-rase-et-chat-sauvage",
+      "n": 302,
+      "cat": "pantoufles",
+      "name": "Pantoufles dame 7-8 — mouton rasé et chat sauvage",
+      "price": 120,
+      "letters": [],
+      "age_band": null,
+      "audience": "dame",
+      "shoe": "7-8",
+      "pointure_range": null,
+      "system": "pointure",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "pantoufles-dame-8-9-vison-et-coyote",
+      "n": 303,
+      "cat": "pantoufles",
+      "name": "Pantoufles dame 8-9 — vison et coyote",
+      "price": 120,
+      "letters": [],
+      "age_band": null,
+      "audience": "dame",
+      "shoe": "8-9",
+      "pointure_range": null,
+      "system": "pointure",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "pantoufles-dame-8-9-vison-et-renard",
+      "n": 304,
+      "cat": "pantoufles",
+      "name": "Pantoufles dame 8-9 — vison et renard",
+      "price": 120,
+      "letters": [],
+      "age_band": null,
+      "audience": "dame",
+      "shoe": "8-9",
+      "pointure_range": null,
+      "system": "pointure",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "pantoufles-dame-9-10-vison-et-renard",
+      "n": 305,
+      "cat": "pantoufles",
+      "name": "Pantoufles dame 9-10 — vison et renard",
+      "price": 120,
+      "letters": [],
+      "age_band": null,
+      "audience": "dame",
+      "shoe": "9-10",
+      "pointure_range": null,
+      "system": "pointure",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "pantoufles-homme-10-11-chat-sauvage",
+      "n": 309,
+      "cat": "pantoufles",
+      "name": "Pantoufles homme 10-11 — chat sauvage",
+      "price": 120,
+      "letters": [],
+      "age_band": null,
+      "audience": "homme",
+      "shoe": "10-11",
+      "pointure_range": null,
+      "system": "pointure",
+      "availability": "contact",
+      "active": true
+    },
+    {
+      "id": "pantoufles-homme-10-11-mouton-et-renard-roux",
+      "n": 310,
+      "cat": "pantoufles",
+      "name": "Pantoufles homme 10-11 — mouton et renard roux",
+      "price": 120,
+      "letters": [],
+      "age_band": null,
+      "audience": "homme",
+      "shoe": "10-11",
+      "pointure_range": null,
+      "system": "pointure",
+      "availability": "contact",
+      "active": true
+    }
+  ]
+}

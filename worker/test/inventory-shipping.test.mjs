@@ -203,31 +203,34 @@ test("assertInventorySellable refuse pending_lucie du fichier réel", () => {
   assert.throws(() => assertInventorySellable(store, [{ id, qty: 1 }]), /Inventaire non prêt/i);
 });
 
-test("shipping-config : no_invented_rates, fees null, canada_post unset", () => {
+test("shipping-config : flat_order 18$, Lucie assigne le transporteur", () => {
   assert.equal(shippingConfig.policy.no_invented_rates, true);
-  assert.equal(shippingConfig.methods.canada_post.rates_source, "unset");
-  assert.equal(shippingConfig.methods.canada_post.rate_table_cad_cents, null);
-  assert.equal(shippingConfig.methods.bus_quebec.fee_cad_cents, null);
-  assert.equal(shippingConfig.methods.bus_quebec.requires_manual_validation, true);
+  assert.equal(shippingConfig.policy.no_purolator, true);
+  assert.equal(shippingConfig.policy.customer_does_not_choose_carrier, true);
+  assert.equal(shippingConfig.methods.flat_order.fee_cad_cents, 1800);
+  assert.equal(shippingConfig.methods.flat_order.fee_scope, "per_order");
+  assert.ok(!shippingConfig.methods.purolator);
   const methods = listShippingMethods(shippingConfig);
-  assert.ok(methods.every((m) => m.configured_for_charge === false));
+  const flat = methods.find((m) => m.id === "flat_order");
+  assert.equal(flat.configured_for_charge, true);
 });
 
-test("quote Postes Canada refusée si rates unset / sans cote réelle", () => {
+test("quote flat_order 18$ ; grille CP sans cote réelle refusée", () => {
+  const fixed = quoteShipping(shippingConfig, {
+    methodId: "flat_order",
+    destination: { country: "CA", province: "QC", postal_code: "H2X1Y4" },
+  });
+  assert.equal(fixed.fee_cad_cents, 1800);
+  assert.equal(fixed.fee_scope, "per_order");
+  assert.equal(fixed.invented, false);
+
   const cfg = structuredClone(shippingConfig);
   cfg.methods.canada_post.enabled = true;
-  assert.throws(
-    () =>
-      quoteShipping(cfg, {
-        methodId: "canada_post",
-        destination: { country: "CA", province: "QC", postal_code: "H2X1Y4" },
-      }),
-    /non configurés|unset|inventé/i,
-  );
-
+  cfg.methods.canada_post.customer_selectable = true;
   cfg.methods.canada_post.rates_source = "lucie_manual_table";
-  cfg.methods.canada_post.rate_table_cad_cents = {}; // table présente mais cote injectée absente
-  cfg.methods.canada_post.package_profile.weight_g = 500;
+  cfg.methods.canada_post.fee_cad_cents = null;
+  cfg.methods.canada_post.rate_table_cad_cents = {};
+  cfg.methods.canada_post.package_profile = { weight_g: 500 };
   assert.throws(
     () =>
       quoteShipping(cfg, {
@@ -240,35 +243,39 @@ test("quote Postes Canada refusée si rates unset / sans cote réelle", () => {
   const q = quoteShipping(cfg, {
     methodId: "canada_post",
     destination: { country: "CA", province: "QC", postal_code: "G1R4P5" },
-    canadaPostQuoteCadCents: 1850, // injecté comme venant d'une grille/API — pas hardcodé dans la config
+    canadaPostQuoteCadCents: 1850,
   });
   assert.equal(q.fee_cad_cents, 1850);
   assert.equal(q.invented, false);
 });
 
-test("quote autobus QC : refuse sans validation manuelle Lucie", () => {
-  const cfg = structuredClone(shippingConfig);
-  cfg.methods.bus_quebec.enabled = true;
+test("quote Express Bus : 18$ fixe QC ; hors zone refusé", () => {
+  const q = quoteShipping(shippingConfig, {
+    methodId: "bus_quebec",
+    destination: { province: "QC", postal_code: "G1A1A1", country: "CA" },
+  });
+  assert.equal(q.fee_cad_cents, 1800);
+  assert.equal(q.fee_scope, "per_order");
+  assert.equal(q.customer_pickup_required, true);
   assert.throws(
-    () => quoteShipping(cfg, { methodId: "bus_quebec", destination: { province: "QC" } }),
-    /non validés|Lucie/i,
+    () =>
+      quoteShipping(shippingConfig, {
+        methodId: "bus_quebec",
+        destination: { province: "ON", postal_code: "M5V1A1", country: "CA" },
+      }),
+    /desservie|Québec/i,
   );
-  const q = quoteShipping(cfg, {
+  // Mode manuel encore possible si on désactive le forfait
+  const cfg = structuredClone(shippingConfig);
+  cfg.methods.bus_quebec.rates_source = "manual_lucie_only";
+  cfg.methods.bus_quebec.fee_cad_cents = null;
+  const manual = quoteShipping(cfg, {
     methodId: "bus_quebec",
     destination: { province: "QC" },
     manualBusFeeCadCents: 2500,
   });
-  assert.equal(q.fee_cad_cents, 2500);
-  assert.equal(q.manual_validated, true);
-  assert.throws(
-    () =>
-      quoteShipping(cfg, {
-        methodId: "bus_quebec",
-        destination: { province: "ON" },
-        manualBusFeeCadCents: 2500,
-      }),
-    /Québec/i,
-  );
+  assert.equal(manual.fee_cad_cents, 2500);
+  assert.equal(manual.manual_validated, true);
 });
 
 test("SHIPPING_CONFIGURED=false bloque facturation Stripe shipping", () => {

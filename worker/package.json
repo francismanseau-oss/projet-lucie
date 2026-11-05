@@ -13,8 +13,10 @@
     "test:mocks": "node --test test/*.test.mjs",
     "test:preprod": "node --test test/preprod.test.mjs",
     "test:inventory": "node --test test/inventory-shipping.test.mjs",
+    "test:inventory-admin": "node --test test/inventory-admin.test.mjs",
     "test:integration": "node --test test/integration-audit.test.mjs",
-    "check": "node scripts/verify-catalog.mjs && node --test test/phase-a.test.mjs test/preprod.test.mjs test/inventory-shipping.test.mjs test/integration-audit.test.mjs",
+    "check": "node scripts/verify-catalog.mjs && node --test test/phase-a.test.mjs test/preprod.test.mjs test/inventory-shipping.test.mjs test/inventory-admin.test.mjs test/integration-audit.test.mjs test/suggestion.test.mjs test/sur-mesure.test.mjs test/lucie-notify.test.mjs test/hub-pages.test.mjs test/sur-mesure-ux.test.mjs test/order-simulation.test.mjs test/checkout-session-id.test.mjs test/product-numbers-csm.test.mjs test/orders-admin.test.mjs test/shipping-single-payment.test.mjs",
+    "test:simulation": "node --test test/order-simulation.test.mjs",
     "sync:catalog": "node -e \"import('node:fs').then(fs=>{fs.copyFileSync('../catalog/products.json','src/products.json');console.log('synced')})\""
   },
   "devDependencies": {

@@ -1,15 +1,46 @@
+# Dépendances / build
 node_modules/
 .wrangler/
 dist/
+
+# Secrets — jamais publier
 .dev.vars
 **/.dev.vars
-*.pem
 .env
 .env.*
 !.env.example
+!.env*.example
 worker/.dev.vars
+*.pem
 *.secret
-.DS_Store
-# Ne pas committer une copie locale de secrets Stripe / CF
 secrets/
+inventory/admin/.env
+inventory/admin/.env.*
+inventory/admin/.local*
+inventory/admin/*.local.json
+inventory/admin/data/lucie-inventory.json
+inventory/admin/data/lucie-account.json
+inventory/admin/data/lucie-sessions.json
+inventory/admin/data/mail-outbox/
+inventory/admin/data/*.json
+!inventory/admin/data/.gitkeep
+inventory/admin/raccourcis/*.png
+inventory/admin/raccourcis/*.flag
+inventory/admin/raccourcis/*.bat
 
+# Données commandes / clients (local only)
+orders/admin-orders.json
+orders/**/*.local.json
+orders/data/
+**/admin-orders.json
+
+# OS / éditeur
+.DS_Store
+Thumbs.db
+*.log
+
+# Captures / diagnostics locaux (optionnel)
+docs/_diag-*
+docs/_e2e-*
+guides/_diag-*
+guides/_e2e-*

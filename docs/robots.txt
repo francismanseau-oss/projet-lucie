@@ -1,0 +1,32 @@
+# Les Fourrures Boréales — robots.txt (préparé pour https://lesfourruresboreales.ca)
+# Domaine : achat prévu — NE PAS soumettre le sitemap à Google tant que le site n'est pas publié officiellement.
+
+User-agent: *
+Allow: /
+Allow: /boutique
+Allow: /categories/
+Allow: /produits/
+Allow: /creations
+Allow: /creations-personnalisees
+Allow: /lucie
+Allow: /contact
+Allow: /assets/
+
+# Pages transactionnelles / privées (robots.txt ≠ authentification)
+Disallow: /panier
+Disallow: /panier.html
+Disallow: /paiement
+Disallow: /paiement.html
+Disallow: /commande-confirmee
+Disallow: /commande-confirmee.html
+Disallow: /commande-annulee
+Disallow: /commande-annulee.html
+Disallow: /inventory/
+Disallow: /orders/
+Disallow: /worker/
+Disallow: /docs/
+Disallow: /seo/
+Disallow: /scripts/
+Disallow: /log/
+
+Sitemap: https://lesfourruresboreales.ca/sitemap.xml

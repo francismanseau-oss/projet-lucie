@@ -5,6 +5,21 @@
 
 Ce guide suppose que le code Phase A + stocks + livraison est déjà prêt en local (72 tests simulés OK).
 
+### Documents de validation Lucie (préparation, sans activation)
+
+| Document | Pour |
+|----------|------|
+| [VALIDATION-FINALE-LUCIE.md](./VALIDATION-FINALE-LUCIE.md) | **Fiche unique** — questions encore ouvertes pour Lucie |
+| [RAPPORT-SIMULATION-COMMANDES.md](./RAPPORT-SIMULATION-COMMANDES.md) | Simulation commandes locale (mocks) vs Stripe réel |
+| [RAPPORT-PREP-STRIPE-TEST.md](./RAPPORT-PREP-STRIPE-TEST.md) | Jour J essais Stripe TEST (commandes + checklist) |
+| [RAPPORT-OPTIM-BOUTIQUE.md](./RAPPORT-OPTIM-BOUTIQUE.md) | WebP boutique + cartes (PNG originaux intacts) |
+| [DECISIONS-RESTANTES-LUCIE.md](./DECISIONS-RESTANTES-LUCIE.md) | Acquis / ouvert / technique Francis |
+| [INVENTAIRE-VALIDATION-LUCIE.csv](./INVENTAIRE-VALIDATION-LUCIE.csv) | Tableau 66 produits (Excel) |
+| [INVENTAIRE-VALIDATION-LUCIE.md](./INVENTAIRE-VALIDATION-LUCIE.md) | Même inventaire, lecture |
+| [LIVRAISON-VALIDATION-LUCIE.md](./LIVRAISON-VALIDATION-LUCIE.md) | Postes Canada / autobus |
+| [STRIPE-PREPARATION.md](./STRIPE-PREPARATION.md) | Prérequis paiements test |
+| [RESEND-CONNEXION.md](./RESEND-CONNEXION.md) | Brancher les courriels plus tard |
+
 ---
 
 ## 0. État des lieux (vérifié)
@@ -239,10 +254,15 @@ Pour **chaque** des 66 articles :
 
 ### 4.5 Politiques commerciales
 
+**Déjà acquis (voir `DECISIONS-RESTANTES-LUCIE.md`) :** échanges acceptés ; pas de remboursement ordinaire (sous réserve légale).
+
+Encore ouvert (fiche Lucie) :
+
 - Délais de fabrication (sur commande)  
-- Retours / échanges  
-- Que faire si **paiement reçu sans stock** (`paid_no_stock`) : rembourser, pièce équivalente, contact manuel ?  
+- Que faire si **paiement reçu sans stock** : échange / contact (aligné politique d’échanges)  
 - Confidentialité / mentions légales paiement  
+- **Taxes :** inscription TPS/TVQ et affichage des prix — **à vérifier avant activation** (absence d’inscription connue ≠ dispense fiscale)  
+
 
 ---
 

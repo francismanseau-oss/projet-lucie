@@ -1,0 +1,1251 @@
+{
+  "totals": {
+    "products": 66,
+    "size_entries": 66,
+    "with_selector": 3,
+    "ids_match": true
+  },
+  "codes_used": {
+    "8-10": 4,
+    "M-L": 18,
+    "unique": 8,
+    "M": 9,
+    "L-XL": 1,
+    "8-24 mois": 4,
+    "2-4 ans": 1,
+    "4-6": 1,
+    "6-8": 1,
+    "10-12": 1,
+    "L": 3,
+    "S": 1,
+    "8-10-12": 2,
+    "10-14": 1,
+    "7-18 mois": 1,
+    "8-18 mois": 1,
+    "8-9": 3,
+    "0-7 mois": 1,
+    "5-12 mois": 1,
+    "2-3": 2,
+    "13-1": 1,
+    "7-8": 1,
+    "9-10": 1,
+    "10-11": 2
+  },
+  "xl_xxl_as_standalone_code": [],
+  "combined_formats": [
+    {
+      "id": "chapeau-dame-m-l-coyote",
+      "n": 202,
+      "code": "M-L",
+      "selector": false,
+      "category": "chapeaux"
+    },
+    {
+      "id": "chapeau-dame-m-l-fourrure-recyclee",
+      "n": 203,
+      "code": "M-L",
+      "selector": false,
+      "category": "chapeaux"
+    },
+    {
+      "id": "chapeau-dame-m-l-renard-argente",
+      "n": 204,
+      "code": "M-L",
+      "selector": false,
+      "category": "chapeaux"
+    },
+    {
+      "id": "chapeau-dame-m-l-renard-norvegien",
+      "n": 205,
+      "code": "M-L",
+      "selector": false,
+      "category": "chapeaux"
+    },
+    {
+      "id": "chapeau-dame-m-l-renard-roux",
+      "n": 206,
+      "code": "M-L",
+      "selector": false,
+      "category": "chapeaux"
+    },
+    {
+      "id": "chapeau-dame-m-l-vison",
+      "n": 207,
+      "code": "M-L",
+      "selector": false,
+      "category": "chapeaux"
+    },
+    {
+      "id": "chapeau-homme-m-l-coyote",
+      "n": 211,
+      "code": "M-L",
+      "selector": false,
+      "category": "chapeaux"
+    },
+    {
+      "id": "chapeau-homme-m-l-renard-argente",
+      "n": 212,
+      "code": "M-L",
+      "selector": false,
+      "category": "chapeaux"
+    },
+    {
+      "id": "chapeau-homme-m-l-renard-roux",
+      "n": 213,
+      "code": "M-L",
+      "selector": false,
+      "category": "chapeaux"
+    },
+    {
+      "id": "chapeau-homme-l-xl-raton",
+      "n": 209,
+      "code": "L-XL",
+      "selector": false,
+      "category": "chapeaux"
+    },
+    {
+      "id": "mitaines-dame-m-l-chat-sauvage",
+      "n": 107,
+      "code": "M-L",
+      "selector": false,
+      "category": "mitaines"
+    },
+    {
+      "id": "mitaines-dame-m-l-fourrure-recyclee",
+      "n": 108,
+      "code": "M-L",
+      "selector": false,
+      "category": "mitaines"
+    },
+    {
+      "id": "mitaines-homme-m-l-castor",
+      "n": 115,
+      "code": "M-L",
+      "selector": false,
+      "category": "mitaines"
+    },
+    {
+      "id": "mitaines-homme-m-l-coyote",
+      "n": 116,
+      "code": "M-L",
+      "selector": false,
+      "category": "mitaines"
+    },
+    {
+      "id": "mitaines-homme-m-l-renard-roux",
+      "n": 117,
+      "code": "M-L",
+      "selector": false,
+      "category": "mitaines"
+    },
+    {
+      "id": "mitaines-m-l-renard",
+      "n": 120,
+      "code": "M-L",
+      "selector": false,
+      "category": "mitaines"
+    },
+    {
+      "id": "mitaines-m-l-vison-et-chat-sauvage",
+      "n": 121,
+      "code": "M-L",
+      "selector": false,
+      "category": "mitaines"
+    },
+    {
+      "id": "mitaines-m-l-vison-et-renard",
+      "n": 122,
+      "code": "M-L",
+      "selector": false,
+      "category": "mitaines"
+    },
+    {
+      "id": "mitaines-motoneige-m-l-renard-norvegien",
+      "n": 124,
+      "code": "M-L",
+      "selector": false,
+      "category": "mitaines"
+    }
+  ],
+  "by_category": {
+    "chapeaux": [
+      {
+        "n": 200,
+        "id": "chapeau-vison-recyclee",
+        "name_fr": "Chapeau — vison recyclée",
+        "price": 8000,
+        "selector": false,
+        "codes": [
+          "unique"
+        ],
+        "labels_fr": [
+          "Format unique"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 201,
+        "id": "chapeau-dame-vison-et-renard",
+        "name_fr": "Chapeau dame — vison et renard",
+        "price": 12000,
+        "selector": false,
+        "codes": [
+          "unique"
+        ],
+        "labels_fr": [
+          "Format unique"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 202,
+        "id": "chapeau-dame-m-l-coyote",
+        "name_fr": "Chapeau dame M-L — coyote",
+        "price": 12000,
+        "selector": false,
+        "codes": [
+          "M-L"
+        ],
+        "labels_fr": [
+          "Moyen–Grand"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 203,
+        "id": "chapeau-dame-m-l-fourrure-recyclee",
+        "name_fr": "Chapeau dame M-L — fourrure recyclée",
+        "price": 12000,
+        "selector": false,
+        "codes": [
+          "M-L"
+        ],
+        "labels_fr": [
+          "Moyen–Grand"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 204,
+        "id": "chapeau-dame-m-l-renard-argente",
+        "name_fr": "Chapeau dame M-L — renard argenté",
+        "price": 12000,
+        "selector": false,
+        "codes": [
+          "M-L"
+        ],
+        "labels_fr": [
+          "Moyen–Grand"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 205,
+        "id": "chapeau-dame-m-l-renard-norvegien",
+        "name_fr": "Chapeau dame M-L — renard norvégien",
+        "price": 12000,
+        "selector": false,
+        "codes": [
+          "M-L"
+        ],
+        "labels_fr": [
+          "Moyen–Grand"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 206,
+        "id": "chapeau-dame-m-l-renard-roux",
+        "name_fr": "Chapeau dame M-L — renard roux",
+        "price": 12000,
+        "selector": false,
+        "codes": [
+          "M-L"
+        ],
+        "labels_fr": [
+          "Moyen–Grand"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 207,
+        "id": "chapeau-dame-m-l-vison",
+        "name_fr": "Chapeau dame M-L — vison",
+        "price": 12000,
+        "selector": false,
+        "codes": [
+          "M-L"
+        ],
+        "labels_fr": [
+          "Moyen–Grand"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 208,
+        "id": "chapeau-fille-8-10-renard",
+        "name_fr": "Chapeau fille 8-10 — renard",
+        "price": 6000,
+        "selector": false,
+        "codes": [
+          "8-10"
+        ],
+        "labels_fr": [
+          "8-10"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 209,
+        "id": "chapeau-homme-l-xl-raton",
+        "name_fr": "Chapeau homme L-XL — raton",
+        "price": 18000,
+        "selector": false,
+        "codes": [
+          "L-XL"
+        ],
+        "labels_fr": [
+          "Grand–Très grand"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 210,
+        "id": "chapeau-homme-m-castor",
+        "name_fr": "Chapeau homme M — castor",
+        "price": 18000,
+        "selector": false,
+        "codes": [
+          "M"
+        ],
+        "labels_fr": [
+          "Moyen"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 211,
+        "id": "chapeau-homme-m-l-coyote",
+        "name_fr": "Chapeau homme M-L — coyote",
+        "price": 18000,
+        "selector": false,
+        "codes": [
+          "M-L"
+        ],
+        "labels_fr": [
+          "Moyen–Grand"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 212,
+        "id": "chapeau-homme-m-l-renard-argente",
+        "name_fr": "Chapeau homme M-L — renard argenté",
+        "price": 18000,
+        "selector": false,
+        "codes": [
+          "M-L"
+        ],
+        "labels_fr": [
+          "Moyen–Grand"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 213,
+        "id": "chapeau-homme-m-l-renard-roux",
+        "name_fr": "Chapeau homme M-L — renard roux",
+        "price": 18000,
+        "selector": false,
+        "codes": [
+          "M-L"
+        ],
+        "labels_fr": [
+          "Moyen–Grand"
+        ],
+        "qty": [
+          3
+        ]
+      }
+    ],
+    "mitaines": [
+      {
+        "n": 100,
+        "id": "mitaines-8-10-vison-fermeture-eclair",
+        "name_fr": "Mitaines 8-10 — vison (fermeture éclair)",
+        "price": 8000,
+        "selector": false,
+        "codes": [
+          "8-10"
+        ],
+        "labels_fr": [
+          "8-10"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 101,
+        "id": "mitaines-bebe-sans-pouces-vison-fermeture-eclair",
+        "name_fr": "Mitaines bébé sans pouces — vison (fermeture éclair)",
+        "price": 4000,
+        "selector": false,
+        "codes": [
+          "unique"
+        ],
+        "labels_fr": [
+          "Format unique"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 102,
+        "id": "mitaines-bebe-sans-pouces-8-24-mois-castor",
+        "name_fr": "Mitaines bébé sans pouces 8-24 mois — castor",
+        "price": 4000,
+        "selector": false,
+        "codes": [
+          "8-24 mois"
+        ],
+        "labels_fr": [
+          "8-24 mois"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 103,
+        "id": "mitaines-bebe-sans-pouces-8-24-mois-vison",
+        "name_fr": "Mitaines bébé sans pouces 8-24 mois — vison",
+        "price": 4000,
+        "selector": false,
+        "codes": [
+          "8-24 mois"
+        ],
+        "labels_fr": [
+          "8-24 mois"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 104,
+        "id": "mitaines-dame-renard-roux",
+        "name_fr": "Mitaines dame — renard roux",
+        "price": 14000,
+        "selector": true,
+        "codes": [
+          "M",
+          "L"
+        ],
+        "labels_fr": [
+          "Moyen",
+          "Grand"
+        ],
+        "qty": [
+          3,
+          3
+        ]
+      },
+      {
+        "n": 105,
+        "id": "mitaines-dame-vison-et-renard",
+        "name_fr": "Mitaines dame — vison et renard",
+        "price": 16000,
+        "selector": true,
+        "codes": [
+          "M",
+          "L"
+        ],
+        "labels_fr": [
+          "Moyen",
+          "Grand"
+        ],
+        "qty": [
+          3,
+          3
+        ]
+      },
+      {
+        "n": 106,
+        "id": "mitaines-dame-m-renard",
+        "name_fr": "Mitaines dame M — renard",
+        "price": 14000,
+        "selector": false,
+        "codes": [
+          "M"
+        ],
+        "labels_fr": [
+          "Moyen"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 107,
+        "id": "mitaines-dame-m-l-chat-sauvage",
+        "name_fr": "Mitaines dame M-L — chat sauvage",
+        "price": 14000,
+        "selector": false,
+        "codes": [
+          "M-L"
+        ],
+        "labels_fr": [
+          "Moyen–Grand"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 108,
+        "id": "mitaines-dame-m-l-fourrure-recyclee",
+        "name_fr": "Mitaines dame M-L — fourrure recyclée",
+        "price": 14000,
+        "selector": false,
+        "codes": [
+          "M-L"
+        ],
+        "labels_fr": [
+          "Moyen–Grand"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 109,
+        "id": "mitaines-enfant-10-12-mouton-rase",
+        "name_fr": "Mitaines enfant 10-12 — mouton rasé",
+        "price": 8000,
+        "selector": false,
+        "codes": [
+          "10-12"
+        ],
+        "labels_fr": [
+          "10-12"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 110,
+        "id": "mitaines-enfant-2-4-ans-castor-fermeture-eclair",
+        "name_fr": "Mitaines enfant 2-4 ans — castor (fermeture éclair)",
+        "price": 6000,
+        "selector": false,
+        "codes": [
+          "2-4 ans"
+        ],
+        "labels_fr": [
+          "2-4 ans"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 111,
+        "id": "mitaines-enfant-4-6-vison-fermeture-eclair",
+        "name_fr": "Mitaines enfant 4-6 — vison (fermeture éclair)",
+        "price": 6000,
+        "selector": false,
+        "codes": [
+          "4-6"
+        ],
+        "labels_fr": [
+          "4-6"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 112,
+        "id": "mitaines-enfant-6-8-vison-fermeture-eclair",
+        "name_fr": "Mitaines enfant 6-8 — vison (fermeture éclair)",
+        "price": 6000,
+        "selector": false,
+        "codes": [
+          "6-8"
+        ],
+        "labels_fr": [
+          "6-8"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 113,
+        "id": "mitaines-enfant-8-10-chat-sauvage",
+        "name_fr": "Mitaines enfant 8-10 — chat sauvage",
+        "price": 8000,
+        "selector": false,
+        "codes": [
+          "8-10"
+        ],
+        "labels_fr": [
+          "8-10"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 114,
+        "id": "mitaines-fille-8-10-renard",
+        "name_fr": "Mitaines fille 8-10 — renard",
+        "price": 4000,
+        "selector": false,
+        "codes": [
+          "8-10"
+        ],
+        "labels_fr": [
+          "8-10"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 115,
+        "id": "mitaines-homme-m-l-castor",
+        "name_fr": "Mitaines homme M-L — castor",
+        "price": 18000,
+        "selector": false,
+        "codes": [
+          "M-L"
+        ],
+        "labels_fr": [
+          "Moyen–Grand"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 116,
+        "id": "mitaines-homme-m-l-coyote",
+        "name_fr": "Mitaines homme M-L — coyote",
+        "price": 18000,
+        "selector": false,
+        "codes": [
+          "M-L"
+        ],
+        "labels_fr": [
+          "Moyen–Grand"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 117,
+        "id": "mitaines-homme-m-l-renard-roux",
+        "name_fr": "Mitaines homme M-L — renard roux",
+        "price": 18000,
+        "selector": false,
+        "codes": [
+          "M-L"
+        ],
+        "labels_fr": [
+          "Moyen–Grand"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 118,
+        "id": "mitaines-longues-dame-m-vison-et-renard",
+        "name_fr": "Mitaines longues dame M — vison et renard",
+        "price": 16000,
+        "selector": false,
+        "codes": [
+          "M"
+        ],
+        "labels_fr": [
+          "Moyen"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 119,
+        "id": "mitaines-m-renard",
+        "name_fr": "Mitaines M — renard",
+        "price": 14000,
+        "selector": false,
+        "codes": [
+          "M"
+        ],
+        "labels_fr": [
+          "Moyen"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 120,
+        "id": "mitaines-m-l-renard",
+        "name_fr": "Mitaines M-L — renard",
+        "price": 14000,
+        "selector": false,
+        "codes": [
+          "M-L"
+        ],
+        "labels_fr": [
+          "Moyen–Grand"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 121,
+        "id": "mitaines-m-l-vison-et-chat-sauvage",
+        "name_fr": "Mitaines M-L — vison et chat sauvage",
+        "price": 16000,
+        "selector": false,
+        "codes": [
+          "M-L"
+        ],
+        "labels_fr": [
+          "Moyen–Grand"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 122,
+        "id": "mitaines-m-l-vison-et-renard",
+        "name_fr": "Mitaines M-L — vison et renard",
+        "price": 16000,
+        "selector": false,
+        "codes": [
+          "M-L"
+        ],
+        "labels_fr": [
+          "Moyen–Grand"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 123,
+        "id": "mitaines-motoneige-m-renard-argente",
+        "name_fr": "Mitaines motoneige M — renard argenté",
+        "price": 16000,
+        "selector": false,
+        "codes": [
+          "M"
+        ],
+        "labels_fr": [
+          "Moyen"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 124,
+        "id": "mitaines-motoneige-m-l-renard-norvegien",
+        "name_fr": "Mitaines motoneige M-L — renard norvégien",
+        "price": 18000,
+        "selector": false,
+        "codes": [
+          "M-L"
+        ],
+        "labels_fr": [
+          "Moyen–Grand"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 125,
+        "id": "mitaines-small-vison",
+        "name_fr": "Mitaines Small — vison",
+        "price": 14000,
+        "selector": false,
+        "codes": [
+          "S"
+        ],
+        "labels_fr": [
+          "Petit"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 126,
+        "id": "mitaines-style-inuit-coyote",
+        "name_fr": "Mitaines style Inuit — coyote",
+        "price": 14000,
+        "selector": true,
+        "codes": [
+          "M",
+          "L"
+        ],
+        "labels_fr": [
+          "Moyen",
+          "Grand"
+        ],
+        "qty": [
+          3,
+          3
+        ]
+      }
+    ],
+    "foulards": [
+      {
+        "n": 600,
+        "id": "foulard-dame-vison",
+        "name_fr": "Foulard dame — vison",
+        "price": 6000,
+        "selector": false,
+        "codes": [
+          "unique"
+        ],
+        "labels_fr": [
+          "Format unique"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 601,
+        "id": "foulard-dame-vison-et-renard",
+        "name_fr": "Foulard dame — vison et renard",
+        "price": 6000,
+        "selector": false,
+        "codes": [
+          "unique"
+        ],
+        "labels_fr": [
+          "Format unique"
+        ],
+        "qty": [
+          3
+        ]
+      }
+    ],
+    "cache-oreilles": [
+      {
+        "n": 500,
+        "id": "cache-oreilles-ado-10-14-renard-et-vison",
+        "name_fr": "Cache-oreilles ado 10-14 — renard et vison",
+        "price": 6000,
+        "selector": false,
+        "codes": [
+          "10-14"
+        ],
+        "labels_fr": [
+          "10-14"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 501,
+        "id": "cache-oreilles-dame-m-vison-et-lapin",
+        "name_fr": "Cache-oreilles dame M — vison et lapin",
+        "price": 6000,
+        "selector": false,
+        "codes": [
+          "M"
+        ],
+        "labels_fr": [
+          "Moyen"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 502,
+        "id": "cache-oreilles-enfant-8-10-12-coyote",
+        "name_fr": "Cache-oreilles enfant 8-10-12 — coyote",
+        "price": 6000,
+        "selector": false,
+        "codes": [
+          "8-10-12"
+        ],
+        "labels_fr": [
+          "8-10-12"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 503,
+        "id": "cache-oreilles-enfant-8-10-12-renard",
+        "name_fr": "Cache-oreilles enfant 8-10-12 — renard",
+        "price": 6000,
+        "selector": false,
+        "codes": [
+          "8-10-12"
+        ],
+        "labels_fr": [
+          "8-10-12"
+        ],
+        "qty": [
+          3
+        ]
+      }
+    ],
+    "semelles": [
+      {
+        "n": 700,
+        "id": "semelles-fourrure-recyclee-pointures-5-a-12",
+        "name_fr": "Semelles fourrure recyclée — pointures 5 à 12",
+        "price": 2000,
+        "selector": false,
+        "codes": [
+          "unique"
+        ],
+        "labels_fr": [
+          "Universelle (pointures 5 à 12, à découper)"
+        ],
+        "qty": [
+          3
+        ]
+      }
+    ],
+    "mukluks": [
+      {
+        "n": 400,
+        "id": "mukluks-adulte-mobilite-reduite-8-9-vison-et-renard",
+        "name_fr": "Mukluks adulte mobilité réduite 8-9 — vison et renard",
+        "price": 14000,
+        "selector": false,
+        "codes": [
+          "8-9"
+        ],
+        "labels_fr": [
+          "8-9"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 401,
+        "id": "mukluks-bebe-vison-fermeture-eclair",
+        "name_fr": "Mukluks bébé — vison (fermeture éclair)",
+        "price": 12000,
+        "selector": false,
+        "codes": [
+          "unique"
+        ],
+        "labels_fr": [
+          "Format unique"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 402,
+        "id": "mukluks-bebe-7-18-mois-vison",
+        "name_fr": "Mukluks bébé 7-18 mois — vison",
+        "price": 12000,
+        "selector": false,
+        "codes": [
+          "7-18 mois"
+        ],
+        "labels_fr": [
+          "7-18 mois"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 403,
+        "id": "mukluks-bebe-8-18-mois-vison",
+        "name_fr": "Mukluks bébé 8-18 mois — vison",
+        "price": 12000,
+        "selector": false,
+        "codes": [
+          "8-18 mois"
+        ],
+        "labels_fr": [
+          "8-18 mois"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 404,
+        "id": "mukluks-bebe-8-24-mois-castor",
+        "name_fr": "Mukluks bébé 8-24 mois — castor",
+        "price": 12000,
+        "selector": false,
+        "codes": [
+          "8-24 mois"
+        ],
+        "labels_fr": [
+          "8-24 mois"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 405,
+        "id": "mukluks-bebe-8-24-mois-vison",
+        "name_fr": "Mukluks bébé 8-24 mois — vison",
+        "price": 12000,
+        "selector": false,
+        "codes": [
+          "8-24 mois"
+        ],
+        "labels_fr": [
+          "8-24 mois"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 406,
+        "id": "mukluks-bebe-a-18-mois-coyote",
+        "name_fr": "Mukluks bébé à 18 mois — coyote",
+        "price": 12000,
+        "selector": false,
+        "codes": [
+          "unique"
+        ],
+        "labels_fr": [
+          "Format unique"
+        ],
+        "qty": [
+          3
+        ]
+      }
+    ],
+    "pantoufles": [
+      {
+        "n": 300,
+        "id": "pantoufles-bebe-0-7-mois-fourrure-recyclee",
+        "name_fr": "Pantoufles bébé 0-7 mois — fourrure recyclée",
+        "price": 4000,
+        "selector": false,
+        "codes": [
+          "0-7 mois"
+        ],
+        "labels_fr": [
+          "0-7 mois"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 301,
+        "id": "pantoufles-bebe-5-12-mois-fourrure-recyclee",
+        "name_fr": "Pantoufles bébé 5-12 mois — fourrure recyclée",
+        "price": 4000,
+        "selector": false,
+        "codes": [
+          "5-12 mois"
+        ],
+        "labels_fr": [
+          "5-12 mois"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 302,
+        "id": "pantoufles-dame-7-8-mouton-rase-et-chat-sauvage",
+        "name_fr": "Pantoufles dame 7-8 — mouton rasé et chat sauvage",
+        "price": 12000,
+        "selector": false,
+        "codes": [
+          "7-8"
+        ],
+        "labels_fr": [
+          "7-8"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 303,
+        "id": "pantoufles-dame-8-9-vison-et-coyote",
+        "name_fr": "Pantoufles dame 8-9 — vison et coyote",
+        "price": 12000,
+        "selector": false,
+        "codes": [
+          "8-9"
+        ],
+        "labels_fr": [
+          "8-9"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 304,
+        "id": "pantoufles-dame-8-9-vison-et-renard",
+        "name_fr": "Pantoufles dame 8-9 — vison et renard",
+        "price": 12000,
+        "selector": false,
+        "codes": [
+          "8-9"
+        ],
+        "labels_fr": [
+          "8-9"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 305,
+        "id": "pantoufles-dame-9-10-vison-et-renard",
+        "name_fr": "Pantoufles dame 9-10 — vison et renard",
+        "price": 12000,
+        "selector": false,
+        "codes": [
+          "9-10"
+        ],
+        "labels_fr": [
+          "9-10"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 306,
+        "id": "pantoufles-enfant-13-1-vison-et-coyote",
+        "name_fr": "Pantoufles enfant 13-1 — vison et coyote",
+        "price": 6000,
+        "selector": false,
+        "codes": [
+          "13-1"
+        ],
+        "labels_fr": [
+          "13-1"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 307,
+        "id": "pantoufles-enfant-2-3-mouton-rase-et-coyote",
+        "name_fr": "Pantoufles enfant 2-3 — mouton rasé et coyote",
+        "price": 6000,
+        "selector": false,
+        "codes": [
+          "2-3"
+        ],
+        "labels_fr": [
+          "2-3"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 308,
+        "id": "pantoufles-enfant-2-3-renard",
+        "name_fr": "Pantoufles enfant 2-3 — renard",
+        "price": 6000,
+        "selector": false,
+        "codes": [
+          "2-3"
+        ],
+        "labels_fr": [
+          "2-3"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 309,
+        "id": "pantoufles-homme-10-11-chat-sauvage",
+        "name_fr": "Pantoufles homme 10-11 — chat sauvage",
+        "price": 12000,
+        "selector": false,
+        "codes": [
+          "10-11"
+        ],
+        "labels_fr": [
+          "10-11"
+        ],
+        "qty": [
+          3
+        ]
+      },
+      {
+        "n": 310,
+        "id": "pantoufles-homme-10-11-mouton-et-renard-roux",
+        "name_fr": "Pantoufles homme 10-11 — mouton et renard roux",
+        "price": 12000,
+        "selector": false,
+        "codes": [
+          "10-11"
+        ],
+        "labels_fr": [
+          "10-11"
+        ],
+        "qty": [
+          3
+        ]
+      }
+    ]
+  }
+}

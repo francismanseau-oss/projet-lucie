@@ -3,12 +3,18 @@
   "currency_note": "Ne pas modifier les prix produits ici — voir catalog/products.json",
   "policy": {
     "no_fictional_qty": true,
-    "qty_on_hand_null_means": "Lucie n'a pas encore saisi la quantité",
+    "qty_on_hand_null_means": "Quantité réelle non confirmée par Lucie",
+    "min_stock_target_default": 3,
+    "min_stock_target_is_not_qty_on_hand": true,
+    "min_stock_target_note": "Objectif provisoire configurable — jamais une quantité disponible; ne pas copier dans qty_on_hand",
     "fulfillment_types": {
       "pending_lucie": "En attente de classification Lucie — non vendable en production",
       "unique_stock": "Pièce(s) unique(s) ou stock limité — réservation atomique requise",
       "made_to_order": "Fabriqué sur commande — pas de décrément stock; délai à confirmer par Lucie"
-    }
+    },
+    "provisional_qty_default": 3,
+    "provisional_not_validated_by_lucie": true,
+    "provisional_not_for_live_sale": true
   },
   "items": [
     {
@@ -18,9 +24,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 208,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "chapeau-dame-m-l-coyote",
@@ -29,9 +40,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 202,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "chapeau-dame-m-l-fourrure-recyclee",
@@ -40,9 +56,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 203,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "chapeau-dame-m-l-renard-argente",
@@ -51,9 +72,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 204,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "chapeau-dame-m-l-renard-norvegien",
@@ -62,9 +88,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 205,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "chapeau-dame-m-l-renard-roux",
@@ -73,9 +104,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 206,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "chapeau-dame-m-l-vison",
@@ -84,9 +120,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 207,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "chapeau-dame-vison-et-renard",
@@ -95,9 +136,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 201,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "chapeau-homme-m-castor",
@@ -106,9 +152,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 210,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "chapeau-homme-m-l-coyote",
@@ -117,9 +168,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 211,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "chapeau-homme-m-l-renard-argente",
@@ -128,9 +184,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 212,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "chapeau-homme-m-l-renard-roux",
@@ -139,9 +200,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 213,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "chapeau-homme-l-xl-raton",
@@ -150,9 +216,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 209,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "chapeau-vison-recyclee",
@@ -161,9 +232,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 200,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-bebe-sans-pouces-8-24-mois-castor",
@@ -172,9 +248,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 102,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-bebe-sans-pouces-8-24-mois-vison",
@@ -183,9 +264,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 103,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-bebe-sans-pouces-vison-fermeture-eclair",
@@ -194,9 +280,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 101,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-enfant-2-4-ans-castor-fermeture-eclair",
@@ -205,9 +296,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 110,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-enfant-4-6-vison-fermeture-eclair",
@@ -216,9 +312,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 111,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-enfant-6-8-vison-fermeture-eclair",
@@ -227,9 +328,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 112,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-enfant-8-10-chat-sauvage",
@@ -238,9 +344,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 113,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-fille-8-10-renard",
@@ -249,9 +360,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 114,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-enfant-10-12-mouton-rase",
@@ -260,9 +376,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 109,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-dame-m-renard",
@@ -271,9 +392,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 106,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-longues-dame-m-vison-et-renard",
@@ -282,9 +408,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 118,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-dame-m-l-chat-sauvage",
@@ -293,9 +424,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 107,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-dame-m-l-fourrure-recyclee",
@@ -304,9 +440,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 108,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-dame-renard-roux",
@@ -315,9 +456,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 104,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-dame-vison-et-renard",
@@ -326,9 +472,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 105,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-homme-m-l-castor",
@@ -337,9 +488,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 115,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-homme-m-l-coyote",
@@ -348,9 +504,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 116,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-homme-m-l-renard-roux",
@@ -359,9 +520,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 117,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-8-10-vison-fermeture-eclair",
@@ -370,9 +536,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 100,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-small-vison",
@@ -381,9 +552,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 125,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-m-renard",
@@ -392,9 +568,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 119,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-motoneige-m-renard-argente",
@@ -403,9 +584,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 123,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-m-l-renard",
@@ -414,9 +600,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 120,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-m-l-vison-et-chat-sauvage",
@@ -425,9 +616,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 121,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-m-l-vison-et-renard",
@@ -436,9 +632,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 122,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-motoneige-m-l-renard-norvegien",
@@ -447,9 +648,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 124,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mitaines-style-inuit-coyote",
@@ -458,9 +664,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 126,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "foulard-dame-vison",
@@ -469,9 +680,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 600,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "foulard-dame-vison-et-renard",
@@ -480,9 +696,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 601,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "cache-oreilles-enfant-8-10-12-coyote",
@@ -491,9 +712,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 502,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "cache-oreilles-enfant-8-10-12-renard",
@@ -502,9 +728,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 503,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "cache-oreilles-ado-10-14-renard-et-vison",
@@ -513,9 +744,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 500,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "cache-oreilles-dame-m-vison-et-lapin",
@@ -524,9 +760,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 501,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "semelles-fourrure-recyclee-pointures-5-a-12",
@@ -535,9 +776,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 700,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mukluks-bebe-7-18-mois-vison",
@@ -546,9 +792,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 402,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mukluks-bebe-8-18-mois-vison",
@@ -557,9 +808,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 403,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mukluks-bebe-8-24-mois-castor",
@@ -568,9 +824,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 404,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mukluks-bebe-8-24-mois-vison",
@@ -579,9 +840,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 405,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mukluks-bebe-a-18-mois-coyote",
@@ -590,9 +856,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 406,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mukluks-bebe-vison-fermeture-eclair",
@@ -601,9 +872,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 401,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "mukluks-adulte-mobilite-reduite-8-9-vison-et-renard",
@@ -612,9 +888,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 400,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "pantoufles-bebe-0-7-mois-fourrure-recyclee",
@@ -623,9 +904,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 300,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "pantoufles-bebe-5-12-mois-fourrure-recyclee",
@@ -634,9 +920,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 301,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "pantoufles-enfant-2-3-mouton-rase-et-coyote",
@@ -645,9 +936,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 307,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "pantoufles-enfant-2-3-renard",
@@ -656,9 +952,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 308,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "pantoufles-enfant-13-1-vison-et-coyote",
@@ -667,9 +968,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 306,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "pantoufles-dame-7-8-mouton-rase-et-chat-sauvage",
@@ -678,9 +984,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 302,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "pantoufles-dame-8-9-vison-et-coyote",
@@ -689,9 +1000,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 303,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "pantoufles-dame-8-9-vison-et-renard",
@@ -700,9 +1016,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 304,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "pantoufles-dame-9-10-vison-et-renard",
@@ -711,9 +1032,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 305,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "pantoufles-homme-10-11-chat-sauvage",
@@ -722,9 +1048,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 309,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     },
     {
       "product_id": "pantoufles-homme-10-11-mouton-et-renard-roux",
@@ -733,9 +1064,14 @@
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
       "qty_reserved": 0,
+      "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": null,
+      "product_number": 310,
+      "provisional_qty_on_hand": 3,
+      "qty_sold": 0,
+      "availability_status": "contact"
     }
   ]
 }

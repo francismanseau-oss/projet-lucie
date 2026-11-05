@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Commandes — Lucie</title>
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="orders.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Mes commandes</h1>
+    <p class="sub">Fourrures Boréales — outil local</p>
+    <nav class="admin-nav">
+      <a href="orders.html" aria-current="page">Commandes</a>
+      <a href="index.html">Inventaire</a>
+    </nav>
+    <p id="banner" class="banner" hidden></p>
+  </header>
+
+  <section id="login-view" class="card login-card">
+    <h2>Connexion</h2>
+    <p class="hint">Mot de passe requis. Aucun accès public.</p>
+    <label for="password">Mot de passe</label>
+    <input id="password" type="password" autocomplete="current-password" minlength="8">
+    <button type="button" id="btn-login" class="btn btn-primary btn-lg">Entrer</button>
+    <p id="login-error" class="error" hidden></p>
+  </section>
+
+  <section id="app-view" hidden>
+    <div class="toolbar card">
+      <input id="search" type="search" placeholder="Commande, produit, client…">
+      <label for="filter">Filtrer</label>
+      <select id="filter">
+        <option value="toutes">Toutes</option>
+        <option value="payees">Payées (vérifiées)</option>
+        <option value="a_fabriquer">À fabriquer</option>
+        <option value="a_preparer">À préparer</option>
+        <option value="expediees">Expédiées</option>
+        <option value="annulees">Annulées</option>
+      </select>
+      <div class="toolbar-actions">
+        <button type="button" id="btn-import" class="btn btn-primary">Actualiser depuis Stripe TEST</button>
+        <button type="button" id="btn-logout" class="btn btn-ghost">Quitter</button>
+      </div>
+      <p class="hint">L’import lit seulement les paiements <strong>test</strong> déjà payés. Aucune commande inventée.</p>
+    </div>
+
+    <p id="empty" class="empty">Aucune commande pour l’instant. Importez depuis Stripe TEST après un paiement fictif.</p>
+    <div id="list" class="order-list"></div>
+  </section>
+
+  <dialog id="dlg">
+    <div id="dlg-body"></div>
+    <form method="dialog"><button class="btn btn-ghost btn-lg">Fermer</button></form>
+  </dialog>
+
+  <script type="module" src="orders.js"></script>
+</body>
+</html>

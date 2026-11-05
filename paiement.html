@@ -4,42 +4,117 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Paiement — Les Fourrures Boréales (Stripe Checkout mode test).">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://lesfourruresboreales.ca/paiement">
+<!-- SEO-GEN-START -->
+<meta property="og:locale" content="fr_CA">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Les Fourrures Boréales">
+<meta property="og:title" content="Paiement | Les Fourrures Boréales">
+<meta property="og:description" content="Paiement — Les Fourrures Boréales (Stripe Checkout mode test).">
+<meta property="og:url" content="https://lesfourruresboreales.ca/paiement">
+<meta property="og:image" content="https://lesfourruresboreales.ca/assets/logo-fourrures-boreales.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Paiement | Les Fourrures Boréales">
+<meta name="twitter:description" content="Paiement — Les Fourrures Boréales (Stripe Checkout mode test).">
+<meta name="twitter:image" content="https://lesfourruresboreales.ca/assets/logo-fourrures-boreales.webp">
+
+<!-- SEO-GEN-END -->
 <title>Paiement | Les Fourrures Boréales</title>
 <link rel="stylesheet" href="style.css">
 <link rel="icon" type="image/png" href="favicon.png" sizes="64x64">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+  .ship-box { margin: 1.25rem 0; padding: 1rem 1.1rem; border: 1px solid #e5d8c8; border-radius: 12px; background: #fffcf8; }
+  .ship-box h2 { margin: 0 0 .75rem; font-size: 1.1rem; font-weight: 600; }
+  .ship-methods { display: grid; gap: .55rem; margin-bottom: .9rem; }
+  .ship-methods label { display: flex; gap: .65rem; align-items: flex-start; padding: .65rem .75rem; border: 1px solid #e5d8c8; border-radius: 10px; cursor: pointer; background: #fff; }
+  .ship-methods label:has(input:checked) { border-color: #965035; background: #f7f1ea; }
+  .ship-fields { display: grid; gap: .65rem; grid-template-columns: 1fr 1fr; }
+  .ship-fields label { display: flex; flex-direction: column; gap: .25rem; font-size: .92rem; }
+  .ship-fields input, .ship-fields select { padding: .55rem .65rem; border: 1px solid #d4c4b4; border-radius: 8px; font: inherit; }
+  .ship-fields .full { grid-column: 1 / -1; }
+  .tot-lines { margin: .75rem 0 0; font-size: 1rem; line-height: 1.55; }
+  .tot-lines strong { font-size: 1.15rem; }
+  .hold-banner { margin-top: .85rem; padding: .85rem; border-radius: 10px; background: #fff4e8; border: 1px solid #e8c9a0; font-size: .95rem; }
+  .bus-notice { margin-top: .75rem; padding: .85rem; border-radius: 10px; background: #f3ebe3; border: 2px solid #965035; font-size: 1rem; line-height: 1.4; font-weight: 600; }
+  @media (max-width: 560px) { .ship-fields { grid-template-columns: 1fr; } }
+</style>
 </head>
 <body class="payment-page">
-<header class="header"><a class="brand" href="index.html"><img src="assets/logo-fourrures-boreales.png" alt="Les Fourrures Boréales" onerror="this.hidden=true"><span>LES FOURRURES <strong>BORÉALES</strong></span></a><button class="menu-toggle" aria-expanded="false" aria-controls="main-menu" data-fr="Menu" data-en="Menu">☰ Menu</button><nav id="main-menu" aria-label="Navigation principale"><a href="index.html" data-fr="Accueil" data-en="Home">Accueil</a><a href="boutique.html" data-fr="Boutique" data-en="Shop">Boutique</a><a href="creations.html" data-fr="Nos créations" data-en="Our creations">Nos créations</a><a href="lucie.html" data-fr="À propos de Lucie" data-en="About Lucie">À propos de Lucie</a><a href="contact.html" data-fr="Contact" data-en="Contact">Contact</a><div class="languages mobile-languages" aria-label="Langue"><button type="button" data-set-lang="fr" aria-pressed="true">FR</button><span>|</span><button type="button" data-set-lang="en" aria-pressed="false">EN</button></div></nav><a class="cart-link" href="panier.html" aria-label="Panier"><span data-fr="Panier" data-en="Cart">Panier</span><span id="cart-count" class="cart-count-badge is-empty" data-count="0">0</span></a><div class="languages desktop-languages" aria-label="Langue"><button type="button" data-set-lang="fr" aria-pressed="true">FR</button><span>|</span><button type="button" data-set-lang="en" aria-pressed="false">EN</button></div></header>
+<header class="header"><a class="brand" href="index.html"><img src="assets/logo-fourrures-boreales.webp" alt="Les Fourrures Boréales" onerror="this.onerror=null;this.src='assets/logo-fourrures-boreales.png'"><span>LES FOURRURES <strong>BORÉALES</strong></span></a><button class="menu-toggle" aria-expanded="false" aria-controls="main-menu" data-fr="Menu" data-en="Menu">☰ Menu</button><nav id="main-menu" aria-label="Navigation principale"><a href="index.html" data-fr="Accueil" data-en="Home">Accueil</a><a href="boutique.html" data-fr="Boutique" data-en="Shop">Boutique</a><a href="creations-personnalisees.html" data-fr="Créations personnalisées" data-en="Custom creations">Créations personnalisées</a><a href="creations.html" data-fr="Nos créations" data-en="Our creations">Nos créations</a><a href="lucie.html" data-fr="À propos de Lucie" data-en="About Lucie">À propos de Lucie</a><a href="contact.html" data-fr="Contact" data-en="Contact">Contact</a><div class="languages mobile-languages" aria-label="Langue"><button type="button" data-set-lang="fr" aria-pressed="true">FR</button><span>|</span><button type="button" data-set-lang="en" aria-pressed="false">EN</button></div></nav><a class="cart-link" href="panier.html" aria-label="Panier"><span data-fr="Panier" data-en="Cart">Panier</span><span id="cart-count" class="cart-count-badge is-empty" data-count="0">0</span></a><div class="languages desktop-languages" aria-label="Langue"><button type="button" data-set-lang="fr" aria-pressed="true">FR</button><span>|</span><button type="button" data-set-lang="en" aria-pressed="false">EN</button></div></header>
 
 <main>
   <section class="page-heading">
     <h1><span data-fr="Paiement" data-en="Payment">Paiement</span></h1>
-    <p id="pay-lead" data-fr="Mode test Stripe — aucun paiement réel. Les prix sont confirmés côté serveur." data-en="Stripe test mode — no real charges. Prices are confirmed on the server.">Mode test Stripe — aucun paiement réel. Les prix sont confirmés côté serveur.</p>
+    <p id="pay-lead">Essais seulement : paiements Stripe simulés (mode TEST) — aucun paiement réel.</p>
   </section>
 
   <section class="story payment-demo">
     <p id="pay-status" class="cart-note" role="status" aria-live="polite"></p>
     <div id="pay-summary" class="cart-summary" hidden>
-      <p id="pay-total" class="cart-total-line"></p>
-      <p class="cart-secure"><span class="cart-secure-icon" aria-hidden="true">🛡️</span>
-        <span data-fr="Paiement sécurisé via Stripe Checkout (test). Aucun frais de livraison n’est facturé à cette étape." data-en="Secure payment via Stripe Checkout (test). No shipping fee is charged at this stage.">Paiement sécurisé via Stripe Checkout (test). Aucun frais de livraison n’est facturé à cette étape.</span>
+      <p id="pay-products" class="cart-total-line"></p>
+      <div class="ship-box" id="ship-box">
+        <h2>Livraison</h2>
+        <p class="cart-ship-note">Livraison du panier complet : <strong>18,00&nbsp;$</strong></p>
+        <p id="bus-notice" class="bus-notice" role="status">Livraison par Express Bus (récupération au dépôt) ou Postes Canada (distribution postale). Le mode de livraison sera confirmé avant l'expédition. Un déplacement au dépôt n'est jamais imposé sans votre accord préalable.</p>
+        <div class="ship-methods" id="ship-methods" hidden></div>
+        <div class="ship-fields">
+          <label class="full">Courriel
+            <input id="ship-email" type="email" autocomplete="email" required>
+          </label>
+          <label>Nom complet
+            <input id="ship-name" type="text" autocomplete="name">
+          </label>
+          <label>Téléphone
+            <input id="ship-phone" type="tel" autocomplete="tel">
+          </label>
+          <label>Province
+            <select id="ship-province">
+              <option value="QC">Québec</option>
+              <option value="ON">Ontario</option>
+              <option value="BC">Colombie-Britannique</option>
+              <option value="AB">Alberta</option>
+              <option value="MB">Manitoba</option>
+              <option value="SK">Saskatchewan</option>
+              <option value="NB">Nouveau-Brunswick</option>
+              <option value="NS">Nouvelle-Écosse</option>
+              <option value="PE">Î.-P.-É.</option>
+              <option value="NL">Terre-Neuve-et-Labrador</option>
+              <option value="NT">T.N.-O.</option>
+              <option value="YT">Yukon</option>
+              <option value="NU">Nunavut</option>
+            </select>
+          </label>
+          <label>Code postal
+            <input id="ship-postal" type="text" autocomplete="postal-code" placeholder="G1A 1A1" required>
+          </label>
+        </div>
+        <p class="tot-lines" id="tot-lines"></p>
+        <div id="hold-banner" class="hold-banner" hidden></div>
+        <p style="margin:.85rem 0 0;">
+          <button type="button" id="btn-quote" class="button button-ghost">Confirmer l'adresse et le total</button>
+        </p>
+      </div>
+      <p class="cart-secure"><span class="cart-secure-icon" aria-hidden="true">🧪</span>
+        <span>Essais seulement : paiement Stripe simulé (TEST). Le total inclut les articles et 18,00&nbsp;$ de livraison.</span>
       </p>
     </div>
     <div class="cart-actions">
-      <a class="button button-ghost" href="panier.html" data-fr="← Retour au panier" data-en="← Back to cart">← Retour au panier</a>
-      <button type="button" id="pay-stripe" class="button button-checkout" hidden>
+      <a class="button button-ghost" href="panier.html">← Retour au panier</a>
+      <button type="button" id="pay-stripe" class="button button-checkout" hidden disabled>
         <span class="pay-icon" aria-hidden="true">💳</span>
-        <span data-fr="Payer avec Stripe (test)" data-en="Pay with Stripe (test)">Payer avec Stripe (test)</span>
+        <span>Payer le total (test)</span>
         <span aria-hidden="true">→</span>
       </button>
-      <a class="button button-ghost" href="boutique.html" data-fr="Continuer vos achats" data-en="Continue shopping">Continuer vos achats</a>
+      <a class="button button-ghost" href="boutique.html">Continuer vos achats</a>
     </div>
   </section>
 </main>
 
 <footer>© <span id="year"></span> Les Fourrures Boréales</footer>
 <script src="checkout-config.js"></script>
+<script src="product-sizes.js"></script>
 <script src="site.js" defer></script>
 <script>
 (() => {
@@ -47,9 +122,17 @@
   const en = () => document.documentElement.lang.startsWith("en");
   const statusEl = document.getElementById("pay-status");
   const summary = document.getElementById("pay-summary");
-  const totalEl = document.getElementById("pay-total");
+  const productsEl = document.getElementById("pay-products");
+  const totLines = document.getElementById("tot-lines");
   const btn = document.getElementById("pay-stripe");
-  const lead = document.getElementById("pay-lead");
+  const btnQuote = document.getElementById("btn-quote");
+  const holdBanner = document.getElementById("hold-banner");
+  const methodsEl = document.getElementById("ship-methods");
+
+  let quoteToken = null;
+  let shippingFeeCents = null;
+  let productsSum = 0;
+  let selectedMethod = null;
 
   function load() {
     try {
@@ -61,11 +144,180 @@
   }
 
   function money(n) {
-    return n.toFixed(2).replace(".", ",") + " $";
+    return Number(n).toFixed(2).replace(".", ",") + " $";
   }
 
   function setStatus(fr, enText) {
-    statusEl.textContent = en() ? enText : fr;
+    statusEl.textContent = en() ? (enText || fr) : fr;
+  }
+
+  function apiBase() {
+    const cfg = window.BOREALES_CHECKOUT || {};
+    return (cfg.apiBase || "").replace(/\/$/, "");
+  }
+
+  function cartItemsPayload() {
+    const cartNow = load();
+    return cartNow.map((x) => {
+      const row = {
+        id: x.id,
+        qty: Number(x.qty) || 1,
+        product_number: x.product_number ?? x.custom_config?.product_number ?? null,
+      };
+      if (x.size) {
+        row.size = x.size;
+        if (x.size_label_fr) row.size_label_fr = x.size_label_fr;
+        if (x.size_label_en) row.size_label_en = x.size_label_en;
+      }
+      if (x.custom && x.custom_config) {
+        row.custom_config = {
+          product_id: x.custom_config.product_id,
+          product_number: x.custom_config.product_number ?? x.product_number ?? null,
+          csm_code: x.custom_config.csm_code || null,
+          unit: x.custom_config.unit,
+          measurements: x.custom_config.measurements || {},
+          measurements_cm: x.custom_config.measurements_cm || null,
+          raynaud: !!x.custom_config.raynaud,
+          comments: String(x.custom_config.comments || "").slice(0, 800),
+          leather: x.custom_config.leather || "noir",
+        };
+      }
+      return row;
+    });
+  }
+
+  function renderTotals() {
+    const ship =
+      shippingFeeCents == null
+        ? "Livraison du panier complet : 18,00 $"
+        : "Livraison du panier complet : " + money(shippingFeeCents / 100);
+    const total =
+      shippingFeeCents == null
+        ? "Total à payer : " + money(productsSum + 18)
+        : "Total à payer : " + money(productsSum + shippingFeeCents / 100);
+    totLines.innerHTML =
+      "Sous-total des articles : " +
+      money(productsSum) +
+      "<br>" +
+      ship +
+      "<br><strong>" +
+      total +
+      "</strong>";
+    btn.disabled = !quoteToken;
+    btn.hidden = false;
+  }
+
+  function destination() {
+    return {
+      country: "CA",
+      province: document.getElementById("ship-province").value,
+      postal_code: document.getElementById("ship-postal").value,
+    };
+  }
+
+  async function loadMethods() {
+    selectedMethod = "flat_order";
+    document.getElementById("ship-province").addEventListener("change", () => {
+      quoteToken = null;
+      shippingFeeCents = null;
+      holdBanner.hidden = true;
+      renderTotals();
+    });
+  }
+
+  async function requestQuote() {
+    const base = apiBase();
+    if (!base) {
+      setStatus("URL API manquante.");
+      return;
+    }
+    selectedMethod = "flat_order";
+    const postal = (document.getElementById("ship-postal").value || "").trim();
+    if (!postal) {
+      setStatus("Indiquez votre code postal.");
+      return;
+    }
+    btnQuote.disabled = true;
+    setStatus("Préparation du total…");
+    holdBanner.hidden = true;
+    quoteToken = null;
+    shippingFeeCents = null;
+    renderTotals();
+    try {
+      const res = await fetch(base + "/api/shipping-quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          shipping_method: "flat_order",
+          destination: destination(),
+          items: cartItemsPayload(),
+          customer_email: document.getElementById("ship-email").value || null,
+          customer_name: document.getElementById("ship-name").value || null,
+          customer_phone: document.getElementById("ship-phone").value || null,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Erreur livraison");
+      if (data.status === "quoted" && data.quote_token) {
+        quoteToken = data.quote_token;
+        shippingFeeCents = data.fee_cad_cents;
+        holdBanner.hidden = true;
+        setStatus("Total prêt. Vous pouvez payer (essai Stripe TEST).");
+      } else if (data.status === "quote_required") {
+        quoteToken = null;
+        shippingFeeCents = null;
+        holdBanner.hidden = false;
+        holdBanner.innerHTML =
+          "<strong>Impossible de finaliser pour le moment.</strong><br>" +
+          (data.message_fr || "Contactez Lucie pour poursuivre.");
+        setStatus("Livraison à confirmer avec Lucie.");
+      } else {
+        throw new Error("Réponse inattendue");
+      }
+      renderTotals();
+    } catch (e) {
+      setStatus("Échec : " + (e.message || e));
+    } finally {
+      btnQuote.disabled = false;
+    }
+  }
+
+  async function tryResumeFromUrl() {
+    const params = new URLSearchParams(location.search);
+    const hold = params.get("hold");
+    const resume = params.get("resume");
+    if (!hold || !resume) return;
+    const base = apiBase();
+    if (!base) return;
+    setStatus("Reprise du devis confirmé…");
+    try {
+      const res = await fetch(base + "/api/shipping-hold/resume", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ hold_id: hold, resume_token: resume }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Reprise impossible");
+      quoteToken = data.quote_token;
+      shippingFeeCents = data.fee_cad_cents;
+      selectedMethod = data.method_id;
+      if (data.destination?.province) {
+        document.getElementById("ship-province").value = data.destination.province;
+      }
+      if (data.destination?.postal_code) {
+        document.getElementById("ship-postal").value = data.destination.postal_code;
+      }
+      selectedMethod = "flat_order";
+      holdBanner.hidden = false;
+      holdBanner.innerHTML =
+        "Livraison confirmée : <strong>" +
+        money(shippingFeeCents / 100) +
+        "</strong>. Total articles + livraison prêt (essai TEST).";
+      setStatus("Total prêt (Stripe TEST).");
+      renderTotals();
+    } catch (e) {
+      setStatus("Reprise devis : " + (e.message || e));
+    }
   }
 
   const cart = load();
@@ -74,35 +326,77 @@
     return;
   }
 
-  if (cart.length) {
-    const sum = cart.reduce((s, x) => s + Number(x.price) * Number(x.qty), 0);
-    summary.hidden = false;
-    totalEl.textContent = (en() ? "Total (affichage panier) : " : "Total (affichage panier) : ") + money(sum);
-    btn.hidden = false;
-    setStatus(
-      "Le montant facturé sera recalculé côté serveur à partir du catalogue officiel (mêmes prix).",
-      "The charged amount will be recalculated server-side from the official catalog (same prices).",
-    );
+  productsSum = cart.reduce((s, x) => s + Number(x.price) * Number(x.qty), 0);
+  summary.hidden = false;
+  {
+    const lines = cart.map((x) => {
+      const title = en()
+        ? x.name_en || x.name || x.name_fr || x.id
+        : x.name_fr || x.name || x.name_en || x.id;
+      const api = window.BOREALES_PRODUCT_SIZES;
+      const sizeLab = api && api.sizeLabel
+        ? api.sizeLabel(x)
+        : en()
+          ? x.size_label_en || x.size_label_fr || x.size
+          : x.size_label_fr || x.size_label_en || x.size;
+      let sizeBit = "";
+      if (x.size && x.size !== "unique") sizeBit = " · " + (en() ? "Size " : "Taille ") + sizeLab;
+      else if (x.size === "unique" && sizeLab && /universelle|universal/i.test(String(sizeLab))) {
+        sizeBit = " · " + sizeLab;
+      }
+      return title + sizeBit + " × " + (Number(x.qty) || 1);
+    });
+    productsEl.textContent = "";
+    lines.forEach((line, i) => {
+      if (i) productsEl.appendChild(document.createElement("br"));
+      productsEl.appendChild(document.createTextNode(line));
+    });
+    productsEl.appendChild(document.createElement("br"));
+    const strong = document.createElement("strong");
+    strong.textContent =
+      (en() ? "Products subtotal: " : "Sous-total produits : ") + money(productsSum);
+    productsEl.appendChild(strong);
   }
+  setStatus(
+    "Choisissez la livraison, puis calculez le tarif réel avant de payer (un seul paiement).",
+  );
+  renderTotals();
+  loadMethods().then(() => tryResumeFromUrl());
+
+  btnQuote.addEventListener("click", requestQuote);
 
   btn.addEventListener("click", async () => {
-    const cfg = window.BOREALES_CHECKOUT || {};
-    const apiBase = (cfg.apiBase || "").replace(/\/$/, "");
-    if (!apiBase) {
-      setStatus("URL API manquante (checkout-config.js).", "Missing API URL (checkout-config.js).");
+    const base = apiBase();
+    if (!base) {
+      setStatus("URL API manquante (checkout-config.js).");
+      return;
+    }
+    if (!quoteToken) {
+      setStatus("Obtenez d’abord un tarif de livraison confirmé.");
       return;
     }
     btn.disabled = true;
-    setStatus("Création de la session Stripe (test)…", "Creating Stripe session (test)…");
+    setStatus("Création de la session Stripe (paiement unique, test)…");
     try {
-      // id + qty seulement — jamais de prix (le serveur recalcule)
-      const items = load().map((x) => ({ id: x.id, qty: Number(x.qty) || 1 }));
+      const cartNow = load();
+      const blocked = cartNow.find(
+        (x) => x.custom && (!x.custom_config || x.custom_config.priced_ok !== true),
+      );
+      if (blocked) {
+        throw new Error("Un article sur mesure a encore un prix à configurer.");
+      }
       const origin = location.origin + location.pathname.replace(/[^/]+$/, "");
-      const res = await fetch(apiBase + "/api/checkout", {
+      const res = await fetch(base + "/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          items,
+          items: cartItemsPayload(),
+          quote_token: quoteToken,
+          shipping_method: selectedMethod,
+          destination: destination(),
+          customer_email: document.getElementById("ship-email").value || null,
+          customer_name: document.getElementById("ship-name").value || null,
+          customer_phone: document.getElementById("ship-phone").value || null,
           successUrl: origin + "commande-confirmee.html?session_id={CHECKOUT_SESSION_ID}",
           cancelUrl: origin + "commande-annulee.html",
         }),
@@ -111,7 +405,7 @@
       try {
         data = await res.json();
       } catch (_) {
-        throw new Error(en() ? "Invalid server response" : "Réponse serveur invalide");
+        throw new Error("Réponse serveur invalide");
       }
       if (!res.ok) throw new Error(data.error || "Erreur checkout");
       if (!data.url) throw new Error("URL Stripe absente");
@@ -124,13 +418,12 @@
         e.name === "AbortError";
       if (network) {
         setStatus(
-          "Connexion interrompue ou Worker injoignable. Vérifiez le Wi‑Fi / données mobiles, puis `wrangler dev` (http://127.0.0.1:8787).",
-          "Network interrupted or Worker unreachable. Check Wi‑Fi / mobile data, then `wrangler dev` (http://127.0.0.1:8787).",
+          "Connexion interrompue ou Worker injoignable. Vérifiez le Wi‑Fi, puis `wrangler dev` (http://127.0.0.1:8787).",
         );
       } else {
-        setStatus("Échec : " + msg, "Failed: " + msg);
+        setStatus("Échec : " + msg);
       }
-      btn.disabled = false;
+      btn.disabled = !quoteToken;
     }
   });
 })();

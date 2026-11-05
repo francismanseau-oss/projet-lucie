@@ -1,0 +1,52 @@
+{
+  "future_origin": "https://lesfourruresboreales.ca",
+  "domain_status": "libre_achat_prevu_lucie",
+  "indexing_active": false,
+  "note_fr": "Domaine pas encore acheté. Ne pas soumettre le sitemap à Google Search Console avant publication officielle sur ce domaine.",
+  "locale": "fr-CA",
+  "site_name": "Les Fourrures Boréales",
+  "organization": {
+    "name": "Les Fourrures Boréales",
+    "alternateName": "Fourrures Boréales",
+    "email": "luciegosselin852@gmail.com",
+    "telephone": "+1-819-443-0403",
+    "areaServed": "CA"
+  },
+  "categories": {
+    "chapeaux": {
+      "label_fr": "Chapeaux en fourrure",
+      "title": "Chapeaux en fourrure artisanaux | Les Fourrures Boréales",
+      "description": "Chapeaux en fourrure recyclée et cuir, créations artisanales québécoises de Les Fourrures Boréales."
+    },
+    "mitaines": {
+      "label_fr": "Mitaines en fourrure recyclée",
+      "title": "Mitaines en fourrure recyclée | Les Fourrures Boréales",
+      "description": "Mitaines en fourrure recyclée, faites au Québec. Boutique et sur mesure — Les Fourrures Boréales."
+    },
+    "foulards": {
+      "label_fr": "Foulards",
+      "title": "Foulards artisanaux | Les Fourrures Boréales",
+      "description": "Foulards artisanaux québécois — Les Fourrures Boréales."
+    },
+    "cache-oreilles": {
+      "label_fr": "Cache-oreilles",
+      "title": "Cache-oreilles en fourrure | Les Fourrures Boréales",
+      "description": "Cache-oreilles en fourrure recyclée, créations artisanales — Les Fourrures Boréales."
+    },
+    "semelles": {
+      "label_fr": "Semelles",
+      "title": "Semelles | Les Fourrures Boréales",
+      "description": "Semelles artisanales — Les Fourrures Boréales."
+    },
+    "mukluks": {
+      "label_fr": "Mukluks",
+      "title": "Mukluks artisanaux | Les Fourrures Boréales",
+      "description": "Mukluks artisanaux québécois en fourrure — Les Fourrures Boréales."
+    },
+    "pantoufles": {
+      "label_fr": "Pantoufles en fourrure",
+      "title": "Pantoufles en fourrure | Les Fourrures Boréales",
+      "description": "Pantoufles en fourrure recyclée, créations artisanales québécoises — Les Fourrures Boréales."
+    }
+  }
+}

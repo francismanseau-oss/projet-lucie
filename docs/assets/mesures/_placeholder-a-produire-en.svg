@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img">
+  <title>Artwork to be produced</title>
+  <rect width="1200" height="900" fill="#FCFAf7"/>
+  <rect x="48" y="48" width="1104" height="804" rx="12" fill="#FFFCF8" stroke="#E4D5C6" stroke-width="3"/>
+  <circle cx="600" cy="380" r="72" fill="none" stroke="#CBB29E" stroke-width="4" stroke-dasharray="14 12"/>
+  <text x="600" y="392" text-anchor="middle" font-family="Georgia, serif" font-size="42" fill="#965035">?</text>
+  <text x="600" y="510" text-anchor="middle" font-family="Georgia, serif" font-size="36" fill="#25201D">Artwork to be produced</text>
+  <text x="600" y="570" text-anchor="middle" font-family="system-ui, sans-serif" font-size="26" fill="#965035">Lucie validation required</text>
+</svg>

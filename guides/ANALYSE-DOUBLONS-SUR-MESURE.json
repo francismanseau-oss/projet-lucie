@@ -1,0 +1,54 @@
+{
+  "generated": "2026-11-02",
+  "total_products": 66,
+  "groups_with_2plus_after_size_strip": 1,
+  "duplicate_sku_count": 2,
+  "potential_cards_saved_if_merged": 0,
+  "summary_counts": {
+    "regroupable_sans_ambiguite_prix": 0,
+    "proche_decision_lucie": 1,
+    "decision_lucie": 0,
+    "garder_separes": 0
+  },
+  "groups": [
+    {
+      "category": "mitaines",
+      "label_fr": "Mitaines — renard",
+      "count": 2,
+      "prices_cad": [
+        140
+      ],
+      "same_price": true,
+      "same_description": true,
+      "same_image": false,
+      "all_have_size_token": true,
+      "verdict": "proche_decision_lucie",
+      "reason": "Même prix et description, mais images différentes — vérifier si c’est le même modèle.",
+      "skus": [
+        {
+          "id": "mitaines-m-renard",
+          "name_fr": "Mitaines M — renard",
+          "size_tokens": [
+            "M"
+          ],
+          "price_cad": 140,
+          "image": "assets/produits/mitaines-renard-recyclee-m.png",
+          "description_fr": "Fourrure renard recyclée et cuir d'agneau"
+        },
+        {
+          "id": "mitaines-m-l-renard",
+          "name_fr": "Mitaines M-L — renard",
+          "size_tokens": [
+            "M-L",
+            "M",
+            "L"
+          ],
+          "price_cad": 140,
+          "image": "assets/produits/mitaines-renard-recyclee-ml.png",
+          "description_fr": "Fourrure renard recyclée et cuir d'agneau"
+        }
+      ]
+    }
+  ],
+  "note": "Aucun regroupement appliqué. Boutique et products.json inchangés. Un regroupement visuel futur devra encore définir quel SKU part dans le panier."
+}

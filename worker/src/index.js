@@ -4,14 +4,23 @@
  * Routes :
  *   GET  /health
  *   GET  /api/catalog
+ *   GET  /api/shipping-methods
  *   GET  /api/order-status?session_id=cs_…
+ *   POST /api/shipping-quote
+ *   POST /api/shipping-hold/confirm
+ *   POST /api/shipping-hold/resume
  *   POST /api/checkout
+ *   POST /api/orders/resend-bon
+ *   POST /api/suggestion
  *   POST /api/webhooks/stripe
- *   POST /api/reservations/expire  (cron / manuel test)
+ *   POST /api/reservations/expire
  */
 
 import catalog from "./products.json" with { type: "json" };
+import productSizes from "./product-sizes.json" with { type: "json" };
 import shippingConfigJson from "./shipping-config.json" with { type: "json" };
+import surMesureConfig from "./sur-mesure-config.json" with { type: "json" };
+import { validateMeasurements } from "./sur-mesure-pricing.js";
 import {
   assertLiveSaleAllowed,
   assertProductionFullyBlocked,
@@ -35,7 +44,30 @@ import {
   settlePaidReservation,
 } from "./inventory.js";
 import { quoteShipping, resolveCheckoutShipping } from "./shipping.js";
+import {
+  confirmShippingHold,
+  createShippingHold,
+  listSelectableMethods,
+  quoteTokenToResolution,
+  resolveHoldToQuoteToken,
+  signQuoteToken,
+  tryAutoQuote,
+  verifyQuoteToken,
+} from "./shipping-quote-service.js";
+import {
+  buildOrderArchive,
+  ensureOrderNumber,
+  putOrderArchive,
+  wasNotifySent,
+} from "./order-archive.js";
+import { normalizeCheckoutSuccessUrl } from "./checkout-return-urls.js";
 import { publicOrderView } from "./privacy.js";
+import { handleSuggestion } from "./suggestion.js";
+import { notifyLucieOrderPaid, resendOrderBon } from "./lucie-notify.js";
+
+function quoteSecret(env) {
+  return env.QUOTE_TOKEN_SECRET || env.STRIPE_WEBHOOK_SECRET || "local-dev-quote";
+}
 
 const json = (data, status = 200, origin) =>
   new Response(JSON.stringify(data), {
@@ -102,6 +134,12 @@ function inventoryStore(env) {
 }
 
 async function buildShippingResolution(env, payload) {
+  // Paiement unique : jeton de cote verrouillé (grille / API / Lucie)
+  if (payload?.quote_token) {
+    const body = await verifyQuoteToken(quoteSecret(env), payload.quote_token);
+    return quoteTokenToResolution(body);
+  }
+
   let quote = null;
   if (env.SHIPPING_CONFIGURED === "true" && env.FREE_SHIPPING_AUTHORIZED !== "true") {
     const methodId = payload.shipping_method || payload.shippingMethod;
@@ -116,20 +154,95 @@ async function buildShippingResolution(env, payload) {
   return resolveCheckoutShipping(env, quote);
 }
 
+async function handleShippingQuote(env, payload = {}) {
+  const methodId = payload.shipping_method || payload.shippingMethod;
+  if (!methodId) throw httpError("shipping_method requis", 400);
+  const destination = payload.destination || {};
+  const auto = tryAutoQuote(shippingConfigJson, {
+    methodId,
+    destination,
+    canadaPostApiFeeCadCents: payload.canada_post_quote_cad_cents,
+  });
+
+  if (auto.status === "quoted") {
+    const token = await signQuoteToken(quoteSecret(env), {
+      method_id: auto.quote.method_id,
+      fee_cad_cents: auto.quote.fee_cad_cents,
+      destination: auto.quote.destination || destination,
+      source: auto.quote.source,
+      invented: false,
+    });
+    return {
+      status: "quoted",
+      fee_cad_cents: auto.quote.fee_cad_cents,
+      currency: "cad",
+      method_id: auto.quote.method_id,
+      source: auto.quote.source,
+      invented: false,
+      quote_token: token,
+      expires_in_sec: 30 * 60,
+      message_fr: "Frais de livraison confirmés — total final avant paiement unique.",
+    };
+  }
+
+  // Cote impossible → hold Lucie (pas de Checkout, pas de 2ᵉ facture)
+  const hold = await createShippingHold(env, {
+    method_id: methodId,
+    destination: auto.destination,
+    items: payload.items || [],
+    customer_email: payload.customer_email || null,
+    customer_name: payload.customer_name || null,
+    customer_phone: payload.customer_phone || null,
+    reason: auto.reason,
+    message_fr: auto.message_fr,
+  });
+
+  const base = siteUrl(env);
+  return {
+    status: "quote_required",
+    hold_id: hold.hold_id,
+    resume_token: hold.resume_token,
+    method_id: methodId,
+    reason: auto.reason,
+    message_fr:
+      auto.message_fr ||
+      "Tarif à confirmer par Lucie avant le paiement unique. Aucun frais inventé.",
+    resume_url: `${base}/paiement.html?hold=${encodeURIComponent(hold.hold_id)}&resume=${encodeURIComponent(hold.resume_token)}`,
+  };
+}
+
 async function createCheckout(env, payload) {
   assertStripeKeyMode(env);
   assertProductionFullyBlocked(env);
 
-  const { resolved, total_cents: products_cents } = buildLineItems(catalog, payload.items);
+  const { resolved, total_cents: products_cents } = buildLineItems(catalog, payload.items, {
+    validateMeasurements,
+    measureSpecForCategory: (category) =>
+      surMesureConfig.measurements_by_category?.[category] || { fields: [] },
+    productSizes,
+  });
   assertLiveSaleAllowed(env, resolved);
+
+  // Boutique réelle : exiger quote_token sauf parcours test différé explicite
+  const wantsBoutiqueShipping =
+    payload.shipping_method ||
+    payload.quote_token ||
+    payload.require_shipping_quote === true;
+  if (wantsBoutiqueShipping && !payload.quote_token) {
+    throw httpError(
+      "quote_token requis pour le paiement unique (produits + livraison). Appelez d’abord /api/shipping-quote.",
+      400,
+    );
+  }
 
   const shippingResolution = await buildShippingResolution(env, payload || {});
   const amount_total_cents = serverCheckoutTotalCents(resolved, shippingResolution);
 
   let reservation = null;
   const store = inventoryStore(env);
+  const stockLines = resolved.filter((r) => !r.skip_inventory && !r.custom);
 
-  if (env.AVAILABILITY_CONFIGURED === "true") {
+  if (env.AVAILABILITY_CONFIGURED === "true" && stockLines.length) {
     if (!store || (store.kind !== "d1" && store.kind !== "memory-tx" && store.kind !== "d1-emulated")) {
       throw httpError(
         "AVAILABILITY_CONFIGURED=true exige un store transactionnel D1 (ou MemoryTx en test) — pas KV",
@@ -138,19 +251,19 @@ async function createCheckout(env, payload) {
     }
     await assertInventorySellableAsync(
       store,
-      resolved.map((r) => ({ id: r.id, qty: r.qty })),
+      stockLines.map((r) => ({ id: r.inventory_id || r.id, qty: r.qty })),
     );
     reservation = await reserveStock(store, {
-      lines: resolved.map((r) => ({ id: r.id, qty: r.qty })),
+      lines: stockLines.map((r) => ({ id: r.inventory_id || r.id, qty: r.qty })),
       sessionId: null,
     });
   }
 
   const base = siteUrl(env);
-  const successUrl =
-    payload.successUrl ||
-    payload.success_url ||
-    `${base}/commande-confirmee.html?session_id={CHECKOUT_SESSION_ID}`;
+  const successUrl = normalizeCheckoutSuccessUrl(
+    payload.successUrl || payload.success_url || "",
+    base,
+  );
   const cancelUrl =
     payload.cancelUrl || payload.cancel_url || `${base}/commande-annulee.html`;
 
@@ -179,19 +292,45 @@ async function createCheckout(env, payload) {
   }
 
   if (env.ORDERS) {
+    const order_number = await ensureOrderNumber(env, session.id);
+    let tokenMeta = null;
+    if (payload.quote_token) {
+      try {
+        tokenMeta = await verifyQuoteToken(quoteSecret(env), payload.quote_token);
+      } catch (_) {
+        tokenMeta = null;
+      }
+    }
     await env.ORDERS.put(
       `pending:${session.id}`,
       JSON.stringify({
         created_at: new Date().toISOString(),
+        order_number,
         products_cents,
         shipping_fee_cents: shippingResolution.fee_cad_cents,
         shipping_mode: shippingResolution.mode,
+        shipping_method: shippingResolution.quote?.method_id || null,
+        shipping_source: shippingResolution.quote?.source || null,
+        destination: shippingResolution.quote?.destination || payload.destination || null,
+        customer_email: payload.customer_email || null,
+        customer_name: payload.customer_name || null,
+        customer_phone: payload.customer_phone || null,
         amount_total_cents,
-        items: resolved.map((r) => ({ id: r.id, qty: r.qty, unit_amount: r.unit_amount })),
+        items: resolved.map((r) => ({
+          id: r.id,
+          name: r.name,
+          product_number: r.product_number ?? null,
+          qty: r.qty,
+          unit_amount: r.unit_amount,
+          custom: !!r.custom,
+          skip_inventory: !!r.skip_inventory,
+          custom_config: r.custom_config || null,
+        })),
         status: "checkout_created",
         reservation_id: reservation?.reservation_id || null,
         reservation_expires_at: reservation?.expires_at || null,
         session_id: session.id,
+        hold_id: tokenMeta?.hold_id || null,
       }),
       { expirationTtl: 60 * 60 * 24 * 7 },
     );
@@ -211,9 +350,11 @@ async function createCheckout(env, payload) {
     products_cents,
     shipping_fee_cents: shippingResolution.fee_cad_cents,
     shipping_mode: shippingResolution.mode,
+    shipping_method: shippingResolution.quote?.method_id || null,
     currency: "cad",
     reservation_id: reservation?.reservation_id || null,
     inventory_store: store?.kind || null,
+    single_payment: true,
   };
 }
 
@@ -335,6 +476,12 @@ export default {
               : key.startsWith("sk_test")
                 ? "test"
                 : "unset",
+            suggestion_mail:
+              env.SUGGESTION_MOCK === "true" ||
+              !env.RESEND_API_KEY ||
+              String(env.RESEND_API_KEY).includes("REMPLACER")
+                ? "mock"
+                : "resend",
             note: "Redirect ≠ payé. D1/MemoryTx pour stocks. PII masquée sur order-status.",
           },
           200,
@@ -372,10 +519,98 @@ export default {
         return json(publicOrderView(status), 200, origin);
       }
 
+      if (request.method === "GET" && path === "/api/shipping-methods") {
+        return json(
+          {
+            methods: listSelectableMethods(shippingConfigJson),
+            policy: {
+              single_payment: true,
+              no_invented_rates: true,
+              no_second_invoice: true,
+            },
+          },
+          200,
+          origin,
+        );
+      }
+
+      if (request.method === "POST" && path === "/api/shipping-quote") {
+        const payload = await request.json();
+        const out = await handleShippingQuote(env, payload || {});
+        return json(out, 200, origin);
+      }
+
+      if (request.method === "POST" && path === "/api/shipping-hold/confirm") {
+        const payload = await request.json();
+        // Confirmation locale / admin — secret partagé optionnel
+        const expected = env.SHIPPING_HOLD_CONFIRM_SECRET;
+        if (expected && payload?.confirm_secret !== expected) {
+          throw httpError("confirm_secret invalide", 403);
+        }
+        const hold = await confirmShippingHold(env, {
+          hold_id: payload.hold_id,
+          fee_cad_cents: payload.fee_cad_cents,
+          actor: payload.actor || "lucie",
+        });
+        return json(
+          {
+            ok: true,
+            hold_id: hold.hold_id,
+            status: hold.status,
+            fee_cad_cents: hold.fee_cad_cents,
+            resume_token: hold.resume_token,
+            message_fr:
+              "Tarif confirmé. Le client peut reprendre le paiement unique (produits + livraison).",
+          },
+          200,
+          origin,
+        );
+      }
+
+      if (request.method === "POST" && path === "/api/shipping-hold/resume") {
+        const payload = await request.json();
+        const out = await resolveHoldToQuoteToken(env, quoteSecret(env), {
+          hold_id: payload.hold_id,
+          resume_token: payload.resume_token,
+        });
+        return json(
+          {
+            status: "quoted",
+            hold_id: out.hold.hold_id,
+            fee_cad_cents: out.fee_cad_cents,
+            method_id: out.hold.method_id,
+            destination: out.hold.destination,
+            quote_token: out.quote_token,
+            items: out.hold.items,
+            message_fr: "Tarif prêt — un seul paiement Stripe pour le total.",
+          },
+          200,
+          origin,
+        );
+      }
+
       if (request.method === "POST" && path === "/api/checkout") {
         const payload = await request.json();
         const session = await createCheckout(env, payload || {});
         return json(session, 200, origin);
+      }
+
+      if (request.method === "POST" && path === "/api/orders/resend-bon") {
+        const payload = await request.json();
+        const expected = env.SHIPPING_HOLD_CONFIRM_SECRET;
+        if (expected && payload?.confirm_secret !== expected) {
+          throw httpError("confirm_secret invalide", 403);
+        }
+        const out = await resendOrderBon(env, {
+          session_id: payload.session_id,
+          order_number: payload.order_number,
+        });
+        return json(out, out.status && !out.ok ? out.status : 200, origin);
+      }
+
+      if (request.method === "POST" && path === "/api/suggestion") {
+        const result = await handleSuggestion(env, request);
+        return json(result, 200, origin);
       }
 
       if (request.method === "POST" && path === "/api/reservations/expire") {
@@ -408,6 +643,40 @@ export default {
           let result = await processWebhookEvent(env, event);
           if (!result.duplicate) {
             result = await handleInventoryAfterWebhook(env, event, result);
+          }
+          // Archive + bon Lucie seulement après confirmation paiement (pas redirect)
+          if (result.confirmed && !result.duplicate) {
+            const obj = event.data?.object || {};
+            try {
+              if (!(await wasNotifySent(env, obj.id))) {
+                let pending = null;
+                if (env.ORDERS) {
+                  const raw = await env.ORDERS.get(`pending:${obj.id}`);
+                  if (raw) pending = JSON.parse(raw);
+                }
+                const order_number = await ensureOrderNumber(env, obj.id);
+                const archive = buildOrderArchive({
+                  sessionObj: obj,
+                  pending,
+                  orderNumber: order_number,
+                  shipping: {
+                    method_id: pending?.shipping_method,
+                    fee_cad_cents: pending?.shipping_fee_cents,
+                    destination: pending?.destination,
+                    source: pending?.shipping_source,
+                  },
+                });
+                await putOrderArchive(env, archive);
+                result.lucie_notify = await notifyLucieOrderPaid(env, obj);
+              } else {
+                result.lucie_notify = { skipped: true, reason: "already_notified", ok: true };
+              }
+            } catch (mailErr) {
+              result.lucie_notify = {
+                ok: false,
+                error: mailErr.message || "notify_failed",
+              };
+            }
           }
           return json(result, 200, origin);
         } catch (procErr) {

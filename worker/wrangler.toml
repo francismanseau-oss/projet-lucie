@@ -40,7 +40,12 @@ PACKAGE_PROFILES_CONFIGURED = "false"
 COMMERCIAL_TERMS_CONFIGURED = "false"
 FREE_SHIPPING_AUTHORIZED = "false"
 ALLOW_CHECKOUT_WITHOUT_SHIPPING = "true"
+SUGGESTION_MOCK = "true"
+SUGGESTION_TO_EMAIL = "luciegosselin852@gmail.com"
 
 # Secrets (NE PAS mettre ici) — via .dev.vars en local, wrangler secret en prod :
+#   RESEND_API_KEY         = re_…        (suggestions Contact)
+#   SUGGESTION_FROM_EMAIL  = adresse vérifiée Resend
+
 #   STRIPE_SECRET_KEY      = sk_test_…   (jamais sk_live en Phase A)
 #   STRIPE_WEBHOOK_SECRET  = whsec_…     (signing secret endpoint test)

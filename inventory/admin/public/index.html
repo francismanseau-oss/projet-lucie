@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#2f5d4a">
+  <title>Mon inventaire</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Mon inventaire</h1>
+    <p class="sub">Fourrures Boréales — quantités sur ce PC</p>
+    <nav class="admin-nav" id="main-nav" hidden>
+      <a href="orders.html">Commandes</a>
+      <a href="index.html" aria-current="page">Inventaire</a>
+    </nav>
+    <p id="banner" class="banner" hidden></p>
+  </header>
+
+  <!-- Connexion -->
+  <section id="login-view" class="card login-card">
+    <h2>Connexion</h2>
+    <p class="hint">Entrez votre mot de passe pour voir et modifier les quantités.</p>
+    <label for="password">Mot de passe</label>
+    <input id="password" type="password" autocomplete="current-password" minlength="8">
+    <label class="chk"><input type="checkbox" id="remember"> Rester connecté sur cet appareil</label>
+    <button type="button" id="btn-login" class="btn btn-primary btn-lg">Entrer</button>
+    <button type="button" id="btn-forgot" class="btn btn-ghost btn-lg">Mot de passe oublié ?</button>
+    <p id="login-error" class="error" hidden></p>
+  </section>
+
+  <!-- Changement obligatoire (1ʳᵉ connexion) -->
+  <section id="change-view" class="card login-card" hidden>
+    <h2>Choisissez votre mot de passe</h2>
+    <p class="hint">C’est votre première connexion. Le mot de passe temporaire ne servira plus après.</p>
+    <label for="cur-password">Mot de passe temporaire (actuel)</label>
+    <input id="cur-password" type="password" autocomplete="current-password" minlength="8">
+    <label for="new-password">Nouveau mot de passe</label>
+    <input id="new-password" type="password" autocomplete="new-password" minlength="8">
+    <label for="new-password2">Confirmez le nouveau</label>
+    <input id="new-password2" type="password" autocomplete="new-password" minlength="8">
+    <button type="button" id="btn-change" class="btn btn-primary btn-lg">Enregistrer mon mot de passe</button>
+    <p id="change-error" class="error" hidden></p>
+  </section>
+
+  <!-- Mot de passe oublié -->
+  <section id="forgot-view" class="card login-card" hidden>
+    <h2>Mot de passe oublié</h2>
+    <p class="hint">Entrez votre courriel. Un lien sécurisé sera préparé (essai local : aucun envoi Internet pour l’instant).</p>
+    <label for="forgot-email">Courriel</label>
+    <input id="forgot-email" type="email" autocomplete="email">
+    <button type="button" id="btn-forgot-send" class="btn btn-primary btn-lg">Recevoir le lien</button>
+    <button type="button" id="btn-forgot-back" class="btn btn-ghost btn-lg">Retour</button>
+    <p id="forgot-msg" class="hint" hidden></p>
+    <p id="forgot-error" class="error" hidden></p>
+  </section>
+
+  <!-- Réinitialisation via lien -->
+  <section id="reset-view" class="card login-card" hidden>
+    <h2>Nouveau mot de passe</h2>
+    <p class="hint">Choisissez un nouveau mot de passe (lien à usage unique).</p>
+    <label for="reset-password">Nouveau mot de passe</label>
+    <input id="reset-password" type="password" autocomplete="new-password" minlength="8">
+    <label for="reset-password2">Confirmez</label>
+    <input id="reset-password2" type="password" autocomplete="new-password" minlength="8">
+    <button type="button" id="btn-reset" class="btn btn-primary btn-lg">Enregistrer</button>
+    <p id="reset-error" class="error" hidden></p>
+  </section>
+
+  <section id="app-view" hidden>
+    <div id="alerts-bar" class="alerts-bar" hidden></div>
+    <div class="summary card" id="summary"></div>
+
+    <div class="toolbar card">
+      <label class="sr-only" for="search">Recherche</label>
+      <input id="search" type="search" placeholder="Chercher par nom ou N°…" enterkeyhint="search">
+
+      <label for="category">Catégorie</label>
+      <select id="category">
+        <option value="">Toutes les catégories</option>
+      </select>
+
+      <label class="chk"><input type="checkbox" id="only-alerts"> Voir seulement les alertes</label>
+
+      <div class="toolbar-actions">
+        <button type="button" id="btn-audit" class="btn btn-ghost">Historique</button>
+        <button type="button" id="btn-logout" class="btn btn-ghost">Quitter</button>
+      </div>
+    </div>
+
+    <p class="hint how-to"><b>Ajouter</b> = mettre des exemplaires en plus. <b>Corriger le stock total</b> = fixer le chiffre après un inventaire physique. Les boutons <b>+</b> et <b>−</b> servent aux petites corrections d’un exemplaire.</p>
+
+    <div id="list" class="product-list" role="list"></div>
+    <p id="empty" class="empty" hidden>Aucun produit trouvé.</p>
+  </section>
+
+  <dialog id="dlg-correct">
+    <form method="dialog" id="dlg-correct-form">
+      <h2 id="dlg-correct-title">Corriger le stock total</h2>
+      <p id="dlg-correct-meta" class="hint"></p>
+      <label for="fld-correct-qty">Nouveau stock total (après inventaire)</label>
+      <input id="fld-correct-qty" type="number" min="0" step="1" inputmode="numeric">
+      <p class="hint">Ceci <b>remplace</b> le total. Ce n’est pas un ajout.</p>
+      <p id="dlg-correct-error" class="error" hidden></p>
+      <button type="button" id="btn-save-correct" class="btn btn-primary btn-lg">Enregistrer la correction</button>
+      <button type="submit" class="btn btn-ghost btn-lg" value="cancel">Annuler</button>
+    </form>
+  </dialog>
+
+  <dialog id="dlg-audit">
+    <h2>Historique</h2>
+    <ul id="audit-list" class="audit"></ul>
+    <form method="dialog"><button class="btn btn-ghost btn-lg">Fermer</button></form>
+  </dialog>
+
+  <div id="toast" class="toast" hidden role="status" aria-live="polite"></div>
+
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

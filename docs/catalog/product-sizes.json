@@ -1,0 +1,1053 @@
+{
+  "version": 2,
+  "provisional": true,
+  "default_qty_per_size": 3,
+  "note_fr": "Formats combinés (ex. M-L) = sélecteur + 3 unités par grandeur. Tranches d’âge / unique restent mono. Lucie peut corriger.",
+  "note_en": "Combined formats (e.g. M-L) = selector + 3 units per size. Age bands / one-size stay single. Lucie may correct.",
+  "products": {
+    "chapeau-fille-8-10-renard": {
+      "product_number": 208,
+      "category": "chapeaux",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "8-10",
+          "label_fr": "8-10",
+          "label_en": "8-10",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "chapeau-dame-m-l-coyote": {
+      "product_number": 202,
+      "category": "chapeaux",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "L",
+          "label_fr": "Grand",
+          "label_en": "Large",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "chapeau-dame-m-l-fourrure-recyclee": {
+      "product_number": 203,
+      "category": "chapeaux",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "L",
+          "label_fr": "Grand",
+          "label_en": "Large",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "chapeau-dame-m-l-renard-argente": {
+      "product_number": 204,
+      "category": "chapeaux",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "L",
+          "label_fr": "Grand",
+          "label_en": "Large",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "chapeau-dame-m-l-renard-norvegien": {
+      "product_number": 205,
+      "category": "chapeaux",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "L",
+          "label_fr": "Grand",
+          "label_en": "Large",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "chapeau-dame-m-l-renard-roux": {
+      "product_number": 206,
+      "category": "chapeaux",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "L",
+          "label_fr": "Grand",
+          "label_en": "Large",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "chapeau-dame-m-l-vison": {
+      "product_number": 207,
+      "category": "chapeaux",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "L",
+          "label_fr": "Grand",
+          "label_en": "Large",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "chapeau-dame-vison-et-renard": {
+      "product_number": 201,
+      "category": "chapeaux",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "unique",
+          "label_fr": "Format unique",
+          "label_en": "One size",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "chapeau-homme-m-castor": {
+      "product_number": 210,
+      "category": "chapeaux",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "chapeau-homme-m-l-coyote": {
+      "product_number": 211,
+      "category": "chapeaux",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "L",
+          "label_fr": "Grand",
+          "label_en": "Large",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "chapeau-homme-m-l-renard-argente": {
+      "product_number": 212,
+      "category": "chapeaux",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "L",
+          "label_fr": "Grand",
+          "label_en": "Large",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "chapeau-homme-m-l-renard-roux": {
+      "product_number": 213,
+      "category": "chapeaux",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "L",
+          "label_fr": "Grand",
+          "label_en": "Large",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "chapeau-homme-l-xl-raton": {
+      "product_number": 209,
+      "category": "chapeaux",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "L",
+          "label_fr": "Grand",
+          "label_en": "Large",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "XL",
+          "label_fr": "Très grand",
+          "label_en": "Extra Large",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "chapeau-vison-recyclee": {
+      "product_number": 200,
+      "category": "chapeaux",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "unique",
+          "label_fr": "Format unique",
+          "label_en": "One size",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-bebe-sans-pouces-8-24-mois-castor": {
+      "product_number": 102,
+      "category": "mitaines",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "8-24 mois",
+          "label_fr": "8-24 mois",
+          "label_en": "8-24 months",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-bebe-sans-pouces-8-24-mois-vison": {
+      "product_number": 103,
+      "category": "mitaines",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "8-24 mois",
+          "label_fr": "8-24 mois",
+          "label_en": "8-24 months",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-bebe-sans-pouces-vison-fermeture-eclair": {
+      "product_number": 101,
+      "category": "mitaines",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "unique",
+          "label_fr": "Format unique",
+          "label_en": "One size",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-enfant-2-4-ans-castor-fermeture-eclair": {
+      "product_number": 110,
+      "category": "mitaines",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "2-4 ans",
+          "label_fr": "2-4 ans",
+          "label_en": "2-4 years",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-enfant-4-6-vison-fermeture-eclair": {
+      "product_number": 111,
+      "category": "mitaines",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "4-6",
+          "label_fr": "4-6",
+          "label_en": "4-6",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-enfant-6-8-vison-fermeture-eclair": {
+      "product_number": 112,
+      "category": "mitaines",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "6-8",
+          "label_fr": "6-8",
+          "label_en": "6-8",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-enfant-8-10-chat-sauvage": {
+      "product_number": 113,
+      "category": "mitaines",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "8-10",
+          "label_fr": "8-10",
+          "label_en": "8-10",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-fille-8-10-renard": {
+      "product_number": 114,
+      "category": "mitaines",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "8-10",
+          "label_fr": "8-10",
+          "label_en": "8-10",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-enfant-10-12-mouton-rase": {
+      "product_number": 109,
+      "category": "mitaines",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "10-12",
+          "label_fr": "10-12",
+          "label_en": "10-12",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-dame-m-renard": {
+      "product_number": 106,
+      "category": "mitaines",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-longues-dame-m-vison-et-renard": {
+      "product_number": 118,
+      "category": "mitaines",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-dame-m-l-chat-sauvage": {
+      "product_number": 107,
+      "category": "mitaines",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "L",
+          "label_fr": "Grand",
+          "label_en": "Large",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-dame-m-l-fourrure-recyclee": {
+      "product_number": 108,
+      "category": "mitaines",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "L",
+          "label_fr": "Grand",
+          "label_en": "Large",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-dame-renard-roux": {
+      "product_number": 104,
+      "category": "mitaines",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "L",
+          "label_fr": "Grand",
+          "label_en": "Large",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-dame-vison-et-renard": {
+      "product_number": 105,
+      "category": "mitaines",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "L",
+          "label_fr": "Grand",
+          "label_en": "Large",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-homme-m-l-castor": {
+      "product_number": 115,
+      "category": "mitaines",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "L",
+          "label_fr": "Grand",
+          "label_en": "Large",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-homme-m-l-coyote": {
+      "product_number": 116,
+      "category": "mitaines",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "L",
+          "label_fr": "Grand",
+          "label_en": "Large",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-homme-m-l-renard-roux": {
+      "product_number": 117,
+      "category": "mitaines",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "L",
+          "label_fr": "Grand",
+          "label_en": "Large",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-8-10-vison-fermeture-eclair": {
+      "product_number": 100,
+      "category": "mitaines",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "8-10",
+          "label_fr": "8-10",
+          "label_en": "8-10",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-small-vison": {
+      "product_number": 125,
+      "category": "mitaines",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "S",
+          "label_fr": "Petit",
+          "label_en": "Small",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-m-renard": {
+      "product_number": 119,
+      "category": "mitaines",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-motoneige-m-renard-argente": {
+      "product_number": 123,
+      "category": "mitaines",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-m-l-renard": {
+      "product_number": 120,
+      "category": "mitaines",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "L",
+          "label_fr": "Grand",
+          "label_en": "Large",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-m-l-vison-et-chat-sauvage": {
+      "product_number": 121,
+      "category": "mitaines",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "L",
+          "label_fr": "Grand",
+          "label_en": "Large",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-m-l-vison-et-renard": {
+      "product_number": 122,
+      "category": "mitaines",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "L",
+          "label_fr": "Grand",
+          "label_en": "Large",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-motoneige-m-l-renard-norvegien": {
+      "product_number": 124,
+      "category": "mitaines",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "L",
+          "label_fr": "Grand",
+          "label_en": "Large",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mitaines-style-inuit-coyote": {
+      "product_number": 126,
+      "category": "mitaines",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "L",
+          "label_fr": "Grand",
+          "label_en": "Large",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "foulard-dame-vison": {
+      "product_number": 600,
+      "category": "foulards",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "unique",
+          "label_fr": "Format unique",
+          "label_en": "One size",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "foulard-dame-vison-et-renard": {
+      "product_number": 601,
+      "category": "foulards",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "unique",
+          "label_fr": "Format unique",
+          "label_en": "One size",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "cache-oreilles-enfant-8-10-12-coyote": {
+      "product_number": 502,
+      "category": "cache-oreilles",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "8-10-12",
+          "label_fr": "8-10-12",
+          "label_en": "8-10-12",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "cache-oreilles-enfant-8-10-12-renard": {
+      "product_number": 503,
+      "category": "cache-oreilles",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "8-10-12",
+          "label_fr": "8-10-12",
+          "label_en": "8-10-12",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "cache-oreilles-ado-10-14-renard-et-vison": {
+      "product_number": 500,
+      "category": "cache-oreilles",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "10-14",
+          "label_fr": "10-14",
+          "label_en": "10-14",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "cache-oreilles-dame-m-vison-et-lapin": {
+      "product_number": 501,
+      "category": "cache-oreilles",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "semelles-fourrure-recyclee-pointures-5-a-12": {
+      "product_number": 700,
+      "category": "semelles",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "unique",
+          "label_fr": "Universelle (pointures 5 à 12, à découper)",
+          "label_en": "Universal (sizes 5–12, cut to fit)",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mukluks-bebe-7-18-mois-vison": {
+      "product_number": 402,
+      "category": "mukluks",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "7-18 mois",
+          "label_fr": "7-18 mois",
+          "label_en": "7-18 months",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mukluks-bebe-8-18-mois-vison": {
+      "product_number": 403,
+      "category": "mukluks",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "8-18 mois",
+          "label_fr": "8-18 mois",
+          "label_en": "8-18 months",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mukluks-bebe-8-24-mois-castor": {
+      "product_number": 404,
+      "category": "mukluks",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "8-24 mois",
+          "label_fr": "8-24 mois",
+          "label_en": "8-24 months",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mukluks-bebe-8-24-mois-vison": {
+      "product_number": 405,
+      "category": "mukluks",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "8-24 mois",
+          "label_fr": "8-24 mois",
+          "label_en": "8-24 months",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mukluks-bebe-a-18-mois-coyote": {
+      "product_number": 406,
+      "category": "mukluks",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "unique",
+          "label_fr": "Format unique",
+          "label_en": "One size",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mukluks-bebe-vison-fermeture-eclair": {
+      "product_number": 401,
+      "category": "mukluks",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "unique",
+          "label_fr": "Format unique",
+          "label_en": "One size",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "mukluks-adulte-mobilite-reduite-8-9-vison-et-renard": {
+      "product_number": 400,
+      "category": "mukluks",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "8",
+          "label_fr": "8",
+          "label_en": "8",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "9",
+          "label_fr": "9",
+          "label_en": "9",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "pantoufles-bebe-0-7-mois-fourrure-recyclee": {
+      "product_number": 300,
+      "category": "pantoufles",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "0-7 mois",
+          "label_fr": "0-7 mois",
+          "label_en": "0-7 months",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "pantoufles-bebe-5-12-mois-fourrure-recyclee": {
+      "product_number": 301,
+      "category": "pantoufles",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "5-12 mois",
+          "label_fr": "5-12 mois",
+          "label_en": "5-12 months",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "pantoufles-enfant-2-3-mouton-rase-et-coyote": {
+      "product_number": 307,
+      "category": "pantoufles",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "2",
+          "label_fr": "2",
+          "label_en": "2",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "3",
+          "label_fr": "3",
+          "label_en": "3",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "pantoufles-enfant-2-3-renard": {
+      "product_number": 308,
+      "category": "pantoufles",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "2",
+          "label_fr": "2",
+          "label_en": "2",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "3",
+          "label_fr": "3",
+          "label_en": "3",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "pantoufles-enfant-13-1-vison-et-coyote": {
+      "product_number": 306,
+      "category": "pantoufles",
+      "selector": false,
+      "sizes": [
+        {
+          "code": "13-1",
+          "label_fr": "13-1",
+          "label_en": "13-1",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "pantoufles-dame-7-8-mouton-rase-et-chat-sauvage": {
+      "product_number": 302,
+      "category": "pantoufles",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "7",
+          "label_fr": "7",
+          "label_en": "7",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "8",
+          "label_fr": "8",
+          "label_en": "8",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "pantoufles-dame-8-9-vison-et-coyote": {
+      "product_number": 303,
+      "category": "pantoufles",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "8",
+          "label_fr": "8",
+          "label_en": "8",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "9",
+          "label_fr": "9",
+          "label_en": "9",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "pantoufles-dame-8-9-vison-et-renard": {
+      "product_number": 304,
+      "category": "pantoufles",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "8",
+          "label_fr": "8",
+          "label_en": "8",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "9",
+          "label_fr": "9",
+          "label_en": "9",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "pantoufles-dame-9-10-vison-et-renard": {
+      "product_number": 305,
+      "category": "pantoufles",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "9",
+          "label_fr": "9",
+          "label_en": "9",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "10",
+          "label_fr": "10",
+          "label_en": "10",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "pantoufles-homme-10-11-chat-sauvage": {
+      "product_number": 309,
+      "category": "pantoufles",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "10",
+          "label_fr": "10",
+          "label_en": "10",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "11",
+          "label_fr": "11",
+          "label_en": "11",
+          "qty_on_hand": 3
+        }
+      ]
+    },
+    "pantoufles-homme-10-11-mouton-et-renard-roux": {
+      "product_number": 310,
+      "category": "pantoufles",
+      "selector": true,
+      "sizes": [
+        {
+          "code": "10",
+          "label_fr": "10",
+          "label_en": "10",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "11",
+          "label_fr": "11",
+          "label_en": "11",
+          "qty_on_hand": 3
+        }
+      ]
+    }
+  }
+}

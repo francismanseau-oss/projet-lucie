@@ -16,6 +16,7 @@ const rows = catalog.products.map((p) => ({
   fulfillment_type: "pending_lucie",
   qty_on_hand: null,
   qty_reserved: 0,
+  min_stock_target: 3,
   lucie_confirmed: false,
   notes_lucie: "",
   updated_at: null,
@@ -27,6 +28,10 @@ const inv = {
   policy: {
     no_fictional_qty: true,
     qty_on_hand_null_means: "Lucie n'a pas encore saisi la quantité",
+    min_stock_target_default: 3,
+    min_stock_target_is_not_qty_on_hand: true,
+    min_stock_target_note:
+      "Objectif provisoire configurable — jamais une quantité disponible; ne pas copier dans qty_on_hand",
     fulfillment_types: {
       pending_lucie: "En attente de classification Lucie — non vendable en production",
       unique_stock: "Pièce(s) unique(s) ou stock limité — réservation atomique requise",
@@ -46,7 +51,8 @@ function csvEscape(s) {
   return t;
 }
 
-const header = "product_id,name_fr,category,fulfillment_type,qty_on_hand,notes_lucie,lucie_confirmed";
+const header =
+  "product_id,name_fr,category,fulfillment_type,qty_on_hand,min_stock_target,notes_lucie,lucie_confirmed";
 const lines = [
   header,
   ...rows.map((r) =>
@@ -55,7 +61,8 @@ const lines = [
       csvEscape(r.name_fr),
       r.category,
       "pending_lucie",
-      "", // qty vide — Lucie remplit
+      "", // qty vide — Lucie remplit (jamais préremplir avec min_stock_target)
+      "3", // objectif provisoire seulement
       "",
       "false",
     ].join(","),

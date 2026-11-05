@@ -2,10 +2,37 @@
 
 Site web de création artisanale en fourrure recyclée et cuir d’agneau.
 
-## Mise en service (Stripe / Cloudflare)
+## Publication GitHub Pages (boutique publique seulement)
 
-Guide étape par étape (sans déploiement improvisé) :
+Le dossier **`docs/`** est le contenu prévu pour GitHub Pages (Settings → Pages → Deploy from branch → Folder **`/docs`**).
 
-→ **[docs/GUIDE-MISE-EN-SERVICE.md](docs/GUIDE-MISE-EN-SERVICE.md)**
+- Contient uniquement : pages boutique, 66 fiches, 7 catégories, images, CSS/JS publics, SEO.
+- **N’inclut pas** : `worker/`, `inventory/`, `shipping/`, `orders/`, `guides/`, `scripts/`, secrets.
 
-Inventaire à remplir par Lucie : `inventory/INVENTAIRE-LUCIE.csv`
+Préparer / régénérer en local (aucun push automatique) :
+
+```bat
+cd /d C:\Projets\projet-lucie
+node scripts\build-pages-site.mjs
+node scripts\check-publish-safety.mjs
+```
+
+Tester localement le site public :
+
+```bat
+npx --yes serve docs -p 5500
+```
+
+## Guides techniques (hors Pages)
+
+→ **[guides/GUIDE-MISE-EN-SERVICE.md](guides/GUIDE-MISE-EN-SERVICE.md)**  
+→ **[guides/GITHUB-PAGES-SECURISE.md](guides/GITHUB-PAGES-SECURISE.md)**
+
+Inventaire Lucie : `inventory/INVENTAIRE-LUCIE.csv`  
+Admin local (jamais via Pages) : `inventory/admin/`
+
+## Sécurité
+
+- Secrets Stripe / Resend / Cloudflare : uniquement `.dev.vars` local (gitignoré) ou Cloudflare Secrets.
+- Jamais dans le JavaScript public ni dans `docs/`.
+- Contrôle auto : `node scripts/check-publish-safety.mjs`

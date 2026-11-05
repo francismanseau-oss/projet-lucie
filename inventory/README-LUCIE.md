@@ -10,8 +10,9 @@ Fichiers :
 ## Règles
 
 1. **Ne pas inventer** de quantité : laisser `qty_on_hand` vide tant que ce n’est pas compté.
-2. **Ne pas changer** les prix (colonne absente volontairement).
-3. Pour chaque article, choisir `fulfillment_type` :
+2. **Objectif minimum** (`min_stock_target`, défaut **3**) = seuil d’alerte provisoire — **ce n’est pas** le stock disponible. Ne jamais copier ce 3 dans `qty_on_hand` sans comptage réel.
+3. **Ne pas changer** les prix (colonne absente volontairement).
+4. Pour chaque article, choisir `fulfillment_type` :
 
 | Valeur | Signification |
 |--------|----------------|
@@ -19,8 +20,10 @@ Fichiers :
 | `unique_stock` | En stock / pièce limitée — saisir `qty_on_hand` (ex. `1`) |
 | `made_to_order` | Fabriqué sur commande — `qty_on_hand` peut rester vide |
 
-4. Mettre `lucie_confirmed` à `true` seulement quand la ligne est validée.
-5. Renvoyer le CSV rempli à Francis / Virtuose pour import — **sans** activer les ventes réelles tant que livraison + checklist prod ne sont pas OK.
+5. Mettre `lucie_confirmed` à `true` seulement quand la ligne est validée.
+6. Renvoyer le CSV rempli à Francis / Virtuose pour import — **sans** activer les ventes réelles tant que livraison + checklist prod ne sont pas OK.
+
+Interface locale (PC, mot de passe) : voir `inventory/admin/README.md`.
 
 ## Exemple de lignes (illustratif — ne pas copier comme stock réel)
 

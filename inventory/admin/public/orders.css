@@ -1,0 +1,67 @@
+.admin-nav {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.65rem;
+}
+.admin-nav a {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+.admin-nav a[aria-current="page"] {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.order-list { display: grid; gap: 0.85rem; }
+.order-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.9rem 1rem;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+.order-card .meta { color: var(--muted); font-size: 0.92rem; }
+.order-card .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.45rem 0; }
+.tag {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: #ece7df;
+  color: var(--muted);
+}
+.tag.ok { background: var(--ok-bg); color: var(--accent); }
+.tag.warn { background: var(--warn-bg); color: var(--warn); }
+.tag.fixture { background: #e8e0f0; color: #5a3d7a; }
+
+.product-code--csm {
+  color: #b00020 !important;
+  font-weight: 700 !important;
+}
+
+.dlg-section { margin: 0.85rem 0; }
+.dlg-section h3 { margin: 0 0 0.4rem; font-size: 1.05rem; }
+.item-block {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.65rem 0.75rem;
+  margin: 0.45rem 0;
+  background: #fff;
+}
+.item-block .meas {
+  margin-top: 0.35rem;
+  font-size: 0.92rem;
+  color: var(--muted);
+  white-space: pre-wrap;
+}
+.hist { list-style: none; padding: 0; margin: 0; max-height: 30vh; overflow: auto; }
+.hist li { border-bottom: 1px solid var(--line); padding: 0.45rem 0; font-size: 0.9rem; }
+
+dialog#dlg { width: min(96vw, 520px); }

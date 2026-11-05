@@ -2,6 +2,12 @@
  * Logique pure Phase A — testable sans clés Stripe ni réseau.
  */
 
+import {
+  inventoryStockId,
+  productSizesMap,
+  resolveSizeForLine,
+} from "./product-sizes-core.js";
+
 export function httpError(message, status, extra) {
   const err = new Error(message);
   err.status = status;
@@ -15,10 +21,20 @@ export function productMapFromCatalog(catalog) {
   return map;
 }
 
-/** Construit les lignes CAD depuis le catalogue serveur. Ignore price/browser. */
-export function buildLineItems(catalog, items) {
+/**
+ * Construit les lignes CAD depuis le catalogue serveur. Ignore price/browser.
+ * @param catalog — produits boutique
+ * @param items — lignes panier
+ * @param opts.validateMeasurements — fn(measureSpec, unit, values)
+ * @param opts.measureSpecForCategory — fn(category) → { fields: [...] }
+ * @param opts.productSizes — document catalog/product-sizes.json (optionnel)
+ * Prix custom = products.json uniquement (pas de 2e catalogue).
+ */
+export function buildLineItems(catalog, items, opts = {}) {
   const map = productMapFromCatalog(catalog);
+  const sizesMap = opts.productSizes ? productSizesMap(opts.productSizes) : null;
   const resolved = [];
+  const validateMeasurements = opts.validateMeasurements || null;
 
   if (!Array.isArray(items) || items.length === 0) {
     throw httpError("Panier vide", 400);
@@ -29,12 +45,85 @@ export function buildLineItems(catalog, items) {
     const qty = Math.floor(Number(raw?.qty) || 0);
     if (!id || qty < 1 || qty > 20) throw httpError(`Ligne invalide: ${id || "(vide)"}`, 400);
 
-    // Rejet explicite si le client envoie un prix (tentative de manipulation)
+    // Prix navigateur toujours ignorés
     if (raw && Object.prototype.hasOwnProperty.call(raw, "price")) {
-      // on n'utilise jamais raw.price — logiqué ci-dessous ; le total serveur prime
+      /* ignoré */
     }
     if (raw && Object.prototype.hasOwnProperty.call(raw, "price_cad_cents")) {
-      // ignoré volontairement
+      /* ignoré */
+    }
+
+    if (id.startsWith("custom:")) {
+      const cfg = raw.custom_config;
+      if (!cfg || typeof cfg !== "object") {
+        throw httpError(`Configuration sur mesure manquante: ${id}`, 400);
+      }
+      // product_id = id Boutique officiel (même prix que products.json)
+      const productId = String(cfg.product_id || "");
+      const product = map.get(productId);
+      if (!product || product.active === false) {
+        throw httpError(`Produit boutique inconnu pour sur mesure: ${productId || "(vide)"}`, 400);
+      }
+      const unitAmount = product.price_cad_cents;
+      if (!Number.isInteger(unitAmount) || unitAmount < 0) {
+        throw httpError(`Prix serveur invalide pour ${productId}`, 500);
+      }
+
+      const measureUnit = cfg.unit;
+      const measurements =
+        cfg.measurements && typeof cfg.measurements === "object" ? cfg.measurements : {};
+      if (validateMeasurements && opts.measureSpecForCategory) {
+        const spec = opts.measureSpecForCategory(product.category);
+        const meas = validateMeasurements(spec, measureUnit, measurements);
+        if (!meas.ok) {
+          throw httpError("Mesures sur mesure invalides", 400, { reason: meas.reason, field: meas.field });
+        }
+      } else if (!measureUnit || (measureUnit !== "in" && measureUnit !== "cm")) {
+        // catégories sans champs mesures (ex. foulards) : unité optionnelle si aucune mesure
+        const hasMeas = Object.values(measurements).some((v) => v !== "" && v != null);
+        if (hasMeas) throw httpError("Unité de mesure sur mesure requise (in|cm)", 400);
+      }
+
+      const productNumber =
+        product.product_number != null
+          ? Number(product.product_number)
+          : cfg.product_number != null
+            ? Number(cfg.product_number)
+            : null;
+      // Raynaud / commentaires : jamais de supplément inventé
+      // CSM : skip_inventory — ne décrémente pas le stock régulier (sauf décision Lucie plus tard)
+      resolved.push({
+        id,
+        name: `Sur mesure — ${product.name_fr}`,
+        product_number: productNumber,
+        qty,
+        unit_amount: unitAmount,
+        line_total_cents: unitAmount * qty,
+        availability: product.availability || "contact",
+        custom: true,
+        skip_inventory: true,
+        custom_config: {
+          product_id: productId,
+          product_number: productNumber,
+          csm_code: productNumber != null ? `${productNumber}-CSM` : "CSM",
+          category: product.category,
+          unit: measureUnit || null,
+          measurements,
+          measurements_cm: cfg.measurements_cm || null,
+          raynaud: !!cfg.raynaud,
+          comments: String(cfg.comments || "").slice(0, 800),
+          leather: "noir",
+          price_source: "catalog/products.json",
+        },
+        client_price_ignored:
+          raw.price != null || raw.price_cad != null || raw.price_cad_cents != null
+            ? Number(
+                raw.price_cad_cents ??
+                  Math.round(Number(raw.price || raw.price_cad || 0) * (raw.price_cad_cents ? 1 : 100)),
+              )
+            : null,
+      });
+      continue;
     }
 
     const product = map.get(id);
@@ -45,14 +134,58 @@ export function buildLineItems(catalog, items) {
       throw httpError(`Prix serveur invalide pour ${id}`, 500);
     }
 
+    let size = null;
+    let size_label_fr = null;
+    let size_label_en = null;
+    let inventory_id = product.id;
+    if (sizesMap) {
+      const sizeEntry = sizesMap.get(product.id) || null;
+      const sized = resolveSizeForLine(sizeEntry, raw?.size ?? raw?.size_code);
+      if (!sized.ok) {
+        const msg =
+          sized.reason === "size_required"
+            ? `Taille requise pour ${product.name_fr}`
+            : sized.reason === "size_sold_out"
+              ? `Taille épuisée pour ${product.name_fr}`
+              : `Taille invalide pour ${product.name_fr}`;
+        throw httpError(msg, sized.reason === "size_sold_out" ? 409 : 400, {
+          product_id: product.id,
+          reason: sized.reason,
+          size: sized.size || null,
+        });
+      }
+      size = sized.size;
+      size_label_fr = sized.label_fr;
+      size_label_en = sized.label_en;
+      inventory_id = inventoryStockId(product.id, size, sizeEntry);
+    } else if (raw?.size) {
+      size = String(raw.size).trim() || null;
+      size_label_fr = raw.size_label_fr || size;
+      size_label_en = raw.size_label_en || size;
+      inventory_id = size ? `${product.id}::${size}` : product.id;
+    }
+
+    const displayName =
+      size && size !== "unique"
+        ? `${product.name_fr} — ${size_label_fr || size}`
+        : size === "unique" && size_label_fr && /universelle/i.test(size_label_fr)
+          ? `${product.name_fr} — ${size_label_fr}`
+          : product.name_fr;
+
     resolved.push({
       id: product.id,
-      name: product.name_fr,
+      inventory_id,
+      size,
+      size_label_fr,
+      size_label_en,
+      name: displayName,
+      product_number: product.product_number != null ? Number(product.product_number) : null,
       qty,
       unit_amount: unit,
       line_total_cents: unit * qty,
       availability: product.availability || "contact",
-      // si le client a envoyé un faux prix, on le note pour les tests
+      custom: false,
+      skip_inventory: false,
       client_price_ignored:
         raw.price != null || raw.price_cad != null || raw.price_cad_cents != null
           ? Number(raw.price_cad_cents ?? Math.round(Number(raw.price || raw.price_cad || 0) * (raw.price_cad_cents ? 1 : 100)))
@@ -333,19 +466,23 @@ export function buildCheckoutParams({
       ? shippingResolution.quote?.method_id || "quoted"
       : shippingResolution?.mode || "not_charged_phase_a";
 
+  // payment_method_types retiré : Stripe Checkout gère les méthodes via Dashboard
+  // (API refuse ce paramètre sur les comptes récents — migration Dynamic Payment Methods).
   const params = {
     mode: "payment",
     success_url: successUrl,
     cancel_url: cancelUrl,
     client_reference_id: clientReferenceId || `cart_${Date.now()}`,
-    "payment_method_types[0]": "card",
     "shipping_address_collection[allowed_countries][0]": "CA",
     "metadata[source]": "fourrures-boreales-phase-a",
     "metadata[shipping]": shipMeta,
     "metadata[shipping_fee_cents]": String(shippingResolution?.fee_cad_cents ?? 0),
     "metadata[currency]": "cad",
     "metadata[item_count]": String(resolved.reduce((s, r) => s + r.qty, 0)),
-    "metadata[product_ids]": resolved.map((r) => `${r.id}x${r.qty}`).join(",").slice(0, 450),
+    "metadata[product_ids]": resolved
+      .map((r) => `${r.id}${r.size ? `:${r.size}` : ""}x${r.qty}`)
+      .join(",")
+      .slice(0, 450),
   };
   if (reservationId) params["metadata[reservation_id]"] = reservationId;
 
@@ -355,6 +492,51 @@ export function buildCheckoutParams({
     params[`line_items[${i}][price_data][unit_amount]`] = r.unit_amount;
     params[`line_items[${i}][price_data][product_data][name]`] = r.name;
     params[`line_items[${i}][price_data][product_data][metadata][product_id]`] = r.id;
+    if (r.inventory_id) {
+      params[`line_items[${i}][price_data][product_data][metadata][inventory_id]`] = String(
+        r.inventory_id,
+      );
+    }
+    if (r.size) {
+      params[`line_items[${i}][price_data][product_data][metadata][size]`] = String(r.size);
+      if (r.size_label_fr) {
+        params[`line_items[${i}][price_data][product_data][metadata][size_label_fr]`] = String(
+          r.size_label_fr,
+        ).slice(0, 120);
+      }
+      if (r.size_label_en) {
+        params[`line_items[${i}][price_data][product_data][metadata][size_label_en]`] = String(
+          r.size_label_en,
+        ).slice(0, 120);
+      }
+    }
+    if (r.product_number != null) {
+      params[`line_items[${i}][price_data][product_data][metadata][product_number]`] = String(
+        r.product_number,
+      );
+    }
+    if (r.custom && r.custom_config) {
+      const cc = r.custom_config;
+      params[`line_items[${i}][price_data][product_data][metadata][custom]`] = "1";
+      params[`line_items[${i}][price_data][product_data][metadata][csm_code]`] = String(
+        cc.csm_code || (cc.product_number != null ? `${cc.product_number}-CSM` : "CSM"),
+      );
+      params[`line_items[${i}][price_data][product_data][metadata][boutique_id]`] = String(
+        cc.product_id || "",
+      );
+      params[`line_items[${i}][price_data][product_data][metadata][unit]`] = String(cc.unit || "");
+      params[`line_items[${i}][price_data][product_data][metadata][measurements]`] = JSON.stringify(
+        cc.measurements || {},
+      ).slice(0, 450);
+      params[`line_items[${i}][price_data][product_data][metadata][measurements_cm]`] = JSON.stringify(
+        cc.measurements_cm || {},
+      ).slice(0, 450);
+      params[`line_items[${i}][price_data][product_data][metadata][raynaud]`] = cc.raynaud ? "1" : "0";
+      params[`line_items[${i}][price_data][product_data][metadata][leather]`] = String(cc.leather || "noir");
+      params[`line_items[${i}][price_data][product_data][metadata][comments]`] = String(
+        cc.comments || "",
+      ).slice(0, 450);
+    }
   });
 
   if (
@@ -527,7 +709,7 @@ export function createMemoryKv() {
     async get(k) {
       return store.has(k) ? store.get(k) : null;
     },
-    async put(k, v) {
+    async put(k, v, _opts) {
       store.set(k, v);
     },
     _store: store,

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aperçu courriel — suggestion (maquette Lucie)</title>
+<style>
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#e8e0d6;color:#2b2420}
+  .page{max-width:720px;margin:0 auto;padding:24px 16px 60px}
+  .banner{background:#fff8f0;border:1px solid #e0d0c0;border-radius:10px;padding:16px 18px;margin-bottom:20px;font-size:15px;line-height:1.5}
+  .banner strong{color:#965035}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .tabs button{appearance:none;border:1.5px solid #cbb29e;background:#fff;border-radius:4px;padding:12px 16px;font-size:15px;font-weight:700;cursor:pointer;min-height:44px}
+  .tabs button[aria-selected="true"]{background:#965035;border-color:#965035;color:#fff}
+  .panel{display:none}
+  .panel.is-on{display:block}
+  .gmail-chrome{background:#fff;border:1px solid #cbb29e;border-radius:12px;overflow:hidden;box-shadow:0 8px 24px rgba(60,35,20,.1)}
+  .gmail-bar{background:#f1f3f4;padding:12px 16px;font-size:13px;color:#5f6368;border-bottom:1px solid #dadce0}
+  .gmail-meta{padding:16px 20px;border-bottom:1px solid #eee;font-size:15px;line-height:1.55}
+  .gmail-meta .row{margin:6px 0}
+  .gmail-meta .label{color:#5f6368;font-size:13px}
+  .gmail-subject{font-size:22px;font-weight:700;margin:0 0 10px;font-family:Georgia,serif}
+  .reply-hint{margin:16px 20px;padding:14px 16px;background:#e8f0fe;border-radius:8px;font-size:16px;line-height:1.45}
+  .old-body{padding:20px;font-size:16px;line-height:1.55;white-space:pre-wrap;font-family:Georgia,serif;background:#fafafa}
+  .attach{margin:0 20px 20px;padding:14px;border:1px dashed #cbb29e;border-radius:8px;background:#fffcf8}
+  .attach h3{margin:0 0 10px;font-size:15px}
+  .attach img{max-width:100%;height:auto;border-radius:6px;border:1px solid #e5d8c8;display:block}
+  .note{margin-top:18px;font-size:14px;color:#5c4f44;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="banner">
+    <strong>Maquette locale — aucun courriel réel n’est envoyé.</strong><br>
+    Avant : le code n’envoyait qu’un <em>texte brut</em> (pas de mise en page HTML).<br>
+    Maintenant : le Worker peut générer un courriel HTML chaleureux (ci-dessous). Ouvrez ce fichier dans votre navigateur pour le montrer à Lucie.
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button type="button" id="tab-new" aria-selected="true">Version proposée (HTML)</button>
+    <button type="button" id="tab-old" aria-selected="false">Ancienne version (texte)</button>
+  </div>
+
+  <div id="panel-new" class="panel is-on" role="tabpanel">
+    <div class="gmail-chrome">
+      <div class="gmail-bar">Boîte de réception · Gmail (simulation)</div>
+      <div class="gmail-meta">
+        <p class="gmail-subject">Nouvelle idée de création — Camille Bouchard</p>
+        <div class="row"><span class="label">De :</span> Les Fourrures Boréales &lt;suggestions@exemple.com&gt;</div>
+        <div class="row"><span class="label">À :</span> luciegosselin852@gmail.com</div>
+        <div class="row"><span class="label">Répondre à :</span> camille.bouchard@exemple.ca ← c’est ici que va la réponse</div>
+      </div>
+      <div class="reply-hint">
+        <strong>Pour Lucie :</strong> cliquez sur le bouton <strong>Répondre</strong> de Gmail.
+        Votre message partira automatiquement à Camille (pas besoin de copier l’adresse).
+      </div>
+
+      <!-- Corps fidèle au HTML généré par worker/src/suggestion.js -->
+      <div style="background:#f3ebe3;padding:20px 12px;font-family:Georgia,'Times New Roman',serif;color:#2b2420;">
+        <div style="max-width:560px;margin:0 auto;background:#fffcf8;border:1px solid #e5d8c8;border-radius:12px;overflow:hidden;">
+          <div style="padding:28px 28px 8px;text-align:center;">
+            <p style="margin:0;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:#965035;">Les Fourrures Boréales</p>
+            <h1 style="margin:12px 0 0;font-size:28px;font-weight:400;line-height:1.25;color:#2a221c;">Nouvelle idée de création</h1>
+          </div>
+          <div style="padding:8px 28px 24px;">
+            <p style="margin:0;font-size:18px;line-height:1.5;color:#5c4f44;">Bonjour Lucie,</p>
+            <p style="margin:12px 0 0;font-size:18px;line-height:1.55;color:#5c4f44;">Une personne vous a écrit une idée depuis votre site. Voici les détails :</p>
+          </div>
+          <div style="padding:0 28px 20px;">
+            <div style="background:#f7f1ea;border-radius:8px;padding:18px 20px;">
+              <p style="margin:0 0 6px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#965035;">Qui a écrit ?</p>
+              <p style="margin:0;font-size:22px;line-height:1.35;color:#2a221c;">Camille Bouchard</p>
+              <p style="margin:16px 0 6px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#965035;">Son courriel</p>
+              <p style="margin:0;font-size:20px;line-height:1.35;color:#2a221c;"><a href="mailto:camille.bouchard@exemple.ca" style="color:#965035;">camille.bouchard@exemple.ca</a></p>
+            </div>
+          </div>
+          <div style="padding:0 28px 20px;">
+            <p style="margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#965035;">Son idée</p>
+            <p style="margin:0;font-size:20px;line-height:1.55;color:#2a221c;">Bonjour Lucie, j’aimerais des mitaines longues en fourrure recyclée, couleur naturelle, avec une doublure bien chaude pour l’hiver en Abitibi. Est-ce que vous pourriez en faire une paire sur mesure ?</p>
+          </div>
+          <div style="padding:0 28px 24px;">
+            <p style="margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#965035;">Photos</p>
+            <p style="font-size:18px;color:#5c4f44;margin:0 0 8px;">1 photo est jointe à ce courriel.</p>
+            <p style="font-size:16px;color:#7a6a5c;margin:0;">Dans Gmail, regardez en bas du message (trombone / pièces jointes) et ouvrez la ou les photos.</p>
+          </div>
+          <div style="padding:0 28px 28px;">
+            <div style="background:#2a221c;border-radius:8px;padding:18px 20px;">
+              <p style="margin:0;font-size:20px;line-height:1.4;color:#fff;">Pour lui répondre</p>
+              <p style="margin:10px 0 0;font-size:17px;line-height:1.5;color:#f3ebe3;">Dans Gmail, cliquez sur <strong style="color:#fff;">Répondre</strong>. Votre message ira directement à Camille Bouchard.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="attach">
+        <h3>Pièce jointe (comme dans Gmail)</h3>
+        <!-- Photo de test générée (mitaines stylisées) — pas une vraie photo client -->
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='400' viewBox='0 0 640 400'%3E%3Crect fill='%23e8d8c9' width='640' height='400'/%3E%3Ctext x='320' y='48' text-anchor='middle' font-family='Georgia,serif' font-size='22' fill='%23743c29'%3EPhoto de test — idée mitaines%3C/text%3E%3Cellipse cx='250' cy='220' rx='90' ry='120' fill='%23a67c52'/%3E%3Cellipse cx='390' cy='220' rx='90' ry='120' fill='%238b6914'/%3E%3Crect x='220' y='300' width='60' height='50' rx='12' fill='%23c4a484'/%3E%3Crect x='360' y='300' width='60' height='50' rx='12' fill='%23c4a484'/%3E%3Ctext x='320' y='370' text-anchor='middle' font-family='Arial' font-size='14' fill='%235c4f44'%3Efichier%3A idee-mitaines.jpg%3C/text%3E%3C/svg%3E" alt="Photo de test : idée mitaines">
+      </div>
+    </div>
+  </div>
+
+  <div id="panel-old" class="panel" role="tabpanel">
+    <div class="gmail-chrome">
+      <div class="gmail-bar">Ancienne version (texte seul — plus difficile pour Lucie)</div>
+      <div class="gmail-meta">
+        <p class="gmail-subject">[Suggestion création] Camille Bouchard</p>
+        <div class="row"><span class="label">Répondre à :</span> camille.bouchard@exemple.ca</div>
+      </div>
+      <pre class="old-body">Nouvelle suggestion de création — Les Fourrures Boréales
+
+Nom : Camille Bouchard
+Courriel : camille.bouchard@exemple.ca
+Images : 1
+
+Description :
+Bonjour Lucie, j’aimerais des mitaines longues…
+
+— Envoyé depuis le formulaire Contact du site (pas de compte client).</pre>
+    </div>
+    <p class="note">Cette ancienne version était lisible mais trop « technique » et sans belle mise en page. Elle a été remplacée dans le code par la version chaleureuse.</p>
+  </div>
+
+  <p class="note">
+    <strong>Comment Lucie répond :</strong> ouvrir le courriel dans Gmail → bouton <strong>Répondre</strong> → écrire → Envoyer.
+    Grâce au champ « Répondre à », Gmail adresse automatiquement le client. Aucun tableau de bord à apprendre.
+  </p>
+</div>
+<script>
+  const tabNew = document.getElementById("tab-new");
+  const tabOld = document.getElementById("tab-old");
+  const panelNew = document.getElementById("panel-new");
+  const panelOld = document.getElementById("panel-old");
+  function show(which) {
+    const isNew = which === "new";
+    tabNew.setAttribute("aria-selected", String(isNew));
+    tabOld.setAttribute("aria-selected", String(!isNew));
+    panelNew.classList.toggle("is-on", isNew);
+    panelOld.classList.toggle("is-on", !isNew);
+  }
+  tabNew.addEventListener("click", () => show("new"));
+  tabOld.addEventListener("click", () => show("old"));
+</script>
+</body>
+</html>

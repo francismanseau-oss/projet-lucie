@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "currency": "CAD",
+  "policy": {
+    "no_invented_prices": true,
+    "no_invented_options": true,
+    "payment_requires_complete_pricing": true,
+    "note": "Remplir modèles, fourrures, couleurs, suppléments et prix avec Lucie avant activation."
+  },
+  "products": [
+    {
+      "id": "mitaines",
+      "active": true,
+      "label_fr": "Mitaines",
+      "label_en": "Mittens",
+      "description_fr": "Personnalisez vos mitaines artisanales.",
+      "description_en": "Customize your handcrafted mittens.",
+      "base_price_cad_cents": null,
+      "options": {
+        "model": {
+          "label_fr": "Modèle",
+          "label_en": "Model",
+          "required": true,
+          "items": []
+        },
+        "fur_type": {
+          "label_fr": "Type de fourrure",
+          "label_en": "Fur type",
+          "required": true,
+          "items": []
+        },
+        "color": {
+          "label_fr": "Couleur",
+          "label_en": "Colour",
+          "required": true,
+          "items": []
+        },
+        "size_preset": {
+          "label_fr": "Taille de référence",
+          "label_en": "Reference size",
+          "required": false,
+          "items": []
+        },
+        "extras": {
+          "label_fr": "Options supplémentaires",
+          "label_en": "Extra options",
+          "required": false,
+          "multi": true,
+          "items": []
+        }
+      },
+      "measurements": {
+        "awaiting_lucie_validation": true,
+        "fields": [
+          {
+            "id": "hand_circumference",
+            "label_fr": "Tour de main",
+            "label_en": "Hand circumference",
+            "required": true,
+            "min": null,
+            "max": null
+          },
+          {
+            "id": "hand_length",
+            "label_fr": "Longueur de la main",
+            "label_en": "Hand length",
+            "required": true,
+            "min": null,
+            "max": null
+          },
+          {
+            "id": "wrist_circumference",
+            "label_fr": "Tour de poignet",
+            "label_en": "Wrist circumference",
+            "required": false,
+            "min": null,
+            "max": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "pantoufles",
+      "active": false,
+      "label_fr": "Pantoufles",
+      "label_en": "Slippers",
+      "base_price_cad_cents": null,
+      "options": {},
+      "measurements": { "awaiting_lucie_validation": true, "fields": [] }
+    },
+    {
+      "id": "chapeaux",
+      "active": false,
+      "label_fr": "Chapeaux",
+      "label_en": "Hats",
+      "base_price_cad_cents": null,
+      "options": {},
+      "measurements": { "awaiting_lucie_validation": true, "fields": [] }
+    },
+    {
+      "id": "cache-oreilles",
+      "active": false,
+      "label_fr": "Cache-oreilles",
+      "label_en": "Ear warmers",
+      "base_price_cad_cents": null,
+      "options": {},
+      "measurements": { "awaiting_lucie_validation": true, "fields": [] }
+    },
+    {
+      "id": "foulards",
+      "active": false,
+      "label_fr": "Foulards",
+      "label_en": "Scarves",
+      "base_price_cad_cents": null,
+      "options": {},
+      "measurements": { "awaiting_lucie_validation": true, "fields": [] }
+    },
+    {
+      "id": "semelles",
+      "active": false,
+      "label_fr": "Semelles",
+      "label_en": "Insoles",
+      "base_price_cad_cents": null,
+      "options": {},
+      "measurements": { "awaiting_lucie_validation": true, "fields": [] }
+    },
+    {
+      "id": "mukluks",
+      "active": false,
+      "label_fr": "Mukluks",
+      "label_en": "Mukluks",
+      "base_price_cad_cents": null,
+      "options": {},
+      "measurements": { "awaiting_lucie_validation": true, "fields": [] }
+    }
+  ]
+}

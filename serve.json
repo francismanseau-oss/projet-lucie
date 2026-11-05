@@ -1,0 +1,354 @@
+{
+  "cleanUrls": false,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/index",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/boutique",
+      "destination": "/boutique.html"
+    },
+    {
+      "source": "/panier",
+      "destination": "/panier.html"
+    },
+    {
+      "source": "/paiement",
+      "destination": "/paiement.html"
+    },
+    {
+      "source": "/commande-confirmee",
+      "destination": "/commande-confirmee.html"
+    },
+    {
+      "source": "/commande-annulee",
+      "destination": "/commande-annulee.html"
+    },
+    {
+      "source": "/creations-personnalisees",
+      "destination": "/creations-personnalisees.html"
+    },
+    {
+      "source": "/creations",
+      "destination": "/creations.html"
+    },
+    {
+      "source": "/lucie",
+      "destination": "/lucie.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/sur-mesure",
+      "destination": "/sur-mesure.html"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/robots.txt"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/sitemap.xml"
+    },
+    {
+      "source": "/categories/chapeaux",
+      "destination": "/categories/chapeaux.html"
+    },
+    {
+      "source": "/categories/mitaines",
+      "destination": "/categories/mitaines.html"
+    },
+    {
+      "source": "/categories/foulards",
+      "destination": "/categories/foulards.html"
+    },
+    {
+      "source": "/categories/cache-oreilles",
+      "destination": "/categories/cache-oreilles.html"
+    },
+    {
+      "source": "/categories/semelles",
+      "destination": "/categories/semelles.html"
+    },
+    {
+      "source": "/categories/mukluks",
+      "destination": "/categories/mukluks.html"
+    },
+    {
+      "source": "/categories/pantoufles",
+      "destination": "/categories/pantoufles.html"
+    },
+    {
+      "source": "/produits/chapeau-fille-8-10-renard",
+      "destination": "/produits/chapeau-fille-8-10-renard.html"
+    },
+    {
+      "source": "/produits/chapeau-dame-m-l-coyote",
+      "destination": "/produits/chapeau-dame-m-l-coyote.html"
+    },
+    {
+      "source": "/produits/chapeau-dame-m-l-fourrure-recyclee",
+      "destination": "/produits/chapeau-dame-m-l-fourrure-recyclee.html"
+    },
+    {
+      "source": "/produits/chapeau-dame-m-l-renard-argente",
+      "destination": "/produits/chapeau-dame-m-l-renard-argente.html"
+    },
+    {
+      "source": "/produits/chapeau-dame-m-l-renard-norvegien",
+      "destination": "/produits/chapeau-dame-m-l-renard-norvegien.html"
+    },
+    {
+      "source": "/produits/chapeau-dame-m-l-renard-roux",
+      "destination": "/produits/chapeau-dame-m-l-renard-roux.html"
+    },
+    {
+      "source": "/produits/chapeau-dame-m-l-vison",
+      "destination": "/produits/chapeau-dame-m-l-vison.html"
+    },
+    {
+      "source": "/produits/chapeau-dame-vison-et-renard",
+      "destination": "/produits/chapeau-dame-vison-et-renard.html"
+    },
+    {
+      "source": "/produits/chapeau-homme-m-castor",
+      "destination": "/produits/chapeau-homme-m-castor.html"
+    },
+    {
+      "source": "/produits/chapeau-homme-m-l-coyote",
+      "destination": "/produits/chapeau-homme-m-l-coyote.html"
+    },
+    {
+      "source": "/produits/chapeau-homme-m-l-renard-argente",
+      "destination": "/produits/chapeau-homme-m-l-renard-argente.html"
+    },
+    {
+      "source": "/produits/chapeau-homme-m-l-renard-roux",
+      "destination": "/produits/chapeau-homme-m-l-renard-roux.html"
+    },
+    {
+      "source": "/produits/chapeau-homme-l-xl-raton",
+      "destination": "/produits/chapeau-homme-l-xl-raton.html"
+    },
+    {
+      "source": "/produits/chapeau-vison-recyclee",
+      "destination": "/produits/chapeau-vison-recyclee.html"
+    },
+    {
+      "source": "/produits/mitaines-bebe-sans-pouces-8-24-mois-castor",
+      "destination": "/produits/mitaines-bebe-sans-pouces-8-24-mois-castor.html"
+    },
+    {
+      "source": "/produits/mitaines-bebe-sans-pouces-8-24-mois-vison",
+      "destination": "/produits/mitaines-bebe-sans-pouces-8-24-mois-vison.html"
+    },
+    {
+      "source": "/produits/mitaines-bebe-sans-pouces-vison-fermeture-eclair",
+      "destination": "/produits/mitaines-bebe-sans-pouces-vison-fermeture-eclair.html"
+    },
+    {
+      "source": "/produits/mitaines-enfant-2-4-ans-castor-fermeture-eclair",
+      "destination": "/produits/mitaines-enfant-2-4-ans-castor-fermeture-eclair.html"
+    },
+    {
+      "source": "/produits/mitaines-enfant-4-6-vison-fermeture-eclair",
+      "destination": "/produits/mitaines-enfant-4-6-vison-fermeture-eclair.html"
+    },
+    {
+      "source": "/produits/mitaines-enfant-6-8-vison-fermeture-eclair",
+      "destination": "/produits/mitaines-enfant-6-8-vison-fermeture-eclair.html"
+    },
+    {
+      "source": "/produits/mitaines-enfant-8-10-chat-sauvage",
+      "destination": "/produits/mitaines-enfant-8-10-chat-sauvage.html"
+    },
+    {
+      "source": "/produits/mitaines-fille-8-10-renard",
+      "destination": "/produits/mitaines-fille-8-10-renard.html"
+    },
+    {
+      "source": "/produits/mitaines-enfant-10-12-mouton-rase",
+      "destination": "/produits/mitaines-enfant-10-12-mouton-rase.html"
+    },
+    {
+      "source": "/produits/mitaines-dame-m-renard",
+      "destination": "/produits/mitaines-dame-m-renard.html"
+    },
+    {
+      "source": "/produits/mitaines-longues-dame-m-vison-et-renard",
+      "destination": "/produits/mitaines-longues-dame-m-vison-et-renard.html"
+    },
+    {
+      "source": "/produits/mitaines-dame-m-l-chat-sauvage",
+      "destination": "/produits/mitaines-dame-m-l-chat-sauvage.html"
+    },
+    {
+      "source": "/produits/mitaines-dame-m-l-fourrure-recyclee",
+      "destination": "/produits/mitaines-dame-m-l-fourrure-recyclee.html"
+    },
+    {
+      "source": "/produits/mitaines-dame-renard-roux",
+      "destination": "/produits/mitaines-dame-renard-roux.html"
+    },
+    {
+      "source": "/produits/mitaines-dame-vison-et-renard",
+      "destination": "/produits/mitaines-dame-vison-et-renard.html"
+    },
+    {
+      "source": "/produits/mitaines-homme-m-l-castor",
+      "destination": "/produits/mitaines-homme-m-l-castor.html"
+    },
+    {
+      "source": "/produits/mitaines-homme-m-l-coyote",
+      "destination": "/produits/mitaines-homme-m-l-coyote.html"
+    },
+    {
+      "source": "/produits/mitaines-homme-m-l-renard-roux",
+      "destination": "/produits/mitaines-homme-m-l-renard-roux.html"
+    },
+    {
+      "source": "/produits/mitaines-8-10-vison-fermeture-eclair",
+      "destination": "/produits/mitaines-8-10-vison-fermeture-eclair.html"
+    },
+    {
+      "source": "/produits/mitaines-small-vison",
+      "destination": "/produits/mitaines-small-vison.html"
+    },
+    {
+      "source": "/produits/mitaines-m-renard",
+      "destination": "/produits/mitaines-m-renard.html"
+    },
+    {
+      "source": "/produits/mitaines-motoneige-m-renard-argente",
+      "destination": "/produits/mitaines-motoneige-m-renard-argente.html"
+    },
+    {
+      "source": "/produits/mitaines-m-l-renard",
+      "destination": "/produits/mitaines-m-l-renard.html"
+    },
+    {
+      "source": "/produits/mitaines-m-l-vison-et-chat-sauvage",
+      "destination": "/produits/mitaines-m-l-vison-et-chat-sauvage.html"
+    },
+    {
+      "source": "/produits/mitaines-m-l-vison-et-renard",
+      "destination": "/produits/mitaines-m-l-vison-et-renard.html"
+    },
+    {
+      "source": "/produits/mitaines-motoneige-m-l-renard-norvegien",
+      "destination": "/produits/mitaines-motoneige-m-l-renard-norvegien.html"
+    },
+    {
+      "source": "/produits/mitaines-style-inuit-coyote",
+      "destination": "/produits/mitaines-style-inuit-coyote.html"
+    },
+    {
+      "source": "/produits/foulard-dame-vison",
+      "destination": "/produits/foulard-dame-vison.html"
+    },
+    {
+      "source": "/produits/foulard-dame-vison-et-renard",
+      "destination": "/produits/foulard-dame-vison-et-renard.html"
+    },
+    {
+      "source": "/produits/cache-oreilles-enfant-8-10-12-coyote",
+      "destination": "/produits/cache-oreilles-enfant-8-10-12-coyote.html"
+    },
+    {
+      "source": "/produits/cache-oreilles-enfant-8-10-12-renard",
+      "destination": "/produits/cache-oreilles-enfant-8-10-12-renard.html"
+    },
+    {
+      "source": "/produits/cache-oreilles-ado-10-14-renard-et-vison",
+      "destination": "/produits/cache-oreilles-ado-10-14-renard-et-vison.html"
+    },
+    {
+      "source": "/produits/cache-oreilles-dame-m-vison-et-lapin",
+      "destination": "/produits/cache-oreilles-dame-m-vison-et-lapin.html"
+    },
+    {
+      "source": "/produits/semelles-fourrure-recyclee-pointures-5-a-12",
+      "destination": "/produits/semelles-fourrure-recyclee-pointures-5-a-12.html"
+    },
+    {
+      "source": "/produits/mukluks-bebe-7-18-mois-vison",
+      "destination": "/produits/mukluks-bebe-7-18-mois-vison.html"
+    },
+    {
+      "source": "/produits/mukluks-bebe-8-18-mois-vison",
+      "destination": "/produits/mukluks-bebe-8-18-mois-vison.html"
+    },
+    {
+      "source": "/produits/mukluks-bebe-8-24-mois-castor",
+      "destination": "/produits/mukluks-bebe-8-24-mois-castor.html"
+    },
+    {
+      "source": "/produits/mukluks-bebe-8-24-mois-vison",
+      "destination": "/produits/mukluks-bebe-8-24-mois-vison.html"
+    },
+    {
+      "source": "/produits/mukluks-bebe-a-18-mois-coyote",
+      "destination": "/produits/mukluks-bebe-a-18-mois-coyote.html"
+    },
+    {
+      "source": "/produits/mukluks-bebe-vison-fermeture-eclair",
+      "destination": "/produits/mukluks-bebe-vison-fermeture-eclair.html"
+    },
+    {
+      "source": "/produits/mukluks-adulte-mobilite-reduite-8-9-vison-et-renard",
+      "destination": "/produits/mukluks-adulte-mobilite-reduite-8-9-vison-et-renard.html"
+    },
+    {
+      "source": "/produits/pantoufles-bebe-0-7-mois-fourrure-recyclee",
+      "destination": "/produits/pantoufles-bebe-0-7-mois-fourrure-recyclee.html"
+    },
+    {
+      "source": "/produits/pantoufles-bebe-5-12-mois-fourrure-recyclee",
+      "destination": "/produits/pantoufles-bebe-5-12-mois-fourrure-recyclee.html"
+    },
+    {
+      "source": "/produits/pantoufles-enfant-2-3-mouton-rase-et-coyote",
+      "destination": "/produits/pantoufles-enfant-2-3-mouton-rase-et-coyote.html"
+    },
+    {
+      "source": "/produits/pantoufles-enfant-2-3-renard",
+      "destination": "/produits/pantoufles-enfant-2-3-renard.html"
+    },
+    {
+      "source": "/produits/pantoufles-enfant-13-1-vison-et-coyote",
+      "destination": "/produits/pantoufles-enfant-13-1-vison-et-coyote.html"
+    },
+    {
+      "source": "/produits/pantoufles-dame-7-8-mouton-rase-et-chat-sauvage",
+      "destination": "/produits/pantoufles-dame-7-8-mouton-rase-et-chat-sauvage.html"
+    },
+    {
+      "source": "/produits/pantoufles-dame-8-9-vison-et-coyote",
+      "destination": "/produits/pantoufles-dame-8-9-vison-et-coyote.html"
+    },
+    {
+      "source": "/produits/pantoufles-dame-8-9-vison-et-renard",
+      "destination": "/produits/pantoufles-dame-8-9-vison-et-renard.html"
+    },
+    {
+      "source": "/produits/pantoufles-dame-9-10-vison-et-renard",
+      "destination": "/produits/pantoufles-dame-9-10-vison-et-renard.html"
+    },
+    {
+      "source": "/produits/pantoufles-homme-10-11-chat-sauvage",
+      "destination": "/produits/pantoufles-homme-10-11-chat-sauvage.html"
+    },
+    {
+      "source": "/produits/pantoufles-homme-10-11-mouton-et-renard-roux",
+      "destination": "/produits/pantoufles-homme-10-11-mouton-et-renard-roux.html"
+    }
+  ]
+}

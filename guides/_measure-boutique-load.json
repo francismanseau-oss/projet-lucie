@@ -1,0 +1,25 @@
+{
+  "visible_strategy": {
+    "mobile_390": "grille 2 col — ~2 cartes 1re rangée au-dessus de la ligne de flottaison typique (sous bannière)",
+    "desktop_1440": "grille 4 col — 1re rangée 4 cartes, mais high limité à 2 (LCP) ; les 2 autres lazy près du viewport se chargent vite",
+    "filter": "cards[hidden]=true — images lazy des cartes masquées ne devraient pas partir (hors viewport)"
+  },
+  "static": {
+    "method": "static_estimate_first_paint_candidates",
+    "eager_images": 2,
+    "eager_webp_paths": [
+      "assets/produits/webp/ensemble-fille-renard-8-10.webp",
+      "assets/produits/webp/ensemble-dame-coyote-inuit.webp"
+    ],
+    "bytes": {
+      "html": 90938,
+      "css": 29017,
+      "site_js": 6616,
+      "logo": 32388,
+      "eager_product_webp": 104652,
+      "total_critical_approx": 263611
+    },
+    "note": "Les 64 images lazy ne sont pas comptées dans le total critique (hors écran)."
+  },
+  "playwright": null
+}
