@@ -36,6 +36,14 @@ function Test-PublicUrl([string]$Url) {
   }
 }
 
+function New-InventaireIcon {
+  $outIco = Join-Path $IconDir "inventaire-fourrures-boreales.ico"
+  $py = Join-Path $Root "inventory\admin\scripts\generer-icone-inventaire.py"
+  & python $py
+  if (-not (Test-Path $outIco)) { throw "Icone inventaire non creee." }
+  return $outIco
+}
+
 function New-GreenPlusIcon {
   $outPng = Join-Path $IconDir "ajouter-stock-icon.png"
   Add-Type -AssemblyName System.Drawing
@@ -116,15 +124,39 @@ if (Test-Path $LocalBoutique) {
 
 $Demarrer = Join-Path $Root "inventory\admin\demarrer-inventaire.bat"
 $InventaireLauncher = Join-Path $IconDir "ouvrir-inventaire-local.bat"
+# INVENTAIRE_URL : essais locaux. Plus tard, adresse HTTPS Cloudflare. Pas maintenant.
+$check = 'powershell -NoProfile -Command "try { $r = Invoke-WebRequest -UseBasicParsing -TimeoutSec 2 ''http://127.0.0.1:8791/api/health''; if ($r.StatusCode -ne 200) { exit 1 } } catch { exit 1 }"'
 @(
   "@echo off",
-  "cd /d `"$Root`"",
-  "start `"`" `"$Demarrer`"",
-  "timeout /t 2 /nobreak >nul",
-  "start `"`" `"$LocalInventaireUrl`""
+  "setlocal EnableDelayedExpansion",
+  "set `"INVENTAIRE_URL=http://127.0.0.1:8791/`"",
+  "set `"ROOT=$Root`"",
+  "cd /d `"%ROOT%`"",
+  $check,
+  "if not errorlevel 1 goto open",
+  "start `"Inventaire Les Fourrures Boreales`" /D `"%ROOT%`" cmd /c `"$Demarrer`"",
+  "set N=0",
+  ":waitloop",
+  "set /a N+=1",
+  "if !N! GTR 25 goto notready",
+  "ping -n 2 127.0.0.1 >nul",
+  $check,
+  "if errorlevel 1 goto waitloop",
+  ":open",
+  "start `"`" `"%INVENTAIRE_URL%`"",
+  "exit /b 0",
+  ":notready",
+  "echo L'inventaire n'a pas demarre. Regardez la fenetre du serveur.",
+  "pause",
+  "exit /b 1"
 ) | Set-Content -Path $InventaireLauncher -Encoding ASCII
 
 New-Shortcut "Ajouter du stock (local)" $InventaireLauncher "" $plusIcon $outDir | Out-Null
+
+$ico = New-InventaireIcon
+$deskName = "Inventaire $([char]0x2013) Les Fourrures Bor$([char]0x00E9)ales"
+New-Shortcut $deskName $InventaireLauncher "" $ico $DesktopPath | Out-Null
+Write-Host "Raccourci bureau : $(Join-Path $DesktopPath ($deskName + '.lnk'))"
 
 Write-Host "Raccourcis LOCAUX crees dans : $outDir"
 Write-Host "  1) Les Fourrures Boreales (local)"

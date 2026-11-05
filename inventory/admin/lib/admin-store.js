@@ -71,6 +71,7 @@ function cloneRow(row) {
     product_number: row.product_number ?? null,
     name_fr: row.name_fr || row.product_id,
     category: row.category || "",
+    audience: row.audience || null,
     image: row.image || "",
     fulfillment_type: row.fulfillment_type || "pending_lucie",
     qty_on_hand: qty,
@@ -392,6 +393,30 @@ export function createAdminInventoryStore(seedItems = [], opts = {}) {
         before: { sizes: before },
         after: { sizes: cloneSizes(row.sizes), size_selector: row.size_selector },
         note: note || `Retrait ${sizeCode}`,
+      });
+      return cloneRow(row);
+    },
+
+    setAudience({ productId, audience, actor }) {
+      const allowed = new Set(["femmes", "hommes", "enfants", "unisexe"]);
+      const next = String(audience || "").trim().toLowerCase();
+      if (!allowed.has(next)) {
+        const err = new Error("Clientèle inconnue");
+        err.status = 400;
+        throw err;
+      }
+      const row = requireRow(productId);
+      const before = row.audience || null;
+      if (before === next) return cloneRow(row);
+      row.audience = next;
+      row.updated_at = new Date().toISOString();
+      pushAudit({
+        actor,
+        product_id: productId,
+        action: "set_audience",
+        before: { audience: before },
+        after: { audience: next },
+        note: `Clientèle : ${next}`,
       });
       return cloneRow(row);
     },

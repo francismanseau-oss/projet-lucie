@@ -135,6 +135,35 @@ test("oubli → outbox local ; token one-shot ; réutilisation refusée", async 
   delete process.env.INVENTORY_AUTH_EXPOSE_RESET;
 });
 
+test("sans obligation, le même mot de passe sert plusieurs fois et le hash ne change pas", async () => {
+  const root = tmpAdmin();
+  const hashed = await hashPassword("TempPass99");
+  saveAccount(root, {
+    version: 1,
+    email: "lucie@example.test",
+    password_algo: hashed.algo,
+    password_salt: hashed.salt,
+    password_hash: hashed.hash,
+    must_change_password: false,
+    temp_password_active: true,
+    failed_attempts: 0,
+    locked_until: null,
+    reset_tokens: [],
+  });
+  const auth = createAuth({ adminRoot: root });
+  const a = await auth.login("TempPass99", { remember: true });
+  assert.equal(a.must_change_password, false);
+  assert.equal(a.remember, true);
+  auth.requireSession(a.token);
+  auth.logout(a.token);
+  const b = await auth.login("TempPass99");
+  assert.equal(b.must_change_password, false);
+  auth.requireSession(b.token);
+  const acc = loadAccount(root);
+  assert.equal(acc.password_hash, hashed.hash);
+  assert.equal(acc.password_salt, hashed.salt);
+});
+
 test("cookie header HttpOnly SameSite — pas Secure en local", () => {
   const root = tmpAdmin();
   const auth = createAuth({ adminRoot: root });
@@ -153,7 +182,14 @@ test("UI login contient Rester connecté et Mot de passe oublié", () => {
   );
   assert.match(adminHtml, /Rester connecté/);
   assert.match(adminHtml, /Mot de passe oublié/);
-  assert.match(adminHtml, /Choisissez votre mot de passe/);
+  assert.match(adminHtml, /Changer le mot de passe/);
+  assert.match(adminHtml, /autocomplete="current-password"/);
+  const adminJs = fs.readFileSync(
+    path.join(projectRoot, "inventory/admin/public/admin.js"),
+    "utf8",
+  );
+  assert.match(adminJs, /Choisissez votre mot de passe/);
+  assert.match(adminJs, /btn-open-change/);
   const bat = fs.readFileSync(
     path.join(projectRoot, "inventory/admin/demarrer-inventaire.bat"),
     "utf8",

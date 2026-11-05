@@ -1,0 +1,421 @@
+{
+  "version": 1,
+  "note_fr": "Classification locale. Unisexe = un seul produit (mukluk mobilité réduite), visible chez Femmes et Hommes, sans copie. Les autres ne sont pas devinés.",
+  "values": [
+    "femmes",
+    "hommes",
+    "enfants",
+    "unisexe"
+  ],
+  "products": {
+    "chapeau-fille-8-10-renard": {
+      "audience": "enfants",
+      "source": "nom",
+      "product_number": 208,
+      "name_fr": "Chapeau fille 8-10 — renard"
+    },
+    "chapeau-dame-m-l-coyote": {
+      "audience": "femmes",
+      "source": "nom",
+      "product_number": 202,
+      "name_fr": "Chapeau dame M-L — coyote"
+    },
+    "chapeau-dame-m-l-fourrure-recyclee": {
+      "audience": "femmes",
+      "source": "nom",
+      "product_number": 203,
+      "name_fr": "Chapeau dame M-L — fourrure recyclée"
+    },
+    "chapeau-dame-m-l-renard-argente": {
+      "audience": "femmes",
+      "source": "nom",
+      "product_number": 204,
+      "name_fr": "Chapeau dame M-L — renard argenté"
+    },
+    "chapeau-dame-m-l-renard-norvegien": {
+      "audience": "femmes",
+      "source": "nom",
+      "product_number": 205,
+      "name_fr": "Chapeau dame M-L — renard norvégien"
+    },
+    "chapeau-dame-m-l-renard-roux": {
+      "audience": "femmes",
+      "source": "nom",
+      "product_number": 206,
+      "name_fr": "Chapeau dame M-L — renard roux"
+    },
+    "chapeau-dame-m-l-vison": {
+      "audience": "femmes",
+      "source": "nom",
+      "product_number": 207,
+      "name_fr": "Chapeau dame M-L — vison"
+    },
+    "chapeau-dame-vison-et-renard": {
+      "audience": "femmes",
+      "source": "nom",
+      "product_number": 201,
+      "name_fr": "Chapeau dame — vison et renard"
+    },
+    "chapeau-homme-m-castor": {
+      "audience": "hommes",
+      "source": "nom",
+      "product_number": 210,
+      "name_fr": "Chapeau homme M — castor"
+    },
+    "chapeau-homme-m-l-coyote": {
+      "audience": "hommes",
+      "source": "nom",
+      "product_number": 211,
+      "name_fr": "Chapeau homme M-L — coyote"
+    },
+    "chapeau-homme-m-l-renard-argente": {
+      "audience": "hommes",
+      "source": "nom",
+      "product_number": 212,
+      "name_fr": "Chapeau homme M-L — renard argenté"
+    },
+    "chapeau-homme-m-l-renard-roux": {
+      "audience": "hommes",
+      "source": "nom",
+      "product_number": 213,
+      "name_fr": "Chapeau homme M-L — renard roux"
+    },
+    "chapeau-homme-l-xl-raton": {
+      "audience": "hommes",
+      "source": "nom",
+      "product_number": 209,
+      "name_fr": "Chapeau homme L-XL — raton"
+    },
+    "mitaines-bebe-sans-pouces-8-24-mois-castor": {
+      "audience": "enfants",
+      "source": "nom",
+      "product_number": 102,
+      "name_fr": "Mitaines bébé sans pouces 8-24 mois — castor"
+    },
+    "mitaines-bebe-sans-pouces-8-24-mois-vison": {
+      "audience": "enfants",
+      "source": "nom",
+      "product_number": 103,
+      "name_fr": "Mitaines bébé sans pouces 8-24 mois — vison"
+    },
+    "mitaines-bebe-sans-pouces-vison-fermeture-eclair": {
+      "audience": "enfants",
+      "source": "nom",
+      "product_number": 101,
+      "name_fr": "Mitaines bébé sans pouces — vison (fermeture éclair)"
+    },
+    "mitaines-enfant-2-4-ans-castor-fermeture-eclair": {
+      "audience": "enfants",
+      "source": "nom",
+      "product_number": 110,
+      "name_fr": "Mitaines enfant 2-4 ans — castor (fermeture éclair)"
+    },
+    "mitaines-enfant-4-6-vison-fermeture-eclair": {
+      "audience": "enfants",
+      "source": "nom",
+      "product_number": 111,
+      "name_fr": "Mitaines enfant 4-6 — vison (fermeture éclair)"
+    },
+    "mitaines-enfant-6-8-vison-fermeture-eclair": {
+      "audience": "enfants",
+      "source": "nom",
+      "product_number": 112,
+      "name_fr": "Mitaines enfant 6-8 — vison (fermeture éclair)"
+    },
+    "mitaines-enfant-8-10-chat-sauvage": {
+      "audience": "enfants",
+      "source": "nom",
+      "product_number": 113,
+      "name_fr": "Mitaines enfant 8-10 — chat sauvage"
+    },
+    "mitaines-fille-8-10-renard": {
+      "audience": "enfants",
+      "source": "nom",
+      "product_number": 114,
+      "name_fr": "Mitaines fille 8-10 — renard"
+    },
+    "mitaines-enfant-10-12-mouton-rase": {
+      "audience": "enfants",
+      "source": "nom",
+      "product_number": 109,
+      "name_fr": "Mitaines enfant 10-12 — mouton rasé"
+    },
+    "mitaines-dame-m-renard": {
+      "audience": "femmes",
+      "source": "nom",
+      "product_number": 106,
+      "name_fr": "Mitaines dame M — renard"
+    },
+    "mitaines-longues-dame-m-vison-et-renard": {
+      "audience": "femmes",
+      "source": "nom",
+      "product_number": 118,
+      "name_fr": "Mitaines longues dame M — vison et renard"
+    },
+    "mitaines-dame-m-l-chat-sauvage": {
+      "audience": "femmes",
+      "source": "nom",
+      "product_number": 107,
+      "name_fr": "Mitaines dame M-L — chat sauvage"
+    },
+    "mitaines-dame-m-l-fourrure-recyclee": {
+      "audience": "femmes",
+      "source": "nom",
+      "product_number": 108,
+      "name_fr": "Mitaines dame M-L — fourrure recyclée"
+    },
+    "mitaines-dame-renard-roux": {
+      "audience": "femmes",
+      "source": "nom",
+      "product_number": 104,
+      "name_fr": "Mitaines dame — renard roux"
+    },
+    "mitaines-dame-vison-et-renard": {
+      "audience": "femmes",
+      "source": "nom",
+      "product_number": 105,
+      "name_fr": "Mitaines dame — vison et renard"
+    },
+    "mitaines-homme-m-l-castor": {
+      "audience": "hommes",
+      "source": "nom",
+      "product_number": 115,
+      "name_fr": "Mitaines homme M-L — castor"
+    },
+    "mitaines-homme-m-l-coyote": {
+      "audience": "hommes",
+      "source": "nom",
+      "product_number": 116,
+      "name_fr": "Mitaines homme M-L — coyote"
+    },
+    "mitaines-homme-m-l-renard-roux": {
+      "audience": "hommes",
+      "source": "nom",
+      "product_number": 117,
+      "name_fr": "Mitaines homme M-L — renard roux"
+    },
+    "foulard-dame-vison": {
+      "audience": "femmes",
+      "source": "nom",
+      "product_number": 600,
+      "name_fr": "Foulard dame — vison"
+    },
+    "foulard-dame-vison-et-renard": {
+      "audience": "femmes",
+      "source": "nom",
+      "product_number": 601,
+      "name_fr": "Foulard dame — vison et renard"
+    },
+    "cache-oreilles-enfant-8-10-12-coyote": {
+      "audience": "enfants",
+      "source": "nom",
+      "product_number": 502,
+      "name_fr": "Cache-oreilles enfant 8-10-12 — coyote"
+    },
+    "cache-oreilles-enfant-8-10-12-renard": {
+      "audience": "enfants",
+      "source": "nom",
+      "product_number": 503,
+      "name_fr": "Cache-oreilles enfant 8-10-12 — renard"
+    },
+    "cache-oreilles-ado-10-14-renard-et-vison": {
+      "audience": "enfants",
+      "source": "nom",
+      "product_number": 500,
+      "name_fr": "Cache-oreilles ado 10-14 — renard et vison"
+    },
+    "cache-oreilles-dame-m-vison-et-lapin": {
+      "audience": "femmes",
+      "source": "nom",
+      "product_number": 501,
+      "name_fr": "Cache-oreilles dame M — vison et lapin"
+    },
+    "mukluks-bebe-7-18-mois-vison": {
+      "audience": "enfants",
+      "source": "nom",
+      "product_number": 402,
+      "name_fr": "Mukluks bébé 7-18 mois — vison"
+    },
+    "mukluks-bebe-8-18-mois-vison": {
+      "audience": "enfants",
+      "source": "nom",
+      "product_number": 403,
+      "name_fr": "Mukluks bébé 8-18 mois — vison"
+    },
+    "mukluks-bebe-8-24-mois-castor": {
+      "audience": "enfants",
+      "source": "nom",
+      "product_number": 404,
+      "name_fr": "Mukluks bébé 8-24 mois — castor"
+    },
+    "mukluks-bebe-8-24-mois-vison": {
+      "audience": "enfants",
+      "source": "nom",
+      "product_number": 405,
+      "name_fr": "Mukluks bébé 8-24 mois — vison"
+    },
+    "mukluks-bebe-a-18-mois-coyote": {
+      "audience": "enfants",
+      "source": "nom",
+      "product_number": 406,
+      "name_fr": "Mukluks bébé à 18 mois — coyote"
+    },
+    "mukluks-bebe-vison-fermeture-eclair": {
+      "audience": "enfants",
+      "source": "nom",
+      "product_number": 401,
+      "name_fr": "Mukluks bébé — vison (fermeture éclair)"
+    },
+    "mukluks-adulte-mobilite-reduite-8-9-vison-et-renard": {
+      "audience": "unisexe",
+      "source": "exception-mukluk",
+      "product_number": 400,
+      "name_fr": "Mukluks adulte mobilité réduite 8-9 — vison et renard"
+    },
+    "pantoufles-bebe-0-7-mois-fourrure-recyclee": {
+      "audience": "enfants",
+      "source": "nom",
+      "product_number": 300,
+      "name_fr": "Pantoufles bébé 0-7 mois — fourrure recyclée"
+    },
+    "pantoufles-bebe-5-12-mois-fourrure-recyclee": {
+      "audience": "enfants",
+      "source": "nom",
+      "product_number": 301,
+      "name_fr": "Pantoufles bébé 5-12 mois — fourrure recyclée"
+    },
+    "pantoufles-enfant-2-3-mouton-rase-et-coyote": {
+      "audience": "enfants",
+      "source": "nom",
+      "product_number": 307,
+      "name_fr": "Pantoufles enfant 2-3 — mouton rasé et coyote"
+    },
+    "pantoufles-enfant-2-3-renard": {
+      "audience": "enfants",
+      "source": "nom",
+      "product_number": 308,
+      "name_fr": "Pantoufles enfant 2-3 — renard"
+    },
+    "pantoufles-enfant-13-1-vison-et-coyote": {
+      "audience": "enfants",
+      "source": "nom",
+      "product_number": 306,
+      "name_fr": "Pantoufles enfant 13-1 — vison et coyote"
+    },
+    "pantoufles-dame-7-8-mouton-rase-et-chat-sauvage": {
+      "audience": "femmes",
+      "source": "nom",
+      "product_number": 302,
+      "name_fr": "Pantoufles dame 7-8 — mouton rasé et chat sauvage"
+    },
+    "pantoufles-dame-8-9-vison-et-coyote": {
+      "audience": "femmes",
+      "source": "nom",
+      "product_number": 303,
+      "name_fr": "Pantoufles dame 8-9 — vison et coyote"
+    },
+    "pantoufles-dame-8-9-vison-et-renard": {
+      "audience": "femmes",
+      "source": "nom",
+      "product_number": 304,
+      "name_fr": "Pantoufles dame 8-9 — vison et renard"
+    },
+    "pantoufles-dame-9-10-vison-et-renard": {
+      "audience": "femmes",
+      "source": "nom",
+      "product_number": 305,
+      "name_fr": "Pantoufles dame 9-10 — vison et renard"
+    },
+    "pantoufles-homme-10-11-chat-sauvage": {
+      "audience": "hommes",
+      "source": "nom",
+      "product_number": 309,
+      "name_fr": "Pantoufles homme 10-11 — chat sauvage"
+    },
+    "pantoufles-homme-10-11-mouton-et-renard-roux": {
+      "audience": "hommes",
+      "source": "nom",
+      "product_number": 310,
+      "name_fr": "Pantoufles homme 10-11 — mouton et renard roux"
+    }
+  },
+  "uncertain": [
+    {
+      "id": "chapeau-vison-recyclee",
+      "product_number": 200,
+      "name_fr": "Chapeau — vison recyclée",
+      "category": "chapeaux",
+      "reason": "Aucun mot dame, homme, enfant, fille, bébé ou ado dans le nom. Non classé : visible seulement dans Tous."
+    },
+    {
+      "id": "mitaines-8-10-vison-fermeture-eclair",
+      "product_number": 100,
+      "name_fr": "Mitaines 8-10 — vison (fermeture éclair)",
+      "category": "mitaines",
+      "reason": "Aucun mot dame, homme, enfant, fille, bébé ou ado dans le nom. Non classé : visible seulement dans Tous."
+    },
+    {
+      "id": "mitaines-small-vison",
+      "product_number": 125,
+      "name_fr": "Mitaines Small — vison",
+      "category": "mitaines",
+      "reason": "Aucun mot dame, homme, enfant, fille, bébé ou ado dans le nom. Non classé : visible seulement dans Tous."
+    },
+    {
+      "id": "mitaines-m-renard",
+      "product_number": 119,
+      "name_fr": "Mitaines M — renard",
+      "category": "mitaines",
+      "reason": "Aucun mot dame, homme, enfant, fille, bébé ou ado dans le nom. Non classé : visible seulement dans Tous."
+    },
+    {
+      "id": "mitaines-motoneige-m-renard-argente",
+      "product_number": 123,
+      "name_fr": "Mitaines motoneige M — renard argenté",
+      "category": "mitaines",
+      "reason": "Aucun mot dame, homme, enfant, fille, bébé ou ado dans le nom. Non classé : visible seulement dans Tous."
+    },
+    {
+      "id": "mitaines-m-l-renard",
+      "product_number": 120,
+      "name_fr": "Mitaines M-L — renard",
+      "category": "mitaines",
+      "reason": "Aucun mot dame, homme, enfant, fille, bébé ou ado dans le nom. Non classé : visible seulement dans Tous."
+    },
+    {
+      "id": "mitaines-m-l-vison-et-chat-sauvage",
+      "product_number": 121,
+      "name_fr": "Mitaines M-L — vison et chat sauvage",
+      "category": "mitaines",
+      "reason": "Aucun mot dame, homme, enfant, fille, bébé ou ado dans le nom. Non classé : visible seulement dans Tous."
+    },
+    {
+      "id": "mitaines-m-l-vison-et-renard",
+      "product_number": 122,
+      "name_fr": "Mitaines M-L — vison et renard",
+      "category": "mitaines",
+      "reason": "Aucun mot dame, homme, enfant, fille, bébé ou ado dans le nom. Non classé : visible seulement dans Tous."
+    },
+    {
+      "id": "mitaines-motoneige-m-l-renard-norvegien",
+      "product_number": 124,
+      "name_fr": "Mitaines motoneige M-L — renard norvégien",
+      "category": "mitaines",
+      "reason": "Aucun mot dame, homme, enfant, fille, bébé ou ado dans le nom. Non classé : visible seulement dans Tous."
+    },
+    {
+      "id": "mitaines-style-inuit-coyote",
+      "product_number": 126,
+      "name_fr": "Mitaines style Inuit — coyote",
+      "category": "mitaines",
+      "reason": "Aucun mot dame, homme, enfant, fille, bébé ou ado dans le nom. Non classé : visible seulement dans Tous."
+    },
+    {
+      "id": "semelles-fourrure-recyclee-pointures-5-a-12",
+      "product_number": 700,
+      "name_fr": "Semelles fourrure recyclée — pointures 5 à 12",
+      "category": "semelles",
+      "reason": "Aucun mot dame, homme, enfant, fille, bébé ou ado dans le nom. Non classé : visible seulement dans Tous."
+    }
+  ]
+}

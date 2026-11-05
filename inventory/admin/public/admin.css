@@ -146,6 +146,55 @@ select {
   gap: 0.55rem;
   margin-top: 0.75rem;
 }
+.filter-caption,
+.aud-edit-label {
+  display: block;
+  width: 100%;
+  font-weight: 700;
+  margin: 0.2rem 0;
+}
+.filter-row,
+.aud-edit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+}
+.btn-filter,
+.btn-aud {
+  min-height: 44px;
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid #d7cdc3;
+  background: #fff;
+  color: #2b2520;
+}
+.btn-filter.is-on,
+.btn-aud.is-on {
+  background: #985237;
+  color: #fff;
+  border-color: #985237;
+}
+.aud-edit {
+  margin-top: 0.7rem;
+  padding-top: 0.7rem;
+  border-top: 1px dashed #e5d8c8;
+}
+.aud-dirty {
+  margin: 0;
+  color: #99482d;
+  font-weight: 700;
+}
+#login-user {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
 
 .product-list {
   display: grid;

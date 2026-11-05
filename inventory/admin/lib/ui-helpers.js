@@ -6,8 +6,19 @@ const CATEGORY_FR = {
   chapeaux: "Chapeaux",
   mitaines: "Mitaines",
   mukluks: "Mukluks",
+  pantoufles: "Pantoufles",
+  foulards: "Foulards",
+  "cache-oreilles": "Cache-oreilles",
+  semelles: "Semelles",
   ensembles: "Ensembles",
   autres: "Autres",
+};
+
+export const AUDIENCE_FR = {
+  femmes: "Femmes",
+  hommes: "Hommes",
+  enfants: "Enfants",
+  unisexe: "Unisexe",
 };
 
 export function categoryLabelFr(category) {
@@ -34,11 +45,21 @@ export function listCategories(items) {
 /**
  * Recherche par nom (et catégorie libellée). Pas de filtre SKU exposé à Lucie.
  */
-export function filterItems(items, { search = "", category = "", onlyAlerts = false } = {}) {
+export function matchesAudience(itemAudience, filter) {
+  const want = String(filter || "tous").trim().toLowerCase();
+  if (!want || want === "tous") return true;
+  const aud = String(itemAudience || "").trim().toLowerCase();
+  if (!aud) return false;
+  if (aud === "unisexe") return want === "femmes" || want === "hommes";
+  return aud === want;
+}
+
+export function filterItems(items, { search = "", category = "", audience = "tous", onlyAlerts = false } = {}) {
   const q = String(search || "").trim().toLowerCase();
   const cat = String(category || "").trim().toLowerCase();
   return (items || []).filter((it) => {
     if (onlyAlerts && !it.below_min) return false;
+    if (!matchesAudience(it.audience, audience)) return false;
     if (cat && String(it.category || "").toLowerCase() !== cat) return false;
     if (!q) return true;
     const name = String(it.name_fr || "").toLowerCase();

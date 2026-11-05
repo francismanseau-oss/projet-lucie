@@ -1,5 +1,28 @@
 (()=>{'use strict';const buttons=document.querySelectorAll('[data-set-lang]');const saved=localStorage.getItem('boreales-lang');function setLang(lang){if(!['fr','en'].includes(lang))lang='fr';document.documentElement.lang=lang==='fr'?'fr-CA':'en-CA';document.querySelectorAll('[data-fr][data-en]').forEach(el=>{el.textContent=el.dataset[lang]});buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.setLang===lang)));localStorage.setItem('boreales-lang',lang);window.dispatchEvent(new CustomEvent('boreales-lang-changed',{detail:{lang}}))}buttons.forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.setLang)));const browserLang=(navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||'fr']).find(l=>/^fr(?:-|$)|^en(?:-|$)/i.test(l));setLang(saved||(/^en(?:-|$)/i.test(browserLang||'')?'en':'fr'));const y=document.getElementById('year');if(y)y.textContent=new Date().getFullYear();const menu=document.querySelector('.menu-toggle'),nav=document.getElementById('main-menu');if(menu&&nav)menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open))});document.querySelectorAll('#main-menu a').forEach(a=>{if(a.getAttribute('href')===location.pathname.split('/').pop()||(!location.pathname.split('/').pop()&&a.getAttribute('href')==='index.html'))a.setAttribute('aria-current','page')});})();
-;(()=>{const filters=document.querySelectorAll('.shop-filter'),cards=[...document.querySelectorAll('.shop-product')],title=document.getElementById('shop-title'),sort=document.getElementById('shop-sort'),grid=document.querySelector('.shop-products');if(!grid)return;filters.forEach(b=>b.addEventListener('click',()=>{filters.forEach(x=>x.classList.toggle('active',x===b));const filter=b.dataset.filter;cards.forEach(c=>c.hidden=filter!=='all'&&c.dataset.category!==filter);if(title){title.dataset.fr=b.querySelector('[data-fr]').dataset.fr;title.dataset.en=b.querySelector('[data-en]').dataset.en;title.textContent=document.documentElement.lang.startsWith('en')?title.dataset.en:title.dataset.fr}}));if(sort)sort.addEventListener('change',()=>{const ordered=[...cards].sort((a,b)=>sort.value==='name'?a.dataset.name.localeCompare(b.dataset.name,'fr'):cards.indexOf(a)-cards.indexOf(b));ordered.forEach(c=>grid.appendChild(c))});(function setupSizesAndCart(){
+;(()=>{const filters=document.querySelectorAll('.shop-filter'),cards=[...document.querySelectorAll('.shop-product')],title=document.getElementById('shop-title'),sort=document.getElementById('shop-sort'),grid=document.querySelector('.shop-products');if(!grid)return;let shopAudience='tous',shopCategory='all';
+function applyShopFilters(){
+  cards.forEach(c=>{
+    const catOk=shopCategory==='all'||c.dataset.category===shopCategory;
+    const aud=c.dataset.audience||'';
+    let audOk=true;
+    if(shopAudience!=='tous'){
+      if(aud==='unisexe')audOk=shopAudience==='femmes'||shopAudience==='hommes';
+      else audOk=aud===shopAudience;
+    }
+    c.hidden=!(catOk&&audOk);
+  });
+}
+document.querySelectorAll('.audience-filter').forEach(b=>b.addEventListener('click',()=>{
+  shopAudience=b.dataset.audience||'tous';
+  document.querySelectorAll('.audience-filter').forEach(x=>x.classList.toggle('active',x===b));
+  applyShopFilters();
+}));
+filters.forEach(b=>b.addEventListener('click',()=>{filters.forEach(x=>x.classList.toggle('active',x===b));shopCategory=b.dataset.filter||'all';applyShopFilters();if(title){const lab=b.querySelector('[data-fr]');if(lab){title.dataset.fr=lab.dataset.fr;title.dataset.en=lab.dataset.en;title.textContent=document.documentElement.lang.startsWith('en')?title.dataset.en:title.dataset.fr}}}));
+fetch('catalog/audience.json').then(r=>r.ok?r.json():null).then(doc=>{
+  const map=doc&&doc.products||{};
+  cards.forEach(c=>{const row=map[c.dataset.productId];c.dataset.audience=row&&row.audience?row.audience:'';});
+  applyShopFilters();
+}).catch(()=>applyShopFilters());if(sort)sort.addEventListener('change',()=>{const ordered=[...cards].sort((a,b)=>sort.value==='name'?a.dataset.name.localeCompare(b.dataset.name,'fr'):cards.indexOf(a)-cards.indexOf(b));ordered.forEach(c=>grid.appendChild(c))});(function setupSizesAndCart(){
 const en=()=>document.documentElement.lang.startsWith('en');
 const sizesApi=()=>window.BOREALES_PRODUCT_SIZES;
 function stockText(q){
@@ -35,10 +58,11 @@ function refreshAddBtn(card,cfg,btn,hint){
   const code=selectedSize(card);
   if(hint){hint.hidden=true;hint.textContent='';}
   if(!code){
-    btn.disabled=false;btn.classList.remove('is-sold-out');
+    btn.disabled=false;btn.classList.remove('is-sold-out');btn.classList.add('is-await-size');
     btn.textContent=en()?btn.dataset.en:btn.dataset.fr;
     return;
   }
+  btn.classList.remove('is-await-size');
   const sz=cfg.sizes.find(x=>x.code===code);
   const q=sz&&sz.qty_on_hand!=null?Math.floor(Number(sz.qty_on_hand)):null;
   if(q!=null&&q<=0){
@@ -66,13 +90,74 @@ function buildChoice(sz,cfg,card,btn,hint){
   stock.textContent=stockText(q);
   b.appendChild(name);b.appendChild(stock);
   if(!sold){
-    b.addEventListener('click',()=>{
+    b.addEventListener('click',(ev)=>{
+      ev.stopPropagation();
       card.querySelectorAll('.size-choice').forEach(x=>x.classList.remove('is-selected'));
       b.classList.add('is-selected');
       refreshAddBtn(card,cfg,btn,hint);
+      btn.click();
     });
   }
   return b;
+}
+function bindSizeReveal(card,wrap){
+  const line=wrap.querySelector('.size-line');
+  function fit(){
+    if(!line||line.clientWidth<20)return;
+    line.classList.remove('is-stacked');
+    if(line.scrollWidth>line.clientWidth+1)line.classList.add('is-stacked');
+  }
+  function setOpen(open){
+    const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(open){
+      card.classList.add('is-size-open');
+      card.classList.remove('is-size-closing');
+      wrap.inert=false;
+      wrap.setAttribute('aria-hidden','false');
+      requestAnimationFrame(fit);
+      return;
+    }
+    card.classList.remove('is-size-open');
+    wrap.setAttribute('aria-hidden','true');
+    if(reduce){
+      wrap.inert=true;
+      card.classList.remove('is-size-closing');
+      return;
+    }
+    card.classList.add('is-size-closing');
+    let settled=false;
+    const done=(ev)=>{
+      if(settled)return;
+      if(ev&&ev.target!==wrap)return;
+      if(ev&&ev.propertyName!=='opacity')return;
+      settled=true;
+      wrap.removeEventListener('transitionend',done);
+      if(card.classList.contains('is-size-open'))return;
+      card.classList.remove('is-size-closing');
+      wrap.inert=true;
+    };
+    wrap.addEventListener('transitionend',done);
+    setTimeout(done,1400);
+  }
+  card.classList.add('has-size-choice');
+  card._setSizeOpen=setOpen;
+  if(!card.hasAttribute('tabindex'))card.tabIndex=0;
+  wrap.inert=true;
+  card.addEventListener('click',(ev)=>{
+    if(ev.target.closest('.size-reveal, .demo-add, a, button, input, select, textarea, label'))return;
+    setOpen(!card.classList.contains('is-size-open'));
+  });
+  card.addEventListener('keydown',(ev)=>{
+    if(ev.key!=='Enter'&&ev.key!==' ')return;
+    if(ev.target!==card)return;
+    ev.preventDefault();
+    setOpen(!card.classList.contains('is-size-open'));
+  });
+  if(typeof ResizeObserver!=='undefined'){
+    const ro=new ResizeObserver(()=>fit());
+    ro.observe(card);
+  }
+  fit();
 }
 function injectSelectors(doc){
   if(!doc||!doc.products)return;
@@ -125,13 +210,14 @@ function injectSelectors(doc){
     }
     if(cfg.selector&&cfg.sizes&&cfg.sizes.length>1){
       const wrap=document.createElement('div');
-      wrap.className='size-select-wrap';
+      wrap.className='size-select-wrap size-reveal';
       wrap.dataset.productId=id;
-      const head=document.createElement('div');
-      head.className='size-select-head';
-      head.appendChild(sizeLabelEl());
-      attachSizeGuideBtn(head,cfg.sizes);
-      wrap.appendChild(head);
+      wrap.setAttribute('aria-hidden','true');
+      const inner=document.createElement('div');
+      inner.className='size-reveal-inner';
+      const line=document.createElement('div');
+      line.className='size-line';
+      line.appendChild(sizeLabelEl());
       const list=document.createElement('div');
       list.className='size-choice-list';
       list.setAttribute('role','group');
@@ -140,9 +226,13 @@ function injectSelectors(doc){
       hint.className='size-select-hint';
       hint.hidden=true;
       cfg.sizes.forEach(sz=>list.appendChild(buildChoice(sz,cfg,card,btn,hint)));
-      wrap.appendChild(list);
-      wrap.appendChild(hint);
+      line.appendChild(list);
+      attachSizeGuideBtn(line,cfg.sizes);
+      inner.appendChild(line);
+      inner.appendChild(hint);
+      wrap.appendChild(inner);
       btn.parentElement.insertBefore(wrap,btn);
+      bindSizeReveal(card,wrap);
       refreshAddBtn(card,cfg,btn,hint);
     }else{
       const only=cfg.sizes&&cfg.sizes[0];
@@ -228,7 +318,7 @@ document.querySelectorAll('.demo-add').forEach(b=>b.addEventListener('click',()=
   let size=null,size_label_fr=null,size_label_en=null;
   if(cfg&&cfg.selector&&cfg.sizes&&cfg.sizes.length>1){
     const code=selectedSize(card);
-    if(!code){alert(en()?'Please choose a size.':'Veuillez choisir une taille.');return}
+    if(!code){if(card&&typeof card._setSizeOpen==='function')card._setSizeOpen(true);return}
     const sz=cfg.sizes.find(s=>s.code===code);
     const q=sz&&sz.qty_on_hand!=null?Math.floor(Number(sz.qty_on_hand)):null;
     if(q!=null&&q<=0){alert(stockText(0));return}

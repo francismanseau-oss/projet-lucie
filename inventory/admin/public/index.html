@@ -23,18 +23,22 @@
   <section id="login-view" class="card login-card">
     <h2>Connexion</h2>
     <p class="hint">Entrez votre mot de passe pour voir et modifier les quantités.</p>
-    <label for="password">Mot de passe</label>
-    <input id="password" type="password" autocomplete="current-password" minlength="8">
-    <label class="chk"><input type="checkbox" id="remember"> Rester connecté sur cet appareil</label>
-    <button type="button" id="btn-login" class="btn btn-primary btn-lg">Entrer</button>
+    <form id="login-form" method="post" action="/api/login" autocomplete="on">
+      <label class="sr-only" for="login-user">Identifiant</label>
+      <input id="login-user" name="username" type="text" autocomplete="username" value="inventaire" tabindex="-1">
+      <label for="password">Mot de passe</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" minlength="8">
+      <label class="chk"><input type="checkbox" id="remember"> Rester connecté sur cet appareil</label>
+      <button type="submit" id="btn-login" class="btn btn-primary btn-lg">Entrer</button>
+    </form>
     <button type="button" id="btn-forgot" class="btn btn-ghost btn-lg">Mot de passe oublié ?</button>
     <p id="login-error" class="error" hidden></p>
   </section>
 
-  <!-- Changement obligatoire (1ʳᵉ connexion) -->
+  <!-- Changement : forcé seulement si le compte l’exige, sinon ouvert par le bouton -->
   <section id="change-view" class="card login-card" hidden>
-    <h2>Choisissez votre mot de passe</h2>
-    <p class="hint">C’est votre première connexion. Le mot de passe temporaire ne servira plus après.</p>
+    <h2 id="change-title">Changer le mot de passe</h2>
+    <p id="change-hint" class="hint">Facultatif pendant les essais. Le mot de passe actuel reste valide tant qu’un nouveau n’est pas enregistré.</p>
     <label for="cur-password">Mot de passe temporaire (actuel)</label>
     <input id="cur-password" type="password" autocomplete="current-password" minlength="8">
     <label for="new-password">Nouveau mot de passe</label>
@@ -42,6 +46,7 @@
     <label for="new-password2">Confirmez le nouveau</label>
     <input id="new-password2" type="password" autocomplete="new-password" minlength="8">
     <button type="button" id="btn-change" class="btn btn-primary btn-lg">Enregistrer mon mot de passe</button>
+    <button type="button" id="btn-change-cancel" class="btn btn-ghost btn-lg">Retour à l’inventaire</button>
     <p id="change-error" class="error" hidden></p>
   </section>
 
@@ -77,15 +82,20 @@
       <label class="sr-only" for="search">Recherche</label>
       <input id="search" type="search" placeholder="Chercher par nom ou N°…" enterkeyhint="search">
 
-      <label for="category">Catégorie</label>
-      <select id="category">
-        <option value="">Toutes les catégories</option>
-      </select>
+      <p class="filter-caption">Voir</p>
+      <div id="audience-filters" class="filter-row" role="group" aria-label="Clientèle">
+        <button type="button" class="btn btn-filter is-on" data-filter-aud="tous">Tous</button>
+        <button type="button" class="btn btn-filter" data-filter-aud="femmes">Femmes</button>
+        <button type="button" class="btn btn-filter" data-filter-aud="hommes">Hommes</button>
+        <button type="button" class="btn btn-filter" data-filter-aud="enfants">Enfants</button>
+      </div>
+      <div id="category" class="filter-row" role="group" aria-label="Catégorie"></div>
 
       <label class="chk"><input type="checkbox" id="only-alerts"> Voir seulement les alertes</label>
 
       <div class="toolbar-actions">
         <button type="button" id="btn-audit" class="btn btn-ghost">Historique</button>
+        <button type="button" id="btn-open-change" class="btn btn-ghost">Changer le mot de passe</button>
         <button type="button" id="btn-logout" class="btn btn-ghost">Quitter</button>
       </div>
     </div>

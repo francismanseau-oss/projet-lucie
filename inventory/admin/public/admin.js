@@ -1,6 +1,7 @@
 import {
   auditActionLabelFr,
   categoryLabelFr,
+  AUDIENCE_FR,
   filterItems,
   qtyDisplayLabel,
   stockStatusLabelFr,
@@ -9,6 +10,9 @@ import {
 const TOKEN_KEY = "inv_admin_token";
 let token = sessionStorage.getItem(TOKEN_KEY) || localStorage.getItem(TOKEN_KEY) || "";
 let items = [];
+let audienceFilter = "tous";
+let categoryFilter = "";
+const pendingAudience = new Map();
 let categories = [];
 let nameById = new Map();
 let toastTimer = null;
@@ -43,9 +47,22 @@ function showLogin() {
   loginView.hidden = false;
 }
 
-function showChange() {
+function showChange(forced) {
   hideAllAuth();
   changeView.hidden = false;
+  const cancel = $("btn-change-cancel");
+  if (cancel) cancel.hidden = !!forced;
+  const title = $("change-title");
+  const hint = $("change-hint");
+  if (title && hint) {
+    if (forced) {
+      title.textContent = "Choisissez votre mot de passe";
+      hint.textContent = "C’est votre première connexion. Le mot de passe temporaire ne servira plus après.";
+    } else {
+      title.textContent = "Changer le mot de passe";
+      hint.textContent = "Facultatif pendant les essais. Le mot de passe actuel reste valide tant qu’un nouveau n’est pas enregistré.";
+    }
+  }
 }
 
 function showForgot() {
@@ -143,22 +160,43 @@ function renderSummary(summary, units) {
 }
 
 function fillCategories() {
-  const sel = $("category");
-  const prev = sel.value;
-  sel.innerHTML = `<option value="">Toutes les catégories</option>`;
-  for (const c of categories) {
-    const opt = document.createElement("option");
-    opt.value = c;
-    opt.textContent = categoryLabelFr(c);
-    sel.appendChild(opt);
-  }
-  if ([...sel.options].some((o) => o.value === prev)) sel.value = prev;
+  const box = $("category");
+  if (!box) return;
+  box.innerHTML = "";
+  const make = (value, label) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "btn btn-filter" + (categoryFilter === value ? " is-on" : "");
+    b.dataset.filterCat = value;
+    b.textContent = label;
+    box.appendChild(b);
+  };
+  make("", "Tous les produits");
+  for (const c of categories) make(c, categoryLabelFr(c));
 }
 
 function currentStockNumber(it) {
   if (it.qty_on_hand == null) return 0;
   const n = Math.floor(Number(it.qty_on_hand));
   return Number.isFinite(n) && n >= 0 ? n : 0;
+}
+
+function renderAudienceEdit(it) {
+  const saved = it.audience || "";
+  const pending = pendingAudience.has(it.product_id) ? pendingAudience.get(it.product_id) : saved;
+  const dirty = pendingAudience.has(it.product_id) && pending !== saved;
+  const buttons = ["femmes", "hommes", "enfants", "unisexe"]
+    .map(
+      (code) =>
+        `<button type="button" class="btn btn-aud${pending === code ? " is-on" : ""}" data-act="aud-pick" data-audience="${code}">${AUDIENCE_FR[code]}</button>`,
+    )
+    .join("");
+  return `<div class="aud-edit">
+    <span class="aud-edit-label">Clientèle de ce produit</span>
+    ${buttons}
+    <p class="aud-dirty"${dirty ? "" : " hidden"}>Modification non enregistrée</p>
+    <button type="button" class="btn btn-primary btn-aud-save" data-act="aud-save"${dirty ? "" : " hidden"}>Enregistrer la clientèle</button>
+  </div>`;
 }
 
 function renderSizesBlock(it) {
@@ -198,7 +236,8 @@ function renderSizesBlock(it) {
 function renderList() {
   const rows = filterItems(items, {
     search: $("search").value,
-    category: $("category").value,
+    category: categoryFilter,
+    audience: audienceFilter,
     onlyAlerts: $("only-alerts").checked,
   });
   emptyEl.hidden = rows.length > 0;
@@ -220,7 +259,9 @@ function renderList() {
           <div class="facts">
             <span>Stock actuel : <b class="qty-live">${escapeHtml(status === "Rupture de stock" ? "0 — rupture" : qty)}</b>${multi ? " <small>(somme des tailles)</small>" : ""}</span>
             <span>${escapeHtml(categoryLabelFr(it.category))}</span>
+            <span>${escapeHtml(it.audience ? AUDIENCE_FR[it.audience] || it.audience : "Clientèle à confirmer")}</span>
           </div>
+          ${renderAudienceEdit(it)}
           ${renderSizesBlock(it)}
         </div>
         ${
@@ -436,6 +477,36 @@ function openCorrect(id) {
   $("dlg-correct").showModal();
 }
 
+function pickAudience(id, card, next) {
+  const it = items.find((i) => i.product_id === id);
+  if (!it || !next) return;
+  const saved = it.audience || "";
+  if (next === saved) pendingAudience.delete(id);
+  else pendingAudience.set(id, next);
+  const dirty = pendingAudience.has(id);
+  card.querySelectorAll("[data-act='aud-pick']").forEach((b) => {
+    b.classList.toggle("is-on", b.dataset.audience === next);
+  });
+  const note = card.querySelector(".aud-dirty");
+  const save = card.querySelector("[data-act='aud-save']");
+  if (note) note.hidden = !dirty;
+  if (save) save.hidden = !dirty;
+}
+
+async function saveAudience(id, btn) {
+  const next = pendingAudience.get(id);
+  if (!next) return;
+  await withBusy(id + "|aud", btn, async () => {
+    const data = await api(`/api/inventory/${encodeURIComponent(id)}/audience`, {
+      method: "POST",
+      body: JSON.stringify({ audience: next }),
+    });
+    pendingAudience.delete(id);
+    showToast(data.message_fr || "Clientèle enregistrée.");
+    await refresh();
+  });
+}
+
 listEl.addEventListener("click", (e) => {
   const btn = e.target.closest("button[data-act]");
   if (!btn || btn.disabled) return;
@@ -450,6 +521,8 @@ listEl.addEventListener("click", (e) => {
   if (btn.dataset.act === "size-remove") removeSize(id, btn.dataset.size, btn);
   if (btn.dataset.act === "add-stock") addStock(id, card, btn);
   if (btn.dataset.act === "correct") openCorrect(id);
+  if (btn.dataset.act === "aud-pick") pickAudience(id, card, btn.dataset.audience);
+  if (btn.dataset.act === "aud-save") saveAudience(id, btn);
 });
 
 listEl.addEventListener("input", (e) => {
@@ -512,7 +585,8 @@ $("btn-save-correct").addEventListener("click", async () => {
   });
 });
 
-$("btn-login").addEventListener("click", async () => {
+$("login-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
   $("login-error").hidden = true;
   try {
     const remember = $("remember").checked;
@@ -523,7 +597,7 @@ $("btn-login").addEventListener("click", async () => {
     storeToken(data.token, remember && !data.must_change_password);
     $("password").value = "";
     if (data.must_change_password) {
-      showChange();
+      showChange(true);
       showToast("Choisissez maintenant votre propre mot de passe.");
       return;
     }
@@ -535,8 +609,14 @@ $("btn-login").addEventListener("click", async () => {
   }
 });
 
-$("password").addEventListener("keydown", (e) => {
-  if (e.key === "Enter") $("btn-login").click();
+$("btn-open-change").addEventListener("click", () => showChange(false));
+
+$("btn-change-cancel").addEventListener("click", () => {
+  $("change-error").hidden = true;
+  $("cur-password").value = "";
+  $("new-password").value = "";
+  $("new-password2").value = "";
+  showApp();
 });
 
 $("btn-change").addEventListener("click", async () => {
@@ -622,7 +702,24 @@ $("btn-logout").addEventListener("click", async () => {
 });
 
 $("search").addEventListener("input", renderList);
-$("category").addEventListener("change", renderList);
+$("audience-filters").addEventListener("click", (e) => {
+  const btn = e.target.closest("[data-filter-aud]");
+  if (!btn) return;
+  audienceFilter = btn.dataset.filterAud || "tous";
+  $("audience-filters").querySelectorAll("[data-filter-aud]").forEach((el) => {
+    el.classList.toggle("is-on", el === btn);
+  });
+  renderList();
+});
+$("category").addEventListener("click", (e) => {
+  const btn = e.target.closest("[data-filter-cat]");
+  if (!btn) return;
+  categoryFilter = btn.dataset.filterCat || "";
+  $("category").querySelectorAll("[data-filter-cat]").forEach((el) => {
+    el.classList.toggle("is-on", el === btn);
+  });
+  renderList();
+});
 $("only-alerts").addEventListener("change", renderList);
 
 $("btn-audit").addEventListener("click", async () => {
@@ -683,7 +780,7 @@ $("btn-audit").addEventListener("click", async () => {
     await refresh();
   } catch (err) {
     if (err.status === 403) {
-      showChange();
+      showChange(true);
       return;
     }
     storeToken("", false);

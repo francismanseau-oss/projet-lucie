@@ -36,6 +36,41 @@ const shippingConfig = JSON.parse(
   fs.readFileSync(path.join(root, "shipping/shipping-config.json"), "utf8"),
 );
 
+function audienceFilePath() {
+  return path.join(root, "catalog/audience.json");
+}
+
+function loadAudienceMap() {
+  try {
+    const doc = JSON.parse(fs.readFileSync(audienceFilePath(), "utf8"));
+    const map = new Map();
+    for (const [id, row] of Object.entries(doc.products || {})) {
+      if (row && row.audience) map.set(id, row.audience);
+    }
+    return map;
+  } catch {
+    return new Map();
+  }
+}
+
+function writeAudienceFile(productId, audience, extra = {}) {
+  const fp = audienceFilePath();
+  const doc = JSON.parse(fs.readFileSync(fp, "utf8"));
+  if (!doc.products) doc.products = {};
+  const prev = doc.products[productId] || {};
+  doc.products[productId] = {
+    audience,
+    source: "lucie",
+    product_number: extra.product_number ?? prev.product_number ?? null,
+    name_fr: extra.name_fr || prev.name_fr || "",
+  };
+  doc.uncertain = (doc.uncertain || []).filter((row) => row.id !== productId);
+  const text = JSON.stringify(doc, null, 2) + "\n";
+  fs.writeFileSync(fp, text, "utf8");
+  const docsCopy = path.join(root, "docs/catalog/audience.json");
+  if (fs.existsSync(path.dirname(docsCopy))) fs.writeFileSync(docsCopy, text, "utf8");
+}
+
 function catalogImageMap() {
   const catalog = JSON.parse(fs.readFileSync(path.join(root, "catalog/products.json"), "utf8"));
   const map = new Map();
@@ -47,6 +82,7 @@ function catalogImageMap() {
 
 function enrichItems(items) {
   const map = catalogImageMap();
+  const audiences = loadAudienceMap();
   return (items || []).map((i) => {
     const cat = map.get(i.product_id) || {};
     return {
@@ -54,6 +90,7 @@ function enrichItems(items) {
       image: i.image || cat.image || "",
       category: i.category || cat.category || "",
       name_fr: i.name_fr || cat.name_fr || i.product_id,
+      audience: i.audience || audiences.get(i.product_id) || null,
       min_stock_target: i.min_stock_target ?? 3,
     };
   });
@@ -495,6 +532,26 @@ async function handleApi(req, res, pathname) {
           : `Enregistré (${sign}1)${sizeNote} : ${row.qty_on_hand} exemplaire(s) au total.`,
       item: row,
       summary: store.summarize(),
+    });
+  }
+
+  const mAud = pathname.match(/^\/api\/inventory\/([^/]+)\/audience$/);
+  if (mAud && req.method === "POST") {
+    const body = await readBody(req);
+    const productId = decodeURIComponent(mAud[1]);
+    const row = store.setAudience({
+      productId,
+      audience: body.audience,
+      actor: "lucie-local",
+    });
+    persistNow();
+    writeAudienceFile(productId, row.audience, row);
+    return sendJson(res, 200, {
+      ok: true,
+      saved: true,
+      local_only: true,
+      message_fr: "Clientèle enregistrée sur ce PC. La boutique locale la relit au prochain affichage. Rien n’est publié en ligne.",
+      item: row,
     });
   }
 
