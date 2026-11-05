@@ -11,14 +11,22 @@ export function maskEmail(email) {
   return `${u}@${domain}`;
 }
 
-/** Champs renvoyés au navigateur pour order-status (sans PII complète). */
+/** Champs renvoyés au navigateur pour order-status (sans PII / jargon technique). */
 export function publicOrderView(status) {
   if (!status || typeof status !== "object") return status;
-  const { customer_email, ...rest } = status;
+  const {
+    customer_email,
+    source: _source,
+    note: _note,
+    session_id: _sessionId,
+    confirmed_via: _via,
+    metadata: _meta,
+    ...rest
+  } = status;
   return {
     ...rest,
     customer_email_masked: maskEmail(customer_email),
-    // jamais renvoyer l’e-mail en clair au client
+    // jamais renvoyer l’e-mail en clair ni les ids techniques Stripe au client
   };
 }
 

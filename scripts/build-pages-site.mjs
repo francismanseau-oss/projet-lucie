@@ -35,6 +35,7 @@ const PUBLIC_FILES = [
   "cart-i18n.js",
   "product-codes.js",
   "product-sizes.js",
+  "size-guide.js",
   "politique-garantie.html",
   "checkout-config.js",
   "favicon.png",
@@ -126,11 +127,21 @@ for (const d of PUBLIC_DIRS) {
   copied.push(d + "/");
 }
 
-// Tailles / stocks provisoires (public boutique — pas de secrets)
-const sizesSrc = path.join(root, "catalog", "product-sizes.json");
-if (fs.existsSync(sizesSrc)) {
-  copyFile(sizesSrc, path.join(outDir, "catalog", "product-sizes.json"));
-  copied.push("catalog/product-sizes.json");
+// Catalogue public (tailles + sur-mesure) — pas de secrets
+const publicCatalogFiles = [
+  "product-sizes.json",
+  "size-guide.json",
+  "sur-mesure-config.json",
+  "sur-mesure-illustrations.json",
+  "sur-mesure.json",
+  "products.json",
+  "product-numbers.json",
+];
+for (const name of publicCatalogFiles) {
+  const src = path.join(root, "catalog", name);
+  if (!fs.existsSync(src)) continue;
+  copyFile(src, path.join(outDir, "catalog", name));
+  copied.push("catalog/" + name);
 }
 
 // 3) Notice Pages (lisible si quelqu’un ouvre docs/ sur GitHub)

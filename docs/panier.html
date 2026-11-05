@@ -28,7 +28,25 @@
     <p id="cart-subtotal" class="cart-total-line"></p>
     <p id="cart-shipping" class="cart-total-line"></p>
     <p id="cart-total" class="cart-total-line cart-total-final"></p>
-    <p class="cart-ship-note" data-fr="Livraison par Express Bus (récupération au dépôt) ou Postes Canada (distribution postale). Le mode de livraison sera confirmé avant l'expédition." data-en="Shipping via Express Bus (depot pickup) or Canada Post (postal delivery). The shipping method will be confirmed before dispatch.">Livraison par Express Bus (récupération au dépôt) ou Postes Canada (distribution postale). Le mode de livraison sera confirmé avant l'expédition.</p>
+    <div class="cart-ship-choice" id="cart-ship-choice">
+      <p class="cart-ship-note" data-fr="Choisissez votre mode : ce qui change, c’est où vous récupérez le colis et le délai. Le frais reste 18,00 $." data-en="Choose your method: what changes is where you get the parcel and the wait time. The fee stays $18.00.">Choisissez votre mode : ce qui change, c’est où vous récupérez le colis et le délai. Le frais reste 18,00&nbsp;$.</p>
+      <div class="ship-methods" id="cart-ship-methods" role="radiogroup" aria-label="Mode de livraison">
+        <label>
+          <input type="radio" name="cart-ship-method" value="canada_post">
+          <span>
+            <strong data-fr="Postes Canada" data-en="Canada Post">Postes Canada</strong><br>
+            <span class="ship-method-detail" data-fr="Où : boîte postale / réseau postal · Délai : 2 à 5 jours ouvrables" data-en="Where: mailbox / postal network · Wait: 2 to 5 business days">Où : boîte postale / réseau postal · Délai : 2 à 5 jours ouvrables</span>
+          </span>
+        </label>
+        <label>
+          <input type="radio" name="cart-ship-method" value="bus_quebec">
+          <span>
+            <strong data-fr="Express Bus" data-en="Express Bus">Express Bus</strong><br>
+            <span class="ship-method-detail" data-fr="Où : dépôt (Québec, si desservi) · Délai : 1 à 2 jours ouvrables" data-en="Where: depot (Québec, when served) · Wait: 1 to 2 business days">Où : dépôt (Québec, si desservi) · Délai : 1 à 2 jours ouvrables</span>
+          </span>
+        </label>
+      </div>
+    </div>
     <p class="cart-secure"><span class="cart-secure-icon" aria-hidden="true">🧪</span><span data-fr="Essais seulement : paiements Stripe simulés (mode TEST) — aucun paiement réel." data-en="Test only: simulated Stripe payments (TEST mode) — no real charges.">Essais seulement : paiements Stripe simulés (mode TEST) — aucun paiement réel.</span></p>
   </div>
   <div class="cart-actions">
@@ -44,6 +62,7 @@
 <script>
 (()=>{
   const key='boreales-cart';
+  const shipKey='boreales-shipping-method';
   const i18n=window.BOREALES_CART_I18N;
   const list=document.getElementById('cart-list');
   const empty=document.getElementById('cart-empty');
@@ -55,6 +74,30 @@
   const checkout=document.getElementById('cart-checkout');
   const SHIPPING_FLAT=18;
   const en=()=>document.documentElement.lang.startsWith('en');
+  function loadShipMethod(){
+    const v=localStorage.getItem(shipKey);
+    return v==='bus_quebec'||v==='canada_post'?v:'canada_post';
+  }
+  function saveShipMethod(id){
+    if(id==='bus_quebec'||id==='canada_post')localStorage.setItem(shipKey,id);
+  }
+  function syncShipRadios(){
+    const cur=loadShipMethod();
+    document.querySelectorAll('input[name="cart-ship-method"]').forEach(inp=>{
+      inp.checked=inp.value===cur;
+    });
+    document.querySelectorAll('#cart-ship-choice [data-fr][data-en]').forEach(el=>{
+      el.textContent=en()?el.dataset.en:el.dataset.fr;
+    });
+  }
+  document.querySelectorAll('input[name="cart-ship-method"]').forEach(inp=>{
+    inp.addEventListener('change',()=>{
+      if(inp.checked){
+        saveShipMethod(inp.value);
+        // Frais inchangé : seul le mode (lieu + délai) change
+      }
+    });
+  });
   function load(){try{const c=JSON.parse(localStorage.getItem(key)||'[]');return Array.isArray(c)?c:[]}catch(e){return[]}}
   function save(cart){localStorage.setItem(key,JSON.stringify(cart));if(window.refreshCartCount)window.refreshCartCount();window.dispatchEvent(new Event('boreales-cart-updated'))}
   function money(n){return n.toFixed(2).replace('.',',')+' $'}
@@ -147,10 +190,12 @@
     if(subtotalEl)subtotalEl.textContent=(en()?'Subtotal: ':'Sous-total des articles : ')+money(sum);
     if(shippingEl)shippingEl.textContent=(en()?'Full-cart shipping: ':'Livraison du panier complet : ')+money(ship);
     totalEl.textContent=(en()?'Total to pay: ':'Total à payer : ')+money(grand);
+    syncShipRadios();
   }
   clearBtn.addEventListener('click',()=>{localStorage.removeItem(key);save([]);render()});
   window.addEventListener('boreales-lang-changed',()=>render());
   document.querySelectorAll('[data-set-lang]').forEach(b=>b.addEventListener('click',()=>setTimeout(render,0)));
+  syncShipRadios();
   render();
   if(window.refreshCartCount)window.refreshCartCount();
 })();

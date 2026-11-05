@@ -36,8 +36,8 @@ function formatAddress(addr) {
 
 function methodLabel(id) {
   const map = {
-    canada_post: "Postes Canada",
-    bus_quebec: "Transport par autobus (Québec)",
+    canada_post: "Postes Canada (boîte postale / distribution postale)",
+    bus_quebec: "Express Bus (récupération au dépôt)",
     pickup: "Ramassage",
     free: "Livraison offerte",
   };

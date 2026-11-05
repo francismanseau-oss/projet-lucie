@@ -184,3 +184,86 @@ export async function wasNotifySent(env, sessionId) {
   const arch = await getOrderArchive(env, sessionId);
   return arch?.notify_status === "sent" || arch?.notify_status === "mocked";
 }
+
+/** Ligne article sûre pour l’UI client (pas de PII / secrets). */
+export function publicLineFromItem(it) {
+  const qty = Math.max(1, Math.floor(Number(it?.qty) || 1));
+  const unit =
+    it?.unit_amount != null && Number.isFinite(Number(it.unit_amount))
+      ? Number(it.unit_amount)
+      : null;
+  return {
+    name: it?.name || it?.id || null,
+    size: it?.size || null,
+    size_label_fr: it?.size_label_fr || null,
+    size_label_en: it?.size_label_en || null,
+    qty,
+    unit_amount_cents: unit,
+    line_total_cents: unit != null ? unit * qty : null,
+    custom: !!(it?.custom || it?.custom_config),
+  };
+}
+
+/**
+ * Enrichit le statut order-status avec n° LFB + récap réel (archive / pending).
+ * N’invente jamais mode, montant ou article.
+ */
+export async function enrichOrderStatusForClient(env, status) {
+  if (!status || typeof status !== "object") return status;
+  const id = status.session_id;
+  if (!id || !env?.ORDERS) return status;
+
+  const archive = await getOrderArchive(env, id);
+  let pending = null;
+  try {
+    const raw = await env.ORDERS.get(`pending:${id}`);
+    if (raw) pending = JSON.parse(raw);
+  } catch (_) {
+    pending = null;
+  }
+
+  const out = { ...status };
+
+  if (status.confirmed === true) {
+    let orderNumber = archive?.order_number || pending?.order_number || null;
+    if (!orderNumber) {
+      orderNumber = await ensureOrderNumber(env, id);
+    }
+    out.order_number = orderNumber;
+
+    const rawItems =
+      Array.isArray(archive?.items) && archive.items.length
+        ? archive.items
+        : Array.isArray(pending?.items)
+          ? pending.items
+          : [];
+    out.items = rawItems.map(publicLineFromItem);
+
+    const methodId =
+      archive?.shipping?.method || pending?.shipping_method || null;
+    const feeRaw =
+      archive?.shipping?.fee_cad_cents ??
+      pending?.shipping_fee_cents ??
+      null;
+    const fee =
+      feeRaw != null && Number.isFinite(Number(feeRaw)) ? Number(feeRaw) : null;
+
+    out.shipping = {
+      method_id: methodId || null,
+      fee_cad_cents: fee,
+    };
+
+    const products =
+      archive?.financial?.products_cents ?? pending?.products_cents ?? null;
+    out.products_cents =
+      products != null && Number.isFinite(Number(products)) ? Number(products) : null;
+
+    if (out.amount_total == null) {
+      const tot =
+        archive?.financial?.amount_total_cents ?? pending?.amount_total_cents ?? null;
+      if (tot != null && Number.isFinite(Number(tot))) out.amount_total = Number(tot);
+    }
+  }
+
+  return out;
+}

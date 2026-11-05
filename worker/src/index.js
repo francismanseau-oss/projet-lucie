@@ -56,6 +56,7 @@ import {
 } from "./shipping-quote-service.js";
 import {
   buildOrderArchive,
+  enrichOrderStatusForClient,
   ensureOrderNumber,
   putOrderArchive,
   wasNotifySent,
@@ -322,6 +323,9 @@ async function createCheckout(env, payload) {
           product_number: r.product_number ?? null,
           qty: r.qty,
           unit_amount: r.unit_amount,
+          size: r.size || null,
+          size_label_fr: r.size_label_fr || null,
+          size_label_en: r.size_label_en || null,
           custom: !!r.custom,
           skip_inventory: !!r.skip_inventory,
           custom_config: r.custom_config || null,
@@ -516,7 +520,8 @@ export default {
         const status = await resolveOrderStatus(env, sessionId, (id) =>
           stripeGet(env, `checkout/sessions/${encodeURIComponent(id)}`),
         );
-        return json(publicOrderView(status), 200, origin);
+        const enriched = await enrichOrderStatusForClient(env, status);
+        return json(publicOrderView(enriched), 200, origin);
       }
 
       if (request.method === "GET" && path === "/api/shipping-methods") {

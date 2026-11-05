@@ -109,12 +109,12 @@ function customLine(product, suffix, measurements, extras = {}) {
 test("SIM — données commerciales officielles non altérées (stock null, livraison off)", () => {
   assert.equal(inventoryOfficial.items.length, 66);
   assert.ok(inventoryOfficial.items.every((i) => i.qty_on_hand === null));
-  assert.equal(shippingConfig.methods.flat_order.enabled, true);
-  assert.equal(shippingConfig.methods.flat_order.fee_cad_cents, 1800);
-  assert.equal(shippingConfig.methods.flat_order.fee_scope, "per_order");
-  assert.equal(shippingConfig.policy.customer_does_not_choose_carrier, true);
-  assert.equal(shippingConfig.methods.canada_post.customer_selectable, false);
-  assert.equal(shippingConfig.methods.bus_quebec.customer_selectable, false);
+  assert.equal(shippingConfig.methods.canada_post.enabled, true);
+  assert.equal(shippingConfig.methods.canada_post.fee_cad_cents, 1800);
+  assert.equal(shippingConfig.methods.canada_post.fee_scope, "per_order");
+  assert.equal(shippingConfig.policy.customer_chooses_carrier, true);
+  assert.equal(shippingConfig.methods.canada_post.customer_selectable, true);
+  assert.equal(shippingConfig.methods.bus_quebec.customer_selectable, true);
   assert.ok(!shippingConfig.methods.purolator);
   assert.equal(MOCK_MODE, "simulated");
 });
@@ -317,19 +317,20 @@ test("SIM — redirect seule ne confirme jamais le paiement", async () => {
 
 // ─── 3. Stock / livraison — refus sans contourner ───────────────────────────
 
-test("SIM — forfait client flat_order 18$; transporteurs Lucie aussi à 18$", () => {
-  const flat = quoteShipping(shippingConfig, {
-    methodId: "flat_order",
+test("SIM — forfait client Postes Canada / Express Bus à 18$", () => {
+  const cp = quoteShipping(shippingConfig, {
+    methodId: "canada_post",
     destination: { country: "CA", postal_code: "J9X1A1", province: "QC" },
   });
-  assert.equal(flat.fee_cad_cents, 1800);
-  assert.equal(flat.fee_scope, "per_order");
-  assert.equal(flat.lucie_assigns_carrier, true);
+  assert.equal(cp.fee_cad_cents, 1800);
+  assert.equal(cp.fee_scope, "per_order");
+  assert.equal(cp.lucie_assigns_carrier, false);
   const bus = quoteShipping(shippingConfig, {
     methodId: "bus_quebec",
     destination: { country: "CA", province: "QC", postal_code: "J9X1A1" },
   });
   assert.equal(bus.fee_cad_cents, 1800);
+  assert.equal(bus.customer_pickup_required, true);
 });
 
 test("SIM — checkout réel bloqué si livraison non autorisée (pas de contournement)", () => {

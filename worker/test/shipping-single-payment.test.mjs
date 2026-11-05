@@ -35,19 +35,21 @@ test("n° commande LFB permanent", () => {
   assert.equal(isValidOrderNumber("cs_xxx"), false);
 });
 
-test("méthodes sélectionnables — flat_order 18$ (Lucie choisit le transporteur)", () => {
+test("méthodes sélectionnables — client choisit Postes Canada ou Express Bus (18$)", () => {
   const methods = listSelectableMethods(shippingConfig);
   const ids = methods.map((m) => m.id);
-  assert.ok(ids.includes("flat_order"));
+  assert.ok(ids.includes("canada_post"));
+  assert.ok(ids.includes("bus_quebec"));
   assert.ok(!ids.includes("purolator"));
-  assert.ok(!ids.includes("canada_post")); // pas choisi par le client
-  assert.ok(!ids.includes("bus_quebec"));
-  const flat = methods.find((m) => m.id === "flat_order");
-  assert.equal(flat.auto_quotable, true);
-  assert.equal(flat.fee_cad_cents, 1800);
-  assert.equal(shippingConfig.policy.customer_does_not_choose_carrier, true);
+  assert.ok(!ids.includes("flat_order"));
+  const cp = methods.find((m) => m.id === "canada_post");
+  assert.equal(cp.auto_quotable, true);
+  assert.equal(cp.fee_cad_cents, 1800);
+  assert.equal(shippingConfig.policy.customer_chooses_carrier, true);
+  assert.equal(shippingConfig.policy.customer_does_not_choose_carrier, false);
+  assert.equal(shippingConfig.policy.lucie_assigns_carrier, false);
   assert.equal(shippingConfig.policy.depot_pickup_requires_prior_customer_agreement, true);
-  assert.match(shippingConfig.policy.customer_message_fr, /confirmé avant l.expédition/i);
+  assert.match(shippingConfig.policy.customer_message_fr, /Choisissez votre mode/i);
 });
 
 test("lookup grille Postes Canada — aucune invention", () => {
@@ -62,9 +64,9 @@ test("lookup grille Postes Canada — aucune invention", () => {
   );
 });
 
-test("flat_order 18$ / commande (indépendant de la quantité et du transporteur)", () => {
+test("Postes Canada / Express Bus 18$ / commande (choix client)", () => {
   const r = tryAutoQuote(shippingConfig, {
-    methodId: "flat_order",
+    methodId: "canada_post",
     destination: { country: "CA", province: "QC", postal_code: "G1A1A1" },
   });
   assert.equal(r.status, "quoted");
@@ -72,15 +74,22 @@ test("flat_order 18$ / commande (indépendant de la quantité et du transporteur
   assert.equal(r.quote.fee_scope, "per_order");
   assert.equal(r.quote.source, "fixed_per_order");
   assert.equal(r.quote.invented, false);
-  assert.equal(r.quote.lucie_assigns_carrier, true);
+  assert.equal(r.quote.lucie_assigns_carrier, false);
   const r2 = tryAutoQuote(shippingConfig, {
-    methodId: "flat_order",
+    methodId: "canada_post",
     destination: { country: "CA", province: "ON", postal_code: "M5V1A1" },
   });
   assert.equal(r2.quote.fee_cad_cents, 1800);
+  const bus = tryAutoQuote(shippingConfig, {
+    methodId: "bus_quebec",
+    destination: { country: "CA", province: "QC", postal_code: "G1A1A1" },
+  });
+  assert.equal(bus.status, "quoted");
+  assert.equal(bus.quote.fee_cad_cents, 1800);
+  assert.equal(bus.quote.customer_pickup_required, true);
 });
 
-test("Express Bus (choix Lucie) → 18$ fixes / commande + récupération dépôt", () => {
+test("Express Bus (choix client) → 18$ fixes / commande + récupération dépôt", () => {
   const q = quoteShipping(shippingConfig, {
     methodId: "bus_quebec",
     destination: { country: "CA", province: "QC", postal_code: "G1A1A1" },
@@ -107,9 +116,10 @@ test("config : pas de Purolator ; flat 18$ ; paiement unique", () => {
   assert.equal(shippingConfig.policy.no_purolator, true);
   assert.equal(shippingConfig.checkout_integration.single_payment_required, true);
   assert.equal(shippingConfig.checkout_integration.no_second_invoice, true);
-  assert.equal(shippingConfig.methods.flat_order.fee_cad_cents, 1800);
-  assert.equal(shippingConfig.methods.bus_quebec.customer_selectable, false);
-  assert.equal(shippingConfig.methods.canada_post.customer_selectable, false);
+  assert.equal(shippingConfig.methods.canada_post.fee_cad_cents, 1800);
+  assert.equal(shippingConfig.methods.bus_quebec.customer_selectable, true);
+  assert.equal(shippingConfig.methods.canada_post.customer_selectable, true);
+  assert.equal(shippingConfig.methods.flat_order.enabled, false);
 });
 
 test("cote Postes via grille Lucie (fixture interne) → quoted", () => {

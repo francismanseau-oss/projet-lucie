@@ -1,0 +1,158 @@
+{
+  "version": 3,
+  "status": "all_14_generated_provisional_except_mitaines_validated",
+  "awaiting_lucie_validation": true,
+  "policy": {
+    "one_language_per_image": true,
+    "no_bilingual_artwork": true,
+    "ready_only_after_file_verified": true,
+    "fr_file_suffix": "-fr.webp",
+    "en_file_suffix": "-en.webp",
+    "provisional_not_presented_as_final": true
+  },
+  "directory": "assets/mesures/",
+  "format_target": "webp",
+  "canvas": {
+    "width_px": 1200,
+    "height_px": 703,
+    "aspect_ratio": "1200:703",
+    "background": "#FCFaf7",
+    "ink": "#25201D",
+    "accent": "#965035",
+    "line": "#CBB29E",
+    "marker_fill": "#965035",
+    "marker_text": "#FFFFFF",
+    "min_label_px": 28,
+    "min_marker_diameter_px": 48
+  },
+  "categories": {
+    "chapeaux": {
+      "label_fr": "Chapeaux",
+      "label_en": "Hats",
+      "files": {
+        "fr": "assets/mesures/chapeaux-mesures-fr.webp",
+        "en": "assets/mesures/chapeaux-mesures-en.webp"
+      },
+      "alt_fr": "Schéma : tour de tête au niveau du front (1) — mesure provisoire.",
+      "alt_en": "Diagram: head circumference at forehead level (1) — provisional measure.",
+      "markers": [
+        { "n": 1, "field_id": "head_circumference", "label_fr": "Tour de tête", "label_en": "Head circumference" }
+      ],
+      "asset_status": "pret",
+      "provisional": true,
+      "verified_at": "2026-11-01",
+      "verified_size_px": [1200, 900]
+    },
+    "mitaines": {
+      "label_fr": "Mitaines",
+      "label_en": "Mittens",
+      "files": {
+        "fr": "assets/mesures/mitaines-mesures-fr.webp",
+        "en": "assets/mesures/mitaines-mesures-en.webp"
+      },
+      "alt_fr": "Schéma : tour de main autour de la paume sans le pouce (1), longueur de la main du pli du poignet au bout du majeur (2).",
+      "alt_en": "Diagram: hand circumference around the palm excluding the thumb (1), hand length from wrist crease to middle fingertip (2).",
+      "markers": [
+        { "n": 1, "field_id": "hand_circumference", "label_fr": "Tour de main", "label_en": "Hand circumference" },
+        { "n": 2, "field_id": "hand_length", "label_fr": "Longueur de la main", "label_en": "Hand length" }
+      ],
+      "asset_status": "pret",
+      "provisional": false,
+      "verified_at": "2026-11-05",
+      "verified_size_px": [1200, 703],
+      "note_fr": "Validé Lucie — mesures définitives. Proportions / textes / hauteur 2026-11-05.",
+      "note_en": "Lucie-validated — final measurements. Proportions / text / height 2026-11-05."
+    },
+    "foulards": {
+      "label_fr": "Foulards",
+      "label_en": "Scarves",
+      "files": {
+        "fr": "assets/mesures/foulards-mesures-fr.webp",
+        "en": "assets/mesures/foulards-mesures-en.webp"
+      },
+      "alt_fr": "Schéma foulard : longueur (1) et largeur (2) — mesures provisoires.",
+      "alt_en": "Scarf diagram: length (1) and width (2) — provisional measures.",
+      "markers": [
+        { "n": 1, "field_id": "scarf_length", "label_fr": "Longueur souhaitée", "label_en": "Desired length" },
+        { "n": 2, "field_id": "scarf_width", "label_fr": "Largeur souhaitée", "label_en": "Desired width" }
+      ],
+      "asset_status": "pret",
+      "provisional": true,
+      "verified_at": "2026-11-01",
+      "verified_size_px": [1200, 900]
+    },
+    "cache-oreilles": {
+      "label_fr": "Cache-oreilles",
+      "label_en": "Earmuffs",
+      "files": {
+        "fr": "assets/mesures/cache-oreilles-mesures-fr.webp",
+        "en": "assets/mesures/cache-oreilles-mesures-en.webp"
+      },
+      "alt_fr": "Schéma : tour de tête (1) pour cache-oreilles — mesure provisoire.",
+      "alt_en": "Diagram: head circumference (1) for earmuffs — provisional measure.",
+      "markers": [
+        { "n": 1, "field_id": "head_circumference", "label_fr": "Tour de tête", "label_en": "Head circumference" }
+      ],
+      "asset_status": "pret",
+      "provisional": true,
+      "verified_at": "2026-11-01",
+      "verified_size_px": [1200, 900]
+    },
+    "semelles": {
+      "label_fr": "Semelles",
+      "label_en": "Insoles",
+      "files": {
+        "fr": "assets/mesures/semelles-mesures-fr.webp",
+        "en": "assets/mesures/semelles-mesures-en.webp"
+      },
+      "alt_fr": "Schéma : longueur du pied (1) et largeur facultative (2) — mesures provisoires.",
+      "alt_en": "Diagram: foot length (1) and optional foot width (2) — provisional measures.",
+      "markers": [
+        { "n": 1, "field_id": "foot_length", "label_fr": "Longueur du pied", "label_en": "Foot length" },
+        { "n": 2, "field_id": "foot_width", "label_fr": "Largeur du pied", "label_en": "Foot width" }
+      ],
+      "asset_status": "pret",
+      "provisional": true,
+      "verified_at": "2026-11-01",
+      "verified_size_px": [1200, 900]
+    },
+    "mukluks": {
+      "label_fr": "Mukluks",
+      "label_en": "Mukluks",
+      "hide_diagram": true,
+      "files": {
+        "fr": "",
+        "en": ""
+      },
+      "alt_fr": "Pas de schéma pied pour les mukluks (surtout bébé). Adulte : contactez Lucie.",
+      "alt_en": "No foot diagram for mukluks (mostly baby). Adult: contact Lucie.",
+      "markers": [
+        { "n": 1, "field_id": "foot_length", "label_fr": "Longueur (bébé)", "label_en": "Length (baby)" },
+        { "n": 2, "field_id": "foot_width", "label_fr": "Largeur (bébé)", "label_en": "Width (baby)" }
+      ],
+      "note_fr": "Les mukluks sur mesure sont surtout pour bébé : aucun schéma de pied adulte. Pour un adulte, contactez Lucie.",
+      "note_en": "Custom mukluks are mostly for babies: no adult foot diagram. For an adult, contact Lucie.",
+      "asset_status": "masque",
+      "provisional": true,
+      "verified_at": "2026-11-05"
+    },
+    "pantoufles": {
+      "label_fr": "Pantoufles",
+      "label_en": "Slippers",
+      "files": {
+        "fr": "assets/mesures/pantoufles-mesures-fr.webp",
+        "en": "assets/mesures/pantoufles-mesures-en.webp"
+      },
+      "alt_fr": "Schéma : longueur du pied (1) et largeur du pied (2) pour pantoufles — mesures provisoires.",
+      "alt_en": "Diagram: foot length (1) and foot width (2) for slippers — provisional measures.",
+      "markers": [
+        { "n": 1, "field_id": "foot_length", "label_fr": "Longueur du pied", "label_en": "Foot length" },
+        { "n": 2, "field_id": "foot_width", "label_fr": "Largeur du pied", "label_en": "Foot width" }
+      ],
+      "asset_status": "pret",
+      "provisional": true,
+      "verified_at": "2026-11-01",
+      "verified_size_px": [1200, 900]
+    }
+  }
+}

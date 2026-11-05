@@ -85,23 +85,24 @@
     "mukluks": {
       "awaiting_lucie_validation": true,
       "provisional": true,
+      "hide_foot_diagram": true,
       "fields": [
         {
           "id": "foot_length",
           "diagram_number": 1,
-          "label_fr": "Longueur du pied",
-          "label_en": "Foot length",
-          "help_fr": "Du talon jusqu’au bout du plus long orteil.",
-          "help_en": "From the heel to the tip of the longest toe.",
+          "label_fr": "Longueur (bébé)",
+          "label_en": "Length (baby)",
+          "help_fr": "Longueur du pied du bébé, du talon au bout du plus long orteil. Pas de schéma pied adulte. Pour un adulte, contactez Lucie.",
+          "help_en": "Baby’s foot length, heel to longest toe. No adult foot diagram. For an adult, contact Lucie.",
           "required": true
         },
         {
           "id": "foot_width",
           "diagram_number": 2,
-          "label_fr": "Largeur du pied",
-          "label_en": "Foot width",
-          "help_fr": "Au plus large de l’avant-pied.",
-          "help_en": "Across the widest part of the forefoot.",
+          "label_fr": "Largeur (bébé)",
+          "label_en": "Width (baby)",
+          "help_fr": "Largeur du pied du bébé, au plus large. Pour un adulte, contactez Lucie.",
+          "help_en": "Baby’s foot width at the widest point. For an adult, contact Lucie.",
           "required": true
         }
       ]

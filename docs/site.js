@@ -85,15 +85,53 @@ function injectSelectors(doc){
     const info=card.querySelector('.shop-product-info')||btn.parentElement;
     if(info.querySelector('.size-select-wrap')||info.querySelector('.size-stock-wrap'))return;
 
-    if(cfg.selector&&cfg.sizes&&cfg.sizes.length>1){
-      const wrap=document.createElement('div');
-      wrap.className='size-select-wrap';
-      wrap.dataset.productId=id;
+    const category=card.dataset.category||cfg.category||'';
+    function attachSizeGuideBtn(parent,sizes){
+      if(!category||!window.BOREALES_SIZE_GUIDE)return;
+      if(parent.querySelector('.size-guide-btn'))return;
+      const info=document.createElement('button');
+      info.type='button';
+      info.className='size-guide-btn';
+      info.setAttribute('aria-haspopup','dialog');
+      info.dataset.fr='Guide des grandeurs';
+      info.dataset.en='Size guide';
+      info.setAttribute('aria-label',en()?'Size guide':'Guide des grandeurs');
+      info.title=en()?'Size guide':'Guide des grandeurs';
+      // Un seul cercle (SVG) — pas de bordure bouton + ⓘ
+      info.innerHTML='<svg class="size-guide-icon" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle class="size-guide-ring" cx="10" cy="10" r="7.6" fill="none" stroke="#C23020" stroke-width="1.7"/><circle class="size-guide-idot" cx="10" cy="6.05" r="1.15" fill="#C23020" stroke="none"/><rect class="size-guide-istem" x="9.05" y="8.15" width="1.9" height="5.85" rx="0.95" fill="#C23020" stroke="none"/></svg>';
+      info.addEventListener('pointerup',()=>{
+        // évite le rectangle :focus après un clic souris / doigt
+        if(info.matches(':focus-visible'))return;
+        info.blur();
+      });
+      info.addEventListener('click',(ev)=>{
+        ev.preventDefault();
+        ev.stopPropagation();
+        const g=window.BOREALES_SIZE_GUIDE;
+        if(!g||!g.open)return;
+        const dlg=document.getElementById('size-guide-dialog');
+        if(dlg){dlg.dataset.category=category;dlg._sizes=sizes||cfg.sizes||[];}
+        g.open({category,sizes:sizes||cfg.sizes||[]});
+        if(!info.matches(':focus-visible'))info.blur();
+      });
+      parent.appendChild(info);
+    }
+    function sizeLabelEl(){
       const title=document.createElement('p');
       title.className='size-select-label';
       title.dataset.fr='Taille';title.dataset.en='Size';
       title.textContent=en()?'Size':'Taille';
-      wrap.appendChild(title);
+      return title;
+    }
+    if(cfg.selector&&cfg.sizes&&cfg.sizes.length>1){
+      const wrap=document.createElement('div');
+      wrap.className='size-select-wrap';
+      wrap.dataset.productId=id;
+      const head=document.createElement('div');
+      head.className='size-select-head';
+      head.appendChild(sizeLabelEl());
+      attachSizeGuideBtn(head,cfg.sizes);
+      wrap.appendChild(head);
       const list=document.createElement('div');
       list.className='size-choice-list';
       list.setAttribute('role','group');
@@ -111,6 +149,11 @@ function injectSelectors(doc){
       const q=only&&only.qty_on_hand!=null?Math.floor(Number(only.qty_on_hand)):null;
       const wrap=document.createElement('div');
       wrap.className='size-stock-wrap';
+      const head=document.createElement('div');
+      head.className='size-select-head';
+      head.appendChild(sizeLabelEl());
+      attachSizeGuideBtn(head,cfg.sizes||[]);
+      wrap.appendChild(head);
       if(only&&only.code==='unique'&&only.label_fr&&/universelle|universal/i.test(String(only.label_fr)+String(only.label_en||''))){
         const tip=document.createElement('p');
         tip.className='size-unique-note';
@@ -141,6 +184,11 @@ function injectSelectors(doc){
     const api=sizesApi();
     document.querySelectorAll('.size-select-label').forEach(el=>{
       el.textContent=en()?(el.dataset.en||'Size'):(el.dataset.fr||'Taille');
+    });
+    document.querySelectorAll('.size-guide-btn').forEach(el=>{
+      const lab=en()?(el.dataset.en||'Size guide'):(el.dataset.fr||'Guide des grandeurs');
+      el.setAttribute('aria-label',lab);
+      el.title=lab;
     });
     document.querySelectorAll('.size-unique-note').forEach(el=>{
       if(el.dataset.fr&&el.dataset.en)el.textContent=en()?el.dataset.en:el.dataset.fr;

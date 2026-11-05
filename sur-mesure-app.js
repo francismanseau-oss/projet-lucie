@@ -473,6 +473,26 @@
       return;
     }
     const entry = illustrationEntry(product.category);
+    // Mukluks : pas de schéma pied (bébé ≠ pied adulte ; adulte → Lucie).
+    if (entry?.hide_diagram || product.category === "mukluks") {
+      figure.hidden = false;
+      figure.classList.add("is-pending", "is-no-diagram");
+      img.hidden = true;
+      img.removeAttribute("src");
+      img.alt = "";
+      if (caption) {
+        caption.hidden = false;
+        caption.textContent =
+          (eng() ? entry?.note_en : entry?.note_fr) ||
+          t(
+            "Mukluks : surtout pour bébé — aucun schéma de pied. Pour un adulte, contactez Lucie.",
+            "Mukluks: mostly for babies — no foot diagram. For an adult, contact Lucie.",
+          );
+      }
+      return;
+    }
+    img.hidden = false;
+    figure.classList.remove("is-no-diagram");
     figure.hidden = false;
     const lang = eng() ? "en" : "fr";
     const src = entry?.files?.[lang] || "";

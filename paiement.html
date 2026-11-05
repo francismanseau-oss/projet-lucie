@@ -37,7 +37,19 @@
   .tot-lines { margin: .75rem 0 0; font-size: 1rem; line-height: 1.55; }
   .tot-lines strong { font-size: 1.15rem; }
   .hold-banner { margin-top: .85rem; padding: .85rem; border-radius: 10px; background: #fff4e8; border: 1px solid #e8c9a0; font-size: .95rem; }
-  .bus-notice { margin-top: .75rem; padding: .85rem; border-radius: 10px; background: #f3ebe3; border: 2px solid #965035; font-size: 1rem; line-height: 1.4; font-weight: 600; }
+  .hold-banner.is-ok { background: #e8f5e9; border-color: #4caf50; color: #1b5e20; }
+  #btn-quote.is-confirmed {
+    background: #2e7d32 !important;
+    color: #fff !important;
+    border-color: #1b5e20 !important;
+  }
+  #btn-quote.is-confirmed:hover { filter: brightness(1.05); }
+  #pay-stripe:disabled {
+    opacity: .45;
+    filter: grayscale(.35);
+    cursor: not-allowed;
+    box-shadow: none;
+  }
   @media (max-width: 560px) { .ship-fields { grid-template-columns: 1fr; } }
 </style>
 </head>
@@ -55,19 +67,16 @@
     <div id="pay-summary" class="cart-summary" hidden>
       <p id="pay-products" class="cart-total-line"></p>
       <div class="ship-box" id="ship-box">
-        <h2>Livraison</h2>
-        <p class="cart-ship-note">Livraison du panier complet : <strong>18,00&nbsp;$</strong></p>
-        <p id="bus-notice" class="bus-notice" role="status">Livraison par Express Bus (récupération au dépôt) ou Postes Canada (distribution postale). Le mode de livraison sera confirmé avant l'expédition. Un déplacement au dépôt n'est jamais imposé sans votre accord préalable.</p>
-        <div class="ship-methods" id="ship-methods" hidden></div>
+        <h2 data-fr="Livraison" data-en="Shipping">Livraison</h2>
+        <p class="cart-ship-note" data-fr="Frais de livraison du panier : 18,00 $" data-en="Full-cart shipping fee: $18.00">Frais de livraison du panier : <strong>18,00&nbsp;$</strong></p>
+        <p class="cart-ship-note" style="margin-top:.35rem;" data-fr="Ce qui change : où vous récupérez le colis et le délai d’attente. Le frais reste 18,00 $." data-en="What changes: where you get the parcel and the wait time. The fee stays $18.00.">Ce qui change : où vous récupérez le colis et le délai d’attente. Le frais reste 18,00&nbsp;$.</p>
+        <div class="ship-methods" id="ship-methods" role="radiogroup" aria-label="Mode de livraison"></div>
         <div class="ship-fields">
           <label class="full">Courriel
             <input id="ship-email" type="email" autocomplete="email" required>
           </label>
           <label>Nom complet
             <input id="ship-name" type="text" autocomplete="name">
-          </label>
-          <label>Téléphone
-            <input id="ship-phone" type="tel" autocomplete="tel">
           </label>
           <label>Province
             <select id="ship-province">
@@ -215,13 +224,138 @@
     };
   }
 
+  const SHIP_KEY = "boreales-shipping-method";
+  const FALLBACK_METHODS = [
+    {
+      id: "canada_post",
+      label_fr: "Postes Canada",
+      label_en: "Canada Post",
+      fee_cad_cents: 1800,
+      customer_notice_fr:
+        "Où : boîte postale / réseau postal · Délai : 2 à 5 jours ouvrables. Même frais 18 $ — pas une récupération en dépôt.",
+      customer_notice_en:
+        "Where: mailbox / postal network · Wait: 2 to 5 business days. Same $18 fee — not depot pickup.",
+      served_provinces: null,
+    },
+    {
+      id: "bus_quebec",
+      label_fr: "Express Bus",
+      label_en: "Express Bus",
+      fee_cad_cents: 1800,
+      customer_notice_fr:
+        "Où : dépôt (Québec, si desservi) · Délai : 1 à 2 jours ouvrables. Même frais 18 $ — pas la boîte postale.",
+      customer_notice_en:
+        "Where: depot (Québec, when served) · Wait: 1 to 2 business days. Same $18 fee — not mailbox delivery.",
+      served_provinces: ["QC"],
+    },
+  ];
+  function readSavedShipMethod() {
+    const v = localStorage.getItem(SHIP_KEY);
+    return v === "bus_quebec" || v === "canada_post" ? v : "canada_post";
+  }
+  function persistShipMethod(id) {
+    if (id === "bus_quebec" || id === "canada_post") localStorage.setItem(SHIP_KEY, id);
+  }
+
+  let methodsCatalog = FALLBACK_METHODS.slice();
+
+  function setQuoteConfirmedUI(ok) {
+    if (!btnQuote) return;
+    btnQuote.classList.toggle("is-confirmed", !!ok);
+    btnQuote.textContent = ok
+      ? en()
+        ? "Address and total confirmed ✓"
+        : "Adresse et total confirmés ✓"
+      : en()
+        ? "Confirm address and total"
+        : "Confirmer l'adresse et le total";
+  }
+
+  function invalidateQuote() {
+    quoteToken = null;
+    shippingFeeCents = null;
+    holdBanner.hidden = true;
+    holdBanner.classList.remove("is-ok");
+    setQuoteConfirmedUI(false);
+    renderTotals();
+  }
+
+  function visibleMethods() {
+    const prov = document.getElementById("ship-province").value;
+    return methodsCatalog.filter((m) => {
+      if (!m.served_provinces || !m.served_provinces.length) return true;
+      return m.served_provinces.includes(prov);
+    });
+  }
+
+  function renderMethodRadios() {
+    const list = visibleMethods();
+    methodsEl.hidden = false;
+    methodsEl.innerHTML = "";
+    if (!list.length) {
+      selectedMethod = null;
+      return;
+    }
+    if (!list.some((m) => m.id === selectedMethod)) {
+      selectedMethod = list[0].id;
+    }
+    list.forEach((m) => {
+      const lab = document.createElement("label");
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = "ship-method";
+      input.value = m.id;
+      input.checked = m.id === selectedMethod;
+      input.addEventListener("change", () => {
+        selectedMethod = m.id;
+        persistShipMethod(m.id);
+        invalidateQuote();
+      });
+      const body = document.createElement("span");
+      const title = document.createElement("strong");
+      title.textContent = en() ? m.label_en || m.label_fr : m.label_fr;
+      body.appendChild(title);
+      body.appendChild(document.createElement("br"));
+      const detail = document.createElement("span");
+      detail.style.fontSize = ".9rem";
+      detail.style.fontWeight = "400";
+      detail.textContent = en()
+        ? m.customer_notice_en || m.coverage_note_en || ""
+        : m.customer_notice_fr || m.coverage_note_fr || "";
+      body.appendChild(detail);
+      lab.appendChild(input);
+      lab.appendChild(body);
+      methodsEl.appendChild(lab);
+    });
+  }
+
   async function loadMethods() {
-    selectedMethod = "flat_order";
+    const base = apiBase();
+    if (base) {
+      try {
+        const res = await fetch(base + "/api/shipping-methods");
+        if (res.ok) {
+          const data = await res.json();
+          const list = Array.isArray(data.methods) ? data.methods : [];
+          if (list.length) methodsCatalog = list;
+        }
+      } catch (_) {
+        /* fallback local */
+      }
+    }
+    selectedMethod = readSavedShipMethod();
+    persistShipMethod(selectedMethod);
+    renderMethodRadios();
     document.getElementById("ship-province").addEventListener("change", () => {
-      quoteToken = null;
-      shippingFeeCents = null;
-      holdBanner.hidden = true;
-      renderTotals();
+      invalidateQuote();
+      renderMethodRadios();
+    });
+    document.getElementById("ship-postal").addEventListener("input", invalidateQuote);
+    window.addEventListener("boreales-lang-changed", () => {
+      renderMethodRadios();
+      document.querySelectorAll("#ship-box [data-fr][data-en]").forEach((el) => {
+        el.textContent = en() ? el.dataset.en : el.dataset.fr;
+      });
     });
   }
 
@@ -231,7 +365,20 @@
       setStatus("URL API manquante.");
       return;
     }
-    selectedMethod = "flat_order";
+    if (!selectedMethod) {
+      setStatus(
+        en() ? "Please choose a shipping method." : "Choisissez un mode de livraison.",
+      );
+      return;
+    }
+    if (selectedMethod === "bus_quebec" && destination().province !== "QC") {
+      setStatus(
+        en()
+          ? "Express Bus is only available in Québec."
+          : "Express Bus n’est disponible qu’au Québec.",
+      );
+      return;
+    }
     const postal = (document.getElementById("ship-postal").value || "").trim();
     if (!postal) {
       setStatus("Indiquez votre code postal.");
@@ -248,12 +395,12 @@
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          shipping_method: "flat_order",
+          shipping_method: selectedMethod,
           destination: destination(),
           items: cartItemsPayload(),
           customer_email: document.getElementById("ship-email").value || null,
           customer_name: document.getElementById("ship-name").value || null,
-          customer_phone: document.getElementById("ship-phone").value || null,
+          customer_phone: null,
         }),
       });
       const data = await res.json();
@@ -261,21 +408,45 @@
       if (data.status === "quoted" && data.quote_token) {
         quoteToken = data.quote_token;
         shippingFeeCents = data.fee_cad_cents;
-        holdBanner.hidden = true;
-        setStatus("Total prêt. Vous pouvez payer (essai Stripe TEST).");
+        holdBanner.hidden = false;
+        holdBanner.classList.add("is-ok");
+        holdBanner.innerHTML = en()
+          ? "<strong>Confirmed.</strong> Shipping " +
+            money(shippingFeeCents / 100) +
+            " — same fee either method. You can pay below (Stripe TEST)."
+          : "<strong>Confirmé.</strong> Livraison " +
+            money(shippingFeeCents / 100) +
+            " — même frais peu importe le mode. Vous pouvez payer ci-dessous (essai Stripe TEST).";
+        setQuoteConfirmedUI(true);
+        setStatus(
+          en()
+            ? "Total ready. You can pay (Stripe TEST)."
+            : "Total prêt. Vous pouvez payer (essai Stripe TEST).",
+        );
+        holdBanner.scrollIntoView({ behavior: "smooth", block: "nearest" });
       } else if (data.status === "quote_required") {
         quoteToken = null;
         shippingFeeCents = null;
         holdBanner.hidden = false;
+        holdBanner.classList.remove("is-ok");
         holdBanner.innerHTML =
           "<strong>Impossible de finaliser pour le moment.</strong><br>" +
           (data.message_fr || "Contactez Lucie pour poursuivre.");
+        setQuoteConfirmedUI(false);
         setStatus("Livraison à confirmer avec Lucie.");
       } else {
         throw new Error("Réponse inattendue");
       }
       renderTotals();
     } catch (e) {
+      setQuoteConfirmedUI(false);
+      holdBanner.hidden = false;
+      holdBanner.classList.remove("is-ok");
+      holdBanner.innerHTML =
+        "<strong>" +
+        (en() ? "Confirmation failed." : "Échec de la confirmation.") +
+        "</strong> " +
+        (e.message || e);
       setStatus("Échec : " + (e.message || e));
     } finally {
       btnQuote.disabled = false;
@@ -300,19 +471,21 @@
       if (!res.ok) throw new Error(data.error || "Reprise impossible");
       quoteToken = data.quote_token;
       shippingFeeCents = data.fee_cad_cents;
-      selectedMethod = data.method_id;
+      selectedMethod = data.method_id || selectedMethod;
       if (data.destination?.province) {
         document.getElementById("ship-province").value = data.destination.province;
       }
       if (data.destination?.postal_code) {
         document.getElementById("ship-postal").value = data.destination.postal_code;
       }
-      selectedMethod = "flat_order";
+      renderMethodRadios();
       holdBanner.hidden = false;
+      holdBanner.classList.add("is-ok");
       holdBanner.innerHTML =
         "Livraison confirmée : <strong>" +
         money(shippingFeeCents / 100) +
         "</strong>. Total articles + livraison prêt (essai TEST).";
+      setQuoteConfirmedUI(true);
       setStatus("Total prêt (Stripe TEST).");
       renderTotals();
     } catch (e) {
@@ -396,7 +569,7 @@
           destination: destination(),
           customer_email: document.getElementById("ship-email").value || null,
           customer_name: document.getElementById("ship-name").value || null,
-          customer_phone: document.getElementById("ship-phone").value || null,
+          customer_phone: null,
           successUrl: origin + "commande-confirmee.html?session_id={CHECKOUT_SESSION_ID}",
           cancelUrl: origin + "commande-annulee.html",
         }),

@@ -306,8 +306,11 @@ CATALOG = {
             "en": "Diagram: foot length (1) and foot width (2) for slippers.",
         },
     },
+    # NOTE 2026-11-05 Francis : mukluks = surtout bébé — ne plus générer de schéma pied adulte.
+    # L’UI masque le diagramme (hide_diagram). Gardé ici pour historique seulement.
     "mukluks": {
         "title": {"fr": "Comment mesurer pour vos mukluks", "en": "How to measure for your mukluks"},
+        "skip_foot_diagram": True,
         "sub": {
             "fr": "Deux mesures proposées — provisoires (validation Lucie)",
             "en": "Two proposed measurements — provisional (Lucie validation)",
@@ -403,8 +406,11 @@ CATALOG = {
 
 
 def draw_category(draw, cat: str):
-    if cat in ("pantoufles", "mukluks"):
-        # Pied allongé partagé ; sous le sous-titre pour éviter chevauchement badge ②
+    # Mukluks : ne plus dessiner de pied (décision Francis 2026-11-05)
+    if cat == "mukluks":
+        return None
+    if cat == "pantoufles":
+        # Pied allongé ; sous le sous-titre pour éviter chevauchement badge ②
         f = draw_foot(draw, 100, 188, 0.90)
         # ① Longueur — à droite du pied
         ax = min(f["right"] + 40, 640)
@@ -419,15 +425,6 @@ def draw_category(draw, cat: str):
         draw.line([(f["ball_l"][0], f["ball_l"][1]), (f["ball_l"][0], wy)], fill=ACCENT, width=2)
         draw.line([(f["ball_r"][0], f["ball_r"][1]), (f["ball_r"][0], wy)], fill=ACCENT, width=2)
         badge(draw, ((f["ball_l"][0] + f["ball_r"][0]) / 2, wy), 2)
-        if cat == "mukluks":
-            # Indication tige décorative (sans numéro)
-            draw.arc(
-                [f["heel"][0] - 36, f["heel"][1] - 100, f["heel"][0] + 70, f["heel"][1] + 16],
-                200,
-                340,
-                fill=LINE,
-                width=3,
-            )
         return f
     elif cat == "semelles":
         f = draw_insole(draw, 100, 140)
@@ -444,11 +441,22 @@ def draw_category(draw, cat: str):
         tape_ellipse(draw, h["box"])
         badge(draw, (h["box"][2] + 15, (h["box"][1] + h["box"][3]) // 2), 1)
     elif cat == "foulards":
-        s = draw_scarf(draw, 80, 140)
+        # Foulard à gauche + ② aéré vs foulard et panneau (2026-11-05)
+        # PANEL_X doit matcher panel_box dans render()
+        PANEL_X = 720
+        BADGE_R = 28
+        GAP_EDGE = 30  # ≥25–30 px badge↔panneau et badge↔foulard
+        s = draw_scarf(draw, 20, 140)  # was ox=80 — décale le foulard à gauche
+        # ① longueur — même proportions relatives au foulard
         dim_h(draw, s["y0"] - 40, s["x0"], s["x1"])
-        badge(draw, ((s["x0"] + s["x1"]) // 2, s["y0"] - 40), 1)
-        dim_v(draw, s["x1"] + 50, s["y0"], s["y1"])
-        badge(draw, (s["x1"] + 50, (s["y0"] + s["y1"]) // 2), 2)
+        badge(draw, ((s["x0"] + s["x1"]) / 2, s["y0"] - 40), 1)
+        # ② largeur — flèche centrée dans l’espace libre (badge centré sur la flèche)
+        min_ax = s["x1"] + BADGE_R + GAP_EDGE
+        max_ax = PANEL_X - GAP_EDGE - BADGE_R
+        ax = (min_ax + max_ax) / 2
+        dim_v(draw, ax, s["y0"], s["y1"])
+        badge(draw, (ax, (s["y0"] + s["y1"]) / 2), 2)
+        return {"panel_box": (PANEL_X, 155, 1145, 820)}
 
 
 def render(cat: str, lang: str) -> Path:
@@ -464,7 +472,7 @@ def render(cat: str, lang: str) -> Path:
         else "Numbers match the form fields exactly."
     )
     # Panneau plus compact pour les schémas pied (moins de vide)
-    if cat in ("pantoufles", "mukluks") and isinstance(foot_info, dict):
+    if cat in ("pantoufles", "mukluks") and isinstance(foot_info, dict) and "bottom" in foot_info:
         panel_top = 155
         panel_bot = min(H - 55, max(int(foot_info["bottom"]) + 24, 520))
         panel_legend(
@@ -474,6 +482,15 @@ def render(cat: str, lang: str) -> Path:
             note,
             provisional=True,
             panel_box=(690, panel_top, 1145, panel_bot),
+        )
+    elif isinstance(foot_info, dict) and "panel_box" in foot_info:
+        panel_legend(
+            draw,
+            lang,
+            meta["items"][lang],
+            note,
+            provisional=True,
+            panel_box=foot_info["panel_box"],
         )
     else:
         panel_legend(draw, lang, meta["items"][lang], note, provisional=True)

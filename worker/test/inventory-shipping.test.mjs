@@ -203,21 +203,22 @@ test("assertInventorySellable refuse pending_lucie du fichier réel", () => {
   assert.throws(() => assertInventorySellable(store, [{ id, qty: 1 }]), /Inventaire non prêt/i);
 });
 
-test("shipping-config : flat_order 18$, Lucie assigne le transporteur", () => {
+test("shipping-config : client choisit Postes Canada / Express Bus à 18$", () => {
   assert.equal(shippingConfig.policy.no_invented_rates, true);
   assert.equal(shippingConfig.policy.no_purolator, true);
-  assert.equal(shippingConfig.policy.customer_does_not_choose_carrier, true);
-  assert.equal(shippingConfig.methods.flat_order.fee_cad_cents, 1800);
-  assert.equal(shippingConfig.methods.flat_order.fee_scope, "per_order");
+  assert.equal(shippingConfig.policy.customer_chooses_carrier, true);
+  assert.equal(shippingConfig.policy.customer_does_not_choose_carrier, false);
+  assert.equal(shippingConfig.methods.canada_post.fee_cad_cents, 1800);
+  assert.equal(shippingConfig.methods.canada_post.fee_scope, "per_order");
   assert.ok(!shippingConfig.methods.purolator);
   const methods = listShippingMethods(shippingConfig);
-  const flat = methods.find((m) => m.id === "flat_order");
-  assert.equal(flat.configured_for_charge, true);
+  const cp = methods.find((m) => m.id === "canada_post");
+  assert.equal(cp.configured_for_charge, true);
 });
 
-test("quote flat_order 18$ ; grille CP sans cote réelle refusée", () => {
+test("quote Postes Canada 18$ ; grille CP sans cote réelle refusée", () => {
   const fixed = quoteShipping(shippingConfig, {
-    methodId: "flat_order",
+    methodId: "canada_post",
     destination: { country: "CA", province: "QC", postal_code: "H2X1Y4" },
   });
   assert.equal(fixed.fee_cad_cents, 1800);

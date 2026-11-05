@@ -1,0 +1,176 @@
+{
+  "version": 2,
+  "source_catalog": "catalog/products.json",
+  "policy": {
+    "no_invented_prices": true,
+    "price_from_boutique_only": true,
+    "leather_available": "noir",
+    "note_fr": "Cuir disponible : noir seulement. Les couleurs de fourrure recyclée peuvent varier selon les matériaux disponibles.",
+    "note_en": "Leather available: black only. Recycled fur colours may vary depending on materials on hand."
+  },
+  "free_options": {
+    "raynaud": {
+      "applies_to_categories": ["mitaines"],
+      "price_addon_cad_cents": 0,
+      "label_fr": "Option Raynaud",
+      "label_en": "Raynaud option",
+      "help_fr": "Sans frais supplémentaires — indiquez si vous souhaitez cette adaptation.",
+      "help_en": "No extra charge — tell us if you need this adaptation."
+    }
+  },
+  "measurements_by_category": {
+    "mitaines": {
+      "awaiting_lucie_validation": false,
+      "validated_by_lucie": "2026-11-01",
+      "fields": [
+        {
+          "id": "hand_circumference",
+          "diagram_number": 1,
+          "label_fr": "Tour de main",
+          "label_en": "Hand circumference",
+          "help_fr": "Autour de la paume, sans inclure le pouce.",
+          "help_en": "Around the palm, not including the thumb.",
+          "required": true
+        },
+        {
+          "id": "hand_length",
+          "diagram_number": 2,
+          "label_fr": "Longueur de la main",
+          "label_en": "Hand length",
+          "help_fr": "Du pli du poignet jusqu’au bout du majeur.",
+          "help_en": "From the wrist crease to the tip of the middle finger.",
+          "required": true
+        }
+      ]
+    },
+    "pantoufles": {
+      "awaiting_lucie_validation": true,
+      "provisional": true,
+      "fields": [
+        {
+          "id": "foot_length",
+          "diagram_number": 1,
+          "label_fr": "Longueur du pied",
+          "label_en": "Foot length",
+          "help_fr": "Du talon jusqu’au bout du plus long orteil.",
+          "help_en": "From the heel to the tip of the longest toe.",
+          "required": true
+        },
+        {
+          "id": "foot_width",
+          "diagram_number": 2,
+          "label_fr": "Largeur du pied",
+          "label_en": "Foot width",
+          "help_fr": "Au plus large de l’avant-pied.",
+          "help_en": "Across the widest part of the forefoot.",
+          "required": true
+        }
+      ]
+    },
+    "chapeaux": {
+      "awaiting_lucie_validation": true,
+      "provisional": true,
+      "fields": [
+        {
+          "id": "head_circumference",
+          "diagram_number": 1,
+          "label_fr": "Tour de tête",
+          "label_en": "Head circumference",
+          "help_fr": "Autour de la tête, au niveau du front.",
+          "help_en": "Around the head at forehead level.",
+          "required": true
+        }
+      ]
+    },
+    "mukluks": {
+      "awaiting_lucie_validation": true,
+      "provisional": true,
+      "hide_foot_diagram": true,
+      "fields": [
+        {
+          "id": "foot_length",
+          "diagram_number": 1,
+          "label_fr": "Longueur (bébé)",
+          "label_en": "Length (baby)",
+          "help_fr": "Longueur du pied du bébé, du talon au bout du plus long orteil. Pas de schéma pied adulte. Pour un adulte, contactez Lucie.",
+          "help_en": "Baby’s foot length, heel to longest toe. No adult foot diagram. For an adult, contact Lucie.",
+          "required": true
+        },
+        {
+          "id": "foot_width",
+          "diagram_number": 2,
+          "label_fr": "Largeur (bébé)",
+          "label_en": "Width (baby)",
+          "help_fr": "Largeur du pied du bébé, au plus large. Pour un adulte, contactez Lucie.",
+          "help_en": "Baby’s foot width at the widest point. For an adult, contact Lucie.",
+          "required": true
+        }
+      ]
+    },
+    "cache-oreilles": {
+      "awaiting_lucie_validation": true,
+      "provisional": true,
+      "fields": [
+        {
+          "id": "head_circumference",
+          "diagram_number": 1,
+          "label_fr": "Tour de tête",
+          "label_en": "Head circumference",
+          "help_fr": "Autour de la tête, au niveau du front.",
+          "help_en": "Around the head at forehead level.",
+          "required": true
+        }
+      ]
+    },
+    "foulards": {
+      "awaiting_lucie_validation": true,
+      "provisional": true,
+      "fields": [
+        {
+          "id": "scarf_length",
+          "diagram_number": 1,
+          "label_fr": "Longueur souhaitée",
+          "label_en": "Desired length",
+          "help_fr": "Longueur totale du foulard désiré (provisoire — à valider avec Lucie).",
+          "help_en": "Total desired scarf length (provisional — pending Lucie validation).",
+          "required": true
+        },
+        {
+          "id": "scarf_width",
+          "diagram_number": 2,
+          "label_fr": "Largeur souhaitée",
+          "label_en": "Desired width",
+          "help_fr": "Largeur totale du foulard désiré (provisoire — à valider avec Lucie).",
+          "help_en": "Total desired scarf width (provisional — pending Lucie validation).",
+          "required": true
+        }
+      ],
+      "note_fr": "Mesures provisoires pour les foulards — à valider avec Lucie avant fabrication définitive.",
+      "note_en": "Provisional scarf measurements — confirm with Lucie before final crafting."
+    },
+    "semelles": {
+      "awaiting_lucie_validation": true,
+      "provisional": true,
+      "fields": [
+        {
+          "id": "foot_length",
+          "diagram_number": 1,
+          "label_fr": "Longueur du pied",
+          "label_en": "Foot length",
+          "help_fr": "Du talon jusqu’au bout du plus long orteil.",
+          "help_en": "From the heel to the tip of the longest toe.",
+          "required": true
+        },
+        {
+          "id": "foot_width",
+          "diagram_number": 2,
+          "label_fr": "Largeur du pied",
+          "label_en": "Foot width",
+          "help_fr": "Au plus large de l’avant-pied (facultatif).",
+          "help_en": "Across the widest part of the forefoot (optional).",
+          "required": false
+        }
+      ]
+    }
+  }
+}

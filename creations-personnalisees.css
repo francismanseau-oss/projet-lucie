@@ -553,6 +553,12 @@
 .cp-page .sm-measure-figure.is-pending .sm-measure-img {
   opacity: 0.95;
 }
+.cp-page .sm-measure-figure.is-no-diagram .sm-measure-img {
+  display: none;
+}
+.cp-page .sm-measure-figure.is-no-diagram .sm-measure-caption {
+  border-top: none;
+}
 .cp-page .sm-measure-caption {
   margin: 0;
   padding: 10px 14px 12px;

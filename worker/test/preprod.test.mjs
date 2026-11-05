@@ -238,9 +238,14 @@ test("pages HTML : succès ne confirme pas sans API ; annulation présente", () 
   const ko = readFileSync(join(site, "commande-annulee.html"), "utf8");
   assert.match(ok, /order-status/);
   assert.match(ok, /confirmed === true/);
-  assert.match(ok, /redirection/i);
+  assert.match(ok, /ui_state === "confirmed"/);
+  assert.match(ok, /JAMAIS/);
   assert.match(ok, /api\/order-status/);
+  assert.match(ok, /Merci pour votre commande/);
+  assert.match(ok, /bus_quebec/);
+  assert.match(ok, /canada_post/);
   assert.match(ok, /viewport/i);
+  assert.doesNotMatch(ok, /stripe_retrieve/);
   assert.match(ko, /annul/i);
   assert.match(ko, /panier/i);
 });

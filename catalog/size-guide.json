@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "note_fr": "Correspondances grandeur ↔ cm/po : aucune grille validée Lucie en catalogue — ne pas inventer.",
+  "note_en": "Size ↔ cm/in charts: no Lucie-validated grid in the catalog — do not invent numbers.",
+  "categories": {
+    "mitaines": {
+      "illustration_key": "mitaines",
+      "title_fr": "Guide des grandeurs — mitaines",
+      "title_en": "Size guide — mittens",
+      "how_fr": "Mesurez le tour de main et la longueur de la main comme sur le schéma.",
+      "how_en": "Measure hand circumference and hand length as shown in the diagram.",
+      "chart_status": "awaiting_lucie"
+    },
+    "pantoufles": {
+      "illustration_key": "pantoufles",
+      "title_fr": "Guide des grandeurs — pantoufles",
+      "title_en": "Size guide — slippers",
+      "how_fr": "Mesurez la longueur et la largeur du pied comme sur le schéma.",
+      "how_en": "Measure foot length and width as shown in the diagram.",
+      "chart_status": "awaiting_lucie"
+    },
+    "mukluks": {
+      "illustration_key": "pantoufles",
+      "title_fr": "Guide des grandeurs — mukluks",
+      "title_en": "Size guide — mukluks",
+      "how_fr": "Mesurez la longueur et la largeur du pied (schéma pied partagé avec les pantoufles). Les mukluks boutique suivent surtout des formats bébé / pointures — à confirmer avec Lucie au besoin.",
+      "how_en": "Measure foot length and width (shared foot diagram with slippers). Boutique mukluks are mostly baby / shoe sizes — confirm with Lucie if needed.",
+      "chart_status": "awaiting_lucie"
+    },
+    "chapeaux": {
+      "illustration_key": "chapeaux",
+      "title_fr": "Guide des grandeurs — chapeaux",
+      "title_en": "Size guide — hats",
+      "how_fr": "Mesurez le tour de tête au niveau du front comme sur le schéma.",
+      "how_en": "Measure head circumference at forehead level as shown in the diagram.",
+      "chart_status": "awaiting_lucie"
+    },
+    "cache-oreilles": {
+      "illustration_key": "cache-oreilles",
+      "title_fr": "Guide des grandeurs — cache-oreilles",
+      "title_en": "Size guide — earmuffs",
+      "how_fr": "Mesurez le tour de tête comme sur le schéma.",
+      "how_en": "Measure head circumference as shown in the diagram.",
+      "chart_status": "awaiting_lucie"
+    },
+    "foulards": {
+      "illustration_key": "foulards",
+      "title_fr": "Guide des mesures — foulards",
+      "title_en": "Measurement guide — scarves",
+      "how_fr": "Indiquez la longueur et la largeur souhaitées comme sur le schéma.",
+      "how_en": "Indicate the desired length and width as shown in the diagram.",
+      "chart_status": "awaiting_lucie"
+    },
+    "semelles": {
+      "illustration_key": "semelles",
+      "title_fr": "Guide des grandeurs — semelles",
+      "title_en": "Size guide — insoles",
+      "how_fr": "Mesurez la longueur du pied (largeur facultative) comme sur le schéma.",
+      "how_en": "Measure foot length (optional width) as shown in the diagram.",
+      "chart_status": "awaiting_lucie"
+    }
+  }
+}

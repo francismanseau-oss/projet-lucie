@@ -74,7 +74,7 @@ export function normalizeDestination(dest = {}) {
 
 export function isCustomerSelectable(methodId, method) {
   if (!method?.enabled) return false;
-  // false explicite = choix Lucie seulement (ex. Express Bus / Postes Canada)
+  // false explicite = non offert au client (ex. forfait legacy flat_order)
   if (method.customer_selectable === false) return false;
   return true;
 }
@@ -377,21 +377,25 @@ export async function resolveHoldToQuoteToken(env, secret, { hold_id, resume_tok
 
 export function listSelectableMethods(config) {
   const c = loadShippingConfig(config);
-  const priority = c.policy?.display_priority || ["flat_order", "bus_quebec", "canada_post"];
+  const priority = c.policy?.display_priority || ["canada_post", "bus_quebec"];
   return Object.entries(c.methods || {})
     .filter(([id, m]) => id !== "purolator" && isCustomerSelectable(id, m))
     .map(([id, m]) => ({
       id,
       label_fr: m.label_fr,
+      label_en: m.label_en || m.label_fr,
       enabled: !!m.enabled,
       customer_selectable: true,
       display_order: m.display_order ?? (priority.indexOf(id) >= 0 ? priority.indexOf(id) + 1 : 99),
       fee_cad_cents: m.rates_source === "fixed_per_order" ? m.fee_cad_cents : null,
       fee_scope: m.fee_scope || null,
       eta_business_days_fr: m.eta_business_days_fr || null,
+      eta_business_days_en: m.eta_business_days_en || null,
       customer_pickup_required: !!m.customer_pickup_required,
       customer_notice_fr: m.customer_notice_fr || null,
+      customer_notice_en: m.customer_notice_en || null,
       delivery_mode_fr: m.delivery_mode_fr || null,
+      delivery_mode_en: m.delivery_mode_en || null,
       served_provinces: m.served_provinces || null,
       auto_quotable:
         (id === "flat_order" && m.enabled && m.rates_source === "fixed_per_order") ||
@@ -409,13 +413,19 @@ export function listSelectableMethods(config) {
         (id === "pickup" && isMethodReadyToCharge(id, m)),
       requires_lucie_quote_if_unknown: false,
       coverage_note_fr:
-        id === "flat_order"
-          ? "18,00 $ par commande — mode confirmé par Lucie avant l'expédition"
-          : id === "bus_quebec"
-            ? "Express Bus (choix Lucie) · dépôt avec accord client"
-            : id === "canada_post"
-              ? "Postes Canada (choix Lucie) · distribution postale"
+        id === "bus_quebec"
+          ? "18,00 $ · récupération au dépôt (pas la boîte postale) · Québec"
+          : id === "canada_post"
+            ? "18,00 $ · distribution postale (souvent boîte postale) · Canada"
+            : id === "flat_order"
+              ? "18,00 $ par commande"
               : null,
+      coverage_note_en:
+        id === "bus_quebec"
+          ? "$18 · depot pickup (not mailbox) · Québec"
+          : id === "canada_post"
+            ? "$18 · postal delivery (often mailbox) · Canada"
+            : null,
     }))
     .sort((a, b) => (a.display_order || 99) - (b.display_order || 99));
 }

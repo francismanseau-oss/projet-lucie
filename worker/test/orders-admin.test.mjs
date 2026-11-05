@@ -150,14 +150,15 @@ test("store updates fulfillment + shipping + history; no duplicate session", () 
   fs.unlinkSync(file);
 });
 
-test("shipping-config forbids invented rates; flat_order 18$; Lucie assigne", () => {
+test("shipping-config forbids invented rates; client choisit Postes Canada / Express Bus", () => {
   const cfg = JSON.parse(fs.readFileSync(path.join(root, "shipping/shipping-config.json"), "utf8"));
   assert.equal(cfg.policy.no_invented_rates, true);
   assert.equal(cfg.policy.no_purolator, true);
-  assert.equal(cfg.policy.customer_does_not_choose_carrier, true);
-  assert.equal(cfg.methods.flat_order.fee_cad_cents, 1800);
-  assert.equal(cfg.methods.bus_quebec.customer_selectable, false);
-  assert.equal(cfg.methods.canada_post.customer_selectable, false);
+  assert.equal(cfg.policy.customer_chooses_carrier, true);
+  assert.equal(cfg.policy.customer_does_not_choose_carrier, false);
+  assert.equal(cfg.methods.canada_post.fee_cad_cents, 1800);
+  assert.equal(cfg.methods.bus_quebec.customer_selectable, true);
+  assert.equal(cfg.methods.canada_post.customer_selectable, true);
   assert.ok(!cfg.methods.purolator);
 });
 

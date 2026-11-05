@@ -1,12 +1,13 @@
 {
-  "version": 5,
+  "version": 6,
   "policy": {
     "no_invented_rates": true,
     "no_purolator": true,
     "client_always_pays_shipping": true,
-    "customer_does_not_choose_carrier": true,
-    "lucie_assigns_carrier": true,
-    "prefer_express_bus_when_depot_accessible": true,
+    "customer_does_not_choose_carrier": false,
+    "customer_chooses_carrier": true,
+    "lucie_assigns_carrier": false,
+    "prefer_express_bus_when_depot_accessible": false,
     "fallback_canada_post": true,
     "depot_pickup_requires_prior_customer_agreement": true,
     "flat_fee_cad_cents": 1800,
@@ -18,40 +19,65 @@
     "checkout_shows_shipping_included_forbidden_until_fee_confirmed": true,
     "client_agreement_required_before_billing_fee": true,
     "fee_status_default": "a_confirmer",
-    "customer_message_fr": "Livraison par Express Bus (récupération au dépôt) ou Postes Canada (distribution postale). Le mode de livraison sera confirmé avant l'expédition.",
+    "display_priority": ["canada_post", "bus_quebec"],
+    "customer_message_fr": "Choisissez votre mode de livraison : Postes Canada (boîte postale / distribution postale) ou Express Bus (récupération au dépôt). Ce ne sont pas les mêmes services.",
+    "customer_message_en": "Choose your shipping method: Canada Post (mailbox / postal delivery) or Express Bus (depot pickup). These are different services.",
     "real_charge_requires": [
-      "quote_token with flat_order 1800 cents per order",
-      "Lucie confirms Express Bus or Canada Post before shipment",
-      "depot pickup only with prior customer agreement"
+      "quote_token with customer-selected canada_post or bus_quebec at 1800 cents per order",
+      "Express Bus only when destination is served (Québec) and customer accepts depot pickup"
     ]
   },
   "currency": "CAD",
   "country": "CA",
   "methods": {
     "flat_order": {
+      "enabled": false,
+      "customer_selectable": false,
+      "display_order": 99,
+      "label_fr": "Livraison (ancien forfait)",
+      "label_en": "Shipping (legacy flat)",
+      "coverage": ["CA"],
+      "rates_source": "fixed_per_order",
+      "fee_scope": "per_order",
+      "fee_cad_cents": 1800,
+      "note_fr": "Remplacé : le client choisit Postes Canada ou Express Bus."
+    },
+    "canada_post": {
       "enabled": true,
       "customer_selectable": true,
       "display_order": 1,
-      "label_fr": "Livraison",
+      "label_fr": "Postes Canada",
+      "label_en": "Canada Post",
       "coverage": ["CA"],
       "rates_source": "fixed_per_order",
       "fee_scope": "per_order",
       "fee_cad_cents": 1800,
       "rate_table_cad_cents": null,
-      "eta_business_days_fr": "Selon le mode retenu (Express Bus 1–2 j. ou Postes Canada 2–5 j. ouvrables)",
-      "customer_notice_fr": "Livraison par Express Bus (récupération au dépôt) ou Postes Canada (distribution postale). Le mode de livraison sera confirmé avant l'expédition. Un déplacement au dépôt n'est jamais imposé sans votre accord préalable.",
-      "note_fr": "18 $ CAD fixes par commande — Lucie choisit Express Bus ou Postes Canada.",
+      "eta_business_days_fr": "2 à 5 jours ouvrables",
+      "eta_business_days_en": "2 to 5 business days",
+      "delivery_mode_fr": "Livraison dans la boîte aux lettres, boîte postale, casier postal communautaire ou autre point Postes Canada. Pas de promesse de remise à la porte.",
+      "delivery_mode_en": "Delivery to your mailbox, PO box, community mailbox, or other Canada Post point. No doorstep delivery promise.",
+      "customer_notice_fr": "Postes Canada livre selon le réseau postal (souvent la boîte postale). Ce n’est pas une récupération en dépôt.",
+      "customer_notice_en": "Canada Post delivers via the postal network (often your mailbox). This is not depot pickup.",
+      "customer_pickup_required": false,
+      "api": {
+        "configured": false,
+        "activated": false,
+        "note": "Non utilisé pour le forfait 18 $ / commande."
+      },
       "destination": {
         "allowed_countries": ["CA"],
         "requires_postal_code": true,
         "requires_province": true
-      }
+      },
+      "note": "Choix client — distribution postale."
     },
     "bus_quebec": {
       "enabled": true,
-      "customer_selectable": false,
-      "display_order": 10,
+      "customer_selectable": true,
+      "display_order": 2,
       "label_fr": "Express Bus",
+      "label_en": "Express Bus",
       "coverage": "QC",
       "served_provinces": ["QC"],
       "rates_source": "fixed_per_order",
@@ -61,58 +87,24 @@
       "requires_carrier_conditions_check": true,
       "customer_pickup_required": true,
       "eta_business_days_fr": "1 à 2 jours ouvrables",
-      "customer_notice_fr": "Récupération en dépôt Express Bus — uniquement avec accord préalable du client.",
-      "note": "Choix Lucie (pas le client). Privilégié si dépôt raisonnablement accessible."
-    },
-    "canada_post": {
-      "enabled": true,
-      "customer_selectable": false,
-      "display_order": 20,
-      "label_fr": "Postes Canada",
-      "coverage": ["CA"],
-      "rates_source": "fixed_per_order",
-      "fee_scope": "per_order",
-      "fee_cad_cents": 1800,
-      "rate_table_cad_cents": null,
-      "eta_business_days_fr": "2 à 5 jours ouvrables",
-      "delivery_mode_fr": "Livraison selon le mode prévu par Postes Canada (boîte aux lettres, boîte postale, casier postal communautaire ou autre point). Pas de promesse de remise à la porte.",
-      "customer_notice_fr": "Distribution postale selon Postes Canada — pas de promesse de livraison à la porte.",
-      "api": {
-        "configured": false,
-        "activated": false,
-        "note": "Non utilisé pour le forfait 18 $ / commande."
-      },
-      "package_profile": {
-        "weight_g": null,
-        "length_cm": null,
-        "width_cm": null,
-        "height_cm": null,
-        "packaging_note": "Forfait fixe."
-      },
-      "tracking": {
-        "supported": true,
-        "number_field": "tracking_number",
-        "shipment_statuses": ["preparing", "shipped", "in_transit", "delivered"]
-      },
-      "destination": {
-        "allowed_countries": ["CA"],
-        "requires_postal_code": true,
-        "requires_province": true
-      },
-      "note": "Choix Lucie si Express Bus non adapté."
+      "eta_business_days_en": "1 to 2 business days",
+      "customer_notice_fr": "Express Bus : vous récupérez le colis au dépôt (ce n’est pas une livraison dans la boîte postale). Disponible au Québec lorsque desservi.",
+      "customer_notice_en": "Express Bus: you pick up the parcel at the depot (not mailbox delivery). Available in Québec when served.",
+      "note": "Choix client — récupération au dépôt seulement."
     },
     "pickup": {
       "enabled": false,
       "customer_selectable": false,
       "label_fr": "Ramassage",
+      "label_en": "Pickup",
       "fee_cad_cents": 0,
       "note": "Activer seulement si Lucie confirme un lieu de ramassage"
     }
   },
   "checkout_integration": {
-    "phase": "single_payment_flat_shipping",
+    "phase": "single_payment_customer_carrier_choice",
     "stripe_shipping_options": "only_with_locked_quote_token",
-    "metadata_placeholder": "flat_order_1800",
+    "metadata_placeholder": "customer_method_1800",
     "single_payment_required": true,
     "no_second_invoice": true
   }

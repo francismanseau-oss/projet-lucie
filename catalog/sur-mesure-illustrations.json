@@ -119,20 +119,22 @@
     "mukluks": {
       "label_fr": "Mukluks",
       "label_en": "Mukluks",
+      "hide_diagram": true,
       "files": {
-        "fr": "assets/mesures/mukluks-mesures-fr.webp",
-        "en": "assets/mesures/mukluks-mesures-en.webp"
+        "fr": "",
+        "en": ""
       },
-      "alt_fr": "Schéma : longueur du pied (1) et largeur du pied (2) pour mukluks — mesures provisoires.",
-      "alt_en": "Diagram: foot length (1) and foot width (2) for mukluks — provisional measures.",
+      "alt_fr": "Pas de schéma pied pour les mukluks (surtout bébé). Adulte : contactez Lucie.",
+      "alt_en": "No foot diagram for mukluks (mostly baby). Adult: contact Lucie.",
       "markers": [
-        { "n": 1, "field_id": "foot_length", "label_fr": "Longueur du pied", "label_en": "Foot length" },
-        { "n": 2, "field_id": "foot_width", "label_fr": "Largeur du pied", "label_en": "Foot width" }
+        { "n": 1, "field_id": "foot_length", "label_fr": "Longueur (bébé)", "label_en": "Length (baby)" },
+        { "n": 2, "field_id": "foot_width", "label_fr": "Largeur (bébé)", "label_en": "Width (baby)" }
       ],
-      "asset_status": "pret",
+      "note_fr": "Les mukluks sur mesure sont surtout pour bébé : aucun schéma de pied adulte. Pour un adulte, contactez Lucie.",
+      "note_en": "Custom mukluks are mostly for babies: no adult foot diagram. For an adult, contact Lucie.",
+      "asset_status": "masque",
       "provisional": true,
-      "verified_at": "2026-11-01",
-      "verified_size_px": [1200, 900]
+      "verified_at": "2026-11-05"
     },
     "pantoufles": {
       "label_fr": "Pantoufles",

@@ -328,6 +328,13 @@ export async function resolveOrderStatus(env, sessionId, fetchSession) {
 
   if (payment_status === "paid" || payment_status === "no_payment_required") {
     if (env.ORDERS) {
+      let pending = null;
+      try {
+        const raw = await env.ORDERS.get(`pending:${id}`);
+        if (raw) pending = JSON.parse(raw);
+      } catch (_) {
+        pending = null;
+      }
       await env.ORDERS.put(
         `order:${id}`,
         JSON.stringify({
@@ -340,6 +347,22 @@ export async function resolveOrderStatus(env, sessionId, fetchSession) {
           confirmed_at: new Date().toISOString(),
           status: "paid_confirmed",
           confirmed_via: "stripe_retrieve",
+          order_number: pending?.order_number || null,
+          items: Array.isArray(pending?.items) ? pending.items : [],
+          shipping: {
+            method: pending?.shipping_method || null,
+            fee_cad_cents:
+              pending?.shipping_fee_cents != null ? Number(pending.shipping_fee_cents) : null,
+            destination: pending?.destination || null,
+            source: pending?.shipping_source || null,
+          },
+          financial: {
+            products_cents:
+              pending?.products_cents != null ? Number(pending.products_cents) : null,
+            shipping_fee_cents:
+              pending?.shipping_fee_cents != null ? Number(pending.shipping_fee_cents) : null,
+            amount_total_cents: session.amount_total ?? pending?.amount_total_cents ?? null,
+          },
         }),
         { expirationTtl: 60 * 60 * 24 * 365 },
       );
