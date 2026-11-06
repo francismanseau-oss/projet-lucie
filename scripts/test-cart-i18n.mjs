@@ -45,7 +45,7 @@ const custom = {
       hand_circumference: { fr: "Tour de main", en: "Hand circumference" },
       hand_length: { fr: "Longueur de la main", en: "Hand length" },
     },
-    raynaud: true,
+    chaleur: true,
     leather: "noir",
     comments: "OK",
   },
@@ -60,7 +60,7 @@ const bitsFr = fr.customDetailBits(custom.custom_config).join(" ");
 const bitsEn = en.customDetailBits(custom.custom_config).join(" ");
 assert.match(bitsFr, /Tour de main/);
 assert.match(bitsEn, /Hand circumference/);
-assert.match(bitsFr, /Raynaud/);
+assert.match(bitsFr, /Chaleur renforcée/);
 assert.equal(shop.id, "chapeau-fille-8-10-renard");
 assert.equal(custom.custom_config.product_id, "mitaines-dame-m-renard");
 

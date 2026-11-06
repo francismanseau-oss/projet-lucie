@@ -60,7 +60,7 @@ function measText(cfg) {
     lines.push(`${lab} : ${v}${cfg.unit === "in" ? " po" : " cm"}`);
   }
   if (cfg.leather) lines.push(`Cuir : ${cfg.leather}`);
-  if (cfg.raynaud) lines.push("Raynaud : oui");
+  if (cfg.chaleur) lines.push("Chaleur renforcée : oui (+20 $ non inclus dans le total). Fait à partir de zéro : 1 semaine de fabrication, environ 3 semaines avant Noël.");
   if (cfg.comments) lines.push(`Commentaires : ${cfg.comments}`);
   return lines.join("\n");
 }

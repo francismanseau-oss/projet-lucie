@@ -140,7 +140,7 @@ export function buildPaidOrderEmail(sessionObj, pending, env, archive = null) {
         `\n    Réf. boutique : ${c.product_id || "—"}` +
         `\n    Unité : ${c.unit || "—"}` +
         `\n    Mensurations : ${formatMeasurements(c)}` +
-        `\n    Raynaud : ${c.raynaud ? "oui" : "non"}` +
+        `\n    Chaleur renforcée : ${c.chaleur ? "oui (+20 $ non inclus dans le total). Fait à partir de zéro : 1 semaine de fabrication, environ 3 semaines avant Noël." : "non"}` +
         `\n    Cuir / matière : ${c.leather || "noir"}` +
         (c.comments ? `\n    Instructions : ${c.comments}` : "");
     } else if (pn != null) {
@@ -218,7 +218,7 @@ export function buildPaidOrderEmail(sessionObj, pending, env, archive = null) {
               detail = `<div style="font-size:13px;color:#5c4f44;margin-top:6px;line-height:1.45;">
                 Réf. : ${escapeHtml(c.product_id || "—")} · Unité : ${escapeHtml(c.unit || "—")}<br>
                 Mensurations : ${escapeHtml(formatMeasurements(c))}<br>
-                Raynaud : ${c.raynaud ? "oui" : "non"} · Matière : ${escapeHtml(c.leather || "noir")}
+                Chaleur renforcée : ${c.chaleur ? "oui (+20 $ non inclus dans le total). Fait à partir de zéro : 1 semaine de fabrication, environ 3 semaines avant Noël." : "non"} · Matière : ${escapeHtml(c.leather || "noir")}
                 ${c.comments ? `<br>Instructions : ${escapeHtml(c.comments)}` : ""}
               </div>`;
             }

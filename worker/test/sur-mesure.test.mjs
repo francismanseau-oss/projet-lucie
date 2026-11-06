@@ -95,18 +95,18 @@ test("buildLineItems : custom = prix Boutique (ignore price navigateur)", () => 
             hand_circumference: 20,
             hand_length: 18,
           },
-          raynaud: true,
+          chaleur: true,
           comments: "Doigté large",
         },
       },
     ],
-    { validateMeasurements, measureSpecForCategory },
+    { validateMeasurements, measureSpecForCategory, audienceByProductId: { [mitaine.id]: "femmes" } },
   );
   assert.equal(resolved[0].unit_amount, mitaine.price_cad_cents);
   assert.equal(total_cents, mitaine.price_cad_cents);
   assert.equal(resolved[0].custom, true);
   assert.equal(resolved[0].skip_inventory, true);
-  assert.equal(resolved[0].custom_config.raynaud, true);
+  assert.equal(resolved[0].custom_config.chaleur, true);
   assert.equal(resolved[0].custom_config.leather, "noir");
   assert.equal(resolved[0].custom_config.price_source, "catalog/products.json");
   assert.ok(resolved[0].client_price_ignored != null);

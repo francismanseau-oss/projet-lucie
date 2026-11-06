@@ -8,14 +8,21 @@
     "note_fr": "Cuir disponible : noir seulement. Les couleurs de fourrure recyclée peuvent varier selon les matériaux disponibles.",
     "note_en": "Leather available: black only. Recycled fur colours may vary depending on materials on hand."
   },
-  "free_options": {
-    "raynaud": {
-      "applies_to_categories": ["mitaines"],
-      "price_addon_cad_cents": 0,
-      "label_fr": "Option Raynaud",
-      "label_en": "Raynaud option",
-      "help_fr": "Sans frais supplémentaires — indiquez si vous souhaitez cette adaptation.",
-      "help_en": "No extra charge — tell us if you need this adaptation."
+  "free_options": {},
+  "pending_options": {
+    "chaleur_renforcee": {
+      "status": "actif",
+      "apply_to_order": true,
+      "applies_to_categories": ["mitaines", "pantoufles"],
+      "applies_to_audiences": ["femmes", "hommes"],
+      "price_addon_cad_cents": 2000,
+      "price_applied": false,
+      "label_fr": "Chaleur renforcée",
+      "label_en": "Extra warmth",
+      "note_fr": "Supplément provisoire +20 $ par article. Ce supplément n’est pas encore inclus dans le total.",
+      "note_en": "Provisional supplement +$20 per item. This supplement is not included in the total yet.",
+      "description_fr": "Doublure supplémentaire pour une meilleure isolation contre le froid.",
+      "description_en": "Extra lining for better insulation against the cold."
     }
   },
   "measurements_by_category": {
@@ -28,8 +35,8 @@
           "diagram_number": 1,
           "label_fr": "Tour de main",
           "label_en": "Hand circumference",
-          "help_fr": "Autour de la paume, sans inclure le pouce.",
-          "help_en": "Around the palm, not including the thumb.",
+          "help_fr": "Autour de la paume, au plus large, sans inclure le pouce.",
+          "help_en": "Around the palm at the widest point, not including the thumb.",
           "required": true
         },
         {
@@ -37,8 +44,8 @@
           "diagram_number": 2,
           "label_fr": "Longueur de la main",
           "label_en": "Hand length",
-          "help_fr": "Du pli du poignet jusqu’au bout du majeur.",
-          "help_en": "From the wrist crease to the tip of the middle finger.",
+          "help_fr": "Du pli du poignet (base de la paume) jusqu’au bout du majeur.",
+          "help_en": "From the wrist crease (base of the palm) to the tip of the middle finger.",
           "required": true
         }
       ]

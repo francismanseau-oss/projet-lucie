@@ -108,15 +108,15 @@ export function buildLineItems(catalog, items, opts = {}) {
       if (chaleurAsked(cfg) && !chaleurEligibleProduct(product, opts, productId)) {
         throw httpError("Chaleur + non offerte pour cet article", 400);
       }
-      // Raynaud / commentaires : jamais de supplément inventé
-      // CSM : skip_inventory — ne décrémente pas le stock régulier (sauf décision Lucie plus tard)
+      const charge = unitAmount;
+      // CSM : skip_inventory — ne décrémente pas le stock régulier
       resolved.push({
         id,
         name: `Sur mesure — ${product.name_fr}`,
         product_number: productNumber,
         qty,
-        unit_amount: unitAmount,
-        line_total_cents: unitAmount * qty,
+        unit_amount: charge,
+        line_total_cents: charge * qty,
         availability: product.availability || "contact",
         custom: true,
         skip_inventory: true,
@@ -128,7 +128,7 @@ export function buildLineItems(catalog, items, opts = {}) {
           unit: measureUnit || null,
           measurements,
           measurements_cm: cfg.measurements_cm || null,
-          raynaud: !!cfg.raynaud,
+          chaleur: chaleurAsked(cfg),
           comments: String(cfg.comments || "").slice(0, 800),
           leather: "noir",
           price_source: "catalog/products.json",
@@ -572,7 +572,7 @@ export function buildCheckoutParams({
       params[`line_items[${i}][price_data][product_data][metadata][measurements_cm]`] = JSON.stringify(
         cc.measurements_cm || {},
       ).slice(0, 450);
-      params[`line_items[${i}][price_data][product_data][metadata][raynaud]`] = cc.raynaud ? "1" : "0";
+      params[`line_items[${i}][price_data][product_data][metadata][chaleur]`] = cc.chaleur ? "1" : "0";
       params[`line_items[${i}][price_data][product_data][metadata][leather]`] = String(cc.leather || "noir");
       params[`line_items[${i}][price_data][product_data][metadata][comments]`] = String(
         cc.comments || "",

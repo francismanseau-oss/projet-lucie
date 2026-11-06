@@ -60,7 +60,7 @@
         );
       if (m.length) bits.push(m.join(" · "));
     }
-    if (cfg.raynaud) bits.push(eng() ? "Raynaud: yes (no charge)" : "Raynaud : oui (sans frais)");
+    if (cfg.chaleur) bits.push(eng() ? "Extra warmth: yes (+$20 not included in the total yet)" : "Chaleur renforcée : oui (+20 $ non inclus dans le total)");
     if (cfg.leather) {
       bits.push(
         (eng() ? "Leather: " : "Cuir : ") +

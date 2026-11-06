@@ -157,8 +157,12 @@ select {
 .aud-edit {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
+  column-gap: 0.45rem;
+  row-gap: 0.7rem;
   align-items: center;
+}
+.filter-row + .filter-row {
+  margin-top: 0.7rem;
 }
 .btn-filter,
 .btn-aud {

@@ -68,7 +68,7 @@ test("CSM label formatting and email highlight", () => {
         unit: "cm",
         measurements: { tour_main: 19, longueur_main: 18 },
         measurements_cm: { tour_main: 19, longueur_main: 18 },
-        raynaud: false,
+        chaleur: false,
         comments: "test",
         leather: "noir",
       },

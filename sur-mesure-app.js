@@ -46,6 +46,7 @@
     step3: document.getElementById("sm-step-3"),
     step4: document.getElementById("sm-step-4"),
     configLead: document.getElementById("sm-config-lead"),
+    configName: document.getElementById("sm-config-name"),
     options: document.getElementById("sm-options"),
     measuresBlock: document.getElementById("sm-step-3"),
     measures: document.getElementById("sm-measures"),
@@ -56,6 +57,13 @@
     measureFigure: document.getElementById("sm-measure-figure"),
     measureImg: document.getElementById("sm-measure-img"),
     measureCaption: document.getElementById("sm-measure-caption"),
+    handGuide: document.getElementById("sm-hand-guide"),
+    handPhoto: document.getElementById("sm-hand-photo"),
+    handTitle: document.getElementById("sm-hand-title"),
+    handSub: document.getElementById("sm-hand-sub"),
+    handSteps: document.getElementById("sm-hand-steps"),
+    handTables: document.getElementById("sm-hand-tables"),
+    handAdvice: document.getElementById("sm-hand-advice"),
     summary: document.getElementById("sm-summary-list"),
     priceBox: document.getElementById("sm-price-box"),
     priceValue: document.getElementById("sm-price-value"),
@@ -63,8 +71,8 @@
     add: document.getElementById("sm-add"),
     msg: document.getElementById("sm-msg"),
     comments: document.getElementById("sm-comments"),
-    raynaud: document.getElementById("sm-raynaud"),
-    raynaudWrap: document.getElementById("sm-raynaud-wrap"),
+    chaleurWrap: document.getElementById("sm-chaleur-wrap"),
+    chaleur: document.getElementById("sm-chaleur"),
     chaleurNote: document.getElementById("sm-chaleur-note"),
     measureErrors: document.getElementById("sm-measure-errors"),
     progress: document.getElementById("sm-progress"),
@@ -85,10 +93,10 @@
     illustrations: null,
     filter: null,
     productId: null,
-    unit: null,
+    unit: "cm",
     measurements: {},
     _lastUnit: null,
-    raynaud: false,
+    chaleur: false,
     comments: "",
     viewStep: 1,
     requestedSize: null,
@@ -455,20 +463,21 @@
   function selectProduct(id) {
     if (state.linkedProductId && id !== state.linkedProductId) state.requestedSize = null;
     state.productId = id;
-    state.unit = null;
     state.measurements = {};
     state._lastUnit = null;
-    state.raynaud = false;
+    state.unit = null;
+    state.chaleur = false;
     state.comments = "";
-    if (els.unitIn) els.unitIn.setAttribute("aria-pressed", "false");
-    if (els.unitCm) els.unitCm.setAttribute("aria-pressed", "false");
     if (els.comments) els.comments.value = "";
-    if (els.raynaud) els.raynaud.checked = false;
+    const link = readOrderLink();
+    const product = currentProduct();
+    state.chaleur = !!(link.chaleur && link.modele === product.id && chaleurEligible(product));
+    if (els.chaleur) els.chaleur.checked = state.chaleur;
     clearMsg();
     clearMeasureErrors();
     renderProducts();
     renderPersonalization();
-    renderMeasures();
+    setUnit("cm");
     renderIllustration();
     refreshSummary();
     gotoStep(2);
@@ -516,6 +525,178 @@
     return state.illustrations?.categories?.[category] || null;
   }
 
+  const HAND_ADULT = [
+    { size: "S", tour: [16, 18], len: [17, 18] },
+    { size: "M", tour: [18, 20], len: [18, 19] },
+    { size: "L", tour: [20, 22], len: [19, 20] },
+    { size: "XL", tour: [22, 24], len: [20, 21] },
+  ];
+  const HAND_CHILD = [
+    { fr: "8 – 24 mois", en: "8–24 months", tour: [11, 13], len: [10, 12] },
+    { fr: "2 – 4 ans", en: "2–4 years", tour: [13, 15], len: [12, 14] },
+    { fr: "5 – 7 ans", en: "5–7 years", tour: [15, 17], len: [14, 16] },
+    { fr: "8 – 10 ans", en: "8–10 years", tour: [17, 18], len: [16, 17] },
+    { fr: "11 – 14 ans (junior)", en: "11–14 years (junior)", tour: [18, 20], len: [17, 19] },
+  ];
+
+  function formatInches(cm) {
+    const eighths = Math.round((cm / 2.54) * 8);
+    const whole = Math.floor(eighths / 8);
+    const rem = eighths - whole * 8;
+    const frac = { 1: "1/8", 2: "1/4", 3: "3/8", 4: "1/2", 5: "5/8", 6: "3/4", 7: "7/8" }[rem];
+    if (!frac) return String(whole);
+    if (!whole) return frac;
+    return whole + " " + frac;
+  }
+
+  function handSpan(pair) {
+    if (state.unit === "in") return formatInches(pair[0]) + " – " + formatInches(pair[1]);
+    return pair[0] + " – " + pair[1];
+  }
+
+  function fillHandTable(table, headers, rows) {
+    const caption = document.createElement("caption");
+    const title = document.createElement("span");
+    title.textContent = headers.caption;
+    const provisional = document.createElement("span");
+    provisional.className = "sm-hand-provisional";
+    provisional.textContent = t(
+      "Mesures indicatives — à confirmer avec Lucie",
+      "Indicative measurements — to be confirmed with Lucie",
+    );
+    caption.append(title, provisional);
+    table.appendChild(caption);
+    const thead = document.createElement("thead");
+    const hr = document.createElement("tr");
+    headers.cols.forEach((label) => {
+      const th = document.createElement("th");
+      th.scope = "col";
+      th.textContent = label;
+      hr.appendChild(th);
+    });
+    thead.appendChild(hr);
+    table.appendChild(thead);
+    const body = document.createElement("tbody");
+    rows.forEach((cells) => {
+      const tr = document.createElement("tr");
+      cells.forEach((text) => {
+        const td = document.createElement("td");
+        td.textContent = text;
+        tr.appendChild(td);
+      });
+      body.appendChild(tr);
+    });
+    table.appendChild(body);
+  }
+
+  function paintHandGuide() {
+    if (!els.handGuide) return;
+    const inches = state.unit === "in";
+    const unitName = inches
+      ? t("po", "in")
+      : "cm";
+    if (els.handTitle) {
+      els.handTitle.textContent = t(
+        "Comment mesurer pour vos mitaines",
+        "How to measure for your mittens",
+      );
+    }
+    if (els.handSub) {
+      els.handSub.textContent = t(
+        "Deux mesures seulement — validées pour la fabrication",
+        "Two measurements only — confirmed for crafting",
+      );
+    }
+    if (els.handPhoto) {
+      els.handPhoto.alt = t(
+        "Schéma : tour de main autour de la paume sans le pouce (1), longueur du pli du poignet au bout du majeur (2).",
+        "Diagram: hand circumference around the palm without the thumb (1), hand length from the wrist crease to the middle fingertip (2).",
+      );
+    }
+    if (els.handSteps) {
+      els.handSteps.replaceChildren();
+      const steps = [
+        {
+          title: t("Tour de main", "Hand circumference"),
+          text: t(
+            "Mesurez le tour de votre main autour de la paume, au plus large, sans inclure le pouce.",
+            "Measure around the palm at the widest point, without the thumb.",
+          ),
+        },
+        {
+          title: t("Longueur de la main", "Hand length"),
+          text: t(
+            "Mesurez du pli du poignet (base de la paume) jusqu’au bout du majeur.",
+            "Measure from the wrist crease (base of the palm) to the tip of the middle finger.",
+          ),
+        },
+      ];
+      steps.forEach((step, i) => {
+        const li = document.createElement("li");
+        const n = document.createElement("span");
+        n.className = "n";
+        n.textContent = String(i + 1);
+        const copy = document.createElement("div");
+        const strong = document.createElement("strong");
+        strong.textContent = step.title;
+        const span = document.createElement("span");
+        span.textContent = step.text;
+        copy.append(strong, span);
+        li.append(n, copy);
+        els.handSteps.appendChild(li);
+      });
+    }
+    if (els.handTables) {
+      els.handTables.replaceChildren();
+      const note = document.createElement("p");
+      note.className = "sm-hand-unitnote";
+      note.textContent = inches
+        ? t(
+            "Grandeurs en pouces : 1 po = 2,54 cm, arrondies au 1/8 po.",
+            "Sizes in inches: 1 in = 2.54 cm, rounded to the nearest 1/8 in.",
+          )
+        : t(
+            "Grandeurs en centimètres. Le bouton Pouces convertit le tableau.",
+            "Sizes in centimetres. The Inches button converts the table.",
+          );
+      const adult = document.createElement("table");
+      adult.className = "sm-hand-table";
+      fillHandTable(
+        adult,
+        {
+          caption: t("Correspondance des grandeurs (adultes)", "Adult size match"),
+          cols: [
+            t("Grandeur", "Size"),
+            t("Tour", "Around") + " (" + unitName + ")",
+            t("Longueur", "Length") + " (" + unitName + ")",
+          ],
+        },
+        HAND_ADULT.map((row) => [row.size, handSpan(row.tour), handSpan(row.len)]),
+      );
+      const child = document.createElement("table");
+      child.className = "sm-hand-table";
+      fillHandTable(
+        child,
+        {
+          caption: t("Repères enfants (à titre indicatif)", "Children’s guide (approximate)"),
+          cols: [
+            t("Âge", "Age"),
+            t("Tour", "Around") + " (" + unitName + ")",
+            t("Longueur", "Length") + " (" + unitName + ")",
+          ],
+        },
+        HAND_CHILD.map((row) => [eng() ? row.en : row.fr, handSpan(row.tour), handSpan(row.len)]),
+      );
+      els.handTables.append(note, adult, child);
+    }
+    if (els.handAdvice) {
+      els.handAdvice.textContent = t(
+        "Conseil : mesurez la main dominante (celle que vous utilisez le plus), et gardez la main détendue, sans serrer.",
+        "Tip: measure the dominant hand (the one you use most), and keep the hand relaxed, without squeezing.",
+      );
+    }
+  }
+
   function renderIllustration() {
     const product = currentProduct();
     const figure = els.measureFigure;
@@ -524,10 +705,31 @@
     if (!figure || !img) return;
     if (!product) {
       figure.hidden = true;
+      figure.classList.remove("is-hand");
+      if (els.handGuide) els.handGuide.hidden = true;
+      img.hidden = false;
       img.removeAttribute("src");
       img.alt = "";
       return;
     }
+    if (product.category === "mitaines") {
+      figure.hidden = false;
+      figure.classList.add("is-hand");
+      figure.classList.remove("is-pending", "is-no-diagram");
+      img.hidden = true;
+      img.removeAttribute("src");
+      img.alt = "";
+      if (caption) caption.hidden = true;
+      if (els.handGuide) {
+        els.handGuide.hidden = false;
+        paintHandGuide();
+      }
+      return;
+    }
+    figure.classList.remove("is-hand");
+    if (els.handGuide) els.handGuide.hidden = true;
+    img.hidden = false;
+    if (caption) caption.hidden = false;
     const entry = illustrationEntry(product.category);
     // Mukluks : pas de schéma pied (bébé ≠ pied adulte ; adulte → Lucie).
     if (entry?.hide_diagram || product.category === "mukluks") {
@@ -618,6 +820,14 @@
     }
   }
 
+  function clientFacingName(product) {
+    let s = displayProductName(product);
+    s = eng()
+      ? s.replace(/\bdame\b/gi, "for women").replace(/\bhomme\b/gi, "for men")
+      : s.replace(/\bdame\b/gi, "pour femme").replace(/\bhomme\b/gi, "pour homme");
+    return s.replace(/\s{2,}/g, " ").trim();
+  }
+
   function renderPersonalization() {
     const product = currentProduct();
     if (!els.step2) return;
@@ -634,49 +844,26 @@
     if (els.step4) els.step4.hidden = false;
     updateProgress();
 
+    if (els.configName) els.configName.textContent = clientFacingName(product);
     if (els.configLead) {
-      const desc =
-        (eng() && product.description_en ? product.description_en : product.description_fr) || "";
-      const modelLine =
-        displayProductName(product) +
-        " · " +
-        t("Réf.", "Ref.") +
-        " " +
-        product.id;
-      const asked = state.requestedSize && LETTERS[state.requestedSize];
-      const sizeSentence = asked
-        ? t(
-            "Taille demandée : " +
-              LETTERS[state.requestedSize].fr +
-              ". " +
-              delayText() +
-              " Les mesures de l’étape suivante guident la fabrication.",
-            "Requested size: " +
-              LETTERS[state.requestedSize].en +
-              ". " +
-              delayText() +
-              " The next step’s measurements guide crafting.",
-          )
-        : t(
-            "Pas de taille S/M/L/XL : les mesures de l’étape suivante guident la fabrication.",
-            "No S/M/L/XL size: the next step’s measurements guide crafting.",
-          );
-      els.configLead.textContent =
-        modelLine + (desc ? " — " + desc : "") + " — " + sizeSentence;
+      els.configLead.textContent = t(
+        "Fabrication selon vos mensurations.",
+        "Made to your measurements.",
+      );
+    }
+    if (els.comments) {
+      els.comments.placeholder = t(
+        "Précisions pour la fabrication…",
+        "Notes for manufacturing…",
+      );
     }
 
-    const raynaudOpt = state.config.free_options?.raynaud;
-    const showRaynaud =
-      raynaudOpt &&
-      (raynaudOpt.applies_to_categories || []).includes(product.category);
-    if (els.raynaudWrap) els.raynaudWrap.hidden = !showRaynaud;
-    if (!showRaynaud) state.raynaud = false;
-    const heat = state.config.pending_options?.chaleur_renforcee;
-    const showHeat =
-      heat &&
-      heat.apply_to_order === false &&
-      chaleurEligible(product);
-    if (els.chaleurNote) els.chaleurNote.hidden = !showHeat;
+    const showHeat = chaleurEligible(product);
+    if (els.chaleurWrap) els.chaleurWrap.hidden = !showHeat;
+    if (!showHeat) {
+      state.chaleur = false;
+      if (els.chaleur) els.chaleur.checked = false;
+    }
   }
 
   function setUnit(unit) {
@@ -701,6 +888,7 @@
           : t("Saisie en centimètres — équivalent pouces affiché sous chaque champ.", "Enter centimetres — inch equivalent shown under each field.");
     }
     renderMeasureFields();
+    if (currentProduct()?.category === "mitaines") paintHandGuide();
     refreshSummary();
   }
 
@@ -738,9 +926,10 @@
       const cm = api.toCm(state.measurements[f.id], state.unit);
       const alt = api.fromCm(cm, other);
       if (alt != null) {
+        const shown = other === "in" ? formatInches(cm) : alt.toFixed(2);
         bits.push(
           t("Équivaut à ", "Equals ") +
-            alt.toFixed(2) +
+            shown +
             " " +
             (other === "in" ? t("po", "in") : "cm"),
         );
@@ -837,14 +1026,14 @@
 
     if (els.priceBox) els.priceBox.hidden = false;
     const price = api.officialPrice(state.catalog, product.id);
+    const totalCents = price.ok ? price.total_cad_cents : null;
     const spec = api.categoryMeasures(state.config, product.category);
     const meas = api.validateMeasurements(spec, state.unit, state.measurements);
     const can = api.canAddToCart(state.catalog, state.config, product.id, state);
 
     const rows = [
-      [t("Modèle", "Model"), displayProductName(product)],
-      [t("Réf. catalogue", "Catalog ref."), product.id],
-      [t("Prix officiel", "Official price"), price.ok ? money(price.total_cad_cents) : "—"],
+      [t("Modèle", "Model"), clientFacingName(product)],
+      [t("Prix", "Price"), totalCents != null ? money(totalCents) : "—"],
     ];
     if (state.requestedSize && LETTERS[state.requestedSize]) {
       rows.push([
@@ -870,10 +1059,12 @@
           : "—",
       ]);
     }
-    if (els.raynaudWrap && !els.raynaudWrap.hidden) {
+    if (els.chaleurWrap && !els.chaleurWrap.hidden) {
       rows.push([
-        t("Option Raynaud", "Raynaud option"),
-        state.raynaud ? t("Oui (sans frais)", "Yes (no charge)") : t("Non", "No"),
+        t("Chaleur renforcée", "Extra warmth"),
+        state.chaleur
+          ? t("Oui — +20 $ non inclus dans le total", "Yes — +$20 not included in the total yet")
+          : t("Non", "No"),
       ]);
     }
     rows.push([
@@ -916,12 +1107,18 @@
       }
     }
 
-    if (els.priceValue) els.priceValue.textContent = money(price.total_cad_cents);
+    if (els.priceValue) els.priceValue.textContent = totalCents != null ? money(totalCents) : "—";
     if (els.priceNote) {
-      els.priceNote.textContent = t(
-        "Même prix que dans la Boutique. Livraison calculée au paiement — pas encore une commande payée.",
-        "Same price as in the Shop. Shipping calculated at checkout — not a paid order yet.",
-      );
+      els.priceNote.textContent =
+        state.chaleur && chaleurEligible(product)
+          ? t(
+              "Même prix que dans la Boutique. Le supplément de 20 $ n’est pas ajouté pour l’instant.",
+              "Same price as in the Shop. The $20 supplement is not added for now.",
+            )
+          : t(
+              "Même prix que dans la Boutique. Livraison calculée au paiement — pas encore une commande payée.",
+              "Same price as in the Shop. Shipping is calculated at payment — not a paid order yet.",
+            );
     }
     els.priceBox?.classList.remove("is-pending");
     els.add.disabled = !can.ok;
@@ -952,7 +1149,10 @@
       return;
     }
     const product = check.product;
-    const price = check.price;
+    const price = {
+      ...check.price,
+      total_cad_cents: check.price.total_cad_cents,
+    };
     const customId =
       "custom:" + product.id + ":" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
     const spec = api.categoryMeasures(state.config, product.category);
@@ -990,7 +1190,7 @@
             .map(([k, v]) => [k, api.toCm(v, state.unit)]),
         ),
         measurement_labels,
-        raynaud: !!state.raynaud,
+        chaleur: !!state.chaleur,
         comments: state.comments.trim(),
         leather: "noir",
         requested_size: state.requestedSize || null,
@@ -1043,8 +1243,8 @@
     state.comments = els.comments.value || "";
     refreshSummary();
   });
-  els.raynaud?.addEventListener("change", () => {
-    state.raynaud = !!els.raynaud.checked;
+  els.chaleur?.addEventListener("change", () => {
+    state.chaleur = !!els.chaleur.checked;
     refreshSummary();
   });
 

@@ -1,6 +1,6 @@
 /**
  * Sur mesure — prix = catalogue Boutique uniquement.
- * Mesures / options gratuites (ex. Raynaud) : jamais de prix inventé.
+ * Mesures et options : le prix vient du catalogue. Le supplément chaleur n'est pas facturé tant qu'il n'est pas confirmé.
  */
 (function (root) {
   const INCH_TO_CM = 2.54;

@@ -41,7 +41,7 @@ function mapStripeSessionToOrder(session) {
             measurements_cm: meta.measurements_cm ? safeJson(meta.measurements_cm) : null,
             comments: meta.comments || "",
             leather: meta.leather || "noir",
-            raynaud: meta.raynaud === "1" || meta.raynaud === "true",
+            chaleur: meta.chaleur === "1" || meta.chaleur === "true",
           }
         : null,
     };

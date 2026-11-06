@@ -120,7 +120,7 @@ const cartSim = [
       unit: "cm",
       measurements: { hand_circumference: 20, hand_length: 18 },
       measurements_cm: { hand_circumference: 20, hand_length: 18 },
-      raynaud: true,
+      chaleur: true,
       comments: "Doigté large",
       leather: "noir",
     },
@@ -134,7 +134,7 @@ const cartSim = [
       unit: "in",
       measurements: { foot_length: 9.5, foot_width: 3.8 },
       measurements_cm: { foot_length: toCm(9.5, "in"), foot_width: toCm(3.8, "in") },
-      raynaud: false,
+      chaleur: false,
       comments: "Semelle souple",
       leather: "noir",
     },
@@ -166,6 +166,7 @@ const cartSim = [
 const { resolved, total_cents } = buildLineItems(products, cartSim, {
   validateMeasurements,
   measureSpecForCategory,
+  audienceByProductId: { [mitaine.id]: "femmes" },
 });
 
 assert.equal(resolved.length, 4);
@@ -174,7 +175,7 @@ assert.equal(resolved[1].unit_amount, pant.price_cad_cents);
 assert.equal(resolved[2].unit_amount, chap.price_cad_cents);
 assert.equal(resolved[3].unit_amount, foul.price_cad_cents);
 assert.notEqual(resolved[0].unit_amount, 99);
-assert.equal(resolved[0].custom_config.raynaud, true);
+assert.equal(resolved[0].custom_config.chaleur, true);
 assert.equal(resolved[0].custom_config.comments, "Doigté large");
 assert.equal(resolved[1].custom_config.measurements.foot_length, 9.5);
 assert.equal(resolved[2].qty, 2);
@@ -194,12 +195,12 @@ pass("officialBoutiquePrice aligné Boutique");
 // Stripe checkout payload shape (paiement.html)
 const paiement = fs.readFileSync(path.join(root, "paiement.html"), "utf8");
 if (
-  paiement.includes("raynaud") &&
+  paiement.includes("chaleur") &&
   paiement.includes("comments") &&
   paiement.includes("measurements_cm") &&
   paiement.includes("product_id")
 ) {
-  pass("paiement.html transmet custom_config (mesures, Raynaud, commentaires)");
+  pass("paiement.html transmet custom_config (mesures, chaleur, commentaires)");
 } else fail("paiement.html: custom_config incomplet");
 
 const panier = fs.readFileSync(path.join(root, "panier.html"), "utf8");
@@ -209,11 +210,11 @@ const cartI18n = fs.existsSync(path.join(root, "cart-i18n.js"))
 if (
   panier.includes("custom_config") &&
   panier.includes("cart-i18n.js") &&
-  cartI18n.includes("raynaud") &&
+  cartI18n.includes("chaleur") &&
   cartI18n.includes("comments") &&
   cartI18n.includes("measurement_labels")
 ) {
-  pass("panier.html + cart-i18n.js affichent mesures / Raynaud / commentaires (bilingue)");
+  pass("panier.html + cart-i18n.js affichent mesures / chaleur / commentaires (bilingue)");
 } else fail("panier.html: détails custom incomplets");
 
 try {
@@ -254,8 +255,8 @@ if (html.includes("pas encore un paiement") || html.includes("not a payment yet"
   pass("UX: disclaimer panier ≠ commande payée");
 } else fail("UX: disclaimer paiement manquant");
 
-if (html.includes('for="sm-raynaud"') && html.includes('for="sm-comments"')) {
-  pass("A11y: labels associés Raynaud + commentaires");
+if (html.includes('for="sm-chaleur"') && html.includes('for="sm-comments"')) {
+  pass("A11y: labels associés chaleur + commentaires");
 } else fail("A11y: labels manquants");
 
 if (html.includes('id="sm-measure-errors"') && html.includes('role="alert"')) {

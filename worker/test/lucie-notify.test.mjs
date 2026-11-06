@@ -54,7 +54,7 @@ test("buildPaidOrderEmail : bon de commande sur mesure avec n° LFB", () => {
             product_id: "mitaines-classiques",
             unit: "cm",
             measurements: { hand_length: 18, hand_circ: 20 },
-            raynaud: true,
+            chaleur: true,
             leather: "noir",
             comments: "Doublure plus chaude",
           },

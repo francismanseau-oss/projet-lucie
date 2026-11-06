@@ -97,7 +97,7 @@ function customLine(product, suffix, measurements, extras = {}) {
       unit: "cm",
       measurements,
       measurements_cm: { ...measurements },
-      raynaud: !!extras.raynaud,
+      chaleur: !!extras.chaleur,
       comments: extras.comments || "",
       leather: "noir",
     },
@@ -133,16 +133,17 @@ test("SIM — A1 produit standard : ids + qty + prix serveur", () => {
   assert.notEqual(resolved[0].unit_amount, 100);
 });
 
-test("SIM — A2 produit sur mesure : mesures / Raynaud / cuir conservés, prix catalogue", () => {
+test("SIM — A2 produit sur mesure : mesures / chaleur / cuir conservés, prix catalogue", () => {
   const line = customLine(
     mitaine,
     "sim-a2",
     { hand_circumference: 21, hand_length: 19 },
-    { raynaud: true, comments: "Doigté souple" },
+    { chaleur: true, comments: "Doigté souple" },
   );
   const { resolved, total_cents } = buildLineItems(catalog, [line], {
     validateMeasurements,
     measureSpecForCategory,
+    audienceByProductId: { [mitaine.id]: "femmes" },
   });
   assert.equal(resolved[0].custom, true);
   assert.equal(resolved[0].unit_amount, mitaine.price_cad_cents);
@@ -152,7 +153,7 @@ test("SIM — A2 produit sur mesure : mesures / Raynaud / cuir conservés, prix 
     hand_circumference: 21,
     hand_length: 19,
   });
-  assert.equal(resolved[0].custom_config.raynaud, true);
+  assert.equal(resolved[0].custom_config.chaleur, true);
   assert.equal(resolved[0].custom_config.leather, "noir");
   assert.equal(resolved[0].custom_config.comments, "Doigté souple");
 });
@@ -177,24 +178,25 @@ test("SIM — A4 deux personnalisations du même produit (ids distincts, mêmes 
     mitaine,
     "perso-a",
     { hand_circumference: 19, hand_length: 17 },
-    { raynaud: false, comments: "Main A" },
+    { chaleur: false, comments: "Main A" },
   );
   const b = customLine(
     mitaine,
     "perso-b",
     { hand_circumference: 22, hand_length: 20 },
-    { raynaud: true, comments: "Main B" },
+    { chaleur: true, comments: "Main B" },
   );
   const { resolved, total_cents } = buildLineItems(catalog, [a, b], {
     validateMeasurements,
     measureSpecForCategory,
+    audienceByProductId: { [mitaine.id]: "femmes" },
   });
   assert.equal(resolved.length, 2);
   assert.notEqual(resolved[0].id, resolved[1].id);
   assert.equal(resolved[0].custom_config.product_id, mitaine.id);
   assert.equal(resolved[1].custom_config.product_id, mitaine.id);
-  assert.equal(resolved[0].custom_config.raynaud, false);
-  assert.equal(resolved[1].custom_config.raynaud, true);
+  assert.equal(resolved[0].custom_config.chaleur, false);
+  assert.equal(resolved[1].custom_config.chaleur, true);
   assert.match(resolved[0].custom_config.comments, /Main A/);
   assert.match(resolved[1].custom_config.comments, /Main B/);
   assert.equal(total_cents, mitaine.price_cad_cents * 2);
@@ -205,8 +207,8 @@ test("SIM — A4 deux personnalisations du même produit (ids distincts, mêmes 
 test("SIM — checkout params : Canada seulement + mesures en metadata Stripe", () => {
   const { resolved } = buildLineItems(
     catalog,
-    [customLine(mitaine, "ca", { hand_circumference: 20, hand_length: 18 }, { raynaud: true })],
-    { validateMeasurements, measureSpecForCategory },
+    [customLine(mitaine, "ca", { hand_circumference: 20, hand_length: 18 }, { chaleur: true })],
+    { validateMeasurements, measureSpecForCategory, audienceByProductId: { [mitaine.id]: "femmes" } },
   );
   const params = buildCheckoutParams({
     resolved,
@@ -216,7 +218,7 @@ test("SIM — checkout params : Canada seulement + mesures en metadata Stripe", 
   assert.equal(params["shipping_address_collection[allowed_countries][0]"], "CA");
   assert.equal(params["line_items[0][price_data][unit_amount]"], mitaine.price_cad_cents);
   assert.match(params["line_items[0][price_data][product_data][metadata][measurements]"], /hand_circumference/);
-  assert.equal(params["line_items[0][price_data][product_data][metadata][raynaud]"], "1");
+  assert.equal(params["line_items[0][price_data][product_data][metadata][chaleur]"], "1");
 });
 
 test("SIM — B1 paiement réussi (mock) : confirmed seulement après webhook", async () => {
@@ -375,7 +377,7 @@ test("SIM — courriel Lucie mock : contenu commande, mocked=true, pas d’envoi
           product_id: mitaine.id,
           unit: "cm",
           measurements: { hand_circumference: 20, hand_length: 18 },
-          raynaud: true,
+          chaleur: true,
           leather: "noir",
           comments: "Sim test",
         },

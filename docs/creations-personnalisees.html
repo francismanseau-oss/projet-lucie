@@ -125,25 +125,22 @@
 
       <section id="sm-step-2" class="sm-panel sm-step" hidden aria-labelledby="sm-config-title" tabindex="-1">
         <p class="sm-step-num" data-fr="Étape 2" data-en="Step 2">Étape 2</p>
-        <h2 id="sm-config-title" data-fr="Personnaliser" data-en="Customize">Personnaliser</h2>
-        <p class="sm-lead" id="sm-config-lead"></p>
-        <div id="sm-raynaud-wrap" class="sm-check" hidden>
-          <label for="sm-raynaud">
-            <input type="checkbox" id="sm-raynaud">
+        <h2 id="sm-config-title" data-fr="Options de fabrication" data-en="Manufacturing options">Options de fabrication</h2>
+        <p id="sm-config-name" class="sm-config-name"></p>
+        <p class="sm-lead" id="sm-config-lead" data-fr="Fabrication selon vos mensurations." data-en="Made to your measurements.">Fabrication selon vos mensurations.</p>
+        <div id="sm-chaleur-wrap" class="sm-check" hidden>
+          <label for="sm-chaleur">
+            <input type="checkbox" id="sm-chaleur">
             <span>
-              <strong data-fr="Option Raynaud" data-en="Raynaud option">Option Raynaud</strong>
-              <em data-fr="Sans frais supplémentaires (mitaines)." data-en="No extra charge (mittens).">Sans frais supplémentaires (mitaines).</em>
+              <strong data-fr="Chaleur renforcée (+20 $)" data-en="Extra warmth (+$20)">Chaleur renforcée (+20 $)</strong>
+              <em data-fr="Doublure supplémentaire pour une meilleure isolation contre le froid." data-en="Extra lining for better insulation against the cold.">Doublure supplémentaire pour une meilleure isolation contre le froid.</em>
+              <em class="sm-chaleur-pending" data-fr="Ce supplément n’est pas encore inclus dans le total." data-en="This supplement is not included in the total yet.">Ce supplément n’est pas encore inclus dans le total.</em>
             </span>
           </label>
         </div>
-        <aside id="sm-chaleur-note" class="sm-chaleur-note" hidden>
-          <p class="sm-chaleur-title"><strong data-fr="Chaleur renforcée" data-en="Extra warmth">Chaleur renforcée</strong> <span data-fr="— supplément provisoire +20 $ par article. Ce montant n’est pas ajouté au prix pour l’instant." data-en="— provisional +$20 per item. This amount is not added to the price yet.">— supplément provisoire +20 $ par article. Ce montant n’est pas ajouté au prix pour l’instant.</span></p>
-          <p data-fr="Conception spéciale avec ajout d'une couche de laine entre les deux épaisseurs de matériaux, offrant une isolation thermique renforcée pour les personnes particulièrement sensibles au froid ou ayant des problèmes de circulation sanguine." data-en="Special construction with an extra wool layer between the two thicknesses of material, for stronger warmth for people who are particularly sensitive to cold or who have circulation concerns.">Conception spéciale avec ajout d'une couche de laine entre les deux épaisseurs de matériaux, offrant une isolation thermique renforcée pour les personnes particulièrement sensibles au froid ou ayant des problèmes de circulation sanguine.</p>
-        </aside>
         <div class="sm-field">
           <label for="sm-comments" data-fr="Commentaires pour Lucie (facultatif)" data-en="Comments for Lucie (optional)">Commentaires pour Lucie (facultatif)</label>
-          <textarea id="sm-comments" rows="3" maxlength="800" data-fr-placeholder="Précisions de fabrication…" data-en-placeholder="Crafting notes…" placeholder="Précisions de fabrication…" aria-describedby="sm-comments-hint"></textarea>
-          <p id="sm-comments-hint" class="sm-help" data-fr="Facultatif — précisions de fabrication pour Lucie." data-en="Optional — crafting notes for Lucie.">Facultatif — précisions de fabrication pour Lucie.</p>
+          <textarea id="sm-comments" rows="3" maxlength="800" data-fr-placeholder="Précisions pour la fabrication…" data-en-placeholder="Notes for manufacturing…" placeholder="Précisions pour la fabrication…"></textarea>
         </div>
         <div id="sm-options" hidden></div>
       </section>
@@ -151,19 +148,33 @@
       <section id="sm-step-3" class="sm-panel sm-step" hidden aria-labelledby="sm-measures-title" tabindex="-1">
         <p class="sm-step-num" data-fr="Étape 3" data-en="Step 3">Étape 3</p>
         <h2 id="sm-measures-title" data-fr="Indiquer ses mensurations" data-en="Enter your measurements">Indiquer ses mensurations</h2>
-        <p class="sm-lead" data-fr="Choisissez pouces ou centimètres — aucune unité présélectionnée. Conversion automatique (vos valeurs sont conservées)." data-en="Choose inches or centimetres — no unit preselected. Automatic conversion (your values are kept).">Choisissez pouces ou centimètres — aucune unité présélectionnée. Conversion automatique (vos valeurs sont conservées).</p>
-        <figure id="sm-measure-figure" class="sm-measure-figure" hidden>
-          <img id="sm-measure-img" class="sm-measure-img" alt="" width="1200" height="703" decoding="async">
-          <figcaption id="sm-measure-caption" class="sm-measure-caption"></figcaption>
-        </figure>
+        <p class="sm-lead" data-fr="Les centimètres sont déjà choisis. Vous pouvez passer en pouces. La conversion se fait toute seule." data-en="Centimetres are already selected. You can switch to inches. Conversion happens automatically.">Les centimètres sont déjà choisis. Vous pouvez passer en pouces. La conversion se fait toute seule.</p>
         <fieldset class="sm-field">
           <legend data-fr="Unité de mesure" data-en="Unit of measure">Unité de mesure</legend>
           <div class="sm-unit" role="group" aria-labelledby="sm-measures-title">
+            <button type="button" id="sm-unit-cm" aria-pressed="true" data-unit="cm" data-fr="Centimètres" data-en="Centimetres">Centimètres</button>
             <button type="button" id="sm-unit-in" aria-pressed="false" data-unit="in" data-fr="Pouces" data-en="Inches">Pouces</button>
-            <button type="button" id="sm-unit-cm" aria-pressed="false" data-unit="cm" data-fr="Centimètres" data-en="Centimetres">Centimètres</button>
           </div>
-          <p id="sm-unit-hint" class="sm-unit-hint" data-fr="Sélectionnez Pouces ou Centimètres pour afficher les champs." data-en="Select Inches or Centimetres to show the fields.">Sélectionnez Pouces ou Centimètres pour afficher les champs.</p>
+          <p id="sm-unit-hint" class="sm-unit-hint" data-fr="Saisie en centimètres — équivalent pouces affiché sous chaque champ." data-en="Enter centimetres — inch equivalent shown under each field.">Saisie en centimètres — équivalent pouces affiché sous chaque champ.</p>
         </fieldset>
+        <figure id="sm-measure-figure" class="sm-measure-figure" hidden>
+          <img id="sm-measure-img" class="sm-measure-img" alt="" width="1200" height="703" decoding="async">
+          <div id="sm-hand-guide" class="sm-hand-guide" hidden>
+            <div class="sm-hand-head">
+              <h3 id="sm-hand-title"></h3>
+              <p id="sm-hand-sub"></p>
+            </div>
+            <div class="sm-hand-body">
+              <img id="sm-hand-photo" src="assets/mesures/guide-main-schema.jpg" width="536" height="496" alt="" decoding="async">
+              <div class="sm-hand-copy">
+                <ol id="sm-hand-steps"></ol>
+                <div id="sm-hand-tables"></div>
+                <p id="sm-hand-advice"></p>
+              </div>
+            </div>
+          </div>
+          <figcaption id="sm-measure-caption" class="sm-measure-caption"></figcaption>
+        </figure>
         <div id="sm-measures" class="sm-measures" hidden></div>
         <p id="sm-measure-errors" class="sm-help is-error" hidden role="alert" aria-live="assertive"></p>
         <p id="sm-measure-note" class="sm-help" hidden></p>
@@ -194,7 +205,7 @@
     <button type="button" class="cp-back" data-cp-back data-fr="← Retour aux choix" data-en="← Back to choices">← Retour aux choix</button>
     <section class="idea-section" aria-labelledby="idea-title">
       <h2 id="idea-title" data-fr="Proposer une création" data-en="Suggest a creation">Proposer une création</h2>
-      <p class="idea-lead" data-fr="Décrivez votre idée et ajoutez jusqu’à 3 photos. Aucune obligation d’achat." data-en="Describe your idea and add up to 3 photos. No purchase required.">Décrivez votre idée et ajoutez jusqu’à 3 photos. Aucune obligation d’achat.</p>
+      <p class="idea-lead" data-fr="Décrivez votre idée et ajoutez jusqu’à 3 photos. Lucie évaluera la demande. Ce n’est pas un article à prix fixe." data-en="Describe your idea and add up to 3 photos. Lucie will review the request. This is not a fixed-price item.">Décrivez votre idée et ajoutez jusqu’à 3 photos. Lucie évaluera la demande. Ce n’est pas un article à prix fixe.</p>
       <form id="idea-form" class="idea-form" novalidate>
         <div class="idea-honeypot" aria-hidden="true">
           <label for="idea-website">Website</label>

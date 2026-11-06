@@ -10,6 +10,7 @@ const opts = {
   chaleurRule: {
     applies_to_categories: ["mitaines", "pantoufles"],
     applies_to_audiences: ["femmes", "hommes"],
+    price_addon_cad_cents: 2000,
   },
 };
 
@@ -48,7 +49,7 @@ test("Chaleur + refusée si le public n'est pas confirmé", () => {
   );
 });
 
-test("Chaleur + adulte : prix catalogue inchangé, option non facturée", () => {
+test("Chaleur renforcée : annoncée sur une mitaine femme, non ajoutée au prix, refusée ailleurs", () => {
   const id = "mitaines-dame-renard-roux";
   const product = byId(id);
   assert.equal(audience.products[id].audience, "femmes");
@@ -59,5 +60,5 @@ test("Chaleur + adulte : prix catalogue inchangé, option non facturée", () => 
   );
   assert.equal(resolved[0].unit_amount, product.price_cad_cents);
   assert.equal(total_cents, product.price_cad_cents);
-  assert.equal(resolved[0].custom_config.chaleur, undefined);
+  assert.equal(resolved[0].custom_config.chaleur, true);
 });
