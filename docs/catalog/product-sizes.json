@@ -12,8 +12,8 @@
       "sizes": [
         {
           "code": "8-10",
-          "label_fr": "8-10",
-          "label_en": "8-10",
+          "label_fr": "8 à 10 ans",
+          "label_en": "8 to 10 years",
           "qty_on_hand": 3
         }
       ]
@@ -21,14 +21,8 @@
     "chapeau-dame-m-l-coyote": {
       "product_number": 202,
       "category": "chapeaux",
-      "selector": true,
+      "selector": false,
       "sizes": [
-        {
-          "code": "M",
-          "label_fr": "Moyen",
-          "label_en": "Medium",
-          "qty_on_hand": 3
-        },
         {
           "code": "L",
           "label_fr": "Grand",
@@ -97,18 +91,12 @@
     "chapeau-dame-m-l-renard-roux": {
       "product_number": 206,
       "category": "chapeaux",
-      "selector": true,
+      "selector": false,
       "sizes": [
         {
           "code": "M",
           "label_fr": "Moyen",
           "label_en": "Medium",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "L",
-          "label_fr": "Grand",
-          "label_en": "Large",
           "qty_on_hand": 3
         }
       ]
@@ -199,18 +187,12 @@
     "chapeau-homme-m-l-renard-roux": {
       "product_number": 213,
       "category": "chapeaux",
-      "selector": true,
+      "selector": false,
       "sizes": [
         {
           "code": "M",
           "label_fr": "Moyen",
           "label_en": "Medium",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "L",
-          "label_fr": "Grand",
-          "label_en": "Large",
           "qty_on_hand": 3
         }
       ]
@@ -218,14 +200,8 @@
     "chapeau-homme-l-xl-raton": {
       "product_number": 209,
       "category": "chapeaux",
-      "selector": true,
+      "selector": false,
       "sizes": [
-        {
-          "code": "L",
-          "label_fr": "Grand",
-          "label_en": "Large",
-          "qty_on_hand": 3
-        },
         {
           "code": "XL",
           "label_fr": "Très grand",
@@ -279,9 +255,9 @@
       "selector": false,
       "sizes": [
         {
-          "code": "unique",
-          "label_fr": "Format unique",
-          "label_en": "One size",
+          "code": "8-24 mois",
+          "label_fr": "8 à 24 mois",
+          "label_en": "8 to 24 months",
           "qty_on_hand": 3
         }
       ]
@@ -393,18 +369,12 @@
     "mitaines-dame-m-l-chat-sauvage": {
       "product_number": 107,
       "category": "mitaines",
-      "selector": true,
+      "selector": false,
       "sizes": [
         {
           "code": "M",
           "label_fr": "Moyen",
           "label_en": "Medium",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "L",
-          "label_fr": "Grand",
-          "label_en": "Large",
           "qty_on_hand": 3
         }
       ]
@@ -412,14 +382,8 @@
     "mitaines-dame-m-l-fourrure-recyclee": {
       "product_number": 108,
       "category": "mitaines",
-      "selector": true,
+      "selector": false,
       "sizes": [
-        {
-          "code": "M",
-          "label_fr": "Moyen",
-          "label_en": "Medium",
-          "qty_on_hand": 3
-        },
         {
           "code": "L",
           "label_fr": "Grand",
@@ -431,18 +395,12 @@
     "mitaines-dame-renard-roux": {
       "product_number": 104,
       "category": "mitaines",
-      "selector": true,
+      "selector": false,
       "sizes": [
         {
           "code": "M",
           "label_fr": "Moyen",
           "label_en": "Medium",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "L",
-          "label_fr": "Grand",
-          "label_en": "Large",
           "qty_on_hand": 3
         }
       ]
@@ -450,18 +408,12 @@
     "mitaines-dame-vison-et-renard": {
       "product_number": 105,
       "category": "mitaines",
-      "selector": true,
+      "selector": false,
       "sizes": [
         {
           "code": "M",
           "label_fr": "Moyen",
           "label_en": "Medium",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "L",
-          "label_fr": "Grand",
-          "label_en": "Large",
           "qty_on_hand": 3
         }
       ]
@@ -469,14 +421,8 @@
     "mitaines-homme-m-l-castor": {
       "product_number": 115,
       "category": "mitaines",
-      "selector": true,
+      "selector": false,
       "sizes": [
-        {
-          "code": "M",
-          "label_fr": "Moyen",
-          "label_en": "Medium",
-          "qty_on_hand": 3
-        },
         {
           "code": "L",
           "label_fr": "Grand",
@@ -488,14 +434,8 @@
     "mitaines-homme-m-l-coyote": {
       "product_number": 116,
       "category": "mitaines",
-      "selector": true,
+      "selector": false,
       "sizes": [
-        {
-          "code": "M",
-          "label_fr": "Moyen",
-          "label_en": "Medium",
-          "qty_on_hand": 3
-        },
         {
           "code": "L",
           "label_fr": "Grand",
@@ -507,18 +447,12 @@
     "mitaines-homme-m-l-renard-roux": {
       "product_number": 117,
       "category": "mitaines",
-      "selector": true,
+      "selector": false,
       "sizes": [
         {
           "code": "M",
           "label_fr": "Moyen",
           "label_en": "Medium",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "L",
-          "label_fr": "Grand",
-          "label_en": "Large",
           "qty_on_hand": 3
         }
       ]
@@ -702,9 +636,9 @@
       "selector": false,
       "sizes": [
         {
-          "code": "8-10-12",
-          "label_fr": "8-10-12",
-          "label_en": "8-10-12",
+          "code": "8-14",
+          "label_fr": "Junior, 8 à 14 ans",
+          "label_en": "Junior, 8 to 14 years",
           "qty_on_hand": 3
         }
       ]
@@ -715,9 +649,9 @@
       "selector": false,
       "sizes": [
         {
-          "code": "8-10-12",
-          "label_fr": "8-10-12",
-          "label_en": "8-10-12",
+          "code": "8-14",
+          "label_fr": "Junior, 8 à 14 ans",
+          "label_en": "Junior, 8 to 14 years",
           "qty_on_hand": 3
         }
       ]
@@ -728,9 +662,9 @@
       "selector": false,
       "sizes": [
         {
-          "code": "10-14",
-          "label_fr": "10-14",
-          "label_en": "10-14",
+          "code": "8-14",
+          "label_fr": "Junior, 8 à 14 ans",
+          "label_en": "Junior, 8 to 14 years",
           "qty_on_hand": 3
         }
       ]
@@ -741,9 +675,9 @@
       "selector": false,
       "sizes": [
         {
-          "code": "M",
-          "label_fr": "Moyen",
-          "label_en": "Medium",
+          "code": "8-14",
+          "label_fr": "Junior, 8 à 14 ans",
+          "label_en": "Junior, 8 to 14 years",
           "qty_on_hand": 3
         }
       ]

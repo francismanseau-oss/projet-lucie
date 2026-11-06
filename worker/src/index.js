@@ -20,6 +20,7 @@ import catalog from "./products.json" with { type: "json" };
 import productSizes from "./product-sizes.json" with { type: "json" };
 import shippingConfigJson from "./shipping-config.json" with { type: "json" };
 import surMesureConfig from "./sur-mesure-config.json" with { type: "json" };
+import audienceDoc from "./audience.json" with { type: "json" };
 import { validateMeasurements } from "./sur-mesure-pricing.js";
 import {
   assertLiveSaleAllowed,
@@ -221,6 +222,11 @@ async function createCheckout(env, payload) {
     measureSpecForCategory: (category) =>
       surMesureConfig.measurements_by_category?.[category] || { fields: [] },
     productSizes,
+    audienceByProductId: audienceDoc.products || {},
+    chaleurRule: {
+      applies_to_categories: ["mitaines", "pantoufles"],
+      applies_to_audiences: ["femmes", "hommes"],
+    },
   });
   assertLiveSaleAllowed(env, resolved);
 

@@ -449,11 +449,11 @@
     {
       "product_number": 213,
       "product_id": "chapeau-homme-m-l-renard-roux",
-      "name_fr": "Chapeau homme M-L — renard roux",
+      "name_fr": "Chapeau dame M-L — renard roux",
       "category": "chapeaux",
       "family_label": "Chapeaux",
-      "price_cad": 180,
-      "price_cad_cents": 18000,
+      "price_cad": 120,
+      "price_cad_cents": 12000,
       "csm_code": "213-CSM"
     },
     {

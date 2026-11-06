@@ -452,6 +452,20 @@
   }
 }
 
+.sm-chaleur-note{
+  margin:0 0 14px;
+  padding:12px 14px;
+  border:1px solid #e7d5c6;
+  border-radius:8px;
+  background:#fff8f3;
+  color:#4a3b32;
+  font-size:.95rem;
+  line-height:1.45;
+}
+.sm-chaleur-note p{margin:0 0 8px}
+.sm-chaleur-note p:last-child{margin:0}
+.sm-chaleur-title strong{color:#9a3b28}
+
 @media (max-width: 760px) {
   .sm-wrap {
     padding: 24px 5% 90px;

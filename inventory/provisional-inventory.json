@@ -571,9 +571,9 @@
     {
       "product_number": 213,
       "product_id": "chapeau-homme-m-l-renard-roux",
-      "name_fr": "Chapeau homme M-L — renard roux",
+      "name_fr": "Chapeau dame M-L — renard roux",
       "category": "chapeaux",
-      "price_cad": 180,
+      "price_cad": 120,
       "qty_physical_provisional": 3,
       "qty_reserved": 0,
       "qty_available_provisional": 3,

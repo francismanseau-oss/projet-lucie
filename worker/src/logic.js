@@ -21,6 +21,21 @@ export function productMapFromCatalog(catalog) {
   return map;
 }
 
+function chaleurAsked(cfg) {
+  const value = cfg.chaleur ?? cfg.chaleur_renforcee;
+  return value === true || value === 1 || value === "1";
+}
+
+function chaleurEligibleProduct(product, opts, productId) {
+  const rule = opts.chaleurRule || {};
+  const cats = rule.applies_to_categories || ["mitaines", "pantoufles"];
+  const auds = rule.applies_to_audiences || ["femmes", "hommes"];
+  if (!cats.includes(product.category)) return false;
+  const row = opts.audienceByProductId?.[productId];
+  const audience = typeof row === "string" ? row : row?.audience || "";
+  return auds.includes(audience);
+}
+
 /**
  * Construit les lignes CAD depuis le catalogue serveur. Ignore price/browser.
  * @param catalog — produits boutique
@@ -90,6 +105,9 @@ export function buildLineItems(catalog, items, opts = {}) {
           : cfg.product_number != null
             ? Number(cfg.product_number)
             : null;
+      if (chaleurAsked(cfg) && !chaleurEligibleProduct(product, opts, productId)) {
+        throw httpError("Chaleur + non offerte pour cet article", 400);
+      }
       // Raynaud / commentaires : jamais de supplément inventé
       // CSM : skip_inventory — ne décrémente pas le stock régulier (sauf décision Lucie plus tard)
       resolved.push({

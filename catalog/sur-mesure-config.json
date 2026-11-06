@@ -8,6 +8,12 @@
     "note_fr": "Cuir disponible : noir seulement. Les couleurs de fourrure recyclée peuvent varier selon les matériaux disponibles.",
     "note_en": "Leather available: black only. Recycled fur colours may vary depending on materials on hand."
   },
+  "made_to_order": {
+    "label_fr": "Sur commande",
+    "label_en": "Made to order",
+    "delay_fr": "Environ 1 semaine de fabrication, puis le délai de livraison. En période de Noël, l’attente peut aller jusqu’à 3 semaines avant la livraison.",
+    "delay_en": "About 1 week to make, then shipping time. Around Christmas, the wait can be up to 3 weeks before delivery."
+  },
   "free_options": {
     "raynaud": {
       "applies_to_categories": ["mitaines"],
@@ -16,6 +22,21 @@
       "label_en": "Raynaud option",
       "help_fr": "Sans frais supplémentaires — indiquez si vous souhaitez cette adaptation.",
       "help_en": "No extra charge — tell us if you need this adaptation."
+    }
+  },
+  "pending_options": {
+    "chaleur_renforcee": {
+      "status": "en_preparation",
+      "apply_to_order": false,
+      "applies_to_categories": ["mitaines", "pantoufles"],
+      "applies_to_audiences": ["femmes", "hommes"],
+      "price_addon_cad_cents": 2000,
+      "label_fr": "Chaleur renforcée",
+      "label_en": "Extra warmth",
+      "note_fr": "Supplément provisoire +20 $ par article. Non ajouté au prix tant que Lucie ne l’a pas validé.",
+      "note_en": "Provisional +$20 per item. Not added to the price until Lucie validates it.",
+      "description_fr": "Conception spéciale avec ajout d'une couche de laine entre les deux épaisseurs de matériaux, offrant une isolation thermique renforcée pour les personnes particulièrement sensibles au froid ou ayant des problèmes de circulation sanguine.",
+      "description_en": "Special construction with an extra wool layer between the two thicknesses of material, for stronger warmth for people who are particularly sensitive to cold or who have circulation concerns."
     }
   },
   "measurements_by_category": {

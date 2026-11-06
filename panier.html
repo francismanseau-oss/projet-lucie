@@ -112,8 +112,13 @@
     const item=cart.find(x=>lineKey(x)===lineId);
     if(!item)return;
     const sizes=window.BOREALES_PRODUCT_SIZES;
-    if(qty>item.qty&&sizes&&!item.custom){
-      const max=sizes.availableQty(item.id,item.size);
+    if(qty>item.qty&&!item.custom){
+      const sim=window.BOREALES_SIM;
+      if(sim&&sim.local&&sim.checked&&!sim.ok){
+        alert(en()?'Availability is not verified.':'La disponibilité n\'est pas vérifiée.');
+        return;
+      }
+      const max=sim&&sim.ok&&sim.qty?sim.qty(item.id,item.size):(sizes&&sizes.availableQty?sizes.availableQty(item.id,item.size):null);
       if(max!=null&&qty>max){
         alert(en()?('Only '+max+' left for this size.'):('Il ne reste que '+max+' pour cette taille.'));
         return;
@@ -128,6 +133,9 @@
     list.innerHTML='';
     if(!cart.length){
       empty.hidden=false;summary.hidden=true;clearBtn.hidden=true;if(checkout)checkout.hidden=true;
+      if(subtotalEl)subtotalEl.textContent=(en()?'Subtotal: ':'Sous-total des articles : ')+money(0);
+      if(shippingEl)shippingEl.textContent=(en()?'Full-cart shipping: ':'Livraison du panier complet : ')+money(0);
+      if(totalEl)totalEl.textContent=(en()?'Total to pay: ':'Total à payer : ')+money(0);
       return;
     }
     empty.hidden=true;summary.hidden=false;clearBtn.hidden=false;if(checkout)checkout.hidden=false;
@@ -180,8 +188,20 @@
       }
       row.querySelector('.cart-row-price').textContent=money(item.price*item.qty);
       row.querySelector('.qty-val').textContent=String(item.qty);
-      row.querySelector('[data-act="minus"]').addEventListener('click',()=>setQty(lk,item.qty-1));
-      row.querySelector('[data-act="plus"]').addEventListener('click',()=>setQty(lk,item.qty+1));
+      const minusBtn=row.querySelector('[data-act="minus"]');
+      const plusBtn=row.querySelector('[data-act="plus"]');
+      minusBtn.disabled=item.qty<=1;
+      if(!item.custom){
+        const sim=window.BOREALES_SIM;
+        if(sim&&sim.local&&sim.checked&&!sim.ok)plusBtn.disabled=true;
+        else{
+          const sizes=window.BOREALES_PRODUCT_SIZES;
+          const max=sim&&sim.ok&&sim.qty?sim.qty(item.id,item.size):(sizes&&sizes.availableQty?sizes.availableQty(item.id,item.size):null);
+          plusBtn.disabled=max!=null&&item.qty>=max;
+        }
+      }else plusBtn.disabled=item.qty>=20;
+      minusBtn.addEventListener('click',()=>setQty(lk,item.qty-1));
+      plusBtn.addEventListener('click',()=>setQty(lk,item.qty+1));
       row.querySelector('[data-act="remove"]').addEventListener('click',()=>setQty(lk,0));
       list.appendChild(row);
     });
@@ -194,6 +214,7 @@
   }
   clearBtn.addEventListener('click',()=>{localStorage.removeItem(key);save([]);render()});
   window.addEventListener('boreales-lang-changed',()=>render());
+  window.addEventListener('boreales-sim-ready',()=>render());
   document.querySelectorAll('[data-set-lang]').forEach(b=>b.addEventListener('click',()=>setTimeout(render,0)));
   syncShipRadios();
   render();

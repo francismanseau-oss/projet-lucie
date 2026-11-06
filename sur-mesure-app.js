@@ -65,6 +65,7 @@
     comments: document.getElementById("sm-comments"),
     raynaud: document.getElementById("sm-raynaud"),
     raynaudWrap: document.getElementById("sm-raynaud-wrap"),
+    chaleurNote: document.getElementById("sm-chaleur-note"),
     measureErrors: document.getElementById("sm-measure-errors"),
     progress: document.getElementById("sm-progress"),
   };
@@ -90,7 +91,61 @@
     raynaud: false,
     comments: "",
     viewStep: 1,
+    requestedSize: null,
+    linkedProductId: null,
+    audienceById: {},
   };
+
+  const LETTERS = {
+    S: { fr: "Petit", en: "Small" },
+    M: { fr: "Moyen", en: "Medium" },
+    L: { fr: "Grand", en: "Large" },
+    XL: { fr: "Très grand", en: "Extra Large" },
+  };
+
+  function audienceOf(productId) {
+    const row = state.audienceById[productId];
+    return row && row.audience ? row.audience : "";
+  }
+
+  function chaleurEligible(product) {
+    const heat = state.config?.pending_options?.chaleur_renforcee;
+    if (!product || !heat) return false;
+    const cats = heat.applies_to_categories || [];
+    const auds = heat.applies_to_audiences || ["femmes", "hommes"];
+    return cats.includes(product.category) && auds.includes(audienceOf(product.id));
+  }
+
+  function stripChaleurFromUrl() {
+    const url = new URL(location.href);
+    url.searchParams.delete("chaleur");
+    const hash = url.hash
+      .replace(/([?&])chaleur=1\b&?/g, "$1")
+      .replace(/[?&]$/, "");
+    history.replaceState(null, "", url.pathname + url.search + hash);
+  }
+
+  function readOrderLink() {
+    const q = new URLSearchParams(location.search);
+    const raw = (location.hash || "").replace(/^#/, "");
+    const hashQuery = raw.includes("&") ? raw.replace(/^(mesure|idee)&/, "").replace(/^choix=(mesure|idee)&/, "") : "";
+    const hp = new URLSearchParams(hashQuery);
+    const taille = (q.get("taille") || hp.get("taille") || "").toUpperCase();
+    return {
+      modele: q.get("modele") || hp.get("modele") || "",
+      taille: LETTERS[taille] ? taille : "",
+      chaleur: (q.get("chaleur") || hp.get("chaleur")) === "1",
+    };
+  }
+
+  function delayText() {
+    const d = state.config && state.config.made_to_order;
+    if (d && d.delay_fr && d.delay_en) return t(d.delay_fr, d.delay_en);
+    return t(
+      "Environ 1 semaine de fabrication, puis le délai de livraison. En période de Noël, l’attente peut aller jusqu’à 3 semaines avant la livraison.",
+      "About 1 week to make, then shipping time. Around Christmas, the wait can be up to 3 weeks before delivery.",
+    );
+  }
 
   function placeholderSrc() {
     return eng()
@@ -398,6 +453,7 @@
   }
 
   function selectProduct(id) {
+    if (state.linkedProductId && id !== state.linkedProductId) state.requestedSize = null;
     state.productId = id;
     state.unit = null;
     state.measurements = {};
@@ -587,14 +643,26 @@
         t("Réf.", "Ref.") +
         " " +
         product.id;
+      const asked = state.requestedSize && LETTERS[state.requestedSize];
+      const sizeSentence = asked
+        ? t(
+            "Taille demandée : " +
+              LETTERS[state.requestedSize].fr +
+              ". " +
+              delayText() +
+              " Les mesures de l’étape suivante guident la fabrication.",
+            "Requested size: " +
+              LETTERS[state.requestedSize].en +
+              ". " +
+              delayText() +
+              " The next step’s measurements guide crafting.",
+          )
+        : t(
+            "Pas de taille S/M/L/XL : les mesures de l’étape suivante guident la fabrication.",
+            "No S/M/L/XL size: the next step’s measurements guide crafting.",
+          );
       els.configLead.textContent =
-        modelLine +
-        (desc ? " — " + desc : "") +
-        " — " +
-        t(
-          "Pas de taille S/M/L/XL : les mesures de l’étape suivante guident la fabrication.",
-          "No S/M/L/XL size: the next step’s measurements guide crafting.",
-        );
+        modelLine + (desc ? " — " + desc : "") + " — " + sizeSentence;
     }
 
     const raynaudOpt = state.config.free_options?.raynaud;
@@ -603,6 +671,12 @@
       (raynaudOpt.applies_to_categories || []).includes(product.category);
     if (els.raynaudWrap) els.raynaudWrap.hidden = !showRaynaud;
     if (!showRaynaud) state.raynaud = false;
+    const heat = state.config.pending_options?.chaleur_renforcee;
+    const showHeat =
+      heat &&
+      heat.apply_to_order === false &&
+      chaleurEligible(product);
+    if (els.chaleurNote) els.chaleurNote.hidden = !showHeat;
   }
 
   function setUnit(unit) {
@@ -771,15 +845,22 @@
       [t("Modèle", "Model"), displayProductName(product)],
       [t("Réf. catalogue", "Catalog ref."), product.id],
       [t("Prix officiel", "Official price"), price.ok ? money(price.total_cad_cents) : "—"],
-      [
-        t("Unité", "Unit"),
-        state.unit === "in"
-          ? t("Pouces", "Inches")
-          : state.unit === "cm"
-            ? t("Centimètres", "Centimetres")
-            : "—",
-      ],
     ];
+    if (state.requestedSize && LETTERS[state.requestedSize]) {
+      rows.push([
+        t("Taille demandée", "Requested size"),
+        t(LETTERS[state.requestedSize].fr, LETTERS[state.requestedSize].en),
+      ]);
+      rows.push([t("Délai", "Lead time"), delayText()]);
+    }
+    rows.push([
+      t("Unité", "Unit"),
+      state.unit === "in"
+        ? t("Pouces", "Inches")
+        : state.unit === "cm"
+          ? t("Centimètres", "Centimetres")
+          : "—",
+    ]);
     for (const f of spec?.fields || []) {
       const v = state.measurements[f.id];
       rows.push([
@@ -912,6 +993,17 @@
         raynaud: !!state.raynaud,
         comments: state.comments.trim(),
         leather: "noir",
+        requested_size: state.requestedSize || null,
+        requested_size_label_fr: state.requestedSize ? LETTERS[state.requestedSize].fr : null,
+        requested_size_label_en: state.requestedSize ? LETTERS[state.requestedSize].en : null,
+        lead_time_fr:
+          state.requestedSize && state.config?.made_to_order
+            ? state.config.made_to_order.delay_fr
+            : null,
+        lead_time_en:
+          state.requestedSize && state.config?.made_to_order
+            ? state.config.made_to_order.delay_en
+            : null,
         priced_ok: true,
         price_source: "catalog/products.json",
         csm_code: productNumber != null ? productNumber + "-CSM" : "CSM",
@@ -997,6 +1089,7 @@
     const productsUrl = new URL("catalog/products.json", document.baseURI).href;
     const configUrl = new URL("catalog/sur-mesure-config.json", document.baseURI).href;
     const illusUrl = new URL("catalog/sur-mesure-illustrations.json", document.baseURI).href;
+    const audienceUrl = new URL("catalog/audience.json", document.baseURI).href;
     Promise.all([
       fetch(productsUrl, { cache: "no-store" }).then((r) => {
         if (!r.ok) throw new Error("products HTTP " + r.status);
@@ -1010,8 +1103,9 @@
         if (!r.ok) throw new Error("illustrations HTTP " + r.status);
         return r.json();
       }),
+      fetch(audienceUrl, { cache: "no-store" }).then((r) => (r.ok ? r.json() : { products: {} })),
     ])
-      .then(([catalog, config, illustrations]) => {
+      .then(([catalog, config, illustrations, audience]) => {
         const n = Array.isArray(catalog?.products) ? catalog.products.length : 0;
         if (!n) {
           throw new Error("catalog empty");
@@ -1019,6 +1113,7 @@
         state.catalog = catalog;
         state.config = config;
         state.illustrations = illustrations;
+        state.audienceById = audience && audience.products ? audience.products : {};
         clearMsg();
         state.filter = null;
         renderCategoryPick();
@@ -1026,7 +1121,22 @@
         updateStep1Copy();
         renderIllustration();
         refreshSummary();
-        const cats = els.categoryPick?.querySelectorAll(".sm-category-card").length || 0;
+        const link = readOrderLink();
+        const linked = link.modele ? api.findProduct(catalog, link.modele) : null;
+        if (linked) {
+          state.linkedProductId = linked.id;
+          state.requestedSize = link.taille || null;
+          if (link.chaleur && !chaleurEligible(linked)) stripChaleurFromUrl();
+          state.filter = linked.category;
+          if (els.categoryPick) els.categoryPick.hidden = true;
+          if (els.productsWrap) els.productsWrap.hidden = false;
+          renderCategoryPick();
+          updateStep1Copy();
+          selectProduct(linked.id);
+        }
+        const cats = state.filter
+          ? 1
+          : els.categoryPick?.querySelectorAll(".sm-category-card").length || 0;
         if (!cats) {
           setProductsStatus(
             "Catalogue chargé mais aucune catégorie trouvée.",

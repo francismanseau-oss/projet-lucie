@@ -75,10 +75,10 @@
       "name_fr": "Chapeau homme M-L — renard argenté"
     },
     "chapeau-homme-m-l-renard-roux": {
-      "audience": "hommes",
-      "source": "nom",
+      "audience": "femmes",
+      "source": "correction",
       "product_number": 213,
-      "name_fr": "Chapeau homme M-L — renard roux"
+      "name_fr": "Chapeau dame M-L — renard roux"
     },
     "chapeau-homme-l-xl-raton": {
       "audience": "hommes",
@@ -139,6 +139,12 @@
       "source": "nom",
       "product_number": 109,
       "name_fr": "Mitaines enfant 10-12 — mouton rasé"
+    },
+    "mitaines-8-10-vison-fermeture-eclair": {
+      "audience": "enfants",
+      "source": "lucie",
+      "product_number": 100,
+      "name_fr": "Mitaines 8-10 — vison (fermeture éclair)"
     },
     "mitaines-dame-m-renard": {
       "audience": "femmes",
@@ -225,8 +231,8 @@
       "name_fr": "Cache-oreilles ado 10-14 — renard et vison"
     },
     "cache-oreilles-dame-m-vison-et-lapin": {
-      "audience": "femmes",
-      "source": "nom",
+      "audience": "enfants",
+      "source": "correction",
       "product_number": 501,
       "name_fr": "Cache-oreilles dame M — vison et lapin"
     },
@@ -345,13 +351,6 @@
       "product_number": 200,
       "name_fr": "Chapeau — vison recyclée",
       "category": "chapeaux",
-      "reason": "Aucun mot dame, homme, enfant, fille, bébé ou ado dans le nom. Non classé : visible seulement dans Tous."
-    },
-    {
-      "id": "mitaines-8-10-vison-fermeture-eclair",
-      "product_number": 100,
-      "name_fr": "Mitaines 8-10 — vison (fermeture éclair)",
-      "category": "mitaines",
       "reason": "Aucun mot dame, homme, enfant, fille, bébé ou ado dans le nom. Non classé : visible seulement dans Tous."
     },
     {

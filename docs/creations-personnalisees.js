@@ -9,12 +9,28 @@
 
   const eng = () => document.documentElement.lang.startsWith("en");
 
+  function linkParams() {
+    const keep = new URLSearchParams();
+    const q = new URLSearchParams(location.search);
+    const raw = (location.hash || "").replace(/^#/, "");
+    const hashQuery = raw.includes("&") ? raw.replace(/^(mesure|idee)&/, "").replace(/^choix=(mesure|idee)&/, "") : "";
+    const hp = new URLSearchParams(hashQuery);
+    for (const k of ["modele", "taille", "chaleur"]) {
+      const v = q.get(k) || hp.get(k);
+      if (v) keep.set(k, v);
+    }
+    return keep;
+  }
+
   function readChoice() {
     const q = new URLSearchParams(location.search).get("choix");
     if (q === "mesure" || q === "idee") return q;
     let h = (location.hash || "").replace(/^#/, "");
+    const amp = h.indexOf("&");
+    if (amp >= 0) h = h.slice(0, amp);
     if (h.startsWith("choix=")) h = h.slice(6);
     if (h === "mesure" || h === "idee") return h;
+    if (linkParams().get("modele")) return "mesure";
     return null;
   }
 
@@ -28,12 +44,14 @@
     panelMesure.hidden = !isMesure;
     panelIdee.hidden = !isIdee;
 
-    // Hash survit aux redirections de serve (qui enlèvent souvent ?choix=)
+    // Hash survit aux redirections de serve (qui enlèvent souvent ?choix=).
+    // modele / taille / chaleur restent pour ouvrir le bon article.
     const path = location.pathname;
-    const next = showForm ? path + "#" + choice : path;
+    const qs = showForm ? linkParams().toString() : "";
+    const next = showForm ? path + (qs ? "?" + qs : "") + "#" + choice : path;
     if (pushHash === false) {
       history.replaceState({}, "", next);
-    } else if (location.pathname + location.hash !== next && location.href.replace(/#.*$/, "") + (showForm ? "#" + choice : "") !== location.origin + next) {
+    } else if (location.pathname + location.search + location.hash !== next) {
       history.replaceState({}, "", next);
     } else {
       history.replaceState({}, "", next);

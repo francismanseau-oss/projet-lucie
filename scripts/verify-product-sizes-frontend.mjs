@@ -22,13 +22,13 @@ ok(
   "sélecteurs ≥ 3 (formats combinés séparés)",
   Object.values(sizes.products).filter((p) => p.selector).length >= 3,
 );
-ok("#104 M+L", sizes.products["mitaines-dame-renard-roux"]?.sizes?.map((s) => s.code).join(",") === "M,L");
-ok("#105 M+L", sizes.products["mitaines-dame-vison-et-renard"]?.sizes?.map((s) => s.code).join(",") === "M,L");
+ok("#104 M seul", sizes.products["mitaines-dame-renard-roux"]?.sizes?.map((s) => s.code).join(",") === "M");
+ok("#105 M seul", sizes.products["mitaines-dame-vison-et-renard"]?.sizes?.map((s) => s.code).join(",") === "M");
 ok("#126 M+L", sizes.products["mitaines-style-inuit-coyote"]?.sizes?.map((s) => s.code).join(",") === "M,L");
 ok(
-  "#107 M+L stocks séparés",
-  sizes.products["mitaines-dame-m-l-chat-sauvage"]?.selector === true &&
-    sizes.products["mitaines-dame-m-l-chat-sauvage"].sizes.map((s) => s.code).join(",") === "M,L" &&
+  "#107 M seul",
+  sizes.products["mitaines-dame-m-l-chat-sauvage"]?.selector === false &&
+    sizes.products["mitaines-dame-m-l-chat-sauvage"].sizes.map((s) => s.code).join(",") === "M" &&
     sizes.products["mitaines-dame-m-l-chat-sauvage"].sizes.every((s) => s.qty_on_hand === 3),
 );
 ok(

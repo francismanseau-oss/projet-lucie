@@ -83,7 +83,7 @@
       "price_cad_cents": 12000,
       "price_cad": 120,
       "image": "assets/produits/ensemble-dame-vison.png",
-      "description_fr": "Fourrure vison recyclée et cuir d'agneau",
+      "description_fr": "Fourrure de vison recyclée et cuir d'agneau",
       "availability": "contact",
       "active": true,
       "product_number": 207
@@ -138,10 +138,10 @@
     },
     {
       "id": "chapeau-homme-m-l-renard-roux",
-      "name_fr": "Chapeau homme M-L — renard roux",
+      "name_fr": "Chapeau dame M-L — renard roux",
       "category": "chapeaux",
-      "price_cad_cents": 18000,
-      "price_cad": 180,
+      "price_cad_cents": 12000,
+      "price_cad": 120,
       "image": "assets/produits/chapeau-renard-roux.png",
       "description_fr": "Fourrure renard roux recyclée et cuir d'agneau",
       "availability": "contact",
@@ -167,7 +167,7 @@
       "price_cad_cents": 8000,
       "price_cad": 80,
       "image": "assets/produits/ensemble-vison-chapeau-mitaines-8-10.png",
-      "description_fr": "Fourrure vison recyclée et cuir d'agneau",
+      "description_fr": "Fourrure de vison recyclée et cuir d'agneau",
       "availability": "contact",
       "active": true,
       "product_number": 200
@@ -191,7 +191,7 @@
       "price_cad_cents": 4000,
       "price_cad": 40,
       "image": "assets/produits/ensemble-mukluks-mitaines-vison-8-24mois.png",
-      "description_fr": "Fourrure vison recyclée, sans pouces, munies d'une fermeture éclair",
+      "description_fr": "Fourrure de vison recyclée, sans pouces, munies d'une fermeture éclair",
       "availability": "contact",
       "active": true,
       "product_number": 103
@@ -203,7 +203,7 @@
       "price_cad_cents": 4000,
       "price_cad": 40,
       "image": "assets/produits/ensemble-mukluks-mitaines-vison-bebe.png",
-      "description_fr": "Fourrure vison recyclée, sans pouces, munies d'une fermeture éclair",
+      "description_fr": "Fourrure de vison recyclée, sans pouces, munies d'une fermeture éclair",
       "availability": "contact",
       "active": true,
       "product_number": 101
@@ -227,7 +227,7 @@
       "price_cad_cents": 6000,
       "price_cad": 60,
       "image": "assets/produits/mitaines-enfant-vison-fermeture-4-6.png",
-      "description_fr": "Fourrure vison recyclée, avec fermeture éclair",
+      "description_fr": "Fourrure de vison recyclée, avec fermeture éclair",
       "availability": "contact",
       "active": true,
       "product_number": 111
@@ -239,7 +239,7 @@
       "price_cad_cents": 6000,
       "price_cad": 60,
       "image": "assets/produits/mitaines-enfant-vison-fermeture-6-8.png",
-      "description_fr": "Fourrure vison recyclée, avec fermeture éclair",
+      "description_fr": "Fourrure de vison recyclée, avec fermeture éclair",
       "availability": "contact",
       "active": true,
       "product_number": 112
@@ -251,7 +251,7 @@
       "price_cad_cents": 8000,
       "price_cad": 80,
       "image": "assets/produits/mitaines-enfant-chat-sauvage-8-10.png",
-      "description_fr": "Fourrure chat sauvage recyclée",
+      "description_fr": "Fourrure chat sauvage recyclée, avec fermeture éclair",
       "availability": "contact",
       "active": true,
       "product_number": 113
@@ -263,7 +263,7 @@
       "price_cad_cents": 4000,
       "price_cad": 40,
       "image": "assets/produits/ensemble-fille-renard-8-10.png",
-      "description_fr": "Fourrure renard recyclée et cuir d'agneau",
+      "description_fr": "Fourrure renard recyclée et cuir d'agneau, avec fermeture éclair",
       "availability": "contact",
       "active": true,
       "product_number": 114
@@ -275,7 +275,7 @@
       "price_cad_cents": 8000,
       "price_cad": 80,
       "image": "assets/produits/mitaines-enfant-mouton-rase-10-12.png",
-      "description_fr": "Fourrure mouton rasé recyclée",
+      "description_fr": "Fourrure mouton rasé recyclée, avec fermeture éclair",
       "availability": "contact",
       "active": true,
       "product_number": 109
@@ -395,7 +395,7 @@
       "price_cad_cents": 8000,
       "price_cad": 80,
       "image": "assets/produits/ensemble-vison-chapeau-mitaines-8-10.png",
-      "description_fr": "Fourrure vison recyclée et cuir d'agneau, avec fermeture éclair",
+      "description_fr": "Fourrure de vison recyclée et cuir d'agneau, avec fermeture éclair",
       "availability": "contact",
       "active": true,
       "product_number": 100
@@ -407,7 +407,7 @@
       "price_cad_cents": 14000,
       "price_cad": 140,
       "image": "assets/produits/mitaines-vison-small.png",
-      "description_fr": "Fourrure vison recyclée et cuir d'agneau",
+      "description_fr": "Fourrure de vison recyclée et cuir d'agneau",
       "availability": "contact",
       "active": true,
       "product_number": 125
@@ -503,7 +503,7 @@
       "price_cad_cents": 6000,
       "price_cad": 60,
       "image": "assets/produits/ensemble-dame-vison.png",
-      "description_fr": "Fourrure vison recyclée et cuir d'agneau",
+      "description_fr": "Fourrure de vison recyclée et cuir d'agneau",
       "availability": "contact",
       "active": true,
       "product_number": 600
@@ -587,7 +587,7 @@
       "price_cad_cents": 12000,
       "price_cad": 120,
       "image": "assets/produits/mukluks-bebe-vison-7-18mois.png",
-      "description_fr": "Fourrure vison recyclée",
+      "description_fr": "Fourrure de vison recyclée",
       "availability": "contact",
       "active": true,
       "product_number": 402
@@ -599,7 +599,7 @@
       "price_cad_cents": 12000,
       "price_cad": 120,
       "image": "assets/produits/mukluks-bebe-vison-8-18mois.png",
-      "description_fr": "Fourrure vison recyclée",
+      "description_fr": "Fourrure de vison recyclée",
       "availability": "contact",
       "active": true,
       "product_number": 403
@@ -623,7 +623,7 @@
       "price_cad_cents": 12000,
       "price_cad": 120,
       "image": "assets/produits/ensemble-mukluks-mitaines-vison-8-24mois.png",
-      "description_fr": "Fourrure vison recyclée",
+      "description_fr": "Fourrure de vison recyclée",
       "availability": "contact",
       "active": true,
       "product_number": 405
@@ -647,7 +647,7 @@
       "price_cad_cents": 12000,
       "price_cad": 120,
       "image": "assets/produits/ensemble-mukluks-mitaines-vison-bebe.png",
-      "description_fr": "Fourrure vison recyclée, munis d'une fermeture éclair",
+      "description_fr": "Fourrure de vison recyclée, munis d'une fermeture éclair",
       "availability": "contact",
       "active": true,
       "product_number": 401

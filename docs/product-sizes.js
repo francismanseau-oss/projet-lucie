@@ -83,10 +83,14 @@
     let en = fromRowEn || raw;
     if (/mois/i.test(fr) || /mois/i.test(raw)) {
       fr = (fromRowFr || raw).replace(/\s+/g, " ").trim();
-      en = fr.replace(/\bà\s+/gi, "up to ").replace(/\bmois\b/gi, "months");
+      en = fromRowEn && !/mois/i.test(fromRowEn)
+        ? fromRowEn
+        : fr.replace(/\bà\s+/gi, "to ").replace(/\bmois\b/gi, "months");
     } else if (/\bans\b/i.test(fr) || /\bans\b/i.test(raw)) {
       fr = (fromRowFr || raw).replace(/\s+/g, " ").trim();
-      en = fr.replace(/\bans\b/gi, "years");
+      en = fromRowEn && !/\bans\b/i.test(fromRowEn)
+        ? fromRowEn
+        : fr.replace(/\bà\s+/gi, "to ").replace(/\bans\b/gi, "years");
     } else if (/universelle|universal|découper|cut to fit|pointures|sizes/i.test(fromRowFr + fromRowEn + raw)) {
       fr = fromRowFr || "Universelle (pointures 5 à 12, à découper)";
       en = fromRowEn || "Universal (sizes 5–12, cut to fit)";
