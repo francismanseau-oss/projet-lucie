@@ -10,7 +10,15 @@ export function toCm(value, unit) {
   return null;
 }
 
-export function validateMeasurements(measureSpec, unit, values) {
+/**
+ * @param {object} measureSpec
+ * @param {string} unit
+ * @param {object} values
+ * @param {object} [opts]
+ * @param {object} [opts.measurementsCm]
+ * @param {object} [opts.measureOutOfRange]
+ */
+export function validateMeasurements(measureSpec, unit, values, opts) {
   const fields = measureSpec?.fields || [];
   if (!fields.length) {
     return { ok: true, no_fields: true };
@@ -18,7 +26,22 @@ export function validateMeasurements(measureSpec, unit, values) {
   if (!unit || (unit !== "in" && unit !== "cm")) {
     return { ok: false, reason: "unit_required" };
   }
+  const cmMap = opts && opts.measurementsCm ? opts.measurementsCm : null;
+  const oor = (opts && opts.measureOutOfRange) || {};
   for (const f of fields) {
+    if (oor[f.id]) continue;
+    if (cmMap) {
+      const cm = cmMap[f.id];
+      if (f.required && (cm == null || !Number.isFinite(Number(cm)))) {
+        return { ok: false, reason: "measurement_required", field: f.id };
+      }
+      if (cm == null || cm === "") continue;
+      const n = Number(cm);
+      if (!Number.isFinite(n) || n <= 0) {
+        return { ok: false, reason: "measurement_invalid", field: f.id };
+      }
+      continue;
+    }
     const raw = values?.[f.id];
     if (f.required && (raw === "" || raw == null)) {
       return { ok: false, reason: "measurement_required", field: f.id };

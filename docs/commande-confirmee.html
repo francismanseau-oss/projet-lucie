@@ -222,18 +222,18 @@
   function shippingCopy(methodId) {
     if (methodId === "bus_quebec") {
       return {
-        fr: "Votre commande sera expédiée par Express Bus. L'adresse du point de distribution où récupérer votre colis vous sera communiquée par courriel.",
-        en: "Your order will be shipped via Express Bus. The depot address where you can pick up your parcel will be shared with you by email.",
+        fr: "Express Bus : le colis sera acheminé vers un dépôt desservant votre région. Les détails vous seront communiqués après confirmation. Aucun dépôt ni suivi n’est inventé ici.",
+        en: "Express Bus: your parcel will go to a depot serving your area. Details will be shared after confirmation. No depot or tracking number is invented here.",
       };
     }
     if (methodId === "canada_post") {
       return {
-        fr: "Votre commande sera expédiée par Postes Canada à l'adresse de livraison indiquée lors de votre commande.",
-        en: "Your order will be shipped via Canada Post to the delivery address provided with your order.",
+        fr: "Postes Canada : le colis sera expédié à l’adresse fournie, selon les modalités du service postal. Aucune date ni suivi n’est inventé ici.",
+        en: "Canada Post: your parcel will be shipped to the address provided, under postal service terms. No delivery date or tracking number is invented here.",
       };
     }
     return {
-      fr: "Votre commande sera préparée selon les informations de livraison disponibles.",
+      fr: "Votre commande sera préparée selon les informations de livraison enregistrées.",
       en: "Your order will be prepared according to the shipping details on file.",
     };
   }
@@ -368,14 +368,21 @@
       (en() ? "Subtotal: " : "Sous-total : ") +
       moneyCents(products) +
       "<br>" +
-      (en() ? "Shipping" : "Livraison") +
-      (mLabel ? " (" + mLabel + ")" : "") +
-      " : " +
+      (en() ? "Shipping chosen: " : "Livraison choisie : ") +
+      (mLabel || t("To confirm", "À confirmer")) +
+      "<br>" +
+      (en() ? "Shipping fee: " : "Frais de livraison : ") +
       moneyCents(fee) +
       "<br><strong>" +
       (en() ? "Total paid: " : "Total payé : ") +
       moneyCents(total) +
-      " CAD</strong>";
+      " CAD</strong>" +
+      "<br><span style=\"display:block;margin-top:.55rem;font-size:.92rem;color:#5c4f44;\">" +
+      t(
+        "Un courriel de confirmation sera envoyé à l’adresse fournie lors du paiement.",
+        "A confirmation email will be sent to the address provided at checkout.",
+      ) +
+      "</span>";
     totalsEl.innerHTML = totalsHtml;
 
     const copy = shippingCopy(methodId);

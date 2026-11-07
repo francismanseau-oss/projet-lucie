@@ -54,7 +54,15 @@
     };
   }
 
-  function validateMeasurements(measureSpec, unit, values) {
+  /**
+   * @param {object} measureSpec
+   * @param {string} unit
+   * @param {object} values display-unit values (legacy) OR ignored if measurementsCm provided
+   * @param {object} [opts]
+   * @param {object} [opts.measurementsCm] fieldId -> cm number
+   * @param {object} [opts.measureOutOfRange] fieldId -> true
+   */
+  function validateMeasurements(measureSpec, unit, values, opts) {
     const fields = measureSpec?.fields || [];
     if (!fields.length) {
       return { ok: true, no_fields: true };
@@ -62,7 +70,22 @@
     if (!unit || (unit !== "in" && unit !== "cm")) {
       return { ok: false, reason: "unit_required" };
     }
+    const cmMap = opts && opts.measurementsCm ? opts.measurementsCm : null;
+    const oor = (opts && opts.measureOutOfRange) || {};
     for (const f of fields) {
+      if (oor[f.id]) continue;
+      if (cmMap) {
+        const cm = cmMap[f.id];
+        if (f.required && (cm == null || !Number.isFinite(Number(cm)))) {
+          return { ok: false, reason: "measurement_required", field: f.id };
+        }
+        if (cm == null || cm === "") continue;
+        const n = Number(cm);
+        if (!Number.isFinite(n) || n <= 0) {
+          return { ok: false, reason: "measurement_invalid", field: f.id };
+        }
+        continue;
+      }
       const raw = values?.[f.id];
       if (f.required && (raw === "" || raw == null)) {
         return { ok: false, reason: "measurement_required", field: f.id };
@@ -90,7 +113,10 @@
       return { ok: true, price, product, skip_measures: true };
     }
     const spec = categoryMeasures(config, product.category);
-    const meas = validateMeasurements(spec, state.unit, state.measurements);
+    const meas = validateMeasurements(spec, state.unit, state.measurements, {
+      measurementsCm: state.measurementsCm,
+      measureOutOfRange: state.measureOutOfRange,
+    });
     if (!meas.ok) return { ok: false, reason: meas.reason, field: meas.field };
     return { ok: true, price, product };
   }

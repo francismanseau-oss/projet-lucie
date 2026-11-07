@@ -49,14 +49,32 @@ function formatMeasurements(c) {
   const unit = c.unit || "—";
   const m = c.measurements || {};
   const mCm = c.measurements_cm || {};
+  const oor = c.measure_out_of_range || {};
+  const labels = c.measurement_labels || {};
   const lines = [];
+  const seen = new Set();
   for (const [k, v] of Object.entries(m)) {
-    lines.push(`${k} : ${v} ${unit}`);
+    if (oor[k]) continue;
+    if (v === "" || v == null) continue;
+    const lab = labels[k]?.fr || k;
+    lines.push(`${lab} : ${v} ${unit}`);
+    seen.add(k);
   }
   for (const [k, v] of Object.entries(mCm)) {
-    if (m[k] == null) lines.push(`${k} : ${v} cm`);
+    if (oor[k] || seen.has(k) || v == null) continue;
+    const lab = labels[k]?.fr || k;
+    lines.push(`${lab} : ${v} cm`);
+    seen.add(k);
   }
-  return lines.join(" · ") || JSON.stringify(m);
+  for (const [k, flagged] of Object.entries(oor)) {
+    if (!flagged) continue;
+    const lab = labels[k]?.fr || k;
+    lines.push(`${lab} : Mesure hors liste — Lucie contactera le client`);
+  }
+  if (Array.isArray(c.special_requests) && c.special_requests.length) {
+    lines.push(`Demandes particulières : ${c.special_requests.join(", ")}`);
+  }
+  return lines.join(" · ") || "—";
 }
 
 /**
@@ -109,6 +127,7 @@ export function buildPaidOrderEmail(sessionObj, pending, env, archive = null) {
   const subject = `Bon de commande ${orderNumber} — ${kindLabel} — ${name}`;
 
   const shipMethod =
+    archive?.shipping?.client_chosen_method ||
     archive?.shipping?.method ||
     pending?.shipping_method ||
     sessionObj?.metadata?.shipping ||
@@ -194,7 +213,7 @@ export function buildPaidOrderEmail(sessionObj, pending, env, archive = null) {
     linesText.length ? linesText.join("\n") : "- (détail non disponible)",
     "",
     "LIVRAISON",
-    `  Méthode : ${methodLabel(shipMethod)}`,
+    `  Livraison choisie : ${methodLabel(shipMethod)}`,
     `  Frais payés : ${moneyCad(shipFee, currency)}`,
     `  Destination : ${destLine}`,
     archive?.shipping?.instructions ? `  Instructions : ${archive.shipping.instructions}` : null,
@@ -358,6 +377,143 @@ export async function sendResendEmail(env, body, fetchImpl = fetch) {
   return { ok: true, mocked: false, id: data.id || null };
 }
 
+function shippingNextStepCopy(methodId) {
+  if (methodId === "bus_quebec") {
+    return "Express Bus : votre colis sera acheminé vers un dépôt desservant votre région. Les détails du dépôt vous seront communiqués après confirmation — aucun dépôt ni numéro de suivi n’est inventé ici.";
+  }
+  if (methodId === "canada_post") {
+    return "Postes Canada : votre colis sera expédié à l’adresse fournie, selon les modalités du service postal. Aucune date de livraison ni numéro de suivi n’est inventé ici.";
+  }
+  return "Votre commande sera préparée selon le mode de livraison enregistré. Les détails d’expédition vous seront communiqués au besoin.";
+}
+
+/**
+ * Courriel client — commande boutique (ou sur mesure non « adaptée »).
+ * Inclut mode de livraison choisi + frais + total.
+ */
+export function buildCustomerShopConfirmEmail(sessionObj, pending, env, archive = null) {
+  const email =
+    archive?.customer?.email ||
+    sessionObj?.customer_details?.email ||
+    sessionObj?.customer_email ||
+    pending?.customer_email ||
+    null;
+  if (!email) return null;
+  const name =
+    archive?.customer?.name ||
+    sessionObj?.customer_details?.name ||
+    pending?.customer_name ||
+    "Client";
+  const orderNumber = archive?.order_number || sessionObj?.metadata?.order_number || "—";
+  const from =
+    env.SUGGESTION_FROM_EMAIL ||
+    "Les Fourrures Boréales <onboarding@resend.dev>";
+  const shipMethod =
+    archive?.shipping?.client_chosen_method ||
+    archive?.shipping?.method ||
+    pending?.shipping_method ||
+    sessionObj?.metadata?.shipping ||
+    null;
+  const shipFee =
+    archive?.shipping?.fee_cad_cents ??
+    archive?.financial?.shipping_fee_cents ??
+    pending?.shipping_fee_cents ??
+    (sessionObj?.metadata?.shipping_fee_cents != null
+      ? Number(sessionObj.metadata.shipping_fee_cents)
+      : null);
+  const productsCents = archive?.financial?.products_cents ?? pending?.products_cents;
+  const amountTotal =
+    archive?.financial?.amount_total_cents ??
+    sessionObj?.amount_total ??
+    pending?.amount_total_cents;
+  const currency = archive?.currency || sessionObj?.currency || "cad";
+  const items = Array.isArray(archive?.items)
+    ? archive.items
+    : Array.isArray(pending?.items)
+      ? pending.items
+      : [];
+
+  const linesText = items.map((it) => {
+    const size =
+      it.size_label_fr || it.size_label || it.size || it.custom_config?.size_label_fr || null;
+    const qty = it.qty || 1;
+    const customBit = it.custom || it.custom_config ? " (sur mesure)" : "";
+    return `- ${it.name || it.id}${customBit}${size ? ` — taille ${size}` : ""} × ${qty}`;
+  });
+
+  const subject = `Confirmation de commande ${orderNumber} — Les Fourrures Boréales`;
+  const nextStep = shippingNextStepCopy(shipMethod);
+  const text = [
+    "Merci pour votre achat !",
+    "",
+    `Bonjour ${name},`,
+    "",
+    `Votre paiement est confirmé. N° de commande : ${orderNumber}`,
+    "",
+    "Articles :",
+    linesText.length ? linesText.join("\n") : "- (détail non disponible)",
+    "",
+    `Sous-total : ${moneyCad(productsCents, currency)}`,
+    `Livraison choisie : ${methodLabel(shipMethod)}`,
+    `Frais de livraison : ${moneyCad(shipFee, currency)}`,
+    `Total payé : ${moneyCad(amountTotal, currency)}`,
+    "",
+    "Prochaine étape : nous préparons votre commande.",
+    nextStep,
+    "",
+    "Les Fourrures Boréales",
+  ].join("\n");
+
+  const itemsHtml = items.length
+    ? `<ul style="margin:0;padding-left:1.1rem;line-height:1.5;">${items
+        .map((it) => {
+          const size =
+            it.size_label_fr || it.size_label || it.size || it.custom_config?.size_label_fr || null;
+          const qty = it.qty || 1;
+          const customBit = it.custom || it.custom_config ? " <em>(sur mesure)</em>" : "";
+          return `<li style="margin:0 0 8px;"><strong>${escapeHtml(it.name || it.id)}</strong>${customBit}${
+            size ? ` — ${escapeHtml(size)}` : ""
+          } · qté ${qty}</li>`;
+        })
+        .join("")}</ul>`
+    : `<p style="margin:0;color:#5c4f44;">Détail des articles non disponible.</p>`;
+
+  const html = `<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHtml(subject)}</title></head>
+<body style="margin:0;background:#f3ebe3;font-family:Georgia,serif;color:#2b2420;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="padding:28px 12px;"><tr><td align="center">
+  <table width="100%" style="max-width:640px;background:#fffcf8;border:1px solid #e5d8c8;border-radius:12px;">
+    <tr><td style="padding:28px;">
+      <p style="margin:0;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:#965035;">Les Fourrures Boréales</p>
+      <h1 style="margin:14px 0 0;font-size:26px;font-weight:400;">Merci pour votre achat !</h1>
+      <p style="margin:18px 0 0;font-size:16px;line-height:1.55;">Bonjour ${escapeHtml(name)},</p>
+      <p style="margin:14px 0 0;font-size:16px;line-height:1.55;">Votre paiement est confirmé.</p>
+      <p style="margin:14px 0 0;font-size:15px;color:#5c4f44;">N° de commande : <strong>${escapeHtml(orderNumber)}</strong></p>
+      <p style="margin:22px 0 8px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#965035;">Articles</p>
+      ${itemsHtml}
+      <div style="margin-top:18px;padding:16px;background:#f7f1ea;border-radius:8px;font-size:15px;line-height:1.55;">
+        <p style="margin:0;">Sous-total : <strong>${escapeHtml(moneyCad(productsCents, currency))}</strong></p>
+        <p style="margin:8px 0 0;">Livraison choisie : <strong>${escapeHtml(methodLabel(shipMethod))}</strong></p>
+        <p style="margin:8px 0 0;">Frais de livraison : <strong>${escapeHtml(moneyCad(shipFee, currency))}</strong></p>
+        <p style="margin:12px 0 0;font-size:18px;">Total payé : <strong>${escapeHtml(moneyCad(amountTotal, currency))}</strong></p>
+      </div>
+      <p style="margin:18px 0 0;font-size:16px;line-height:1.55;"><strong>Prochaine étape :</strong> nous préparons votre commande.</p>
+      <p style="margin:10px 0 0;font-size:15px;line-height:1.55;color:#5c4f44;">${escapeHtml(nextStep)}</p>
+    </td></tr>
+  </table>
+  </td></tr></table>
+</body></html>`;
+
+  return {
+    to: email,
+    from,
+    subject,
+    text,
+    html,
+    order_number: orderNumber,
+  };
+}
+
 /** Courriel client — produit adapté sans mesures (ex. n° 400). */
 export function buildCustomerAdaptedConfirmEmail(sessionObj, pending, env, archive = null) {
   const email =
@@ -486,14 +642,12 @@ export async function notifyLucieOrderPaid(env, sessionObj, fetchImpl = fetch, o
 
   const mail = buildPaidOrderEmail(sessionObj, pending, env, archive);
   const sent = await sendResendEmail(env, mail, fetchImpl);
-  let customer_notify = { skipped: true, reason: "not_adapted" };
-  if (orderHasAdaptedContact(archive, pending)) {
-    const customerMail = buildCustomerAdaptedConfirmEmail(sessionObj, pending, env, archive);
-    if (customerMail) {
-      customer_notify = await sendResendEmail(env, customerMail, fetchImpl);
-    } else {
-      customer_notify = { skipped: true, reason: "no_customer_email" };
-    }
+  let customer_notify = { skipped: true, reason: "no_customer_email" };
+  const customerMail = orderHasAdaptedContact(archive, pending)
+    ? buildCustomerAdaptedConfirmEmail(sessionObj, pending, env, archive)
+    : buildCustomerShopConfirmEmail(sessionObj, pending, env, archive);
+  if (customerMail) {
+    customer_notify = await sendResendEmail(env, customerMail, fetchImpl);
   }
   await markNotifyResult(env, sessionObj.id, { ...sent, customer_notify });
   return {

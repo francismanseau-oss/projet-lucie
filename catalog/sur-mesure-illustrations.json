@@ -30,38 +30,60 @@
       "label_fr": "Chapeaux",
       "label_en": "Hats",
       "files": {
-        "fr": "assets/mesures/chapeaux-mesures-fr.webp",
-        "en": "assets/mesures/chapeaux-mesures-en.webp"
+        "fr": "assets/mesures/tete-mesures-humain-fr.jpg",
+        "en": "assets/mesures/tete-mesures-humain-en.jpg"
       },
-      "alt_fr": "Schéma : tour de tête au niveau du front (1) — mesure provisoire.",
-      "alt_en": "Diagram: head circumference at forehead level (1) — provisional measure.",
+      "alt_fr": "Schéma : tour de tête au-dessus des oreilles.",
+      "alt_en": "Diagram: head circumference above the ears.",
       "markers": [
-        { "n": 1, "field_id": "head_circumference", "label_fr": "Tour de tête", "label_en": "Head circumference" }
+        {
+          "field_id": "head_circumference",
+          "label_fr": "Tour de tête",
+          "label_en": "Head circumference"
+        }
       ],
       "asset_status": "pret",
-      "provisional": true,
-      "verified_at": "2026-11-01",
-      "verified_size_px": [1200, 900]
+      "provisional": false,
+      "note_fr": "Mannequin tête humain — partagé chapeaux / cache-oreilles. Variante EN fournie.",
+      "note_en": "Human head diagram — shared hats / earmuffs. EN variant provided.",
+      "verified_at": "2026-11-07",
+      "verified_size_px": [
+        1024,
+        682
+      ]
     },
     "mitaines": {
       "label_fr": "Mitaines",
       "label_en": "Mittens",
       "files": {
-        "fr": "assets/mesures/mitaines-mesures-fr.webp",
-        "en": "assets/mesures/mitaines-mesures-en.webp"
+        "fr": "assets/mesures/guide-main-schema.jpg",
+        "en": "assets/mesures/guide-main-schema.jpg"
       },
       "alt_fr": "Schéma : tour de main autour de la paume sans le pouce (1), longueur de la main du pli du poignet au bout du majeur (2).",
       "alt_en": "Diagram: hand circumference around the palm excluding the thumb (1), hand length from wrist crease to middle fingertip (2).",
       "markers": [
-        { "n": 1, "field_id": "hand_circumference", "label_fr": "Tour de main", "label_en": "Hand circumference" },
-        { "n": 2, "field_id": "hand_length", "label_fr": "Longueur de la main", "label_en": "Hand length" }
+        {
+          "n": 1,
+          "field_id": "hand_circumference",
+          "label_fr": "Tour de main",
+          "label_en": "Hand circumference"
+        },
+        {
+          "n": 2,
+          "field_id": "hand_length",
+          "label_fr": "Longueur de la main",
+          "label_en": "Hand length"
+        }
       ],
       "asset_status": "pret",
       "provisional": false,
-      "verified_at": "2026-11-05",
-      "verified_size_px": [1200, 703],
-      "note_fr": "Validé Lucie — mesures définitives. Proportions / textes / hauteur 2026-11-05.",
-      "note_en": "Lucie-validated — final measurements. Proportions / text / height 2026-11-05."
+      "verified_at": "2026-11-07",
+      "verified_size_px": [
+        1024,
+        682
+      ],
+      "note_fr": "Mannequin main humain (photo) — boutique « i » et créations. Même fichier FR/EN (repères numériques).",
+      "note_en": "Human hand photo diagram — shop info icon and custom creations. Same FR/EN file (numeric markers)."
     },
     "foulards": {
       "label_fr": "Foulards",
@@ -73,48 +95,78 @@
       "alt_fr": "Schéma foulard : longueur (1) et largeur (2) — mesures provisoires.",
       "alt_en": "Scarf diagram: length (1) and width (2) — provisional measures.",
       "markers": [
-        { "n": 1, "field_id": "scarf_length", "label_fr": "Longueur souhaitée", "label_en": "Desired length" },
-        { "n": 2, "field_id": "scarf_width", "label_fr": "Largeur souhaitée", "label_en": "Desired width" }
+        {
+          "n": 1,
+          "field_id": "scarf_length",
+          "label_fr": "Longueur souhaitée",
+          "label_en": "Desired length"
+        },
+        {
+          "n": 2,
+          "field_id": "scarf_width",
+          "label_fr": "Largeur souhaitée",
+          "label_en": "Desired width"
+        }
       ],
       "asset_status": "pret",
       "provisional": true,
       "verified_at": "2026-11-01",
-      "verified_size_px": [1200, 900]
+      "verified_size_px": [
+        1200,
+        900
+      ]
     },
     "cache-oreilles": {
       "label_fr": "Cache-oreilles",
       "label_en": "Earmuffs",
       "files": {
-        "fr": "assets/mesures/cache-oreilles-mesures-fr.webp",
-        "en": "assets/mesures/cache-oreilles-mesures-en.webp"
+        "fr": "assets/mesures/tete-mesures-humain-fr.jpg",
+        "en": "assets/mesures/tete-mesures-humain-en.jpg"
       },
-      "alt_fr": "Schéma : tour de tête (1) pour cache-oreilles — mesure provisoire.",
-      "alt_en": "Diagram: head circumference (1) for earmuffs — provisional measure.",
+      "alt_fr": "Schéma : tour de tête au-dessus des oreilles.",
+      "alt_en": "Diagram: head circumference above the ears.",
       "markers": [
-        { "n": 1, "field_id": "head_circumference", "label_fr": "Tour de tête", "label_en": "Head circumference" }
+        {
+          "field_id": "head_circumference",
+          "label_fr": "Tour de tête",
+          "label_en": "Head circumference"
+        }
       ],
       "asset_status": "pret",
-      "provisional": true,
-      "verified_at": "2026-11-01",
-      "verified_size_px": [1200, 900]
+      "provisional": false,
+      "note_fr": "Mannequin tête humain — partagé chapeaux / cache-oreilles. Variante EN fournie.",
+      "note_en": "Human head diagram — shared hats / earmuffs. EN variant provided.",
+      "verified_at": "2026-11-07",
+      "verified_size_px": [
+        1024,
+        682
+      ]
     },
     "semelles": {
       "label_fr": "Semelles",
       "label_en": "Insoles",
       "files": {
-        "fr": "assets/mesures/semelles-mesures-fr.webp",
-        "en": "assets/mesures/semelles-mesures-en.webp"
+        "fr": "assets/mesures/pied-mesures-humain-fr.jpg",
+        "en": "assets/mesures/pied-mesures-humain-en.jpg"
       },
-      "alt_fr": "Schéma : longueur du pied (1) et largeur facultative (2) — mesures provisoires.",
-      "alt_en": "Diagram: foot length (1) and optional foot width (2) — provisional measures.",
+      "alt_fr": "Schéma : longueur du pied.",
+      "alt_en": "Diagram: foot length.",
       "markers": [
-        { "n": 1, "field_id": "foot_length", "label_fr": "Longueur du pied", "label_en": "Foot length" },
-        { "n": 2, "field_id": "foot_width", "label_fr": "Largeur du pied", "label_en": "Foot width" }
+        {
+          "field_id": "foot_length",
+          "label_fr": "Longueur du pied",
+          "label_en": "Foot length"
+        }
       ],
       "asset_status": "pret",
-      "provisional": true,
-      "verified_at": "2026-11-01",
-      "verified_size_px": [1200, 900]
+      "provisional": false,
+      "note_fr": "Mannequin pied humain (longueur seule) — partagé pantoufles / semelles. Variante EN fournie.",
+      "note_en": "Human foot diagram (length only) — shared slippers / insoles. EN variant provided.",
+      "verified_at": "2026-11-07",
+      "verified_size_px": [
+        1024,
+        682
+      ]
     },
     "mukluks": {
       "label_fr": "Mukluks",
@@ -127,8 +179,12 @@
       "alt_fr": "Pas de schéma pied pour les mukluks (surtout bébé). Adulte : contactez Lucie.",
       "alt_en": "No foot diagram for mukluks (mostly baby). Adult: contact Lucie.",
       "markers": [
-        { "n": 1, "field_id": "foot_length", "label_fr": "Longueur (bébé)", "label_en": "Length (baby)" },
-        { "n": 2, "field_id": "foot_width", "label_fr": "Largeur (bébé)", "label_en": "Width (baby)" }
+        {
+          "n": 1,
+          "field_id": "foot_length",
+          "label_fr": "Longueur (bébé)",
+          "label_en": "Length (baby)"
+        }
       ],
       "note_fr": "Les mukluks sur mesure sont surtout pour bébé : aucun schéma de pied adulte. Pour un adulte, contactez Lucie.",
       "note_en": "Custom mukluks are mostly for babies: no adult foot diagram. For an adult, contact Lucie.",
@@ -140,19 +196,27 @@
       "label_fr": "Pantoufles",
       "label_en": "Slippers",
       "files": {
-        "fr": "assets/mesures/pantoufles-mesures-fr.webp",
-        "en": "assets/mesures/pantoufles-mesures-en.webp"
+        "fr": "assets/mesures/pied-mesures-humain-fr.jpg",
+        "en": "assets/mesures/pied-mesures-humain-en.jpg"
       },
-      "alt_fr": "Schéma : longueur du pied (1) et largeur du pied (2) pour pantoufles — mesures provisoires.",
-      "alt_en": "Diagram: foot length (1) and foot width (2) for slippers — provisional measures.",
+      "alt_fr": "Schéma : longueur du pied.",
+      "alt_en": "Diagram: foot length.",
       "markers": [
-        { "n": 1, "field_id": "foot_length", "label_fr": "Longueur du pied", "label_en": "Foot length" },
-        { "n": 2, "field_id": "foot_width", "label_fr": "Largeur du pied", "label_en": "Foot width" }
+        {
+          "field_id": "foot_length",
+          "label_fr": "Longueur du pied",
+          "label_en": "Foot length"
+        }
       ],
       "asset_status": "pret",
-      "provisional": true,
-      "verified_at": "2026-11-01",
-      "verified_size_px": [1200, 900]
+      "provisional": false,
+      "note_fr": "Mannequin pied humain (longueur seule) — partagé pantoufles / semelles. Variante EN fournie.",
+      "note_en": "Human foot diagram (length only) — shared slippers / insoles. EN variant provided.",
+      "verified_at": "2026-11-07",
+      "verified_size_px": [
+        1024,
+        682
+      ]
     }
   }
 }

@@ -11,17 +11,18 @@
 <body>
   <header class="top">
     <h1>Mes commandes</h1>
-    <p class="sub">Fourrures Boréales — outil local</p>
+    <p class="sub">Fourrures Boréales — outil local sécurisé</p>
     <nav class="admin-nav">
       <a href="orders.html" aria-current="page">Commandes</a>
       <a href="index.html">Inventaire</a>
+      <a href="clients.html">Messages clients</a>
     </nav>
     <p id="banner" class="banner" hidden></p>
   </header>
 
   <section id="login-view" class="card login-card">
     <h2>Connexion</h2>
-    <p class="hint">Mot de passe requis. Aucun accès public.</p>
+    <p class="hint">Mot de passe requis. Les coordonnées clients restent dans cet outil seulement.</p>
     <label for="password">Mot de passe</label>
     <input id="password" type="password" autocomplete="current-password" minlength="8">
     <button type="button" id="btn-login" class="btn btn-primary btn-lg">Entrer</button>
@@ -29,31 +30,81 @@
   </section>
 
   <section id="app-view" hidden>
+    <div id="orders-dashboard" class="orders-dashboard card" aria-live="polite"></div>
+
     <div class="toolbar card">
-      <input id="search" type="search" placeholder="Commande, produit, client…">
-      <label for="filter">Filtrer</label>
-      <select id="filter">
-        <option value="toutes">Toutes</option>
-        <option value="payees">Payées (vérifiées)</option>
-        <option value="a_fabriquer">À fabriquer</option>
-        <option value="a_preparer">À préparer</option>
-        <option value="expediees">Expédiées</option>
-        <option value="annulees">Annulées</option>
-      </select>
-      <div class="toolbar-actions">
-        <button type="button" id="btn-import" class="btn btn-primary">Actualiser depuis Stripe TEST</button>
-        <button type="button" id="btn-logout" class="btn btn-ghost">Quitter</button>
+      <label class="sr-only" for="search">Recherche</label>
+      <input id="search" type="search" placeholder="Commande, produit, client…" enterkeyhint="search">
+
+      <div class="filter-zone">
+        <p class="filter-zone-title">Filtres</p>
+        <div id="order-filters" class="filter-row" role="group" aria-label="Filtres commandes">
+          <button type="button" class="btn btn-filter is-on" data-filter="toutes">Toutes</button>
+          <button type="button" class="btn btn-filter" data-filter="a_fabriquer">Sur mesure</button>
+          <button type="button" class="btn btn-filter" data-filter="a_preparer">À préparer</button>
+          <button type="button" class="btn btn-filter" data-filter="expediees">Expédiées</button>
+          <button type="button" class="btn btn-filter" data-filter="annulees">Annulées</button>
+          <button type="button" class="btn btn-filter" data-filter="archivees">Archivées</button>
+        </div>
+        <label class="sort-row" for="order-sort">
+          <span class="sort-label">Ordre</span>
+          <select id="order-sort">
+            <option value="oldest" selected>Plus anciennes d’abord</option>
+            <option value="newest">Plus récentes d’abord</option>
+          </select>
+        </label>
       </div>
-      <p class="hint">L’import lit seulement les paiements <strong>test</strong> déjà payés. Aucune commande inventée.</p>
+
+      <details class="admin-acc">
+        <summary class="admin-acc-summary">Options</summary>
+        <div class="admin-acc-body">
+          <p id="stripe-mode" class="stripe-mode" role="status">Mode essai — paiements fictifs</p>
+          <div class="toolbar-actions orders-actions">
+            <button type="button" id="btn-import" class="btn btn-primary">Actualiser les commandes</button>
+            <button type="button" id="btn-open-change" class="btn btn-ghost">Changer le mot de passe</button>
+          </div>
+        </div>
+      </details>
     </div>
 
-    <p id="empty" class="empty">Aucune commande pour l’instant. Importez depuis Stripe TEST après un paiement fictif.</p>
-    <div id="list" class="order-list"></div>
+    <p id="empty" class="empty">Aucune commande pour l’instant. Actualisez après un paiement d’essai.</p>
+    <div id="list" class="order-list" role="list"></div>
   </section>
 
   <dialog id="dlg">
+    <div class="dlg-topbar">
+      <strong class="dlg-topbar-title">Détail commande</strong>
+      <form method="dialog">
+        <button type="submit" class="btn btn-ghost" value="cancel">Fermer</button>
+      </form>
+    </div>
     <div id="dlg-body"></div>
-    <form method="dialog"><button class="btn btn-ghost btn-lg">Fermer</button></form>
+  </dialog>
+
+  <dialog id="dlg-confirm-delete" class="dlg-confirm">
+    <h2>Supprimer cette commande ?</h2>
+    <p id="dlg-confirm-delete-msg" class="hint"></p>
+    <p class="hint">Stripe n’est pas touché. Irréversible dans cet outil.</p>
+    <div class="dlg-confirm-actions">
+      <button type="button" class="btn btn-ghost btn-lg" id="btn-confirm-delete-no">Annuler</button>
+      <button type="button" class="btn btn-danger btn-lg" id="btn-confirm-delete-yes">OK — supprimer</button>
+    </div>
+  </dialog>
+
+  <dialog id="dlg-change-password" class="dlg-confirm dlg-change-pw">
+    <h2>Changer le mot de passe</h2>
+    <p class="hint">Le mot de passe actuel reste valide tant qu’un nouveau n’est pas enregistré.</p>
+    <label for="cur-password">Mot de passe actuel</label>
+    <input id="cur-password" type="password" autocomplete="current-password" minlength="8">
+    <label for="new-password">Nouveau mot de passe</label>
+    <input id="new-password" type="password" autocomplete="new-password" minlength="8">
+    <label for="new-password2">Confirmez le nouveau</label>
+    <input id="new-password2" type="password" autocomplete="new-password" minlength="8">
+    <p id="change-pw-error" class="error" hidden></p>
+    <div class="dlg-confirm-actions">
+      <button type="button" class="btn btn-ghost btn-lg" id="btn-change-cancel">Annuler</button>
+      <button type="button" class="btn btn-primary btn-lg" id="btn-change-save">Enregistrer</button>
+    </div>
   </dialog>
 
   <script type="module" src="orders.js"></script>

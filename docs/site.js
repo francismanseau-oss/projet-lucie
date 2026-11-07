@@ -14,8 +14,8 @@ const kidsCss=document.querySelector('link[href$="style.css"],link[href*="style.
 const kidsHref=kidsCss?kidsCss.getAttribute('href'):'style.css';
 kidsIcon.src=kidsHref.replace(/style\.css.*$/,'')+'assets/icones/fermeture-eclair-28.png';
 const kidsText=document.createElement('span');
-kidsText.dataset.fr="Toutes nos mitaines pour bébés et enfants sont munies d'une fermeture éclair pour faciliter l'enfilage.";
-kidsText.dataset.en="All our baby and children's mittens feature a zipper for easier dressing.";
+kidsText.dataset.fr="Toutes nos mitaines pour bébés et enfants sont munies d'une fermeture éclair.";
+kidsText.dataset.en="All our baby and children's mittens feature a zipper.";
 kidsText.textContent=document.documentElement.lang.startsWith('en')?kidsText.dataset.en:kidsText.dataset.fr;
 kidsNote.appendChild(kidsIcon);
 kidsNote.appendChild(kidsText);
@@ -26,7 +26,8 @@ function applyShopFilters(){
     const aud=c.dataset.audience||'';
     let audOk=true;
     if(shopAudience!=='tous'){
-      if(aud==='unisexe')audOk=shopAudience==='femmes'||shopAudience==='hommes';
+      if(aud==='tous'||aud==='all')audOk=true; // ex. cache-oreilles 8-14 : Femmes + Hommes + Enfants
+      else if(aud==='unisexe')audOk=shopAudience==='femmes'||shopAudience==='hommes';
       else audOk=aud===shopAudience;
     }
     c.hidden=!(catOk&&audOk);
@@ -41,7 +42,7 @@ document.querySelectorAll('.audience-filter').forEach(b=>b.addEventListener('cli
 filters.forEach(b=>b.addEventListener('click',()=>{filters.forEach(x=>x.classList.toggle('active',x===b));shopCategory=b.dataset.filter||'all';applyShopFilters();if(title){const lab=b.querySelector('[data-fr]');if(lab){title.dataset.fr=lab.dataset.fr;title.dataset.en=lab.dataset.en;title.textContent=document.documentElement.lang.startsWith('en')?title.dataset.en:title.dataset.fr}}}));
 fetch('catalog/audience.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(doc=>{
   const map=doc&&doc.products||{};
-  cards.forEach(c=>{const row=map[c.dataset.productId];c.dataset.audience=row&&row.audience?row.audience:'';});
+  cards.forEach(c=>{const row=map[c.dataset.productId];if(row&&row.audience)c.dataset.audience=row.audience;});
   applyShopFilters();
   window.dispatchEvent(new CustomEvent('boreales-audience-ready'));
 }).catch(()=>{applyShopFilters();window.dispatchEvent(new CustomEvent('boreales-audience-ready'));});if(sort)sort.addEventListener('change',()=>{const ordered=[...cards].sort((a,b)=>sort.value==='name'?a.dataset.name.localeCompare(b.dataset.name,'fr'):cards.indexOf(a)-cards.indexOf(b));ordered.forEach(c=>grid.appendChild(c))});(function setupSizesAndCart(){
@@ -67,9 +68,9 @@ const LETTER_LABELS={
   L:{fr:'Grand',en:'Large',abbrFr:'G',abbrEn:'L'},
   XL:{fr:'Très grand',en:'Extra Large',abbrFr:'TG',abbrEn:'XL'}
 };
-const FIXED_ONE_SIZE={
-  'chapeau-dame-m-l-coyote':true,'chapeau-dame-m-l-fourrure-recyclee':true,'chapeau-dame-m-l-renard-argente':true,'chapeau-dame-m-l-renard-norvegien':true,'chapeau-dame-m-l-renard-roux':true,'chapeau-dame-m-l-vison':true,'chapeau-dame-vison-et-renard':true,'chapeau-homme-m-l-renard-roux':true,'chapeau-homme-l-xl-raton':true,'mitaines-dame-m-l-chat-sauvage':true,'mitaines-dame-m-l-fourrure-recyclee':true,'mitaines-dame-renard-roux':true,'mitaines-dame-vison-et-renard':true,'mitaines-homme-m-l-castor':true,'mitaines-homme-m-l-coyote':true,'mitaines-homme-m-l-renard-roux':true,'mitaines-small-vison':true,'mitaines-m-renard':true,'mitaines-motoneige-m-renard-argente':true,'mitaines-m-l-renard':true,'mitaines-m-l-vison-et-chat-sauvage':true,'mitaines-m-l-vison-et-renard':true,'mitaines-motoneige-m-l-renard-norvegien':true,'mitaines-style-inuit-coyote':true
-};
+/** Ancien blocage mono-taille retiré (2026-11-07) : les lettres S/M/L/XL
+ *  affichent toujours P/M/G/TG ; le stock réel reste dans product-sizes.json. */
+const FIXED_ONE_SIZE={};
 const ADAPTED_CONTACT_PRODUCTS={
   'mukluks-adulte-mobilite-reduite-8-9-vison-et-renard':true
 };
@@ -80,9 +81,23 @@ const ORDER_FALLBACK={
   delay_en:'About 1 week to make, then shipping time. Around Christmas, the wait can be up to 3 weeks before delivery.'
 };
 let orderCopy=Object.assign({},ORDER_FALLBACK);
-function letterScale(cfg,id){
-  if(id&&FIXED_ONE_SIZE[id])return false;
+function letterScale(cfg,_id){
+  // Grille P/M/G/TG dès que toutes les variantes listées sont des lettres.
+  // Les lettres absentes du JSON = Sur commande (pas de stock fictif).
   return !!(cfg&&cfg.sizes&&cfg.sizes.length&&cfg.sizes.every(sz=>LETTERS.includes(String(sz.code||'').toUpperCase())));
+}
+function isUniqueOnly(cfg){
+  const list=cfg&&cfg.sizes||[];
+  return list.length===1&&String(list[0].code||'').toLowerCase()==='unique';
+}
+/** Sélecteur de taille visible (lettres, multi, ou âge/pointure informatif). */
+function usesSizeChoices(cfg,id){
+  if(!cfg||!cfg.sizes||!cfg.sizes.length)return false;
+  if(isUniqueOnly(cfg))return false;
+  if(letterScale(cfg,id))return true;
+  if(cfg.selector&&cfg.sizes.length>1)return true;
+  // une ou plusieurs tailles informatives (âge, pointure, junior…)
+  return cfg.sizes.some(sz=>String(sz.code||'').toLowerCase()!=='unique');
 }
 function buttonLabel(sz){
   const row=LETTER_LABELS[String(sz&&sz.code||'').toUpperCase()];
@@ -340,8 +355,9 @@ function selectedSize(card){
   return picked?picked.dataset.size:null;
 }
 function refreshAddBtn(card,cfg,btn,hint){
-  if(!((cfg.selector&&cfg.sizes&&cfg.sizes.length>1)||letterScale(cfg,card&&card.dataset.productId))){
-    const only=cfg.sizes&&cfg.sizes[0];
+  const id=card&&(card.dataset.productId||(btn&&btn.dataset.id));
+  if(!usesSizeChoices(cfg,id)){
+    const only=cfg&&cfg.sizes&&cfg.sizes[0];
     const q=only&&only.qty_on_hand!=null?Math.floor(Number(only.qty_on_hand)):null;
     if(q!=null&&q<=0){
       btn.disabled=true;btn.classList.add('is-sold-out');
@@ -540,8 +556,8 @@ function zipperDetail(){
   img.height=28;
   img.setAttribute('aria-hidden','true');
   const label=document.createElement('span');
-  label.dataset.fr="Fermeture éclair pour faciliter l'enfilage";
-  label.dataset.en='Zipper for easier dressing';
+  label.dataset.fr="Fermeture éclair";
+  label.dataset.en='Zipper';
   label.textContent=en()?label.dataset.en:label.dataset.fr;
   row.appendChild(img);
   row.appendChild(label);
@@ -644,6 +660,15 @@ function injectSelectors(doc){
       title.textContent=en()?'Size':'Taille';
       return title;
     }
+    /** « Taille : » + bouton i (guide) collés — le i n’est plus à droite des cases. */
+    function appendSizeLabelWithGuide(parent,sizes){
+      const row=document.createElement('div');
+      row.className='size-label-row';
+      row.appendChild(sizeLabelEl());
+      attachSizeGuideBtn(row,sizes);
+      parent.appendChild(row);
+      return row;
+    }
     const letter=letterScale(cfg,id);
     placeStock(cfg,id,btn);
     if((cfg.selector&&cfg.sizes&&cfg.sizes.length>1)||letter){
@@ -655,7 +680,7 @@ function injectSelectors(doc){
       inner.className='size-reveal-inner';
       const line=document.createElement('div');
       line.className='size-line';
-      line.appendChild(sizeLabelEl());
+      appendSizeLabelWithGuide(line,cfg.sizes);
       const list=document.createElement('div');
       list.className='size-choice-list';
       list.setAttribute('role','group');
@@ -692,7 +717,6 @@ function injectSelectors(doc){
         cfg.sizes.forEach(sz=>list.appendChild(buildChoice(sz,cfg,card,btn,hint)));
         line.appendChild(list);
       }
-      attachSizeGuideBtn(line,cfg.sizes);
       attachChaleur(line);
       inner.appendChild(line);
       if(letter&&letterRows(cfg).some(row=>!row.sz)){
@@ -714,54 +738,65 @@ function injectSelectors(doc){
       bindSizeReveal(card,wrap);
       refreshAddBtn(card,cfg,btn,hint);
     }else{
-      const only=cfg.sizes&&cfg.sizes[0];
-      const q=only&&only.qty_on_hand!=null?Math.floor(Number(only.qty_on_hand)):null;
-      const openDetails=category==='mitaines'||category==='pantoufles';
-      const wrap=document.createElement('div');
-      wrap.className='size-stock-wrap'+(openDetails?' size-reveal':'');
-      if(openDetails) wrap.setAttribute('aria-hidden','true');
-      const head=document.createElement('div');
-      head.className='size-select-head';
-      head.appendChild(sizeLabelEl());
-      attachSizeGuideBtn(head,cfg.sizes||[]);
-      if(chaleurAllowed(card)) attachChaleur(head);
-      const bucket=openDetails?document.createElement('div'):wrap;
-      if(openDetails) bucket.className='size-reveal-inner';
-      bucket.appendChild(head);
-      if(only&&only.code==='unique'&&only.label_fr&&/universelle|universal/i.test(String(only.label_fr)+String(only.label_en||''))){
+      const sizeList=cfg.sizes||[];
+      const only=sizeList[0];
+      const isUnique=sizeList.length===1&&only&&String(only.code||'').toLowerCase()==='unique';
+      if(isUnique){
+        const wrap=document.createElement('div');
+        wrap.className='size-stock-wrap';
+        const head=document.createElement('div');
+        head.className='size-select-head';
+        head.appendChild(sizeLabelEl());
+        wrap.appendChild(head);
         const tip=document.createElement('p');
         tip.className='size-unique-note';
-        tip.dataset.fr=only.label_fr;tip.dataset.en=only.label_en||only.label_fr;
-        tip.textContent=en()?(only.label_en||only.label_fr):only.label_fr;
-        bucket.appendChild(tip);
-      }else if(only&&only.code&&only.code!=='unique'){
-        const tip=document.createElement('p');
-        tip.className='size-unique-note size-format-name';
-        const api=sizesApi();
-        const labFr=api&&api.displayLabel?api.displayLabel(only.code,only,'fr'):(only.label_fr||only.code);
-        const labEn=api&&api.displayLabel?api.displayLabel(only.code,only,'en'):(only.label_en||only.code);
-        const letterRow=LETTER_LABELS[String(only.code||'').toUpperCase()];
-        tip.dataset.fr=letterRow?letterRow.abbrFr:labFr;
-        tip.dataset.en=letterRow?letterRow.abbrEn:labEn;
-        tip.dataset.fullFr=labFr;tip.dataset.fullEn=labEn;
+        tip.dataset.fr=only.label_fr||'Taille unique';
+        tip.dataset.en=only.label_en||only.label_fr||'One size';
         tip.textContent=en()?tip.dataset.en:tip.dataset.fr;
-        tip.title=en()?labEn:labFr;
-        bucket.appendChild(tip);
+        wrap.appendChild(tip);
+        attachQtyPicker(wrap,card,cfg,btn);
+        btn.parentElement.insertBefore(wrap,btn);
+        refreshAddBtn(card,cfg,btn,null);
+      }else if(sizeList.length){
+        // Âges / pointures / junior : cases informatives (pas de P/M/G/TG inventés)
+        const wrap=document.createElement('div');
+        wrap.className='size-select-wrap size-reveal';
+        wrap.dataset.productId=id;
+        wrap.setAttribute('aria-hidden','true');
+        const inner=document.createElement('div');
+        inner.className='size-reveal-inner';
+        const line=document.createElement('div');
+        line.className='size-line';
+        appendSizeLabelWithGuide(line,sizeList);
+        const list=document.createElement('div');
+        list.className='size-choice-list';
+        list.setAttribute('role','group');
+        list.setAttribute('aria-label',en()?'Size':'Taille');
+        const hint=document.createElement('p');
+        hint.className='size-select-hint';
+        hint.hidden=true;
+        sizeList.forEach(sz=>list.appendChild(buildChoice(sz,cfg,card,btn,hint)));
+        line.appendChild(list);
+        attachChaleur(line);
+        inner.appendChild(line);
+        inner.appendChild(hint);
+        if(ZIPPER_MITTENS[id]){
+          inner.insertBefore(zipperDetail(),inner.firstChild);
+          card.classList.add('has-zipper');
+        }
+        wrap.appendChild(inner);
+        attachQtyPicker(inner,card,cfg,btn);
+        btn.parentElement.insertBefore(wrap,btn);
+        bindSizeReveal(card,wrap);
+        if(sizeList.length===1){
+          const onlyBtn=list.querySelector('.size-choice:not([disabled])');
+          if(onlyBtn)onlyBtn.classList.add('is-selected');
+        }
+        refreshAddBtn(card,cfg,btn,hint);
+      }else{
+        attachQtyPicker(btn.parentElement,card,cfg,btn);
+        refreshAddBtn(card,cfg,btn,null);
       }
-      const stock=document.createElement('p');
-      stock.className='size-choice-stock size-stock-solo'+(q!=null&&q<=0?' is-sold':'');
-      stock.dataset.qty=q==null?'':String(q);
-      stock.textContent=q==null?'':stockText(q);
-      bucket.appendChild(stock);
-      if(ZIPPER_MITTENS[id]){
-        bucket.insertBefore(zipperDetail(),bucket.firstChild);
-        card.classList.add('has-zipper');
-      }
-      if(openDetails) wrap.appendChild(bucket);
-      attachQtyPicker(openDetails?bucket:wrap,card,cfg,btn);
-      btn.parentElement.insertBefore(wrap,btn);
-      if(openDetails) bindSizeReveal(card,wrap);
-      refreshAddBtn(card,cfg,btn,null);
     }
   });
 
@@ -832,7 +867,7 @@ document.querySelectorAll('.demo-add').forEach(b=>b.addEventListener('click',()=
   const api=sizesApi();
   const cfg=api&&api.entry?api.entry(id):null;
   let size=null,size_label_fr=null,size_label_en=null;
-  if((cfg&&cfg.selector&&cfg.sizes&&cfg.sizes.length>1)||letterScale(cfg,id)){
+  if(usesSizeChoices(cfg,id)){
     const code=selectedSize(card);
     if(!code){if(card&&typeof card._setSizeOpen==='function')card._setSizeOpen(true);return}
     const sz=cfg.sizes.find(s=>s.code===code);

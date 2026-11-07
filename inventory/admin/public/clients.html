@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Messages clients — Lucie</title>
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="orders.css">
+  <link rel="stylesheet" href="clients.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Messages clients</h1>
+    <p class="sub">Fourrures Boréales</p>
+    <nav class="admin-nav">
+      <a href="orders.html">Commandes</a>
+      <a href="index.html">Inventaire</a>
+      <a href="clients.html" aria-current="page">Messages clients</a>
+    </nav>
+    <p id="banner" class="banner" hidden></p>
+  </header>
+
+  <section id="login-view" class="card login-card">
+    <h2>Connexion</h2>
+    <p class="hint">Les coordonnées clients ne sont visibles qu’après connexion.</p>
+    <label for="password">Mot de passe</label>
+    <input id="password" type="password" autocomplete="current-password" minlength="8">
+    <button type="button" id="btn-login" class="btn btn-primary btn-lg">Entrer</button>
+    <p id="login-error" class="error" hidden></p>
+  </section>
+
+  <section id="app-view" hidden>
+    <div class="toolbar card">
+      <label class="sr-only" for="search">Recherche</label>
+      <input id="search" type="search" placeholder="Nom, courriel, téléphone, n° commande…" enterkeyhint="search">
+      <div class="filter-zone">
+        <p class="filter-zone-title">Répertoire</p>
+        <p class="hint privacy-hint">Renseignements personnels — usage interne seulement. Pas de pub sans consentement.</p>
+        <p id="clients-count" class="clients-count"></p>
+      </div>
+    </div>
+
+    <div class="clients-table-wrap card">
+      <table class="clients-table" aria-label="Clients">
+        <thead>
+          <tr>
+            <th>N° client</th>
+            <th>Nom</th>
+            <th>Courriel</th>
+            <th>Téléphone</th>
+            <th>Adresse</th>
+            <th>Ville</th>
+            <th>Commandes</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="clients-body"></tbody>
+      </table>
+      <p id="empty" class="empty" hidden>Aucun client pour l’instant (aucune commande avec courriel).</p>
+    </div>
+  </section>
+
+  <dialog id="dlg-client">
+    <div id="dlg-client-body"></div>
+    <form method="dialog"><button class="btn btn-ghost btn-lg">Fermer</button></form>
+  </dialog>
+
+  <script type="module" src="clients.js"></script>
+</body>
+</html>

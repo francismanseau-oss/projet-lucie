@@ -13,7 +13,7 @@ function readSkTest(devVarsPath) {
   return sk;
 }
 
-function mapStripeSessionToOrder(session) {
+export function mapStripeSessionToOrder(session) {
   const paid =
     session.payment_status === "paid" || session.payment_status === "no_payment_required";
   const lineItems = Array.isArray(session._line_items) ? session._line_items : [];
@@ -47,17 +47,63 @@ function mapStripeSessionToOrder(session) {
     };
   });
 
+  const addr =
+    session.shipping_details?.address ||
+    session.customer_details?.address ||
+    null;
+  const metaShip = String(session.metadata?.shipping || "").trim();
+  const methodFromMeta =
+    metaShip === "canada_post" || metaShip === "bus_quebec" || metaShip === "pickup"
+      ? metaShip
+      : null;
+  const feeFromMeta =
+    session.metadata?.shipping_fee_cents != null &&
+    Number.isFinite(Number(session.metadata.shipping_fee_cents))
+      ? Number(session.metadata.shipping_fee_cents)
+      : null;
+  const shippingCents =
+    session.total_details?.amount_shipping != null
+      ? Number(session.total_details.amount_shipping)
+      : session.shipping_cost?.amount_total != null
+        ? Number(session.shipping_cost.amount_total)
+        : feeFromMeta;
+  const methodResolved = methodFromMeta || "a_confirmer";
+  const feeKnown = shippingCents != null && Number.isFinite(shippingCents);
+  const feePaid = feeKnown && Number(shippingCents) > 0;
+
   return {
     id: session.id,
     session_id: session.id,
+    order_number: session.metadata?.order_number || null,
     created_at: new Date((session.created || 0) * 1000).toISOString(),
     amount_total_cents: session.amount_total,
+    amount_subtotal_cents: session.amount_subtotal ?? null,
+    amount_shipping_cents: shippingCents,
     currency: session.currency || "cad",
     payment_status: session.payment_status,
     payment_verified: paid,
     customer_email: session.customer_details?.email || session.customer_email || null,
-    customer_name: session.customer_details?.name || null,
+    customer_name:
+      session.shipping_details?.name || session.customer_details?.name || null,
+    customer_phone: session.customer_details?.phone || null,
+    shipping_address: addr
+      ? {
+          line1: addr.line1 || null,
+          line2: addr.line2 || null,
+          city: addr.city || null,
+          state: addr.state || null,
+          postal_code: addr.postal_code || null,
+          country: addr.country || null,
+        }
+      : null,
     items,
+    shipping: {
+      method: methodResolved,
+      client_chosen_method: methodFromMeta,
+      fee_cad_cents: feeKnown ? Number(shippingCents) : null,
+      fee_status: methodFromMeta && feePaid ? "facture" : methodFromMeta ? "facture" : "a_confirmer",
+      client_fee_agreed: !!(methodFromMeta && feeKnown),
+    },
     source: "stripe_test",
     fulfillment_status: items.some((i) => i.custom) ? "a_fabriquer" : "a_preparer",
   };

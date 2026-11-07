@@ -49,7 +49,7 @@
     {
       "product_number": 100,
       "product_id": "mitaines-8-10-vison-fermeture-eclair",
-      "name_fr": "Mitaines 8-10 ans — vison (fermeture éclair)",
+      "name_fr": "Mitaines 8-10 ans — vison",
       "category": "mitaines",
       "family_label": "Mitaines",
       "price_cad": 80,
@@ -59,7 +59,7 @@
     {
       "product_number": 101,
       "product_id": "mitaines-bebe-sans-pouces-vison-fermeture-eclair",
-      "name_fr": "Mitaines bébé sans pouces — vison (fermeture éclair)",
+      "name_fr": "Mitaines bébé sans pouces — vison",
       "category": "mitaines",
       "family_label": "Mitaines",
       "price_cad": 40,
@@ -149,7 +149,7 @@
     {
       "product_number": 110,
       "product_id": "mitaines-enfant-2-4-ans-castor-fermeture-eclair",
-      "name_fr": "Mitaines enfant 2-4 ans — castor (fermeture éclair)",
+      "name_fr": "Mitaines enfant 2-4 ans — castor",
       "category": "mitaines",
       "family_label": "Mitaines",
       "price_cad": 60,
@@ -159,7 +159,7 @@
     {
       "product_number": 111,
       "product_id": "mitaines-enfant-4-6-vison-fermeture-eclair",
-      "name_fr": "Mitaines enfant 4-6 — vison (fermeture éclair)",
+      "name_fr": "Mitaines enfant 4-6 — vison",
       "category": "mitaines",
       "family_label": "Mitaines",
       "price_cad": 60,
@@ -169,7 +169,7 @@
     {
       "product_number": 112,
       "product_id": "mitaines-enfant-6-8-vison-fermeture-eclair",
-      "name_fr": "Mitaines enfant 6-8 — vison (fermeture éclair)",
+      "name_fr": "Mitaines enfant 6-8 — vison",
       "category": "mitaines",
       "family_label": "Mitaines",
       "price_cad": 60,

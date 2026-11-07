@@ -50,6 +50,8 @@ export function matchesAudience(itemAudience, filter) {
   if (!want || want === "tous") return true;
   const aud = String(itemAudience || "").trim().toLowerCase();
   if (!aud) return false;
+  // « tous » = visible Femmes + Hommes + Enfants (ex. cache-oreilles)
+  if (aud === "tous" || aud === "all") return true;
   if (aud === "unisexe") return want === "femmes" || want === "hommes";
   return aud === want;
 }

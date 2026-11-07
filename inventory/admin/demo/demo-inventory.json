@@ -252,7 +252,7 @@
     {
       "product_id": "mitaines-bebe-sans-pouces-vison-fermeture-eclair",
       "product_number": 101,
-      "name_fr": "Mitaines bébé sans pouces — vison (fermeture éclair)",
+      "name_fr": "Mitaines bébé sans pouces — vison",
       "category": "mitaines",
       "image": "assets/produits/ensemble-mukluks-mitaines-vison-bebe.png",
       "fulfillment_type": "pending_lucie",
@@ -263,12 +263,12 @@
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": "2026-11-07T20:00:04.422Z"
     },
     {
       "product_id": "mitaines-enfant-2-4-ans-castor-fermeture-eclair",
       "product_number": 110,
-      "name_fr": "Mitaines enfant 2-4 ans — castor (fermeture éclair)",
+      "name_fr": "Mitaines enfant 2-4 ans — castor",
       "category": "mitaines",
       "image": "assets/produits/mitaines-enfant-castor-fermeture-2-4.png",
       "fulfillment_type": "pending_lucie",
@@ -279,12 +279,12 @@
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": "2026-11-07T20:00:04.422Z"
     },
     {
       "product_id": "mitaines-enfant-4-6-vison-fermeture-eclair",
       "product_number": 111,
-      "name_fr": "Mitaines enfant 4-6 — vison (fermeture éclair)",
+      "name_fr": "Mitaines enfant 4-6 — vison",
       "category": "mitaines",
       "image": "assets/produits/mitaines-enfant-vison-fermeture-4-6.png",
       "fulfillment_type": "pending_lucie",
@@ -295,12 +295,12 @@
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": "2026-11-07T20:00:04.422Z"
     },
     {
       "product_id": "mitaines-enfant-6-8-vison-fermeture-eclair",
       "product_number": 112,
-      "name_fr": "Mitaines enfant 6-8 — vison (fermeture éclair)",
+      "name_fr": "Mitaines enfant 6-8 — vison",
       "category": "mitaines",
       "image": "assets/produits/mitaines-enfant-vison-fermeture-6-8.png",
       "fulfillment_type": "pending_lucie",
@@ -311,7 +311,7 @@
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": "2026-11-07T20:00:04.422Z"
     },
     {
       "product_id": "mitaines-enfant-8-10-chat-sauvage",
@@ -332,18 +332,28 @@
     {
       "product_id": "mitaines-fille-8-10-renard",
       "product_number": 114,
-      "name_fr": "Mitaines fille 8-10 — renard",
+      "name_fr": "Mitaines dame — renard",
       "category": "mitaines",
       "image": "assets/produits/ensemble-fille-renard-8-10.png",
       "fulfillment_type": "pending_lucie",
-      "qty_on_hand": null,
+      "qty_on_hand": 3,
       "provisional_qty_on_hand": 3,
       "qty_reserved": 0,
       "qty_sold": 0,
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": "2026-11-07T19:29:50.435Z",
+      "audience": "femmes",
+      "sizes": [
+        {
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
+          "qty_on_hand": 3
+        }
+      ],
+      "size_selector": false
     },
     {
       "product_id": "mitaines-enfant-10-12-mouton-rase",
@@ -508,7 +518,7 @@
     {
       "product_id": "mitaines-8-10-vison-fermeture-eclair",
       "product_number": 100,
-      "name_fr": "Mitaines 8-10 — vison (fermeture éclair)",
+      "name_fr": "Mitaines 8-10 — vison",
       "category": "mitaines",
       "image": "assets/produits/ensemble-vison-chapeau-mitaines-8-10.png",
       "fulfillment_type": "pending_lucie",
@@ -519,7 +529,7 @@
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": "2026-11-07T20:00:04.422Z"
     },
     {
       "product_id": "mitaines-small-vison",
@@ -918,14 +928,23 @@
       "category": "pantoufles",
       "image": "assets/produits/pantoufles-enfant-mouton-coyote-2-3.png",
       "fulfillment_type": "pending_lucie",
-      "qty_on_hand": null,
-      "provisional_qty_on_hand": 3,
+      "qty_on_hand": 0,
+      "provisional_qty_on_hand": 0,
       "qty_reserved": 0,
       "qty_sold": 0,
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": "2026-11-07T18:41:14.575Z",
+      "sizes": [
+        {
+          "code": "2-3",
+          "label_fr": "Pointure 2-3",
+          "label_en": "Size 2-3",
+          "qty_on_hand": 0
+        }
+      ],
+      "size_selector": false
     },
     {
       "product_id": "pantoufles-enfant-2-3-renard",
@@ -934,14 +953,23 @@
       "category": "pantoufles",
       "image": "assets/produits/pantoufles-enfant-renard-2-3.png",
       "fulfillment_type": "pending_lucie",
-      "qty_on_hand": null,
-      "provisional_qty_on_hand": 3,
+      "qty_on_hand": 0,
+      "provisional_qty_on_hand": 0,
       "qty_reserved": 0,
       "qty_sold": 0,
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": "2026-11-07T18:41:14.575Z",
+      "sizes": [
+        {
+          "code": "2-3",
+          "label_fr": "Pointure 2-3",
+          "label_en": "Size 2-3",
+          "qty_on_hand": 0
+        }
+      ],
+      "size_selector": false
     },
     {
       "product_id": "pantoufles-enfant-13-1-vison-et-coyote",
@@ -966,14 +994,23 @@
       "category": "pantoufles",
       "image": "assets/produits/pantoufles-dame-mouton-chat-sauvage-7-8.png",
       "fulfillment_type": "pending_lucie",
-      "qty_on_hand": null,
-      "provisional_qty_on_hand": 3,
+      "qty_on_hand": 0,
+      "provisional_qty_on_hand": 0,
       "qty_reserved": 0,
       "qty_sold": 0,
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": "2026-11-07T18:41:14.575Z",
+      "sizes": [
+        {
+          "code": "7-8",
+          "label_fr": "Pointure 7-8",
+          "label_en": "Size 7-8",
+          "qty_on_hand": 0
+        }
+      ],
+      "size_selector": false
     },
     {
       "product_id": "pantoufles-dame-8-9-vison-et-coyote",
@@ -982,14 +1019,23 @@
       "category": "pantoufles",
       "image": "assets/produits/pantoufles-dame-vison-coyote-8-9.png",
       "fulfillment_type": "pending_lucie",
-      "qty_on_hand": null,
-      "provisional_qty_on_hand": 3,
+      "qty_on_hand": 0,
+      "provisional_qty_on_hand": 0,
       "qty_reserved": 0,
       "qty_sold": 0,
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": "2026-11-07T18:41:14.575Z",
+      "sizes": [
+        {
+          "code": "8-9",
+          "label_fr": "Pointure 8-9",
+          "label_en": "Size 8-9",
+          "qty_on_hand": 0
+        }
+      ],
+      "size_selector": false
     },
     {
       "product_id": "pantoufles-dame-8-9-vison-et-renard",
@@ -998,14 +1044,23 @@
       "category": "pantoufles",
       "image": "assets/produits/pantoufles-dame-vison-renard-8-9.png",
       "fulfillment_type": "pending_lucie",
-      "qty_on_hand": null,
-      "provisional_qty_on_hand": 3,
+      "qty_on_hand": 0,
+      "provisional_qty_on_hand": 0,
       "qty_reserved": 0,
       "qty_sold": 0,
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": "2026-11-07T18:41:14.575Z",
+      "sizes": [
+        {
+          "code": "8-9",
+          "label_fr": "Pointure 8-9",
+          "label_en": "Size 8-9",
+          "qty_on_hand": 0
+        }
+      ],
+      "size_selector": false
     },
     {
       "product_id": "pantoufles-dame-9-10-vison-et-renard",
@@ -1014,14 +1069,23 @@
       "category": "pantoufles",
       "image": "assets/produits/pantoufles-dame-vison-renard-9-10.png",
       "fulfillment_type": "pending_lucie",
-      "qty_on_hand": null,
-      "provisional_qty_on_hand": 3,
+      "qty_on_hand": 0,
+      "provisional_qty_on_hand": 0,
       "qty_reserved": 0,
       "qty_sold": 0,
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": "2026-11-07T18:41:14.575Z",
+      "sizes": [
+        {
+          "code": "9-10",
+          "label_fr": "Pointure 9-10",
+          "label_en": "Size 9-10",
+          "qty_on_hand": 0
+        }
+      ],
+      "size_selector": false
     },
     {
       "product_id": "pantoufles-homme-10-11-chat-sauvage",
@@ -1030,14 +1094,23 @@
       "category": "pantoufles",
       "image": "assets/produits/pantoufles-homme-chat-sauvage-10-11.png",
       "fulfillment_type": "pending_lucie",
-      "qty_on_hand": null,
-      "provisional_qty_on_hand": 3,
+      "qty_on_hand": 0,
+      "provisional_qty_on_hand": 0,
       "qty_reserved": 0,
       "qty_sold": 0,
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": "2026-11-07T18:41:14.575Z",
+      "sizes": [
+        {
+          "code": "10-11",
+          "label_fr": "Pointure 10-11",
+          "label_en": "Size 10-11",
+          "qty_on_hand": 0
+        }
+      ],
+      "size_selector": false
     },
     {
       "product_id": "pantoufles-homme-10-11-mouton-et-renard-roux",
@@ -1046,14 +1119,23 @@
       "category": "pantoufles",
       "image": "assets/produits/pantoufles-homme-mouton-renard-10-11.png",
       "fulfillment_type": "pending_lucie",
-      "qty_on_hand": null,
-      "provisional_qty_on_hand": 3,
+      "qty_on_hand": 0,
+      "provisional_qty_on_hand": 0,
       "qty_reserved": 0,
       "qty_sold": 0,
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null
+      "updated_at": "2026-11-07T18:41:14.575Z",
+      "sizes": [
+        {
+          "code": "10-11",
+          "label_fr": "Pointure 10-11",
+          "label_en": "Size 10-11",
+          "qty_on_hand": 0
+        }
+      ],
+      "size_selector": false
     }
   ]
 }

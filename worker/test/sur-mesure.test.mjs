@@ -74,6 +74,65 @@ test("validateMeasurements : foulards provisoires = longueur + largeur", () => {
   );
 });
 
+test("validateMeasurements : mesure hors liste sans inventer de valeur", () => {
+  const spec = measureSpecForCategory("mitaines");
+  assert.equal(
+    validateMeasurements(
+      spec,
+      "cm",
+      {},
+      {
+        measurementsCm: { hand_circumference: 20 },
+        measureOutOfRange: { hand_length: true },
+      },
+    ).ok,
+    true,
+  );
+  assert.equal(
+    validateMeasurements(
+      spec,
+      "cm",
+      {},
+      {
+        measurementsCm: {},
+        measureOutOfRange: { hand_circumference: true },
+      },
+    ).ok,
+    false,
+  );
+});
+
+test("buildLineItems : hors liste transmis sans measurements_cm inventé", () => {
+  assert.ok(mitaine);
+  const { resolved } = buildLineItems(
+    catalog,
+    [
+      {
+        id: "custom:" + mitaine.id + ":oor",
+        qty: 1,
+        custom_config: {
+          product_id: mitaine.id,
+          unit: "cm",
+          measurements: { hand_circumference: 20 },
+          measurements_cm: { hand_circumference: 20 },
+          measure_out_of_range: { hand_length: true },
+          special_requests: ["mesure_hors_liste:hand_length"],
+          measurement_labels: {
+            hand_circumference: { fr: "Tour de main", en: "Hand circumference" },
+            hand_length: { fr: "Longueur de main", en: "Hand length" },
+          },
+        },
+      },
+    ],
+    { validateMeasurements, measureSpecForCategory, audienceByProductId: { [mitaine.id]: "femmes" } },
+  );
+  assert.equal(resolved[0].custom_config.measure_out_of_range.hand_length, true);
+  assert.equal(resolved[0].custom_config.measurements_cm.hand_length, undefined);
+  assert.deepEqual(resolved[0].custom_config.special_requests, [
+    "mesure_hors_liste:hand_length",
+  ]);
+});
+
 test("buildLineItems : custom = prix Boutique (ignore price navigateur)", () => {
   assert.ok(mitaine);
   const { resolved, total_cents } = buildLineItems(

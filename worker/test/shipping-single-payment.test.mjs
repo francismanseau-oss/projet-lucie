@@ -29,8 +29,9 @@ const root = join(__dirname, "..", "..");
 const shippingConfig = JSON.parse(readFileSync(join(root, "shipping", "shipping-config.json"), "utf8"));
 
 test("n° commande LFB permanent", () => {
-  const n = generateOrderNumber({ now: () => new Date("2026-11-04T12:00:00Z"), random: () => 0.42 });
-  assert.equal(n, "LFB-20261104-4200");
+  // 12:00 UTC en novembre = 07:00 heure Québec (EST)
+  const n = generateOrderNumber({ now: () => new Date("2026-11-04T12:00:00Z") });
+  assert.equal(n, "LFB-20261104-0700");
   assert.equal(isValidOrderNumber(n), true);
   assert.equal(isValidOrderNumber("cs_xxx"), false);
 });

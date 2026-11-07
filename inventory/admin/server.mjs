@@ -19,8 +19,17 @@ import { listCategories } from "./lib/ui-helpers.js";
 import { loadPersisted, savePersisted, ensureDataDir } from "./lib/persist.js";
 import { loadAccount } from "./lib/account-store.js";
 import { createAdminOrdersStore } from "../../orders/admin-orders-store.js";
-import { filterOrders, FULFILLMENT_STATUSES, SHIPPING_FEE_STATUSES, SHIPPING_METHODS } from "../../orders/orders-core.js";
+import {
+  filterOrders,
+  summarizeOrders,
+  sortOrders,
+  withOrderLateness,
+  FULFILLMENT_STATUSES,
+  SHIPPING_FEE_STATUSES,
+  SHIPPING_METHODS,
+} from "../../orders/orders-core.js";
 import { importPaidOrdersFromStripeTest } from "../../orders/stripe-test-import.js";
+import { createClientsRegistry } from "../../orders/clients-registry.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "../..");
@@ -32,6 +41,7 @@ const publicDir = path.join(__dirname, "public");
 const assetsDir = path.join(root, "assets");
 ensureDataDir(__dirname);
 const ordersStore = createAdminOrdersStore(path.join(root, "orders/admin-orders.json"));
+const clientsRegistry = createClientsRegistry(path.join(root, "orders/clients-registry.json"));
 const shippingConfig = JSON.parse(
   fs.readFileSync(path.join(root, "shipping/shipping-config.json"), "utf8"),
 );
@@ -90,7 +100,8 @@ function enrichItems(items) {
       image: i.image || cat.image || "",
       category: i.category || cat.category || "",
       name_fr: i.name_fr || cat.name_fr || i.product_id,
-      audience: i.audience || audiences.get(i.product_id) || null,
+      // catalog/audience.json prime (ex. cache-oreilles → tous) ; inventaire en secours
+      audience: audiences.get(i.product_id) || i.audience || null,
       min_stock_target: i.min_stock_target ?? 3,
     };
   });
@@ -207,6 +218,7 @@ function syncProductSizesFromInventory(items) {
           code: s.code,
           label_fr: s.label_fr || s.code,
           label_en: s.label_en || s.label_fr || s.code,
+          group: s.group || undefined,
           qty_on_hand: s.qty_on_hand == null ? 0 : Math.floor(Number(s.qty_on_hand)) || 0,
         }))
       : [
@@ -222,6 +234,7 @@ function syncProductSizesFromInventory(items) {
       product_number: it.product_number ?? prev.product_number ?? null,
       category: it.category || prev.category || "",
       selector: !!(it.size_selector || sizes.length > 1),
+      size_groups: it.size_groups || prev.size_groups || undefined,
       sizes,
     };
   }
@@ -650,20 +663,32 @@ async function handleApi(req, res, pathname) {
       shipping_methods_enabled: Object.fromEntries(
         Object.entries(shippingConfig.methods || {}).map(([k, v]) => [k, !!v.enabled]),
       ),
+      stripe_mode: "TEST_ONLY",
+      stripe_live: false,
     });
   }
 
   if (pathname === "/api/orders" && req.method === "GET") {
     const u = new URL(req.url, `http://${HOST}:${PORT}`);
-    const all = ordersStore.list();
+    const all = clientsRegistry.enrichOrders(ordersStore.list());
     const filtered = filterOrders(all, {
       filter: u.searchParams.get("filter") || "toutes",
       search: u.searchParams.get("q") || "",
     });
+    const sort = u.searchParams.get("sort") === "newest" ? "newest" : "oldest";
+    const now = new Date();
+    const orders = sortOrders(
+      filtered.map((o) => withOrderLateness(o, now)),
+      sort,
+    );
     return sendJson(res, 200, {
       total: all.length,
-      count: filtered.length,
-      orders: filtered,
+      count: orders.length,
+      summary: summarizeOrders(all),
+      sort,
+      orders,
+      stripe_mode: "TEST_ONLY",
+      stripe_live: false,
       note_fr:
         "Les commandes « Jeu d’essai » ne sont pas des ventes réelles. Stripe TEST = paiements fictifs.",
     });
@@ -680,7 +705,8 @@ async function handleApi(req, res, pathname) {
     });
     const saved = [];
     for (const o of result.orders) {
-      saved.push(ordersStore.upsertFromImport(o));
+      const row = ordersStore.upsertFromImport(o);
+      saved.push(clientsRegistry.enrichOrders([row])[0]);
     }
     return sendJson(res, 200, {
       ok: true,
@@ -694,7 +720,8 @@ async function handleApi(req, res, pathname) {
   if (mOrd && req.method === "GET") {
     const ord = ordersStore.get(decodeURIComponent(mOrd[1]));
     if (!ord) return sendJson(res, 404, { error: "Commande introuvable" });
-    return sendJson(res, 200, { order: ord });
+    const enriched = clientsRegistry.enrichOrders([ord])[0];
+    return sendJson(res, 200, { order: withOrderLateness(enriched) });
   }
 
   const mFul = pathname.match(/^\/api\/orders\/([^/]+)\/fulfillment$/);
@@ -721,6 +748,43 @@ async function handleApi(req, res, pathname) {
       actor: "lucie-local",
     });
     return sendJson(res, 200, { ok: true, order: ord });
+  }
+
+  const mDetails = pathname.match(/^\/api\/orders\/([^/]+)\/details$/);
+  if (mDetails && req.method === "POST") {
+    const body = await readBody(req);
+    const ord = ordersStore.updateDetails({
+      id: decodeURIComponent(mDetails[1]),
+      patch: body.patch || body,
+      confirm: !!body.confirm,
+      note: body.note || "",
+      actor: "lucie-local",
+    });
+    return sendJson(res, 200, { ok: true, order: clientsRegistry.enrichOrders([ord])[0] });
+  }
+
+  const mArch = pathname.match(/^\/api\/orders\/([^/]+)\/archive$/);
+  if (mArch && req.method === "POST") {
+    const body = await readBody(req);
+    const ord = ordersStore.setArchived({
+      id: decodeURIComponent(mArch[1]),
+      archived: body.archived !== false,
+      confirm: !!body.confirm,
+      note: body.note || "",
+      actor: "lucie-local",
+    });
+    return sendJson(res, 200, { ok: true, order: clientsRegistry.enrichOrders([ord])[0] });
+  }
+
+  const mDel = pathname.match(/^\/api\/orders\/([^/]+)\/delete$/);
+  if (mDel && req.method === "POST") {
+    const body = await readBody(req);
+    const result = ordersStore.deleteOrder({
+      id: decodeURIComponent(mDel[1]),
+      confirm: !!body.confirm,
+      actor: "lucie-local",
+    });
+    return sendJson(res, 200, result);
   }
 
   sendJson(res, 404, { error: "Page introuvable" });

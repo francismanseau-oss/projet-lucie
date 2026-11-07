@@ -72,7 +72,7 @@
       "audience": "femmes",
       "source": "correction",
       "product_number": 213,
-      "name_fr": "Chapeau dame M — renard roux"
+      "name_fr": "Chapeau dame renard roux"
     },
     "chapeau-homme-l-xl-raton": {
       "audience": "hommes",
@@ -96,25 +96,25 @@
       "audience": "enfants",
       "source": "nom",
       "product_number": 101,
-      "name_fr": "Mitaines bébé sans pouces — vison (fermeture éclair)"
+      "name_fr": "Mitaines bébé sans pouces — vison"
     },
     "mitaines-enfant-2-4-ans-castor-fermeture-eclair": {
       "audience": "enfants",
       "source": "nom",
       "product_number": 110,
-      "name_fr": "Mitaines enfant 2-4 ans — castor (fermeture éclair)"
+      "name_fr": "Mitaines enfant 2-4 ans — castor"
     },
     "mitaines-enfant-4-6-vison-fermeture-eclair": {
       "audience": "enfants",
       "source": "nom",
       "product_number": 111,
-      "name_fr": "Mitaines enfant 4-6 — vison (fermeture éclair)"
+      "name_fr": "Mitaines enfant 4-6 — vison"
     },
     "mitaines-enfant-6-8-vison-fermeture-eclair": {
       "audience": "enfants",
       "source": "nom",
       "product_number": 112,
-      "name_fr": "Mitaines enfant 6-8 — vison (fermeture éclair)"
+      "name_fr": "Mitaines enfant 6-8 — vison"
     },
     "mitaines-enfant-8-10-chat-sauvage": {
       "audience": "enfants",
@@ -124,9 +124,10 @@
     },
     "mitaines-fille-8-10-renard": {
       "audience": "enfants",
-      "source": "nom",
+      "source": "lucie",
       "product_number": 114,
-      "name_fr": "Mitaines fille 8-10 — renard"
+      "name_fr": "Mitaines fille 8-10 — renard",
+      "note_fr": "Confirmé Lucie : enfants, fille 8-10, fermeture éclair"
     },
     "mitaines-enfant-10-12-mouton-rase": {
       "audience": "enfants",
@@ -138,7 +139,7 @@
       "audience": "enfants",
       "source": "lucie",
       "product_number": 100,
-      "name_fr": "Mitaines 8-10 ans — vison (fermeture éclair)"
+      "name_fr": "Mitaines 8-10 ans — vison"
     },
     "mitaines-dame-m-renard": {
       "audience": "femmes",
@@ -207,28 +208,32 @@
       "name_fr": "Foulard dame — vison et renard"
     },
     "cache-oreilles-enfant-8-10-12-coyote": {
-      "audience": "enfants",
-      "source": "nom",
+      "audience": "tous",
+      "source": "correction",
       "product_number": 502,
-      "name_fr": "Cache-oreilles junior 8-14 ans — coyote"
+      "name_fr": "Cache-oreilles junior 8-14 ans — coyote",
+      "note_fr": "Visible Femmes / Hommes / Enfants — taille informative 8-14 ans"
     },
     "cache-oreilles-enfant-8-10-12-renard": {
-      "audience": "enfants",
-      "source": "nom",
+      "audience": "tous",
+      "source": "correction",
       "product_number": 503,
-      "name_fr": "Cache-oreilles junior 8-14 ans — renard"
+      "name_fr": "Cache-oreilles junior 8-14 ans — renard",
+      "note_fr": "Visible Femmes / Hommes / Enfants — taille informative 8-14 ans"
     },
     "cache-oreilles-ado-10-14-renard-et-vison": {
-      "audience": "enfants",
-      "source": "nom",
+      "audience": "tous",
+      "source": "correction",
       "product_number": 500,
-      "name_fr": "Cache-oreilles junior 8-14 ans — renard et vison"
+      "name_fr": "Cache-oreilles junior 8-14 ans — renard et vison",
+      "note_fr": "Visible Femmes / Hommes / Enfants — taille informative 8-14 ans"
     },
     "cache-oreilles-dame-m-vison-et-lapin": {
-      "audience": "enfants",
+      "audience": "tous",
       "source": "correction",
       "product_number": 501,
-      "name_fr": "Cache-oreilles junior 8-14 ans — vison et lapin"
+      "name_fr": "Cache-oreilles junior 8-14 ans — vison et lapin",
+      "note_fr": "Visible Femmes / Hommes / Enfants — taille informative 8-14 ans"
     },
     "mukluks-bebe-7-18-mois-vison": {
       "audience": "enfants",

@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "note_fr": "Limites provisoires — à valider avec Lucie. Une seule config par type de mesure × clientèle.",
+  "note_en": "Provisional limits — pending Lucie validation. One config per measure type × audience.",
+  "audiences": ["enfant", "femme", "homme"],
+  "audience_aliases": {
+    "enfants": "enfant",
+    "femmes": "femme",
+    "hommes": "homme",
+    "unisexe": "femme"
+  },
+  "by_field": {
+    "hand_circumference": {
+      "label_fr": "Tour de main",
+      "label_en": "Hand circumference",
+      "limits_cm": {
+        "enfant": { "min": 8, "max": 20 },
+        "femme": { "min": 14, "max": 27 },
+        "homme": { "min": 17, "max": 32 }
+      }
+    },
+    "hand_length": {
+      "label_fr": "Longueur de main",
+      "label_en": "Hand length",
+      "limits_cm": {
+        "enfant": { "min": 8, "max": 19 },
+        "femme": { "min": 13, "max": 24 },
+        "homme": { "min": 15, "max": 27 }
+      }
+    },
+    "foot_length": {
+      "label_fr": "Longueur du pied",
+      "label_en": "Foot length",
+      "limits_cm": {
+        "enfant": { "min": 10, "max": 22 },
+        "femme": { "min": 20, "max": 28 },
+        "homme": { "min": 23, "max": 32 }
+      }
+    },
+    "head_circumference": {
+      "label_fr": "Tour de tête",
+      "label_en": "Head circumference",
+      "limits_cm": {
+        "enfant": { "min": 48, "max": 56 },
+        "femme": { "min": 52, "max": 60 },
+        "homme": { "min": 54, "max": 64 }
+      }
+    },
+    "scarf_length": {
+      "label_fr": "Longueur souhaitée",
+      "label_en": "Desired length",
+      "limits_cm": {
+        "enfant": { "min": 80, "max": 140 },
+        "femme": { "min": 120, "max": 200 },
+        "homme": { "min": 130, "max": 220 }
+      }
+    },
+    "scarf_width": {
+      "label_fr": "Largeur souhaitée",
+      "label_en": "Desired width",
+      "limits_cm": {
+        "enfant": { "min": 15, "max": 30 },
+        "femme": { "min": 20, "max": 45 },
+        "homme": { "min": 20, "max": 50 }
+      }
+    }
+  },
+  "increments": {
+    "cm": 0.5,
+    "in_eighths": 1
+  }
+}

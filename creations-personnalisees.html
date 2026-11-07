@@ -110,8 +110,13 @@
       <section id="sm-step-1" class="sm-panel sm-step is-current-step" aria-labelledby="sm-products-title" tabindex="-1">
         <p class="sm-step-num" data-fr="Étape 1" data-en="Step 1">Étape 1</p>
         <h2 id="sm-products-title" data-fr="Choisir une catégorie" data-en="Choose a category">Choisir une catégorie</h2>
-        <p class="sm-lead" id="sm-step1-lead" data-fr="Choisissez d’abord le type de création, puis le modèle. Les mensurations remplacent les tailles standards." data-en="First choose the type of creation, then the model. Measurements replace standard sizes.">Choisissez d’abord le type de création, puis le modèle. Les mensurations remplacent les tailles standards.</p>
         <p id="sm-products-status" class="sm-products-status" role="status" aria-live="polite" data-fr="Chargement du catalogue Boutique…" data-en="Loading the Shop catalog…">Chargement du catalogue Boutique…</p>
+        <div id="sm-audience-bar" class="audience-bar sm-audience-bar" role="group" aria-label="Clientèle">
+          <button type="button" class="audience-filter active" data-audience="tous" data-fr="Tous" data-en="All">Tous</button>
+          <button type="button" class="audience-filter" data-audience="femmes" data-fr="Femmes" data-en="Women">Femmes</button>
+          <button type="button" class="audience-filter" data-audience="hommes" data-fr="Hommes" data-en="Men">Hommes</button>
+          <button type="button" class="audience-filter" data-audience="enfants" data-fr="Enfants" data-en="Kids">Enfants</button>
+        </div>
         <div id="sm-category-pick" class="sm-category-grid" role="list" aria-label="Catégories"></div>
         <div id="sm-products-wrap" class="sm-products-wrap" hidden>
           <div class="sm-products-toolbar">
@@ -148,7 +153,7 @@
       <section id="sm-step-3" class="sm-panel sm-step" hidden aria-labelledby="sm-measures-title" tabindex="-1">
         <p class="sm-step-num" data-fr="Étape 3" data-en="Step 3">Étape 3</p>
         <h2 id="sm-measures-title" data-fr="Indiquer ses mensurations" data-en="Enter your measurements">Indiquer ses mensurations</h2>
-        <p class="sm-lead" data-fr="Les centimètres sont déjà choisis. Vous pouvez passer en pouces. La conversion se fait toute seule." data-en="Centimetres are already selected. You can switch to inches. Conversion happens automatically.">Les centimètres sont déjà choisis. Vous pouvez passer en pouces. La conversion se fait toute seule.</p>
+        <p class="sm-lead" data-fr="Choisissez chaque mesure dans la liste (aucune valeur présélectionnée). Passez en pouces si besoin — la conversion conserve votre choix exact. Si votre mesure n’est pas dans la liste, sélectionnez « hors liste » : Lucie vous contactera." data-en="Pick each measurement from the list (nothing preselected). Switch to inches if needed — conversion keeps your exact choice. If your measure isn’t listed, choose out-of-list: Lucie will contact you.">Choisissez chaque mesure dans la liste (aucune valeur présélectionnée). Passez en pouces si besoin — la conversion conserve votre choix exact. Si votre mesure n’est pas dans la liste, sélectionnez « hors liste » : Lucie vous contactera.</p>
         <fieldset class="sm-field">
           <legend data-fr="Unité de mesure" data-en="Unit of measure">Unité de mesure</legend>
           <div class="sm-unit" role="group" aria-labelledby="sm-measures-title">
@@ -165,7 +170,7 @@
               <p id="sm-hand-sub"></p>
             </div>
             <div class="sm-hand-body">
-              <img id="sm-hand-photo" src="assets/mesures/guide-main-schema.jpg" width="536" height="496" alt="" decoding="async">
+              <img id="sm-hand-photo" src="assets/mesures/guide-main-schema.jpg" width="1024" height="682" alt="" decoding="async">
               <div class="sm-hand-copy">
                 <ol id="sm-hand-steps"></ol>
                 <div id="sm-hand-tables"></div>

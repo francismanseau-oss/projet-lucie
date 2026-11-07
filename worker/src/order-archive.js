@@ -72,18 +72,30 @@ export function buildOrderArchive({ sessionObj, pending, orderNumber, shipping }
           }
         : null,
     items,
-    shipping: {
-      method: ship.method_id || ship.method || pending?.shipping_method || null,
-      fee_cad_cents: moneyCad(
-        ship.fee_cad_cents ?? pending?.shipping_fee_cents ?? sessionObj?.metadata?.shipping_fee_cents,
-      ),
-      fee_status: "paye",
-      destination: ship.destination || pending?.destination || null,
-      source: ship.source || pending?.shipping_source || null,
-      tracking_number: null,
-      initial_status: "a_preparer",
-      instructions: pending?.shipping_instructions || null,
-    },
+    shipping: (() => {
+      const method =
+        ship.method_id ||
+        ship.method ||
+        pending?.shipping_method ||
+        sessionObj?.metadata?.shipping ||
+        null;
+      return {
+        method,
+        client_chosen_method: ship.client_chosen_method || pending?.shipping_method || method || null,
+        actual_carrier: ship.actual_carrier || null,
+        fee_cad_cents: moneyCad(
+          ship.fee_cad_cents ??
+            pending?.shipping_fee_cents ??
+            sessionObj?.metadata?.shipping_fee_cents,
+        ),
+        fee_status: "paye",
+        destination: ship.destination || pending?.destination || null,
+        source: ship.source || pending?.shipping_source || null,
+        tracking_number: null,
+        initial_status: "a_preparer",
+        instructions: pending?.shipping_instructions || null,
+      };
+    })(),
     financial: {
       products_cents: moneyCad(pending?.products_cents),
       shipping_fee_cents: moneyCad(pending?.shipping_fee_cents ?? ship.fee_cad_cents),

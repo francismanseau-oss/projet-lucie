@@ -8,6 +8,7 @@ import {
   assertFulfillmentStatus,
   assertNoInventedShippingFee,
   emptyShipping,
+  mergeShippingOnImport,
   normalizeOrder,
 } from "./orders-core.js";
 
@@ -63,8 +64,10 @@ export function createAdminOrdersStore(filePath, opts = {}) {
         ...next,
         fulfillment_status: prev.fulfillment_status,
         status_history: prev.status_history,
-        shipping: prev.shipping?.method ? prev.shipping : next.shipping,
+        shipping: mergeShippingOnImport(prev.shipping, next.shipping),
         notes_lucie: prev.notes_lucie,
+        archived: prev.archived,
+        archived_at: prev.archived_at,
         updated_at: new Date().toISOString(),
       };
     } else {
@@ -139,6 +142,14 @@ export function createAdminOrdersStore(filePath, opts = {}) {
     const merged = { ...emptyShipping(), ...prev.shipping, ...shipping };
     if (shipping?.bus) merged.bus = { ...prev.shipping.bus, ...shipping.bus };
     if (shipping?.package) merged.package = { ...prev.shipping.package, ...shipping.package };
+    // Ne jamais effacer le choix client si Lucie change seulement le transporteur utilisé
+    if (!merged.client_chosen_method) {
+      merged.client_chosen_method =
+        prev.shipping?.client_chosen_method ||
+        (prev.shipping?.method && prev.shipping.method !== "a_confirmer"
+          ? prev.shipping.method
+          : null);
+    }
     assertNoInventedShippingFee(merged);
     const before = prev.shipping;
     prev.shipping = merged;
@@ -160,6 +171,142 @@ export function createAdminOrdersStore(filePath, opts = {}) {
     return normalizeOrder(prev);
   }
 
+  function findIndex(data, id) {
+    return data.orders.findIndex((o) => o.id === id || o.session_id === id);
+  }
+
+  function pushHist(prev, actor, field, before, after, note) {
+    prev.status_history = [
+      {
+        id: newId("hist"),
+        at: prev.updated_at,
+        actor: actor || actorDefault,
+        field,
+        before,
+        after,
+        note: note || "",
+      },
+      ...(prev.status_history || []),
+    ].slice(0, 200);
+  }
+
+  /** Modifier coordonnées / notes — jamais le paiement Stripe. */
+  function updateDetails({ id, patch = {}, actor, note, confirm }) {
+    if (!confirm) {
+      const err = new Error("Confirmation requise");
+      err.status = 400;
+      throw err;
+    }
+    const data = readAll();
+    const idx = findIndex(data, id);
+    if (idx < 0) {
+      const err = new Error("Commande introuvable");
+      err.status = 404;
+      throw err;
+    }
+    const prev = normalizeOrder(data.orders[idx]);
+    const before = {
+      customer_name: prev.customer_name,
+      customer_email: prev.customer_email,
+      customer_phone: prev.customer_phone,
+      shipping_address: prev.shipping_address,
+      notes_lucie: prev.notes_lucie,
+    };
+    if (patch.customer_name !== undefined) {
+      prev.customer_name = String(patch.customer_name || "").trim() || null;
+    }
+    if (patch.customer_email !== undefined) {
+      prev.customer_email = String(patch.customer_email || "").trim() || null;
+    }
+    if (patch.customer_phone !== undefined) {
+      prev.customer_phone = String(patch.customer_phone || "").trim() || null;
+    }
+    if (patch.notes_lucie !== undefined) {
+      prev.notes_lucie = String(patch.notes_lucie || "");
+    }
+    if (patch.shipping_address && typeof patch.shipping_address === "object") {
+      const a = patch.shipping_address;
+      prev.shipping_address = {
+        line1: String(a.line1 || "").trim() || null,
+        line2: String(a.line2 || "").trim() || null,
+        city: String(a.city || "").trim() || null,
+        state: String(a.state || "").trim() || null,
+        postal_code: String(a.postal_code || "").trim() || null,
+        country: String(a.country || "CA").trim() || "CA",
+      };
+    }
+    prev.updated_at = new Date().toISOString();
+    pushHist(prev, actor, "details", before, {
+      customer_name: prev.customer_name,
+      customer_email: prev.customer_email,
+      customer_phone: prev.customer_phone,
+      shipping_address: prev.shipping_address,
+      notes_lucie: prev.notes_lucie,
+    }, note || "Coordonnées / notes mises à jour");
+    data.orders[idx] = prev;
+    writeAll(data);
+    return normalizeOrder(prev);
+  }
+
+  /** Archiver (prioritaire) — masque de la liste active, conservée. */
+  function setArchived({ id, archived, actor, note, confirm }) {
+    if (!confirm) {
+      const err = new Error("Confirmation requise");
+      err.status = 400;
+      throw err;
+    }
+    const data = readAll();
+    const idx = findIndex(data, id);
+    if (idx < 0) {
+      const err = new Error("Commande introuvable");
+      err.status = 404;
+      throw err;
+    }
+    const prev = normalizeOrder(data.orders[idx]);
+    const nextArchived = !!archived;
+    if (prev.archived === nextArchived) return prev;
+    const before = prev.archived;
+    prev.archived = nextArchived;
+    prev.archived_at = nextArchived ? new Date().toISOString() : null;
+    prev.updated_at = new Date().toISOString();
+    pushHist(
+      prev,
+      actor,
+      "archived",
+      before,
+      nextArchived,
+      note || (nextArchived ? "Commande archivée" : "Commande désarchivée"),
+    );
+    data.orders[idx] = prev;
+    writeAll(data);
+    return normalizeOrder(prev);
+  }
+
+  /** Suppression définitive locale — exige confirm (dialogue UI). */
+  function deleteOrder({ id, actor, confirm }) {
+    if (!confirm) {
+      const err = new Error("Confirmation requise");
+      err.status = 400;
+      throw err;
+    }
+    const data = readAll();
+    const idx = findIndex(data, id);
+    if (idx < 0) {
+      const err = new Error("Commande introuvable");
+      err.status = 404;
+      throw err;
+    }
+    const removed = normalizeOrder(data.orders[idx]);
+    data.orders.splice(idx, 1);
+    writeAll(data);
+    return {
+      ok: true,
+      deleted_id: removed.session_id || removed.id,
+      order_number: removed.order_number,
+      actor: actor || actorDefault,
+    };
+  }
+
   return {
     filePath,
     list,
@@ -167,6 +314,9 @@ export function createAdminOrdersStore(filePath, opts = {}) {
     upsertFromImport,
     updateFulfillment,
     updateShipping,
+    updateDetails,
+    setArchived,
+    deleteOrder,
     readAll,
   };
 }

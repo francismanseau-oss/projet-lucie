@@ -6,7 +6,7 @@
   "products": [
     {
       "id": "chapeau-fille-8-10-renard",
-      "name_fr": "Chapeau fille 8-10 ans — renard",
+      "name_fr": "Chapeau fille renard",
       "category": "chapeaux",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -18,7 +18,7 @@
     },
     {
       "id": "chapeau-dame-m-l-coyote",
-      "name_fr": "Chapeau dame M — coyote",
+      "name_fr": "Chapeau dame coyote",
       "category": "chapeaux",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -30,7 +30,7 @@
     },
     {
       "id": "chapeau-dame-m-l-fourrure-recyclee",
-      "name_fr": "Chapeau dame M — fourrure recyclée",
+      "name_fr": "Chapeau dame fourrure recyclée",
       "category": "chapeaux",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -42,7 +42,7 @@
     },
     {
       "id": "chapeau-dame-m-l-renard-argente",
-      "name_fr": "Chapeau dame M — renard argenté",
+      "name_fr": "Chapeau dame renard argenté",
       "category": "chapeaux",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -54,7 +54,7 @@
     },
     {
       "id": "chapeau-dame-m-l-renard-norvegien",
-      "name_fr": "Chapeau dame M — renard norvégien",
+      "name_fr": "Chapeau dame renard norvégien",
       "category": "chapeaux",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -66,7 +66,7 @@
     },
     {
       "id": "chapeau-dame-m-l-renard-roux",
-      "name_fr": "Chapeau dame M — renard roux",
+      "name_fr": "Chapeau dame renard roux",
       "category": "chapeaux",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -78,7 +78,7 @@
     },
     {
       "id": "chapeau-dame-m-l-vison",
-      "name_fr": "Chapeau dame M — vison",
+      "name_fr": "Chapeau dame vison",
       "category": "chapeaux",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -90,7 +90,7 @@
     },
     {
       "id": "chapeau-dame-vison-et-renard",
-      "name_fr": "Chapeau dame M — renard",
+      "name_fr": "Chapeau dame renard",
       "category": "chapeaux",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -102,7 +102,7 @@
     },
     {
       "id": "chapeau-homme-m-castor",
-      "name_fr": "Chapeau homme M — castor",
+      "name_fr": "Chapeau homme castor",
       "category": "chapeaux",
       "price_cad_cents": 18000,
       "price_cad": 180,
@@ -114,7 +114,7 @@
     },
     {
       "id": "chapeau-homme-m-l-coyote",
-      "name_fr": "Chapeau homme M-L — coyote",
+      "name_fr": "Chapeau homme coyote",
       "category": "chapeaux",
       "price_cad_cents": 18000,
       "price_cad": 180,
@@ -126,7 +126,7 @@
     },
     {
       "id": "chapeau-homme-m-l-renard-roux",
-      "name_fr": "Chapeau dame M — renard roux",
+      "name_fr": "Chapeau dame renard roux",
       "category": "chapeaux",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -138,7 +138,7 @@
     },
     {
       "id": "chapeau-homme-l-xl-raton",
-      "name_fr": "Chapeau homme XL — raton",
+      "name_fr": "Chapeau homme raton",
       "category": "chapeaux",
       "price_cad_cents": 18000,
       "price_cad": 180,
@@ -150,7 +150,7 @@
     },
     {
       "id": "chapeau-vison-recyclee",
-      "name_fr": "Chapeau enfant 8-12 ans — vison recyclée",
+      "name_fr": "Chapeau enfant vison recyclée",
       "category": "chapeaux",
       "price_cad_cents": 8000,
       "price_cad": 80,
@@ -162,7 +162,7 @@
     },
     {
       "id": "mitaines-bebe-sans-pouces-8-24-mois-castor",
-      "name_fr": "Mitaines bébé sans pouces 8-24 mois — castor",
+      "name_fr": "Mitaines bébé sans pouces castor",
       "category": "mitaines",
       "price_cad_cents": 4000,
       "price_cad": 40,
@@ -174,7 +174,7 @@
     },
     {
       "id": "mitaines-bebe-sans-pouces-8-24-mois-vison",
-      "name_fr": "Mitaines bébé sans pouces 8-24 mois — vison",
+      "name_fr": "Mitaines bébé sans pouces vison",
       "category": "mitaines",
       "price_cad_cents": 4000,
       "price_cad": 40,
@@ -186,7 +186,7 @@
     },
     {
       "id": "mitaines-bebe-sans-pouces-vison-fermeture-eclair",
-      "name_fr": "Mitaines bébé sans pouces — vison (fermeture éclair)",
+      "name_fr": "Mitaines bébé sans pouces vison",
       "category": "mitaines",
       "price_cad_cents": 4000,
       "price_cad": 40,
@@ -198,7 +198,7 @@
     },
     {
       "id": "mitaines-enfant-2-4-ans-castor-fermeture-eclair",
-      "name_fr": "Mitaines enfant 2-4 ans — castor (fermeture éclair)",
+      "name_fr": "Mitaines enfant castor",
       "category": "mitaines",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -210,7 +210,7 @@
     },
     {
       "id": "mitaines-enfant-4-6-vison-fermeture-eclair",
-      "name_fr": "Mitaines enfant 4-6 — vison (fermeture éclair)",
+      "name_fr": "Mitaines enfant vison",
       "category": "mitaines",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -222,7 +222,7 @@
     },
     {
       "id": "mitaines-enfant-6-8-vison-fermeture-eclair",
-      "name_fr": "Mitaines enfant 6-8 — vison (fermeture éclair)",
+      "name_fr": "Mitaines enfant vison",
       "category": "mitaines",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -234,7 +234,7 @@
     },
     {
       "id": "mitaines-enfant-8-10-chat-sauvage",
-      "name_fr": "Mitaines enfant 8-10 — chat sauvage",
+      "name_fr": "Mitaines enfant chat sauvage",
       "category": "mitaines",
       "price_cad_cents": 8000,
       "price_cad": 80,
@@ -246,7 +246,7 @@
     },
     {
       "id": "mitaines-fille-8-10-renard",
-      "name_fr": "Mitaines fille 8-10 — renard",
+      "name_fr": "Mitaines fille 8-10 renard",
       "category": "mitaines",
       "price_cad_cents": 4000,
       "price_cad": 40,
@@ -254,11 +254,12 @@
       "description_fr": "Fourrure renard recyclée et cuir d'agneau, avec fermeture éclair",
       "availability": "contact",
       "active": true,
-      "product_number": 114
+      "product_number": 114,
+      "name_en": "Girls' mittens 8-10 — fox"
     },
     {
       "id": "mitaines-enfant-10-12-mouton-rase",
-      "name_fr": "Mitaines enfant 10-12 — mouton rasé",
+      "name_fr": "Mitaines enfant mouton rasé",
       "category": "mitaines",
       "price_cad_cents": 8000,
       "price_cad": 80,
@@ -270,7 +271,7 @@
     },
     {
       "id": "mitaines-dame-m-renard",
-      "name_fr": "Mitaines dame M — renard",
+      "name_fr": "Mitaines dame renard",
       "category": "mitaines",
       "price_cad_cents": 14000,
       "price_cad": 140,
@@ -282,7 +283,7 @@
     },
     {
       "id": "mitaines-longues-dame-m-vison-et-renard",
-      "name_fr": "Mitaines longues dame M — vison et renard",
+      "name_fr": "Mitaines longues dame vison et renard",
       "category": "mitaines",
       "price_cad_cents": 16000,
       "price_cad": 160,
@@ -294,7 +295,7 @@
     },
     {
       "id": "mitaines-dame-m-l-chat-sauvage",
-      "name_fr": "Mitaines dame M — chat sauvage",
+      "name_fr": "Mitaines dame chat sauvage",
       "category": "mitaines",
       "price_cad_cents": 14000,
       "price_cad": 140,
@@ -306,7 +307,7 @@
     },
     {
       "id": "mitaines-dame-m-l-fourrure-recyclee",
-      "name_fr": "Mitaines dame M — fourrure recyclée",
+      "name_fr": "Mitaines dame fourrure recyclée",
       "category": "mitaines",
       "price_cad_cents": 14000,
       "price_cad": 140,
@@ -318,7 +319,7 @@
     },
     {
       "id": "mitaines-dame-renard-roux",
-      "name_fr": "Mitaines dame M — renard roux",
+      "name_fr": "Mitaines dame renard roux",
       "category": "mitaines",
       "price_cad_cents": 14000,
       "price_cad": 140,
@@ -330,7 +331,7 @@
     },
     {
       "id": "mitaines-dame-vison-et-renard",
-      "name_fr": "Mitaines dame M — vison et renard",
+      "name_fr": "Mitaines dame vison et renard",
       "category": "mitaines",
       "price_cad_cents": 16000,
       "price_cad": 160,
@@ -342,7 +343,7 @@
     },
     {
       "id": "mitaines-homme-m-l-castor",
-      "name_fr": "Mitaines homme L — castor",
+      "name_fr": "Mitaines homme castor",
       "category": "mitaines",
       "price_cad_cents": 18000,
       "price_cad": 180,
@@ -354,7 +355,7 @@
     },
     {
       "id": "mitaines-homme-m-l-coyote",
-      "name_fr": "Mitaines homme L — coyote",
+      "name_fr": "Mitaines homme coyote",
       "category": "mitaines",
       "price_cad_cents": 18000,
       "price_cad": 180,
@@ -366,7 +367,7 @@
     },
     {
       "id": "mitaines-homme-m-l-renard-roux",
-      "name_fr": "Mitaines homme M — renard roux",
+      "name_fr": "Mitaines homme renard roux",
       "category": "mitaines",
       "price_cad_cents": 18000,
       "price_cad": 180,
@@ -378,7 +379,7 @@
     },
     {
       "id": "mitaines-8-10-vison-fermeture-eclair",
-      "name_fr": "Mitaines 8-10 ans — vison (fermeture éclair)",
+      "name_fr": "Mitaines vison",
       "category": "mitaines",
       "price_cad_cents": 8000,
       "price_cad": 80,
@@ -390,7 +391,7 @@
     },
     {
       "id": "mitaines-small-vison",
-      "name_fr": "Mitaines dame S — vison",
+      "name_fr": "Mitaines dame vison",
       "category": "mitaines",
       "price_cad_cents": 14000,
       "price_cad": 140,
@@ -402,7 +403,7 @@
     },
     {
       "id": "mitaines-m-renard",
-      "name_fr": "Mitaines dame M — renard",
+      "name_fr": "Mitaines dame renard",
       "category": "mitaines",
       "price_cad_cents": 14000,
       "price_cad": 140,
@@ -414,7 +415,7 @@
     },
     {
       "id": "mitaines-motoneige-m-renard-argente",
-      "name_fr": "Mitaines motoneige dame M — renard argenté",
+      "name_fr": "Mitaines motoneige dame renard argenté",
       "category": "mitaines",
       "price_cad_cents": 16000,
       "price_cad": 160,
@@ -426,7 +427,7 @@
     },
     {
       "id": "mitaines-m-l-renard",
-      "name_fr": "Mitaines dame M — renard",
+      "name_fr": "Mitaines dame renard",
       "category": "mitaines",
       "price_cad_cents": 14000,
       "price_cad": 140,
@@ -438,7 +439,7 @@
     },
     {
       "id": "mitaines-m-l-vison-et-chat-sauvage",
-      "name_fr": "Mitaines dame M — vison et chat sauvage",
+      "name_fr": "Mitaines dame vison et chat sauvage",
       "category": "mitaines",
       "price_cad_cents": 16000,
       "price_cad": 160,
@@ -450,7 +451,7 @@
     },
     {
       "id": "mitaines-m-l-vison-et-renard",
-      "name_fr": "Mitaines dame M — vison et renard",
+      "name_fr": "Mitaines dame vison et renard",
       "category": "mitaines",
       "price_cad_cents": 16000,
       "price_cad": 160,
@@ -462,7 +463,7 @@
     },
     {
       "id": "mitaines-motoneige-m-l-renard-norvegien",
-      "name_fr": "Mitaines motoneige homme M — renard norvégien",
+      "name_fr": "Mitaines motoneige homme renard norvégien",
       "category": "mitaines",
       "price_cad_cents": 18000,
       "price_cad": 180,
@@ -474,7 +475,7 @@
     },
     {
       "id": "mitaines-style-inuit-coyote",
-      "name_fr": "Mitaines style Inuit dame M — coyote",
+      "name_fr": "Mitaines style Inuit dame coyote",
       "category": "mitaines",
       "price_cad_cents": 14000,
       "price_cad": 140,
@@ -486,7 +487,7 @@
     },
     {
       "id": "foulard-dame-vison",
-      "name_fr": "Foulard dame — vison",
+      "name_fr": "Foulard dame vison",
       "category": "foulards",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -498,7 +499,7 @@
     },
     {
       "id": "foulard-dame-vison-et-renard",
-      "name_fr": "Foulard dame — vison et renard",
+      "name_fr": "Foulard dame vison et renard",
       "category": "foulards",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -510,7 +511,7 @@
     },
     {
       "id": "cache-oreilles-enfant-8-10-12-coyote",
-      "name_fr": "Cache-oreilles junior 8-14 ans — coyote",
+      "name_fr": "Cache-oreilles junior coyote",
       "category": "cache-oreilles",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -522,7 +523,7 @@
     },
     {
       "id": "cache-oreilles-enfant-8-10-12-renard",
-      "name_fr": "Cache-oreilles junior 8-14 ans — renard",
+      "name_fr": "Cache-oreilles junior renard",
       "category": "cache-oreilles",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -534,7 +535,7 @@
     },
     {
       "id": "cache-oreilles-ado-10-14-renard-et-vison",
-      "name_fr": "Cache-oreilles junior 8-14 ans — renard et vison",
+      "name_fr": "Cache-oreilles junior renard et vison",
       "category": "cache-oreilles",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -546,7 +547,7 @@
     },
     {
       "id": "cache-oreilles-dame-m-vison-et-lapin",
-      "name_fr": "Cache-oreilles junior 8-14 ans — vison et lapin",
+      "name_fr": "Cache-oreilles junior vison et lapin",
       "category": "cache-oreilles",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -570,7 +571,7 @@
     },
     {
       "id": "mukluks-bebe-7-18-mois-vison",
-      "name_fr": "Mukluks bébé 7-18 mois — vison",
+      "name_fr": "Mukluks bébé vison",
       "category": "mukluks",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -582,7 +583,7 @@
     },
     {
       "id": "mukluks-bebe-8-18-mois-vison",
-      "name_fr": "Mukluks bébé 8-18 mois — vison",
+      "name_fr": "Mukluks bébé vison",
       "category": "mukluks",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -594,7 +595,7 @@
     },
     {
       "id": "mukluks-bebe-8-24-mois-castor",
-      "name_fr": "Mukluks bébé 8-24 mois — castor",
+      "name_fr": "Mukluks bébé castor",
       "category": "mukluks",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -606,7 +607,7 @@
     },
     {
       "id": "mukluks-bebe-8-24-mois-vison",
-      "name_fr": "Mukluks bébé 8-24 mois — vison",
+      "name_fr": "Mukluks bébé vison",
       "category": "mukluks",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -618,7 +619,7 @@
     },
     {
       "id": "mukluks-bebe-a-18-mois-coyote",
-      "name_fr": "Mukluks bébé à 18 mois — coyote",
+      "name_fr": "Mukluks bébé coyote",
       "category": "mukluks",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -630,7 +631,7 @@
     },
     {
       "id": "mukluks-bebe-vison-fermeture-eclair",
-      "name_fr": "Mukluks bébé — vison (fermeture éclair)",
+      "name_fr": "Mukluks bébé vison (fermeture éclair)",
       "category": "mukluks",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -642,7 +643,7 @@
     },
     {
       "id": "mukluks-adulte-mobilite-reduite-8-9-vison-et-renard",
-      "name_fr": "Mukluks adaptés – Sur mesure",
+      "name_fr": "Mukluks adaptés Sur mesure",
       "category": "mukluks",
       "price_cad_cents": 14000,
       "price_cad": 140,
@@ -656,7 +657,7 @@
     },
     {
       "id": "pantoufles-bebe-0-7-mois-fourrure-recyclee",
-      "name_fr": "Pantoufles bébé 0-7 mois — fourrure recyclée",
+      "name_fr": "Pantoufles bébé fourrure recyclée",
       "category": "pantoufles",
       "price_cad_cents": 4000,
       "price_cad": 40,
@@ -668,7 +669,7 @@
     },
     {
       "id": "pantoufles-bebe-5-12-mois-fourrure-recyclee",
-      "name_fr": "Pantoufles bébé 5-12 mois — fourrure recyclée",
+      "name_fr": "Pantoufles bébé fourrure recyclée",
       "category": "pantoufles",
       "price_cad_cents": 4000,
       "price_cad": 40,
@@ -680,7 +681,7 @@
     },
     {
       "id": "pantoufles-enfant-2-3-mouton-rase-et-coyote",
-      "name_fr": "Pantoufles enfant pointure 2-3 — mouton rasé et coyote",
+      "name_fr": "Pantoufles enfant mouton rasé et coyote",
       "category": "pantoufles",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -692,7 +693,7 @@
     },
     {
       "id": "pantoufles-enfant-2-3-renard",
-      "name_fr": "Pantoufles enfant pointure 2-3 — renard",
+      "name_fr": "Pantoufles enfant renard",
       "category": "pantoufles",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -704,7 +705,7 @@
     },
     {
       "id": "pantoufles-enfant-13-1-vison-et-coyote",
-      "name_fr": "Pantoufles enfant pointure 13-1 — vison et coyote",
+      "name_fr": "Pantoufles enfant vison et coyote",
       "category": "pantoufles",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -716,7 +717,7 @@
     },
     {
       "id": "pantoufles-dame-7-8-mouton-rase-et-chat-sauvage",
-      "name_fr": "Pantoufles dame 7-8 — mouton rasé et chat sauvage",
+      "name_fr": "Pantoufles dame mouton rasé et chat sauvage",
       "category": "pantoufles",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -728,7 +729,7 @@
     },
     {
       "id": "pantoufles-dame-8-9-vison-et-coyote",
-      "name_fr": "Pantoufles dame 8-9 — vison et coyote",
+      "name_fr": "Pantoufles dame vison et coyote",
       "category": "pantoufles",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -740,7 +741,7 @@
     },
     {
       "id": "pantoufles-dame-8-9-vison-et-renard",
-      "name_fr": "Pantoufles dame 8-9 — vison et renard",
+      "name_fr": "Pantoufles dame vison et renard",
       "category": "pantoufles",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -752,7 +753,7 @@
     },
     {
       "id": "pantoufles-dame-9-10-vison-et-renard",
-      "name_fr": "Pantoufles dame 9-10 — vison et renard",
+      "name_fr": "Pantoufles dame vison et renard",
       "category": "pantoufles",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -764,7 +765,7 @@
     },
     {
       "id": "pantoufles-homme-10-11-chat-sauvage",
-      "name_fr": "Pantoufles homme 10-11 — chat sauvage",
+      "name_fr": "Pantoufles homme chat sauvage",
       "category": "pantoufles",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -776,7 +777,7 @@
     },
     {
       "id": "pantoufles-homme-10-11-mouton-et-renard-roux",
-      "name_fr": "Pantoufles homme 10-11 — mouton et renard roux",
+      "name_fr": "Pantoufles homme mouton et renard roux",
       "category": "pantoufles",
       "price_cad_cents": 12000,
       "price_cad": 120,

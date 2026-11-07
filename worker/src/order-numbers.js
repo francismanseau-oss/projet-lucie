@@ -1,21 +1,29 @@
 /**
- * Numéros de commande permanents Lucie — LFB-YYYYMMDD-XXXX
- * Indépendants de Stripe cs_…
+ * Numéros de commande permanents Lucie — LFB-YYYYMMDD-HHMM
+ * Date + heure (minute), fuseau Québec. Pas de compteur séquentiel (pour l’instant).
  */
 
 /**
  * @param {object} opts
  * @param {() => Date} [opts.now]
- * @param {() => number} [opts.random] — 0..1
+ * @param {string} [opts.timeZone] — défaut America/Toronto
  */
 export function generateOrderNumber(opts = {}) {
   const now = opts.now ? opts.now() : new Date();
-  const y = now.getUTCFullYear();
-  const m = String(now.getUTCMonth() + 1).padStart(2, "0");
-  const d = String(now.getUTCDate()).padStart(2, "0");
-  const rand = opts.random ? opts.random() : Math.random();
-  const seq = String(Math.floor(rand * 10000)).padStart(4, "0");
-  return `LFB-${y}${m}${d}-${seq}`;
+  const timeZone = opts.timeZone || "America/Toronto";
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(now);
+  const get = (type) => parts.find((p) => p.type === type)?.value || "00";
+  let hour = get("hour");
+  if (hour === "24") hour = "00";
+  return `LFB-${get("year")}${get("month")}${get("day")}-${hour}${get("minute")}`;
 }
 
 export function isValidOrderNumber(value) {

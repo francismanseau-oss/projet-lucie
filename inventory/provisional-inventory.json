@@ -11,7 +11,7 @@
     {
       "product_number": 100,
       "product_id": "mitaines-8-10-vison-fermeture-eclair",
-      "name_fr": "Mitaines 8-10 — vison (fermeture éclair)",
+      "name_fr": "Mitaines 8-10 — vison",
       "category": "mitaines",
       "price_cad": 80,
       "qty_physical_provisional": 3,
@@ -20,12 +20,13 @@
       "qty_sold": 0,
       "min_stock_target": 3,
       "availability_status": "contact",
-      "lucie_validated": false
+      "lucie_validated": false,
+      "updated_at": "2026-11-07T20:00:04.414Z"
     },
     {
       "product_number": 101,
       "product_id": "mitaines-bebe-sans-pouces-vison-fermeture-eclair",
-      "name_fr": "Mitaines bébé sans pouces — vison (fermeture éclair)",
+      "name_fr": "Mitaines bébé sans pouces — vison",
       "category": "mitaines",
       "price_cad": 40,
       "qty_physical_provisional": 3,
@@ -34,7 +35,8 @@
       "qty_sold": 0,
       "min_stock_target": 3,
       "availability_status": "contact",
-      "lucie_validated": false
+      "lucie_validated": false,
+      "updated_at": "2026-11-07T20:00:04.414Z"
     },
     {
       "product_number": 102,
@@ -151,7 +153,7 @@
     {
       "product_number": 110,
       "product_id": "mitaines-enfant-2-4-ans-castor-fermeture-eclair",
-      "name_fr": "Mitaines enfant 2-4 ans — castor (fermeture éclair)",
+      "name_fr": "Mitaines enfant 2-4 ans — castor",
       "category": "mitaines",
       "price_cad": 60,
       "qty_physical_provisional": 3,
@@ -160,12 +162,13 @@
       "qty_sold": 0,
       "min_stock_target": 3,
       "availability_status": "contact",
-      "lucie_validated": false
+      "lucie_validated": false,
+      "updated_at": "2026-11-07T20:00:04.414Z"
     },
     {
       "product_number": 111,
       "product_id": "mitaines-enfant-4-6-vison-fermeture-eclair",
-      "name_fr": "Mitaines enfant 4-6 — vison (fermeture éclair)",
+      "name_fr": "Mitaines enfant 4-6 — vison",
       "category": "mitaines",
       "price_cad": 60,
       "qty_physical_provisional": 3,
@@ -174,12 +177,13 @@
       "qty_sold": 0,
       "min_stock_target": 3,
       "availability_status": "contact",
-      "lucie_validated": false
+      "lucie_validated": false,
+      "updated_at": "2026-11-07T20:00:04.414Z"
     },
     {
       "product_number": 112,
       "product_id": "mitaines-enfant-6-8-vison-fermeture-eclair",
-      "name_fr": "Mitaines enfant 6-8 — vison (fermeture éclair)",
+      "name_fr": "Mitaines enfant 6-8 — vison",
       "category": "mitaines",
       "price_cad": 60,
       "qty_physical_provisional": 3,
@@ -188,7 +192,8 @@
       "qty_sold": 0,
       "min_stock_target": 3,
       "availability_status": "contact",
-      "lucie_validated": false
+      "lucie_validated": false,
+      "updated_at": "2026-11-07T20:00:04.414Z"
     },
     {
       "product_number": 113,
@@ -216,7 +221,19 @@
       "qty_sold": 0,
       "min_stock_target": 3,
       "availability_status": "contact",
-      "lucie_validated": false
+      "lucie_validated": false,
+      "audience": "enfants",
+      "sizes": [
+        {
+          "code": "8-10",
+          "label_fr": "8-10",
+          "label_en": "8-10",
+          "qty_on_hand": 3
+        }
+      ],
+      "size_selector": false,
+      "qty_on_hand": 3,
+      "updated_at": "2026-11-07T20:00:04.414Z"
     },
     {
       "product_number": 115,
@@ -608,7 +625,18 @@
       "qty_sold": 0,
       "min_stock_target": 3,
       "availability_status": "contact",
-      "lucie_validated": false
+      "lucie_validated": false,
+      "sizes": [
+        {
+          "code": "7-8",
+          "label_fr": "Pointure 7-8",
+          "label_en": "Size 7-8",
+          "qty_on_hand": 0
+        }
+      ],
+      "size_selector": false,
+      "qty_on_hand": 0,
+      "updated_at": "2026-11-07T18:41:14.572Z"
     },
     {
       "product_number": 303,
@@ -622,7 +650,18 @@
       "qty_sold": 0,
       "min_stock_target": 3,
       "availability_status": "contact",
-      "lucie_validated": false
+      "lucie_validated": false,
+      "sizes": [
+        {
+          "code": "8-9",
+          "label_fr": "Pointure 8-9",
+          "label_en": "Size 8-9",
+          "qty_on_hand": 0
+        }
+      ],
+      "size_selector": false,
+      "qty_on_hand": 0,
+      "updated_at": "2026-11-07T18:41:14.572Z"
     },
     {
       "product_number": 304,
@@ -636,7 +675,18 @@
       "qty_sold": 0,
       "min_stock_target": 3,
       "availability_status": "contact",
-      "lucie_validated": false
+      "lucie_validated": false,
+      "sizes": [
+        {
+          "code": "8-9",
+          "label_fr": "Pointure 8-9",
+          "label_en": "Size 8-9",
+          "qty_on_hand": 0
+        }
+      ],
+      "size_selector": false,
+      "qty_on_hand": 0,
+      "updated_at": "2026-11-07T18:41:14.572Z"
     },
     {
       "product_number": 305,
@@ -650,7 +700,18 @@
       "qty_sold": 0,
       "min_stock_target": 3,
       "availability_status": "contact",
-      "lucie_validated": false
+      "lucie_validated": false,
+      "sizes": [
+        {
+          "code": "9-10",
+          "label_fr": "Pointure 9-10",
+          "label_en": "Size 9-10",
+          "qty_on_hand": 0
+        }
+      ],
+      "size_selector": false,
+      "qty_on_hand": 0,
+      "updated_at": "2026-11-07T18:41:14.572Z"
     },
     {
       "product_number": 306,
@@ -678,7 +739,18 @@
       "qty_sold": 0,
       "min_stock_target": 3,
       "availability_status": "contact",
-      "lucie_validated": false
+      "lucie_validated": false,
+      "sizes": [
+        {
+          "code": "2-3",
+          "label_fr": "Pointure 2-3",
+          "label_en": "Size 2-3",
+          "qty_on_hand": 0
+        }
+      ],
+      "size_selector": false,
+      "qty_on_hand": 0,
+      "updated_at": "2026-11-07T18:41:14.572Z"
     },
     {
       "product_number": 308,
@@ -692,7 +764,18 @@
       "qty_sold": 0,
       "min_stock_target": 3,
       "availability_status": "contact",
-      "lucie_validated": false
+      "lucie_validated": false,
+      "sizes": [
+        {
+          "code": "2-3",
+          "label_fr": "Pointure 2-3",
+          "label_en": "Size 2-3",
+          "qty_on_hand": 0
+        }
+      ],
+      "size_selector": false,
+      "qty_on_hand": 0,
+      "updated_at": "2026-11-07T18:41:14.572Z"
     },
     {
       "product_number": 309,
@@ -706,7 +789,18 @@
       "qty_sold": 0,
       "min_stock_target": 3,
       "availability_status": "contact",
-      "lucie_validated": false
+      "lucie_validated": false,
+      "sizes": [
+        {
+          "code": "10-11",
+          "label_fr": "Pointure 10-11",
+          "label_en": "Size 10-11",
+          "qty_on_hand": 0
+        }
+      ],
+      "size_selector": false,
+      "qty_on_hand": 0,
+      "updated_at": "2026-11-07T18:41:14.572Z"
     },
     {
       "product_number": 310,
@@ -720,7 +814,18 @@
       "qty_sold": 0,
       "min_stock_target": 3,
       "availability_status": "contact",
-      "lucie_validated": false
+      "lucie_validated": false,
+      "sizes": [
+        {
+          "code": "10-11",
+          "label_fr": "Pointure 10-11",
+          "label_en": "Size 10-11",
+          "qty_on_hand": 0
+        }
+      ],
+      "size_selector": false,
+      "qty_on_hand": 0,
+      "updated_at": "2026-11-07T18:41:14.572Z"
     },
     {
       "product_number": 400,

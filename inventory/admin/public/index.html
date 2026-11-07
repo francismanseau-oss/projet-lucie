@@ -11,10 +11,10 @@
 <body>
   <header class="top">
     <h1>Mon inventaire</h1>
-    <p class="sub">Fourrures Boréales — quantités sur ce PC</p>
     <nav class="admin-nav" id="main-nav" hidden>
       <a href="orders.html">Commandes</a>
       <a href="index.html" aria-current="page">Inventaire</a>
+      <a href="clients.html">Messages clients</a>
     </nav>
     <p id="banner" class="banner" hidden></p>
   </header>
@@ -82,42 +82,34 @@
       <label class="sr-only" for="search">Recherche</label>
       <input id="search" type="search" placeholder="Chercher par nom ou N°…" enterkeyhint="search">
 
-      <p class="filter-caption">Voir</p>
-      <div id="audience-filters" class="filter-row" role="group" aria-label="Clientèle">
-        <button type="button" class="btn btn-filter is-on" data-filter-aud="tous">Tous</button>
-        <button type="button" class="btn btn-filter" data-filter-aud="femmes">Femmes</button>
-        <button type="button" class="btn btn-filter" data-filter-aud="hommes">Hommes</button>
-        <button type="button" class="btn btn-filter" data-filter-aud="enfants">Enfants</button>
+      <div class="filter-zone">
+        <p class="filter-zone-title">Clientèle</p>
+        <div id="audience-filters" class="filter-row" role="group" aria-label="Clientèle">
+          <button type="button" class="btn btn-filter is-on" data-filter-aud="tous">Tous</button>
+          <button type="button" class="btn btn-filter" data-filter-aud="femmes">Femmes</button>
+          <button type="button" class="btn btn-filter" data-filter-aud="hommes">Hommes</button>
+          <button type="button" class="btn btn-filter" data-filter-aud="enfants">Enfants</button>
+        </div>
       </div>
-      <div id="category" class="filter-row" role="group" aria-label="Catégorie"></div>
 
-      <label class="chk"><input type="checkbox" id="only-alerts"> Voir seulement les alertes</label>
-
-      <div class="toolbar-actions">
-        <button type="button" id="btn-audit" class="btn btn-ghost">Historique</button>
-        <button type="button" id="btn-open-change" class="btn btn-ghost">Changer le mot de passe</button>
-        <button type="button" id="btn-logout" class="btn btn-ghost">Quitter</button>
+      <div class="filter-zone">
+        <p class="filter-zone-title">Catégories</p>
+        <div id="category" class="filter-row" role="group" aria-label="Catégorie"></div>
+        <label class="chk"><input type="checkbox" id="only-alerts"> Voir seulement les alertes</label>
       </div>
+
+      <details class="admin-acc">
+        <summary class="admin-acc-summary">Options</summary>
+        <div class="admin-acc-body toolbar-actions">
+          <button type="button" id="btn-audit" class="btn btn-ghost">Historique</button>
+          <button type="button" id="btn-open-change" class="btn btn-ghost">Changer le mot de passe</button>
+        </div>
+      </details>
     </div>
-
-    <p class="hint how-to"><b>Ajouter</b> = mettre des exemplaires en plus. <b>Corriger le stock total</b> = fixer le chiffre après un inventaire physique. Les boutons <b>+</b> et <b>−</b> servent aux petites corrections d’un exemplaire.</p>
 
     <div id="list" class="product-list" role="list"></div>
     <p id="empty" class="empty" hidden>Aucun produit trouvé.</p>
   </section>
-
-  <dialog id="dlg-correct">
-    <form method="dialog" id="dlg-correct-form">
-      <h2 id="dlg-correct-title">Corriger le stock total</h2>
-      <p id="dlg-correct-meta" class="hint"></p>
-      <label for="fld-correct-qty">Nouveau stock total (après inventaire)</label>
-      <input id="fld-correct-qty" type="number" min="0" step="1" inputmode="numeric">
-      <p class="hint">Ceci <b>remplace</b> le total. Ce n’est pas un ajout.</p>
-      <p id="dlg-correct-error" class="error" hidden></p>
-      <button type="button" id="btn-save-correct" class="btn btn-primary btn-lg">Enregistrer la correction</button>
-      <button type="submit" class="btn btn-ghost btn-lg" value="cancel">Annuler</button>
-    </form>
-  </dialog>
 
   <dialog id="dlg-audit">
     <h2>Historique</h2>

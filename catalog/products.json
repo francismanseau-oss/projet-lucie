@@ -6,7 +6,7 @@
   "products": [
     {
       "id": "chapeau-fille-8-10-renard",
-      "name_fr": "Chapeau fille 8-10 ans — renard",
+      "name_fr": "Chapeau fille renard",
       "category": "chapeaux",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -14,11 +14,12 @@
       "description_fr": "Fourrure renard recyclée et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 208
+      "product_number": 208,
+      "name_en": "Girl's hat — fox"
     },
     {
       "id": "chapeau-dame-m-l-coyote",
-      "name_fr": "Chapeau dame M — coyote",
+      "name_fr": "Chapeau dame coyote",
       "category": "chapeaux",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -26,11 +27,12 @@
       "description_fr": "Fourrure recyclée coyote et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 202
+      "product_number": 202,
+      "name_en": "Women's hat — coyote"
     },
     {
       "id": "chapeau-dame-m-l-fourrure-recyclee",
-      "name_fr": "Chapeau dame M — fourrure recyclée",
+      "name_fr": "Chapeau dame fourrure recyclée",
       "category": "chapeaux",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -38,11 +40,12 @@
       "description_fr": "Fourrure recyclée et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 203
+      "product_number": 203,
+      "name_en": "Women's hat — recycled fur"
     },
     {
       "id": "chapeau-dame-m-l-renard-argente",
-      "name_fr": "Chapeau dame M — renard argenté",
+      "name_fr": "Chapeau dame renard argenté",
       "category": "chapeaux",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -50,11 +53,12 @@
       "description_fr": "Fourrure recyclée renard argenté et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 204
+      "product_number": 204,
+      "name_en": "Women's hat — silver fox"
     },
     {
       "id": "chapeau-dame-m-l-renard-norvegien",
-      "name_fr": "Chapeau dame M — renard norvégien",
+      "name_fr": "Chapeau dame renard norvégien",
       "category": "chapeaux",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -62,11 +66,12 @@
       "description_fr": "Fourrure recyclée renard norvégien et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 205
+      "product_number": 205,
+      "name_en": "Women's hat — Norwegian fox"
     },
     {
       "id": "chapeau-dame-m-l-renard-roux",
-      "name_fr": "Chapeau dame M — renard roux",
+      "name_fr": "Chapeau dame renard roux",
       "category": "chapeaux",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -74,11 +79,12 @@
       "description_fr": "Fourrure recyclée renard roux et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 206
+      "product_number": 206,
+      "name_en": "Women's hat — red fox"
     },
     {
       "id": "chapeau-dame-m-l-vison",
-      "name_fr": "Chapeau dame M — vison",
+      "name_fr": "Chapeau dame vison",
       "category": "chapeaux",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -86,11 +92,12 @@
       "description_fr": "Fourrure de vison recyclée et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 207
+      "product_number": 207,
+      "name_en": "Women's hat — mink"
     },
     {
       "id": "chapeau-dame-vison-et-renard",
-      "name_fr": "Chapeau dame M — renard",
+      "name_fr": "Chapeau dame renard",
       "category": "chapeaux",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -98,11 +105,12 @@
       "description_fr": "Fourrure renard recyclée et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 201
+      "product_number": 201,
+      "name_en": "Women's hat — mink and fox"
     },
     {
       "id": "chapeau-homme-m-castor",
-      "name_fr": "Chapeau homme M — castor",
+      "name_fr": "Chapeau homme castor",
       "category": "chapeaux",
       "price_cad_cents": 18000,
       "price_cad": 180,
@@ -110,11 +118,12 @@
       "description_fr": "Fourrure castor naturel recyclée et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 210
+      "product_number": 210,
+      "name_en": "Men's hat — beaver"
     },
     {
       "id": "chapeau-homme-m-l-coyote",
-      "name_fr": "Chapeau homme M-L — coyote",
+      "name_fr": "Chapeau homme coyote",
       "category": "chapeaux",
       "price_cad_cents": 18000,
       "price_cad": 180,
@@ -122,11 +131,12 @@
       "description_fr": "Fourrure coyote et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 211
+      "product_number": 211,
+      "name_en": "Men's hat — coyote"
     },
     {
       "id": "chapeau-homme-m-l-renard-roux",
-      "name_fr": "Chapeau dame M — renard roux",
+      "name_fr": "Chapeau dame renard roux",
       "category": "chapeaux",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -134,11 +144,12 @@
       "description_fr": "Fourrure renard roux recyclée et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 213
+      "product_number": 213,
+      "name_en": "Women's hat — red fox"
     },
     {
       "id": "chapeau-homme-l-xl-raton",
-      "name_fr": "Chapeau homme XL — raton",
+      "name_fr": "Chapeau homme raton",
       "category": "chapeaux",
       "price_cad_cents": 18000,
       "price_cad": 180,
@@ -146,11 +157,12 @@
       "description_fr": "Fourrure raton et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 209
+      "product_number": 209,
+      "name_en": "Men's hat — raccoon"
     },
     {
       "id": "chapeau-vison-recyclee",
-      "name_fr": "Chapeau enfant 8-12 ans — vison recyclée",
+      "name_fr": "Chapeau enfant vison recyclée",
       "category": "chapeaux",
       "price_cad_cents": 8000,
       "price_cad": 80,
@@ -158,11 +170,12 @@
       "description_fr": "Fourrure de vison recyclée et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 200
+      "product_number": 200,
+      "name_en": "Hat — recycled mink"
     },
     {
       "id": "mitaines-bebe-sans-pouces-8-24-mois-castor",
-      "name_fr": "Mitaines bébé sans pouces 8-24 mois — castor",
+      "name_fr": "Mitaines bébé sans pouces castor",
       "category": "mitaines",
       "price_cad_cents": 4000,
       "price_cad": 40,
@@ -170,11 +183,12 @@
       "description_fr": "Fourrure castor recyclée, sans pouces, munies d'une fermeture éclair",
       "availability": "contact",
       "active": true,
-      "product_number": 102
+      "product_number": 102,
+      "name_en": "Baby thumbless mittens — beaver"
     },
     {
       "id": "mitaines-bebe-sans-pouces-8-24-mois-vison",
-      "name_fr": "Mitaines bébé sans pouces 8-24 mois — vison",
+      "name_fr": "Mitaines bébé sans pouces vison",
       "category": "mitaines",
       "price_cad_cents": 4000,
       "price_cad": 40,
@@ -182,11 +196,12 @@
       "description_fr": "Fourrure de vison recyclée, sans pouces, munies d'une fermeture éclair",
       "availability": "contact",
       "active": true,
-      "product_number": 103
+      "product_number": 103,
+      "name_en": "Baby thumbless mittens — mink"
     },
     {
       "id": "mitaines-bebe-sans-pouces-vison-fermeture-eclair",
-      "name_fr": "Mitaines bébé sans pouces — vison (fermeture éclair)",
+      "name_fr": "Mitaines bébé sans pouces vison",
       "category": "mitaines",
       "price_cad_cents": 4000,
       "price_cad": 40,
@@ -194,11 +209,12 @@
       "description_fr": "Fourrure de vison recyclée, sans pouces, munies d'une fermeture éclair",
       "availability": "contact",
       "active": true,
-      "product_number": 101
+      "product_number": 101,
+      "name_en": "Baby thumbless mittens — mink"
     },
     {
       "id": "mitaines-enfant-2-4-ans-castor-fermeture-eclair",
-      "name_fr": "Mitaines enfant 2-4 ans — castor (fermeture éclair)",
+      "name_fr": "Mitaines enfant castor",
       "category": "mitaines",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -206,11 +222,12 @@
       "description_fr": "Fourrure castor recyclée et cuir d'agneau, avec fermeture éclair",
       "availability": "contact",
       "active": true,
-      "product_number": 110
+      "product_number": 110,
+      "name_en": "Kids mittens — beaver"
     },
     {
       "id": "mitaines-enfant-4-6-vison-fermeture-eclair",
-      "name_fr": "Mitaines enfant 4-6 — vison (fermeture éclair)",
+      "name_fr": "Mitaines enfant vison",
       "category": "mitaines",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -218,11 +235,12 @@
       "description_fr": "Fourrure de vison recyclée, avec fermeture éclair",
       "availability": "contact",
       "active": true,
-      "product_number": 111
+      "product_number": 111,
+      "name_en": "Kids mittens — mink"
     },
     {
       "id": "mitaines-enfant-6-8-vison-fermeture-eclair",
-      "name_fr": "Mitaines enfant 6-8 — vison (fermeture éclair)",
+      "name_fr": "Mitaines enfant vison",
       "category": "mitaines",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -230,11 +248,12 @@
       "description_fr": "Fourrure de vison recyclée, avec fermeture éclair",
       "availability": "contact",
       "active": true,
-      "product_number": 112
+      "product_number": 112,
+      "name_en": "Kids mittens — mink"
     },
     {
       "id": "mitaines-enfant-8-10-chat-sauvage",
-      "name_fr": "Mitaines enfant 8-10 — chat sauvage",
+      "name_fr": "Mitaines enfant chat sauvage",
       "category": "mitaines",
       "price_cad_cents": 8000,
       "price_cad": 80,
@@ -242,11 +261,12 @@
       "description_fr": "Fourrure chat sauvage recyclée, avec fermeture éclair",
       "availability": "contact",
       "active": true,
-      "product_number": 113
+      "product_number": 113,
+      "name_en": "Kids mittens — wild cat"
     },
     {
       "id": "mitaines-fille-8-10-renard",
-      "name_fr": "Mitaines fille 8-10 — renard",
+      "name_fr": "Mitaines fille 8-10 renard",
       "category": "mitaines",
       "price_cad_cents": 4000,
       "price_cad": 40,
@@ -254,11 +274,12 @@
       "description_fr": "Fourrure renard recyclée et cuir d'agneau, avec fermeture éclair",
       "availability": "contact",
       "active": true,
-      "product_number": 114
+      "product_number": 114,
+      "name_en": "Girls' mittens 8-10 — fox"
     },
     {
       "id": "mitaines-enfant-10-12-mouton-rase",
-      "name_fr": "Mitaines enfant 10-12 — mouton rasé",
+      "name_fr": "Mitaines enfant mouton rasé",
       "category": "mitaines",
       "price_cad_cents": 8000,
       "price_cad": 80,
@@ -266,11 +287,12 @@
       "description_fr": "Fourrure mouton rasé recyclée, avec fermeture éclair",
       "availability": "contact",
       "active": true,
-      "product_number": 109
+      "product_number": 109,
+      "name_en": "Kids mittens — sheared sheep"
     },
     {
       "id": "mitaines-dame-m-renard",
-      "name_fr": "Mitaines dame M — renard",
+      "name_fr": "Mitaines dame renard",
       "category": "mitaines",
       "price_cad_cents": 14000,
       "price_cad": 140,
@@ -278,11 +300,12 @@
       "description_fr": "Fourrure renard recyclée et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 106
+      "product_number": 106,
+      "name_en": "Women's mittens — fox"
     },
     {
       "id": "mitaines-longues-dame-m-vison-et-renard",
-      "name_fr": "Mitaines longues dame M — vison et renard",
+      "name_fr": "Mitaines longues dame vison et renard",
       "category": "mitaines",
       "price_cad_cents": 16000,
       "price_cad": 160,
@@ -290,11 +313,12 @@
       "description_fr": "Fourrure vison et renard recyclée et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 118
+      "product_number": 118,
+      "name_en": "Women's long mittens — mink and fox"
     },
     {
       "id": "mitaines-dame-m-l-chat-sauvage",
-      "name_fr": "Mitaines dame M — chat sauvage",
+      "name_fr": "Mitaines dame chat sauvage",
       "category": "mitaines",
       "price_cad_cents": 14000,
       "price_cad": 140,
@@ -302,11 +326,12 @@
       "description_fr": "Fourrure de chat sauvage recyclée et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 107
+      "product_number": 107,
+      "name_en": "Women's mittens — wild cat"
     },
     {
       "id": "mitaines-dame-m-l-fourrure-recyclee",
-      "name_fr": "Mitaines dame M — fourrure recyclée",
+      "name_fr": "Mitaines dame fourrure recyclée",
       "category": "mitaines",
       "price_cad_cents": 14000,
       "price_cad": 140,
@@ -314,11 +339,12 @@
       "description_fr": "Fourrure recyclée et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 108
+      "product_number": 108,
+      "name_en": "Women's mittens — recycled fur"
     },
     {
       "id": "mitaines-dame-renard-roux",
-      "name_fr": "Mitaines dame M — renard roux",
+      "name_fr": "Mitaines dame renard roux",
       "category": "mitaines",
       "price_cad_cents": 14000,
       "price_cad": 140,
@@ -326,11 +352,12 @@
       "description_fr": "Fourrure recyclée renard roux et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 104
+      "product_number": 104,
+      "name_en": "Women's mittens — red fox"
     },
     {
       "id": "mitaines-dame-vison-et-renard",
-      "name_fr": "Mitaines dame M — vison et renard",
+      "name_fr": "Mitaines dame vison et renard",
       "category": "mitaines",
       "price_cad_cents": 16000,
       "price_cad": 160,
@@ -338,11 +365,12 @@
       "description_fr": "Fourrure de vison et renard recyclée et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 105
+      "product_number": 105,
+      "name_en": "Women's mittens — mink and fox"
     },
     {
       "id": "mitaines-homme-m-l-castor",
-      "name_fr": "Mitaines homme L — castor",
+      "name_fr": "Mitaines homme castor",
       "category": "mitaines",
       "price_cad_cents": 18000,
       "price_cad": 180,
@@ -350,11 +378,12 @@
       "description_fr": "Fourrure recyclée castor et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 115
+      "product_number": 115,
+      "name_en": "Men's mittens — beaver"
     },
     {
       "id": "mitaines-homme-m-l-coyote",
-      "name_fr": "Mitaines homme L — coyote",
+      "name_fr": "Mitaines homme coyote",
       "category": "mitaines",
       "price_cad_cents": 18000,
       "price_cad": 180,
@@ -362,11 +391,12 @@
       "description_fr": "Fourrure recyclée coyote et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 116
+      "product_number": 116,
+      "name_en": "Men's mittens — coyote"
     },
     {
       "id": "mitaines-homme-m-l-renard-roux",
-      "name_fr": "Mitaines homme M — renard roux",
+      "name_fr": "Mitaines homme renard roux",
       "category": "mitaines",
       "price_cad_cents": 18000,
       "price_cad": 180,
@@ -374,11 +404,12 @@
       "description_fr": "Fourrure recyclée renard roux et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 117
+      "product_number": 117,
+      "name_en": "Men's mittens — red fox"
     },
     {
       "id": "mitaines-8-10-vison-fermeture-eclair",
-      "name_fr": "Mitaines 8-10 ans — vison (fermeture éclair)",
+      "name_fr": "Mitaines vison",
       "category": "mitaines",
       "price_cad_cents": 8000,
       "price_cad": 80,
@@ -386,11 +417,12 @@
       "description_fr": "Fourrure de vison recyclée et cuir d'agneau, avec fermeture éclair",
       "availability": "contact",
       "active": true,
-      "product_number": 100
+      "product_number": 100,
+      "name_en": "Mittens — mink"
     },
     {
       "id": "mitaines-small-vison",
-      "name_fr": "Mitaines dame S — vison",
+      "name_fr": "Mitaines dame vison",
       "category": "mitaines",
       "price_cad_cents": 14000,
       "price_cad": 140,
@@ -398,11 +430,12 @@
       "description_fr": "Fourrure de vison recyclée et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 125
+      "product_number": 125,
+      "name_en": "Mittens Small — mink"
     },
     {
       "id": "mitaines-m-renard",
-      "name_fr": "Mitaines dame M — renard",
+      "name_fr": "Mitaines dame renard",
       "category": "mitaines",
       "price_cad_cents": 14000,
       "price_cad": 140,
@@ -410,11 +443,12 @@
       "description_fr": "Fourrure renard recyclée et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 119
+      "product_number": 119,
+      "name_en": "Mittens — fox"
     },
     {
       "id": "mitaines-motoneige-m-renard-argente",
-      "name_fr": "Mitaines motoneige dame M — renard argenté",
+      "name_fr": "Mitaines motoneige dame renard argenté",
       "category": "mitaines",
       "price_cad_cents": 16000,
       "price_cad": 160,
@@ -422,11 +456,12 @@
       "description_fr": "Fourrure renard argenté recyclée et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 123
+      "product_number": 123,
+      "name_en": "Snowmobile mittens — silver fox"
     },
     {
       "id": "mitaines-m-l-renard",
-      "name_fr": "Mitaines dame M — renard",
+      "name_fr": "Mitaines dame renard",
       "category": "mitaines",
       "price_cad_cents": 14000,
       "price_cad": 140,
@@ -434,11 +469,12 @@
       "description_fr": "Fourrure renard recyclée et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 120
+      "product_number": 120,
+      "name_en": "Mittens — fox"
     },
     {
       "id": "mitaines-m-l-vison-et-chat-sauvage",
-      "name_fr": "Mitaines dame M — vison et chat sauvage",
+      "name_fr": "Mitaines dame vison et chat sauvage",
       "category": "mitaines",
       "price_cad_cents": 16000,
       "price_cad": 160,
@@ -446,11 +482,12 @@
       "description_fr": "Fourrure vison et chat sauvage recyclée et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 121
+      "product_number": 121,
+      "name_en": "Mittens — mink and wild cat"
     },
     {
       "id": "mitaines-m-l-vison-et-renard",
-      "name_fr": "Mitaines dame M — vison et renard",
+      "name_fr": "Mitaines dame vison et renard",
       "category": "mitaines",
       "price_cad_cents": 16000,
       "price_cad": 160,
@@ -458,11 +495,12 @@
       "description_fr": "Fourrure vison et renard recyclée et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 122
+      "product_number": 122,
+      "name_en": "Mittens — mink and fox"
     },
     {
       "id": "mitaines-motoneige-m-l-renard-norvegien",
-      "name_fr": "Mitaines motoneige homme M — renard norvégien",
+      "name_fr": "Mitaines motoneige homme renard norvégien",
       "category": "mitaines",
       "price_cad_cents": 18000,
       "price_cad": 180,
@@ -470,11 +508,12 @@
       "description_fr": "Fourrure recyclée renard norvégien et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 124
+      "product_number": 124,
+      "name_en": "Snowmobile mittens — Norwegian fox"
     },
     {
       "id": "mitaines-style-inuit-coyote",
-      "name_fr": "Mitaines style Inuit dame M — coyote",
+      "name_fr": "Mitaines style Inuit dame coyote",
       "category": "mitaines",
       "price_cad_cents": 14000,
       "price_cad": 140,
@@ -482,11 +521,12 @@
       "description_fr": "Fourrure recyclée coyote et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 126
+      "product_number": 126,
+      "name_en": "Inuit-style mittens — coyote"
     },
     {
       "id": "foulard-dame-vison",
-      "name_fr": "Foulard dame — vison",
+      "name_fr": "Foulard dame vison",
       "category": "foulards",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -494,11 +534,12 @@
       "description_fr": "Fourrure de vison recyclée et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 600
+      "product_number": 600,
+      "name_en": "Women's scarf — mink"
     },
     {
       "id": "foulard-dame-vison-et-renard",
-      "name_fr": "Foulard dame — vison et renard",
+      "name_fr": "Foulard dame vison et renard",
       "category": "foulards",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -506,11 +547,12 @@
       "description_fr": "Fourrure de vison et renard recyclée et cuir d'agneau",
       "availability": "contact",
       "active": true,
-      "product_number": 601
+      "product_number": 601,
+      "name_en": "Women's scarf — mink and fox"
     },
     {
       "id": "cache-oreilles-enfant-8-10-12-coyote",
-      "name_fr": "Cache-oreilles junior 8-14 ans — coyote",
+      "name_fr": "Cache-oreilles junior coyote",
       "category": "cache-oreilles",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -518,11 +560,12 @@
       "description_fr": "Fourrure coyote recyclée",
       "availability": "contact",
       "active": true,
-      "product_number": 502
+      "product_number": 502,
+      "name_en": "Kids earmuffs -12 — coyote"
     },
     {
       "id": "cache-oreilles-enfant-8-10-12-renard",
-      "name_fr": "Cache-oreilles junior 8-14 ans — renard",
+      "name_fr": "Cache-oreilles junior renard",
       "category": "cache-oreilles",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -530,11 +573,12 @@
       "description_fr": "Fourrure renard recyclée",
       "availability": "contact",
       "active": true,
-      "product_number": 503
+      "product_number": 503,
+      "name_en": "Kids earmuffs -12 — fox"
     },
     {
       "id": "cache-oreilles-ado-10-14-renard-et-vison",
-      "name_fr": "Cache-oreilles junior 8-14 ans — renard et vison",
+      "name_fr": "Cache-oreilles junior renard et vison",
       "category": "cache-oreilles",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -542,11 +586,12 @@
       "description_fr": "Fourrure renard et vison recyclée",
       "availability": "contact",
       "active": true,
-      "product_number": 500
+      "product_number": 500,
+      "name_en": "Teen earmuffs 10-14 — fox and mink"
     },
     {
       "id": "cache-oreilles-dame-m-vison-et-lapin",
-      "name_fr": "Cache-oreilles junior 8-14 ans — vison et lapin",
+      "name_fr": "Cache-oreilles junior vison et lapin",
       "category": "cache-oreilles",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -554,7 +599,8 @@
       "description_fr": "Fourrure vison et lapin recyclée",
       "availability": "contact",
       "active": true,
-      "product_number": 501
+      "product_number": 501,
+      "name_en": "Women's earmuffs — mink and rabbit"
     },
     {
       "id": "semelles-fourrure-recyclee-pointures-5-a-12",
@@ -566,11 +612,12 @@
       "description_fr": "Isolantes et antidérapantes. Homme 9 à 13, femme 5 à 11 (demi-pointures), enfant 4 à 6. Trois épaisseurs de tissu et fourrures différentes — ne se découpent pas.",
       "availability": "contact",
       "active": true,
-      "product_number": 700
+      "product_number": 700,
+      "name_en": "Recycled fur insoles"
     },
     {
       "id": "mukluks-bebe-7-18-mois-vison",
-      "name_fr": "Mukluks bébé 7-18 mois — vison",
+      "name_fr": "Mukluks bébé vison",
       "category": "mukluks",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -578,11 +625,12 @@
       "description_fr": "Fourrure de vison recyclée",
       "availability": "contact",
       "active": true,
-      "product_number": 402
+      "product_number": 402,
+      "name_en": "Baby mukluks — mink"
     },
     {
       "id": "mukluks-bebe-8-18-mois-vison",
-      "name_fr": "Mukluks bébé 8-18 mois — vison",
+      "name_fr": "Mukluks bébé vison",
       "category": "mukluks",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -590,11 +638,12 @@
       "description_fr": "Fourrure de vison recyclée",
       "availability": "contact",
       "active": true,
-      "product_number": 403
+      "product_number": 403,
+      "name_en": "Baby mukluks — mink"
     },
     {
       "id": "mukluks-bebe-8-24-mois-castor",
-      "name_fr": "Mukluks bébé 8-24 mois — castor",
+      "name_fr": "Mukluks bébé castor",
       "category": "mukluks",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -602,11 +651,12 @@
       "description_fr": "Fourrure castor recyclée",
       "availability": "contact",
       "active": true,
-      "product_number": 404
+      "product_number": 404,
+      "name_en": "Baby mukluks — beaver"
     },
     {
       "id": "mukluks-bebe-8-24-mois-vison",
-      "name_fr": "Mukluks bébé 8-24 mois — vison",
+      "name_fr": "Mukluks bébé vison",
       "category": "mukluks",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -614,11 +664,12 @@
       "description_fr": "Fourrure de vison recyclée",
       "availability": "contact",
       "active": true,
-      "product_number": 405
+      "product_number": 405,
+      "name_en": "Baby mukluks — mink"
     },
     {
       "id": "mukluks-bebe-a-18-mois-coyote",
-      "name_fr": "Mukluks bébé à 18 mois — coyote",
+      "name_fr": "Mukluks bébé coyote",
       "category": "mukluks",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -626,11 +677,12 @@
       "description_fr": "Fourrure coyote recyclée",
       "availability": "contact",
       "active": true,
-      "product_number": 406
+      "product_number": 406,
+      "name_en": "Baby mukluks to 18 months — coyote"
     },
     {
       "id": "mukluks-bebe-vison-fermeture-eclair",
-      "name_fr": "Mukluks bébé — vison (fermeture éclair)",
+      "name_fr": "Mukluks bébé vison (fermeture éclair)",
       "category": "mukluks",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -638,11 +690,12 @@
       "description_fr": "Fourrure de vison recyclée, munis d'une fermeture éclair",
       "availability": "contact",
       "active": true,
-      "product_number": 401
+      "product_number": 401,
+      "name_en": "Baby mukluks — mink (zipper)"
     },
     {
       "id": "mukluks-adulte-mobilite-reduite-8-9-vison-et-renard",
-      "name_fr": "Mukluks adaptés – Sur mesure",
+      "name_fr": "Mukluks adaptés Sur mesure",
       "category": "mukluks",
       "price_cad_cents": 14000,
       "price_cad": 140,
@@ -652,11 +705,12 @@
       "active": true,
       "product_number": 400,
       "order_flow": "adapted_contact",
-      "skip_inventory": true
+      "skip_inventory": true,
+      "name_en": "Adapted mukluks – Made to order"
     },
     {
       "id": "pantoufles-bebe-0-7-mois-fourrure-recyclee",
-      "name_fr": "Pantoufles bébé 0-7 mois — fourrure recyclée",
+      "name_fr": "Pantoufles bébé fourrure recyclée",
       "category": "pantoufles",
       "price_cad_cents": 4000,
       "price_cad": 40,
@@ -664,11 +718,12 @@
       "description_fr": "Fourrure recyclée, doublure Sherpa",
       "availability": "contact",
       "active": true,
-      "product_number": 300
+      "product_number": 300,
+      "name_en": "Baby slippers — recycled fur"
     },
     {
       "id": "pantoufles-bebe-5-12-mois-fourrure-recyclee",
-      "name_fr": "Pantoufles bébé 5-12 mois — fourrure recyclée",
+      "name_fr": "Pantoufles bébé fourrure recyclée",
       "category": "pantoufles",
       "price_cad_cents": 4000,
       "price_cad": 40,
@@ -676,11 +731,12 @@
       "description_fr": "Fourrure recyclée, doublure Sherpa",
       "availability": "contact",
       "active": true,
-      "product_number": 301
+      "product_number": 301,
+      "name_en": "Baby slippers — recycled fur"
     },
     {
       "id": "pantoufles-enfant-2-3-mouton-rase-et-coyote",
-      "name_fr": "Pantoufles enfant pointure 2-3 — mouton rasé et coyote",
+      "name_fr": "Pantoufles enfant mouton rasé et coyote",
       "category": "pantoufles",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -688,11 +744,12 @@
       "description_fr": "Fourrure mouton rasé et coyote recyclé",
       "availability": "contact",
       "active": true,
-      "product_number": 307
+      "product_number": 307,
+      "name_en": "Kids slippers — sheared sheep and coyote"
     },
     {
       "id": "pantoufles-enfant-2-3-renard",
-      "name_fr": "Pantoufles enfant pointure 2-3 — renard",
+      "name_fr": "Pantoufles enfant renard",
       "category": "pantoufles",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -700,11 +757,12 @@
       "description_fr": "Fourrure renard recyclée",
       "availability": "contact",
       "active": true,
-      "product_number": 308
+      "product_number": 308,
+      "name_en": "Kids slippers — fox"
     },
     {
       "id": "pantoufles-enfant-13-1-vison-et-coyote",
-      "name_fr": "Pantoufles enfant pointure 13-1 — vison et coyote",
+      "name_fr": "Pantoufles enfant vison et coyote",
       "category": "pantoufles",
       "price_cad_cents": 6000,
       "price_cad": 60,
@@ -712,11 +770,12 @@
       "description_fr": "Fourrure vison et coyote recyclé",
       "availability": "contact",
       "active": true,
-      "product_number": 306
+      "product_number": 306,
+      "name_en": "Kids slippers — mink and coyote"
     },
     {
       "id": "pantoufles-dame-7-8-mouton-rase-et-chat-sauvage",
-      "name_fr": "Pantoufles dame 7-8 — mouton rasé et chat sauvage",
+      "name_fr": "Pantoufles dame mouton rasé et chat sauvage",
       "category": "pantoufles",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -724,11 +783,12 @@
       "description_fr": "Fourrure mouton rasé et chat sauvage recyclée",
       "availability": "contact",
       "active": true,
-      "product_number": 302
+      "product_number": 302,
+      "name_en": "Women's slippers — sheared sheep and wild cat"
     },
     {
       "id": "pantoufles-dame-8-9-vison-et-coyote",
-      "name_fr": "Pantoufles dame 8-9 — vison et coyote",
+      "name_fr": "Pantoufles dame vison et coyote",
       "category": "pantoufles",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -736,11 +796,12 @@
       "description_fr": "Fourrure vison et coyote recyclées",
       "availability": "contact",
       "active": true,
-      "product_number": 303
+      "product_number": 303,
+      "name_en": "Women's slippers — mink and coyote"
     },
     {
       "id": "pantoufles-dame-8-9-vison-et-renard",
-      "name_fr": "Pantoufles dame 8-9 — vison et renard",
+      "name_fr": "Pantoufles dame vison et renard",
       "category": "pantoufles",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -748,11 +809,12 @@
       "description_fr": "Fourrure vison et renard recyclée",
       "availability": "contact",
       "active": true,
-      "product_number": 304
+      "product_number": 304,
+      "name_en": "Women's slippers — mink and fox"
     },
     {
       "id": "pantoufles-dame-9-10-vison-et-renard",
-      "name_fr": "Pantoufles dame 9-10 — vison et renard",
+      "name_fr": "Pantoufles dame vison et renard",
       "category": "pantoufles",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -760,11 +822,12 @@
       "description_fr": "Fourrure vison et renard recyclée",
       "availability": "contact",
       "active": true,
-      "product_number": 305
+      "product_number": 305,
+      "name_en": "Women's slippers — mink and fox"
     },
     {
       "id": "pantoufles-homme-10-11-chat-sauvage",
-      "name_fr": "Pantoufles homme 10-11 — chat sauvage",
+      "name_fr": "Pantoufles homme chat sauvage",
       "category": "pantoufles",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -772,11 +835,12 @@
       "description_fr": "Fourrure chat sauvage recyclée",
       "availability": "contact",
       "active": true,
-      "product_number": 309
+      "product_number": 309,
+      "name_en": "Men's slippers — wild cat"
     },
     {
       "id": "pantoufles-homme-10-11-mouton-et-renard-roux",
-      "name_fr": "Pantoufles homme 10-11 — mouton et renard roux",
+      "name_fr": "Pantoufles homme mouton et renard roux",
       "category": "pantoufles",
       "price_cad_cents": 12000,
       "price_cad": 120,
@@ -784,7 +848,8 @@
       "description_fr": "Fourrure mouton rasé et renard roux recyclée",
       "availability": "contact",
       "active": true,
-      "product_number": 310
+      "product_number": 310,
+      "name_en": "Men's slippers — sheep and red fox"
     }
   ],
   "product_numbering": {

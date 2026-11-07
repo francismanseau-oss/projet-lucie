@@ -1,46 +1,426 @@
 {
-  "version": 1,
-  "note_fr": "Correspondances grandeur ↔ cm/po : aucune grille validée Lucie en catalogue — ne pas inventer.",
-  "note_en": "Size ↔ cm/in charts: no Lucie-validated grid in the catalog — do not invent numbers.",
+  "version": 2,
+  "note_fr": "Mains : grille fabricant Auclair (femme / homme / enfant S–XL). Pieds / tête : grilles de base couturier-fabricant (indicatives). Conversion cm ↔ po (1 po = 2,54 cm).",
+  "note_en": "Hands: Auclair manufacturer chart (women / men / kids S–XL). Feet / head: base tailor–manufacturer charts (indicative). cm ↔ in conversion (1 in = 2.54 cm).",
+  "page": {
+    "title_fr": "Guide des tailles",
+    "title_en": "Size guide",
+    "intro_fr": "",
+    "intro_en": "",
+    "unit_note_fr": "Conversion : 1 po = 2,54 cm, arrondi au 1/8 po.",
+    "unit_note_en": "Conversion: 1 in = 2.54 cm, rounded to the nearest 1/8 in.",
+    "hand_guide": {
+      "image": "assets/mesures/guide-main-schema.jpg",
+      "image_width": 1024,
+      "image_height": 682,
+      "alt_fr": "Schéma : tour de main autour de la paume sans le pouce (1), longueur du pli du poignet au bout du majeur (2).",
+      "alt_en": "Diagram: hand circumference around the palm without the thumb (1), hand length from the wrist crease to the middle fingertip (2).",
+      "title_fr": "Guide des grandeurs — mitaines",
+      "title_en": "Size guide — mittens",
+      "sub_fr": "",
+      "sub_en": "",
+      "advice_fr": "",
+      "advice_en": "",
+      "source_fr": "",
+      "source_en": "",
+      "femme": [
+        {
+          "size": "S",
+          "circ": [
+            15,
+            17
+          ],
+          "len": [
+            17,
+            18
+          ]
+        },
+        {
+          "size": "M",
+          "circ": [
+            17,
+            19
+          ],
+          "len": [
+            18,
+            19
+          ]
+        },
+        {
+          "size": "L",
+          "circ": [
+            19,
+            20
+          ],
+          "len": [
+            19,
+            20
+          ]
+        },
+        {
+          "size": "XL",
+          "circ": [
+            20,
+            21.5
+          ],
+          "len": [
+            20,
+            21
+          ]
+        }
+      ],
+      "homme": [
+        {
+          "size": "S",
+          "circ": [
+            18,
+            20.5
+          ],
+          "len": [
+            18,
+            19
+          ]
+        },
+        {
+          "size": "M",
+          "circ": [
+            20.5,
+            23
+          ],
+          "len": [
+            19,
+            20
+          ]
+        },
+        {
+          "size": "L",
+          "circ": [
+            23,
+            24
+          ],
+          "len": [
+            20,
+            21
+          ]
+        },
+        {
+          "size": "XL",
+          "circ": [
+            24,
+            25.5
+          ],
+          "len": [
+            21,
+            22
+          ]
+        }
+      ],
+      "enfant": [
+        {
+          "size": "S",
+          "circ": [
+            14,
+            15
+          ],
+          "len": [
+            13.5,
+            14.5
+          ]
+        },
+        {
+          "size": "M",
+          "circ": [
+            15,
+            16.5
+          ],
+          "len": [
+            14.5,
+            15.5
+          ]
+        },
+        {
+          "size": "L",
+          "circ": [
+            16.5,
+            18
+          ],
+          "len": [
+            15.5,
+            16.5
+          ]
+        },
+        {
+          "size": "XL",
+          "circ": [
+            18,
+            19
+          ],
+          "len": [
+            16.5,
+            17.5
+          ]
+        }
+      ]
+    },
+    "foot_guide": {
+      "source_fr": "Pointures canadiennes. Demi-pointures pour adultes, pointures entières pour enfants.",
+      "source_en": "Canadian shoe sizes. Half sizes for adults, whole sizes for children.",
+      "system_fr": "Choisissez votre pointure selon la longueur mesurée.",
+      "system_en": "Choose your size according to the measured length.",
+      "femme": [
+        {
+          "pointure": 5,
+          "label": "5",
+          "len_cm": 22.0
+        },
+        {
+          "pointure": 5.5,
+          "label": "5½",
+          "len_cm": 22.4
+        },
+        {
+          "pointure": 6,
+          "label": "6",
+          "len_cm": 22.9
+        },
+        {
+          "pointure": 6.5,
+          "label": "6½",
+          "len_cm": 23.3
+        },
+        {
+          "pointure": 7,
+          "label": "7",
+          "len_cm": 23.7
+        },
+        {
+          "pointure": 7.5,
+          "label": "7½",
+          "len_cm": 24.1
+        },
+        {
+          "pointure": 8,
+          "label": "8",
+          "len_cm": 24.6
+        },
+        {
+          "pointure": 8.5,
+          "label": "8½",
+          "len_cm": 25.0
+        },
+        {
+          "pointure": 9,
+          "label": "9",
+          "len_cm": 25.4
+        },
+        {
+          "pointure": 9.5,
+          "label": "9½",
+          "len_cm": 25.8
+        },
+        {
+          "pointure": 10,
+          "label": "10",
+          "len_cm": 26.2
+        },
+        {
+          "pointure": 10.5,
+          "label": "10½",
+          "len_cm": 26.7
+        },
+        {
+          "pointure": 11,
+          "label": "11",
+          "len_cm": 27.1
+        }
+      ],
+      "homme": [
+        {
+          "pointure": 9,
+          "label": "9",
+          "len_cm": 26.7
+        },
+        {
+          "pointure": 9.5,
+          "label": "9½",
+          "len_cm": 27.1
+        },
+        {
+          "pointure": 10,
+          "label": "10",
+          "len_cm": 27.5
+        },
+        {
+          "pointure": 10.5,
+          "label": "10½",
+          "len_cm": 27.9
+        },
+        {
+          "pointure": 11,
+          "label": "11",
+          "len_cm": 28.4
+        },
+        {
+          "pointure": 11.5,
+          "label": "11½",
+          "len_cm": 28.8
+        },
+        {
+          "pointure": 12,
+          "label": "12",
+          "len_cm": 29.2
+        },
+        {
+          "pointure": 12.5,
+          "label": "12½",
+          "len_cm": 29.6
+        },
+        {
+          "pointure": 13,
+          "label": "13",
+          "len_cm": 30.1
+        }
+      ],
+      "enfant": [
+        {
+          "pointure": 4,
+          "label": "4",
+          "len_cm": 18.5
+        },
+        {
+          "pointure": 5,
+          "label": "5",
+          "len_cm": 19.5
+        },
+        {
+          "pointure": 6,
+          "label": "6",
+          "len_cm": 20.5
+        }
+      ]
+    },
+    "head_guide": {
+      "source_fr": "",
+      "source_en": "",
+      "adult_cm": [
+        {
+          "size": "S",
+          "circ": [
+            54,
+            55.5
+          ]
+        },
+        {
+          "size": "M",
+          "circ": [
+            56,
+            57.5
+          ]
+        },
+        {
+          "size": "L",
+          "circ": [
+            58,
+            59.5
+          ]
+        },
+        {
+          "size": "XL",
+          "circ": [
+            60,
+            61.5
+          ]
+        }
+      ]
+    },
+    "sections": [
+      {
+        "id": "mains",
+        "label_fr": "Mains",
+        "label_en": "Hands",
+        "panels": [
+          {
+            "category": "mitaines",
+            "use_hand_guide": true,
+            "validated": true,
+            "tab_fr": "Mitaines",
+            "tab_en": "Mittens"
+          }
+        ]
+      },
+      {
+        "id": "pieds",
+        "label_fr": "Pieds",
+        "label_en": "Feet",
+        "panels": [
+          {
+            "category": "pantoufles",
+            "illustration_key": "pantoufles",
+            "size_chart": "foot",
+            "validated": true,
+            "tab_fr": "Pantoufles",
+            "tab_en": "Slippers"
+          },
+          {
+            "category": "semelles",
+            "illustration_key": "semelles",
+            "size_chart": "foot",
+            "validated": true,
+            "tab_fr": "Semelles",
+            "tab_en": "Insoles"
+          }
+        ]
+      },
+      {
+        "id": "tete",
+        "label_fr": "Tête",
+        "label_en": "Head",
+        "panels": [
+          {
+            "category": "chapeaux",
+            "illustration_key": "chapeaux",
+            "size_chart": "head",
+            "validated": true,
+            "tab_fr": "Chapeaux",
+            "tab_en": "Hats",
+            "aside_note_fr": "Cache-oreilles : taille unique Junior — 8 à 14 ans",
+            "aside_note_en": "Earmuffs: one Junior size — ages 8 to 14"
+          }
+        ]
+      }
+    ]
+  },
   "categories": {
     "mitaines": {
       "illustration_key": "mitaines",
       "title_fr": "Guide des grandeurs — mitaines",
       "title_en": "Size guide — mittens",
-      "how_fr": "Mesurez le tour de main et la longueur de la main comme sur le schéma.",
-      "how_en": "Measure hand circumference and hand length as shown in the diagram.",
+      "how_fr": "Mesurez le tour (1) et la longueur (2), puis ouvrez le tableau Homme, Femme ou Enfant.",
+      "how_en": "Measure circumference (1) and length (2), then open the Men, Women or Kids chart.",
       "chart_status": "awaiting_lucie"
     },
     "pantoufles": {
       "illustration_key": "pantoufles",
       "title_fr": "Guide des grandeurs — pantoufles",
       "title_en": "Size guide — slippers",
-      "how_fr": "Mesurez la longueur et la largeur du pied comme sur le schéma.",
-      "how_en": "Measure foot length and width as shown in the diagram.",
-      "chart_status": "awaiting_lucie"
-    },
-    "mukluks": {
-      "illustration_key": "pantoufles",
-      "title_fr": "Guide des grandeurs — mukluks",
-      "title_en": "Size guide — mukluks",
-      "how_fr": "Mesurez la longueur et la largeur du pied (schéma pied partagé avec les pantoufles). Les mukluks boutique suivent surtout des formats bébé / pointures — à confirmer avec Lucie au besoin.",
-      "how_en": "Measure foot length and width (shared foot diagram with slippers). Boutique mukluks are mostly baby / shoe sizes — confirm with Lucie if needed.",
-      "chart_status": "awaiting_lucie"
+      "how_fr": "",
+      "how_en": "",
+      "chart_status": "pointure"
     },
     "chapeaux": {
       "illustration_key": "chapeaux",
       "title_fr": "Guide des grandeurs — chapeaux",
       "title_en": "Size guide — hats",
-      "how_fr": "Mesurez le tour de tête au niveau du front comme sur le schéma.",
-      "how_en": "Measure head circumference at forehead level as shown in the diagram.",
+      "how_fr": "Mesurez le tour de tête (1), puis reportez-vous au tableau S à XL.",
+      "how_en": "Measure head circumference (1), then use the S to XL chart.",
       "chart_status": "awaiting_lucie"
     },
     "cache-oreilles": {
       "illustration_key": "cache-oreilles",
       "title_fr": "Guide des grandeurs — cache-oreilles",
       "title_en": "Size guide — earmuffs",
-      "how_fr": "Mesurez le tour de tête comme sur le schéma.",
-      "how_en": "Measure head circumference as shown in the diagram.",
+      "how_fr": "Mesurez le tour de tête (1), puis reportez-vous au tableau S à XL.",
+      "how_en": "Measure head circumference (1), then use the S to XL chart.",
       "chart_status": "awaiting_lucie"
     },
     "foulards": {
@@ -55,9 +435,9 @@
       "illustration_key": "semelles",
       "title_fr": "Guide des grandeurs — semelles",
       "title_en": "Size guide — insoles",
-      "how_fr": "Mesurez la longueur du pied (largeur facultative) comme sur le schéma.",
-      "how_en": "Measure foot length (optional width) as shown in the diagram.",
-      "chart_status": "awaiting_lucie"
+      "how_fr": "",
+      "how_en": "",
+      "chart_status": "pointure"
     }
   }
 }

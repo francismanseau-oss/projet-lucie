@@ -40,6 +40,7 @@ function cloneSizes(sizes) {
     code: normalizeSizeCode(s.code),
     label_fr: s.label_fr || s.code,
     label_en: s.label_en || s.label_fr || s.code,
+    group: s.group || null,
     qty_on_hand:
       s.qty_on_hand == null || s.qty_on_hand === ""
         ? null
@@ -66,6 +67,7 @@ function cloneRow(row) {
     const sum = sumSizeQty(sizes);
     if (sum != null) qty = sum;
   }
+  const skipInventory = !!(row.skip_inventory || row.adapted_contact);
   return {
     product_id: row.product_id,
     product_number: row.product_number ?? null,
@@ -84,9 +86,21 @@ function cloneRow(row) {
     notes_lucie: row.notes_lucie || "",
     updated_at: row.updated_at || null,
     sizes,
+    size_groups: Array.isArray(row.size_groups)
+      ? row.size_groups.map((g) => ({
+          id: g.id,
+          label_fr: g.label_fr || g.id,
+          label_en: g.label_en || g.label_fr || g.id,
+        }))
+      : null,
     size_selector: !!(row.size_selector || (sizes && sizes.length > 1)),
-    below_min: isBelowMinStock({ qty_on_hand: qty, min_stock_target: min }),
-    out_of_stock: isOutOfStock({ qty_on_hand: qty }),
+    /** Sur mesure seulement (ex. n° 400) — pas de stock / pas d’alerte inventaire. */
+    skip_inventory: skipInventory,
+    adapted_contact: !!row.adapted_contact,
+    below_min: skipInventory
+      ? false
+      : isBelowMinStock({ qty_on_hand: qty, min_stock_target: min }),
+    out_of_stock: skipInventory ? false : isOutOfStock({ qty_on_hand: qty }),
   };
 }
 
@@ -121,10 +135,15 @@ export function createAdminInventoryStore(seedItems = [], opts = {}) {
     return row ? cloneRow(row) : null;
   }
 
-  function list() {
+  function listAll() {
     return [...inventory.values()]
       .map(cloneRow)
       .sort((a, b) => a.name_fr.localeCompare(b.name_fr, "fr"));
+  }
+
+  /** Produits à stocker seulement — exclut sur mesure / skip_inventory (ex. n° 400). */
+  function list() {
+    return listAll().filter((i) => !i.skip_inventory);
   }
 
   function requireRow(productId) {
@@ -398,7 +417,7 @@ export function createAdminInventoryStore(seedItems = [], opts = {}) {
     },
 
     setAudience({ productId, audience, actor }) {
-      const allowed = new Set(["femmes", "hommes", "enfants", "unisexe"]);
+      const allowed = new Set(["femmes", "hommes", "enfants", "unisexe", "tous"]);
       const next = String(audience || "").trim().toLowerCase();
       if (!allowed.has(next)) {
         const err = new Error("Clientèle inconnue");
@@ -421,10 +440,10 @@ export function createAdminInventoryStore(seedItems = [], opts = {}) {
       return cloneRow(row);
     },
 
-    /** Export pour persistance privée locale. */
+    /** Export pour persistance privée locale (inclut skip_inventory pour ne pas les perdre). */
     exportSnapshot() {
       return {
-        items: list(),
+        items: listAll(),
         audit: audit.slice(0, 500),
         data_mode: dataMode,
         exported_at: new Date().toISOString(),

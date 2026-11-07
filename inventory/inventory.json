@@ -259,7 +259,7 @@
     },
     {
       "product_id": "mitaines-bebe-sans-pouces-vison-fermeture-eclair",
-      "name_fr": "Mitaines bébé sans pouces — vison (fermeture éclair)",
+      "name_fr": "Mitaines bébé sans pouces — vison",
       "category": "mitaines",
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
@@ -267,7 +267,7 @@
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null,
+      "updated_at": "2026-11-07T20:00:04.419Z",
       "product_number": 101,
       "provisional_qty_on_hand": 3,
       "qty_sold": 0,
@@ -275,7 +275,7 @@
     },
     {
       "product_id": "mitaines-enfant-2-4-ans-castor-fermeture-eclair",
-      "name_fr": "Mitaines enfant 2-4 ans — castor (fermeture éclair)",
+      "name_fr": "Mitaines enfant 2-4 ans — castor",
       "category": "mitaines",
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
@@ -283,7 +283,7 @@
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null,
+      "updated_at": "2026-11-07T20:00:04.419Z",
       "product_number": 110,
       "provisional_qty_on_hand": 3,
       "qty_sold": 0,
@@ -291,7 +291,7 @@
     },
     {
       "product_id": "mitaines-enfant-4-6-vison-fermeture-eclair",
-      "name_fr": "Mitaines enfant 4-6 — vison (fermeture éclair)",
+      "name_fr": "Mitaines enfant 4-6 — vison",
       "category": "mitaines",
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
@@ -299,7 +299,7 @@
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null,
+      "updated_at": "2026-11-07T20:00:04.419Z",
       "product_number": 111,
       "provisional_qty_on_hand": 3,
       "qty_sold": 0,
@@ -307,7 +307,7 @@
     },
     {
       "product_id": "mitaines-enfant-6-8-vison-fermeture-eclair",
-      "name_fr": "Mitaines enfant 6-8 — vison (fermeture éclair)",
+      "name_fr": "Mitaines enfant 6-8 — vison",
       "category": "mitaines",
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
@@ -315,7 +315,7 @@
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null,
+      "updated_at": "2026-11-07T20:00:04.419Z",
       "product_number": 112,
       "provisional_qty_on_hand": 3,
       "qty_sold": 0,
@@ -342,16 +342,26 @@
       "name_fr": "Mitaines fille 8-10 — renard",
       "category": "mitaines",
       "fulfillment_type": "pending_lucie",
-      "qty_on_hand": null,
+      "qty_on_hand": 3,
       "qty_reserved": 0,
       "min_stock_target": 3,
       "lucie_confirmed": false,
-      "notes_lucie": "",
-      "updated_at": null,
+      "notes_lucie": "Lucie : enfants (fille 8-10) + fermeture éclair",
+      "updated_at": "2026-11-07T20:00:04.419Z",
       "product_number": 114,
       "provisional_qty_on_hand": 3,
       "qty_sold": 0,
-      "availability_status": "contact"
+      "availability_status": "contact",
+      "audience": "enfants",
+      "sizes": [
+        {
+          "code": "8-10",
+          "label_fr": "8-10",
+          "label_en": "8-10",
+          "qty_on_hand": 3
+        }
+      ],
+      "size_selector": false
     },
     {
       "product_id": "mitaines-enfant-10-12-mouton-rase",
@@ -515,7 +525,7 @@
     },
     {
       "product_id": "mitaines-8-10-vison-fermeture-eclair",
-      "name_fr": "Mitaines 8-10 — vison (fermeture éclair)",
+      "name_fr": "Mitaines 8-10 — vison",
       "category": "mitaines",
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
@@ -523,7 +533,7 @@
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null,
+      "updated_at": "2026-11-07T20:00:04.419Z",
       "product_number": 100,
       "provisional_qty_on_hand": 3,
       "qty_sold": 0,
@@ -941,32 +951,50 @@
       "name_fr": "Pantoufles enfant 2-3 — mouton rasé et coyote",
       "category": "pantoufles",
       "fulfillment_type": "pending_lucie",
-      "qty_on_hand": null,
+      "qty_on_hand": 0,
       "qty_reserved": 0,
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null,
+      "updated_at": "2026-11-07T18:41:14.567Z",
       "product_number": 307,
-      "provisional_qty_on_hand": 3,
+      "provisional_qty_on_hand": 0,
       "qty_sold": 0,
-      "availability_status": "contact"
+      "availability_status": "contact",
+      "sizes": [
+        {
+          "code": "2-3",
+          "label_fr": "Pointure 2-3",
+          "label_en": "Size 2-3",
+          "qty_on_hand": 0
+        }
+      ],
+      "size_selector": false
     },
     {
       "product_id": "pantoufles-enfant-2-3-renard",
       "name_fr": "Pantoufles enfant 2-3 — renard",
       "category": "pantoufles",
       "fulfillment_type": "pending_lucie",
-      "qty_on_hand": null,
+      "qty_on_hand": 0,
       "qty_reserved": 0,
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null,
+      "updated_at": "2026-11-07T18:41:14.567Z",
       "product_number": 308,
-      "provisional_qty_on_hand": 3,
+      "provisional_qty_on_hand": 0,
       "qty_sold": 0,
-      "availability_status": "contact"
+      "availability_status": "contact",
+      "sizes": [
+        {
+          "code": "2-3",
+          "label_fr": "Pointure 2-3",
+          "label_en": "Size 2-3",
+          "qty_on_hand": 0
+        }
+      ],
+      "size_selector": false
     },
     {
       "product_id": "pantoufles-enfant-13-1-vison-et-coyote",
@@ -989,96 +1017,150 @@
       "name_fr": "Pantoufles dame 7-8 — mouton rasé et chat sauvage",
       "category": "pantoufles",
       "fulfillment_type": "pending_lucie",
-      "qty_on_hand": null,
+      "qty_on_hand": 0,
       "qty_reserved": 0,
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null,
+      "updated_at": "2026-11-07T18:41:14.567Z",
       "product_number": 302,
-      "provisional_qty_on_hand": 3,
+      "provisional_qty_on_hand": 0,
       "qty_sold": 0,
-      "availability_status": "contact"
+      "availability_status": "contact",
+      "sizes": [
+        {
+          "code": "7-8",
+          "label_fr": "Pointure 7-8",
+          "label_en": "Size 7-8",
+          "qty_on_hand": 0
+        }
+      ],
+      "size_selector": false
     },
     {
       "product_id": "pantoufles-dame-8-9-vison-et-coyote",
       "name_fr": "Pantoufles dame 8-9 — vison et coyote",
       "category": "pantoufles",
       "fulfillment_type": "pending_lucie",
-      "qty_on_hand": null,
+      "qty_on_hand": 0,
       "qty_reserved": 0,
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null,
+      "updated_at": "2026-11-07T18:41:14.567Z",
       "product_number": 303,
-      "provisional_qty_on_hand": 3,
+      "provisional_qty_on_hand": 0,
       "qty_sold": 0,
-      "availability_status": "contact"
+      "availability_status": "contact",
+      "sizes": [
+        {
+          "code": "8-9",
+          "label_fr": "Pointure 8-9",
+          "label_en": "Size 8-9",
+          "qty_on_hand": 0
+        }
+      ],
+      "size_selector": false
     },
     {
       "product_id": "pantoufles-dame-8-9-vison-et-renard",
       "name_fr": "Pantoufles dame 8-9 — vison et renard",
       "category": "pantoufles",
       "fulfillment_type": "pending_lucie",
-      "qty_on_hand": null,
+      "qty_on_hand": 0,
       "qty_reserved": 0,
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null,
+      "updated_at": "2026-11-07T18:41:14.567Z",
       "product_number": 304,
-      "provisional_qty_on_hand": 3,
+      "provisional_qty_on_hand": 0,
       "qty_sold": 0,
-      "availability_status": "contact"
+      "availability_status": "contact",
+      "sizes": [
+        {
+          "code": "8-9",
+          "label_fr": "Pointure 8-9",
+          "label_en": "Size 8-9",
+          "qty_on_hand": 0
+        }
+      ],
+      "size_selector": false
     },
     {
       "product_id": "pantoufles-dame-9-10-vison-et-renard",
       "name_fr": "Pantoufles dame 9-10 — vison et renard",
       "category": "pantoufles",
       "fulfillment_type": "pending_lucie",
-      "qty_on_hand": null,
+      "qty_on_hand": 0,
       "qty_reserved": 0,
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null,
+      "updated_at": "2026-11-07T18:41:14.567Z",
       "product_number": 305,
-      "provisional_qty_on_hand": 3,
+      "provisional_qty_on_hand": 0,
       "qty_sold": 0,
-      "availability_status": "contact"
+      "availability_status": "contact",
+      "sizes": [
+        {
+          "code": "9-10",
+          "label_fr": "Pointure 9-10",
+          "label_en": "Size 9-10",
+          "qty_on_hand": 0
+        }
+      ],
+      "size_selector": false
     },
     {
       "product_id": "pantoufles-homme-10-11-chat-sauvage",
       "name_fr": "Pantoufles homme 10-11 — chat sauvage",
       "category": "pantoufles",
       "fulfillment_type": "pending_lucie",
-      "qty_on_hand": null,
+      "qty_on_hand": 0,
       "qty_reserved": 0,
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null,
+      "updated_at": "2026-11-07T18:41:14.567Z",
       "product_number": 309,
-      "provisional_qty_on_hand": 3,
+      "provisional_qty_on_hand": 0,
       "qty_sold": 0,
-      "availability_status": "contact"
+      "availability_status": "contact",
+      "sizes": [
+        {
+          "code": "10-11",
+          "label_fr": "Pointure 10-11",
+          "label_en": "Size 10-11",
+          "qty_on_hand": 0
+        }
+      ],
+      "size_selector": false
     },
     {
       "product_id": "pantoufles-homme-10-11-mouton-et-renard-roux",
       "name_fr": "Pantoufles homme 10-11 — mouton et renard roux",
       "category": "pantoufles",
       "fulfillment_type": "pending_lucie",
-      "qty_on_hand": null,
+      "qty_on_hand": 0,
       "qty_reserved": 0,
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
-      "updated_at": null,
+      "updated_at": "2026-11-07T18:41:14.567Z",
       "product_number": 310,
-      "provisional_qty_on_hand": 3,
+      "provisional_qty_on_hand": 0,
       "qty_sold": 0,
-      "availability_status": "contact"
+      "availability_status": "contact",
+      "sizes": [
+        {
+          "code": "10-11",
+          "label_fr": "Pointure 10-11",
+          "label_en": "Size 10-11",
+          "qty_on_hand": 0
+        }
+      ],
+      "size_selector": false
     }
   ]
 }

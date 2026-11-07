@@ -860,9 +860,9 @@
       "selector": false,
       "sizes": [
         {
-          "code": "unique",
-          "label_fr": "Format unique",
-          "label_en": "One size",
+          "code": "18 mois",
+          "label_fr": "18 mois",
+          "label_en": "18 months",
           "qty_on_hand": 3
         }
       ]
@@ -917,38 +917,26 @@
     "pantoufles-enfant-2-3-mouton-rase-et-coyote": {
       "product_number": 307,
       "category": "pantoufles",
-      "selector": true,
+      "selector": false,
       "sizes": [
         {
-          "code": "2",
-          "label_fr": "Pointure 2",
-          "label_en": "Size 2",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "3",
-          "label_fr": "Pointure 3",
-          "label_en": "Size 3",
-          "qty_on_hand": 3
+          "code": "2-3",
+          "label_fr": "Pointure 2-3",
+          "label_en": "Size 2-3",
+          "qty_on_hand": 6
         }
       ]
     },
     "pantoufles-enfant-2-3-renard": {
       "product_number": 308,
       "category": "pantoufles",
-      "selector": true,
+      "selector": false,
       "sizes": [
         {
-          "code": "2",
-          "label_fr": "Pointure 2",
-          "label_en": "Size 2",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "3",
-          "label_fr": "Pointure 3",
-          "label_en": "Size 3",
-          "qty_on_hand": 3
+          "code": "2-3",
+          "label_fr": "Pointure 2-3",
+          "label_en": "Size 2-3",
+          "qty_on_hand": 6
         }
       ]
     },
@@ -968,114 +956,78 @@
     "pantoufles-dame-7-8-mouton-rase-et-chat-sauvage": {
       "product_number": 302,
       "category": "pantoufles",
-      "selector": true,
+      "selector": false,
       "sizes": [
         {
-          "code": "7",
-          "label_fr": "7",
-          "label_en": "7",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "8",
-          "label_fr": "8",
-          "label_en": "8",
-          "qty_on_hand": 3
+          "code": "7-8",
+          "label_fr": "Pointure 7-8",
+          "label_en": "Size 7-8",
+          "qty_on_hand": 6
         }
       ]
     },
     "pantoufles-dame-8-9-vison-et-coyote": {
       "product_number": 303,
       "category": "pantoufles",
-      "selector": true,
+      "selector": false,
       "sizes": [
         {
-          "code": "8",
-          "label_fr": "8",
-          "label_en": "8",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "9",
-          "label_fr": "9",
-          "label_en": "9",
-          "qty_on_hand": 3
+          "code": "8-9",
+          "label_fr": "Pointure 8-9",
+          "label_en": "Size 8-9",
+          "qty_on_hand": 6
         }
       ]
     },
     "pantoufles-dame-8-9-vison-et-renard": {
       "product_number": 304,
       "category": "pantoufles",
-      "selector": true,
+      "selector": false,
       "sizes": [
         {
-          "code": "8",
-          "label_fr": "8",
-          "label_en": "8",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "9",
-          "label_fr": "9",
-          "label_en": "9",
-          "qty_on_hand": 3
+          "code": "8-9",
+          "label_fr": "Pointure 8-9",
+          "label_en": "Size 8-9",
+          "qty_on_hand": 6
         }
       ]
     },
     "pantoufles-dame-9-10-vison-et-renard": {
       "product_number": 305,
       "category": "pantoufles",
-      "selector": true,
+      "selector": false,
       "sizes": [
         {
-          "code": "9",
-          "label_fr": "9",
-          "label_en": "9",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "10",
-          "label_fr": "10",
-          "label_en": "10",
-          "qty_on_hand": 3
+          "code": "9-10",
+          "label_fr": "Pointure 9-10",
+          "label_en": "Size 9-10",
+          "qty_on_hand": 6
         }
       ]
     },
     "pantoufles-homme-10-11-chat-sauvage": {
       "product_number": 309,
       "category": "pantoufles",
-      "selector": true,
+      "selector": false,
       "sizes": [
         {
-          "code": "10",
-          "label_fr": "10",
-          "label_en": "10",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "11",
-          "label_fr": "11",
-          "label_en": "11",
-          "qty_on_hand": 3
+          "code": "10-11",
+          "label_fr": "Pointure 10-11",
+          "label_en": "Size 10-11",
+          "qty_on_hand": 6
         }
       ]
     },
     "pantoufles-homme-10-11-mouton-et-renard-roux": {
       "product_number": 310,
       "category": "pantoufles",
-      "selector": true,
+      "selector": false,
       "sizes": [
         {
-          "code": "10",
-          "label_fr": "10",
-          "label_en": "10",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "11",
-          "label_fr": "11",
-          "label_en": "11",
-          "qty_on_hand": 3
+          "code": "10-11",
+          "label_fr": "Pointure 10-11",
+          "label_en": "Size 10-11",
+          "qty_on_hand": 6
         }
       ]
     }

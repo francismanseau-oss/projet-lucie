@@ -87,17 +87,32 @@ export function buildLineItems(catalog, items, opts = {}) {
       const measureUnit = cfg.unit;
       const measurements =
         cfg.measurements && typeof cfg.measurements === "object" ? cfg.measurements : {};
+      const measureOutOfRange =
+        cfg.measure_out_of_range && typeof cfg.measure_out_of_range === "object"
+          ? cfg.measure_out_of_range
+          : {};
+      const measurementsCm =
+        cfg.measurements_cm && typeof cfg.measurements_cm === "object" ? cfg.measurements_cm : null;
+      const specialRequests = Array.isArray(cfg.special_requests)
+        ? cfg.special_requests.map((x) => String(x).slice(0, 120)).slice(0, 20)
+        : Object.keys(measureOutOfRange)
+            .filter((k) => measureOutOfRange[k])
+            .map((k) => "mesure_hors_liste:" + k);
       const skipMeasures = !!(cfg.skip_measures || cfg.adapted_contact || product.order_flow === "adapted_contact");
       if (!skipMeasures && validateMeasurements && opts.measureSpecForCategory) {
         const spec = opts.measureSpecForCategory(product.category);
-        const meas = validateMeasurements(spec, measureUnit, measurements);
+        const meas = validateMeasurements(spec, measureUnit, measurements, {
+          measurementsCm,
+          measureOutOfRange,
+        });
         if (!meas.ok) {
           throw httpError("Mesures sur mesure invalides", 400, { reason: meas.reason, field: meas.field });
         }
       } else if (!skipMeasures && (!measureUnit || (measureUnit !== "in" && measureUnit !== "cm"))) {
         // catégories sans champs mesures (ex. foulards) : unité optionnelle si aucune mesure
         const hasMeas = Object.values(measurements).some((v) => v !== "" && v != null);
-        if (hasMeas) throw httpError("Unité de mesure sur mesure requise (in|cm)", 400);
+        const hasOor = Object.values(measureOutOfRange).some(Boolean);
+        if (hasMeas || hasOor) throw httpError("Unité de mesure sur mesure requise (in|cm)", 400);
       }
 
       const productNumber =
@@ -128,7 +143,13 @@ export function buildLineItems(catalog, items, opts = {}) {
           category: product.category,
           unit: skipMeasures ? null : measureUnit || null,
           measurements: skipMeasures ? {} : measurements,
-          measurements_cm: skipMeasures ? null : cfg.measurements_cm || null,
+          measurements_cm: skipMeasures ? null : measurementsCm,
+          measure_out_of_range: skipMeasures ? {} : measureOutOfRange,
+          special_requests: skipMeasures ? [] : specialRequests,
+          measurement_labels:
+            !skipMeasures && cfg.measurement_labels && typeof cfg.measurement_labels === "object"
+              ? cfg.measurement_labels
+              : undefined,
           chaleur: chaleurAsked(cfg),
           comments: String(cfg.comments || "").slice(0, 800),
           leather: "noir",
@@ -574,6 +595,11 @@ export function buildCheckoutParams({
       ).slice(0, 450);
       params[`line_items[${i}][price_data][product_data][metadata][measurements_cm]`] = JSON.stringify(
         cc.measurements_cm || {},
+      ).slice(0, 450);
+      params[`line_items[${i}][price_data][product_data][metadata][measure_out_of_range]`] =
+        JSON.stringify(cc.measure_out_of_range || {}).slice(0, 450);
+      params[`line_items[${i}][price_data][product_data][metadata][special_requests]`] = JSON.stringify(
+        cc.special_requests || [],
       ).slice(0, 450);
       params[`line_items[${i}][price_data][product_data][metadata][chaleur]`] = cc.chaleur ? "1" : "0";
       params[`line_items[${i}][price_data][product_data][metadata][leather]`] = String(cc.leather || "noir");

@@ -1,7 +1,6 @@
 import {
   auditActionLabelFr,
   categoryLabelFr,
-  AUDIENCE_FR,
   filterItems,
   qtyDisplayLabel,
   stockStatusLabelFr,
@@ -12,7 +11,6 @@ let token = sessionStorage.getItem(TOKEN_KEY) || localStorage.getItem(TOKEN_KEY)
 let items = [];
 let audienceFilter = "tous";
 let categoryFilter = "";
-const pendingAudience = new Map();
 let categories = [];
 let nameById = new Map();
 let toastTimer = null;
@@ -86,8 +84,6 @@ function storeToken(t, remember) {
   sessionStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(TOKEN_KEY);
   if (!token) return;
-  // Jeton opaque seulement — jamais le mot de passe. localStorage = « rester connecté » côté UI ;
-  // le cookie HttpOnly est aussi posé par le serveur.
   if (remember) localStorage.setItem(TOKEN_KEY, token);
   else sessionStorage.setItem(TOKEN_KEY, token);
 }
@@ -105,14 +101,8 @@ async function api(path, opts = {}) {
   return data;
 }
 
-function photoUrl(imagePath) {
-  if (!imagePath) return "";
-  if (imagePath.startsWith("assets/")) return `/${imagePath}`;
-  if (imagePath.startsWith("/assets/")) return imagePath;
-  return `/assets/${imagePath.replace(/^\/+/, "")}`;
-}
-
 function badge(item) {
+  if (item.skip_inventory) return { cls: "ok", text: "Sur mesure seulement" };
   if (item.qty_on_hand == null) return { cls: "unk", text: "À confirmer" };
   if (item.out_of_stock || item.qty_on_hand === 0) return { cls: "out", text: "Rupture de stock" };
   if (item.below_min) return { cls: "warn", text: "Stock bas" };
@@ -146,16 +136,36 @@ function renderSummary(summary, units) {
       out ? ` · ${out} rupture(s)` : ""
     }</span>
   `;
-  if (summary.low_stock_count > 0 || out > 0) {
+  const stockItems = (items || []).filter((it) => !it.skip_inventory);
+  const lowItems = stockItems.filter((it) => it.below_min && !it.out_of_stock);
+  const outItems = stockItems.filter((it) => it.out_of_stock || it.qty_on_hand === 0);
+  if (lowItems.length || outItems.length) {
     alertsBar.hidden = false;
-    const parts = [];
-    if (summary.low_stock_count > 0) {
-      parts.push(`${summary.low_stock_count} produit(s) sous l’objectif minimum`);
+    const listHtml = (arr) =>
+      `<ul class="alerts-names">${arr
+        .map((it) => `<li>${escapeHtml(displayTitle(it))}</li>`)
+        .join("")}</ul>`;
+    const summaryBits = [];
+    if (lowItems.length) summaryBits.push(`${lowItems.length} sous l’objectif`);
+    if (outItems.length) summaryBits.push(`${outItems.length} en rupture`);
+    const blocks = [];
+    if (lowItems.length) {
+      blocks.push(
+        `<div class="alerts-block"><p class="alerts-label">${lowItems.length} sous l’objectif minimum</p>${listHtml(lowItems)}</div>`,
+      );
     }
-    if (out > 0) parts.push(`${out} en rupture de stock`);
-    alertsBar.textContent = parts.join(" · ") + ".";
+    if (outItems.length) {
+      blocks.push(
+        `<div class="alerts-block"><p class="alerts-label">${outItems.length} en rupture de stock</p>${listHtml(outItems)}</div>`,
+      );
+    }
+    alertsBar.innerHTML = `<details class="alerts-acc">
+      <summary class="alerts-acc-summary">${escapeHtml(summaryBits.join(" · "))}</summary>
+      <div class="alerts-acc-body">${blocks.join("")}</div>
+    </details>`;
   } else {
     alertsBar.hidden = true;
+    alertsBar.innerHTML = "";
   }
 }
 
@@ -181,55 +191,150 @@ function currentStockNumber(it) {
   return Number.isFinite(n) && n >= 0 ? n : 0;
 }
 
-function renderAudienceEdit(it) {
-  const saved = it.audience || "";
-  const pending = pendingAudience.has(it.product_id) ? pendingAudience.get(it.product_id) : saved;
-  const dirty = pendingAudience.has(it.product_id) && pending !== saved;
-  const buttons = ["femmes", "hommes", "enfants", "unisexe"]
-    .map(
-      (code) =>
-        `<button type="button" class="btn btn-aud${pending === code ? " is-on" : ""}" data-act="aud-pick" data-audience="${code}">${AUDIENCE_FR[code]}</button>`,
-    )
-    .join("");
-  return `<div class="aud-edit">
-    <span class="aud-edit-label">Clientèle de ce produit</span>
-    ${buttons}
-    <p class="aud-dirty"${dirty ? "" : " hidden"}>Modification non enregistrée</p>
-    <button type="button" class="btn btn-primary btn-aud-save" data-act="aud-save"${dirty ? "" : " hidden"}>Enregistrer la clientèle</button>
+function sizeQtyNumber(s) {
+  if (!s || s.qty_on_hand == null) return 0;
+  const n = Math.floor(Number(s.qty_on_hand));
+  return Number.isFinite(n) && n >= 0 ? n : 0;
+}
+
+/**
+ * Titre affiché seulement : enlève les marques de taille du libellé
+ * (M, L, M-L, L-XL…) sans modifier les données enregistrées.
+ */
+function displayNameWithoutSize(nameFr) {
+  let name = String(nameFr || "").trim();
+  // « Chapeau dame M-L — … » / « … M / L … »
+  name = name.replace(/\b(?:P|M|G|TG|S|L|XL|XXL|M-L|L-XL|S-M)\b/gi, " ");
+  // Pas de tirets dans le titre affiché (raccourcit, plus lisible)
+  name = name.replace(/\s*[–—−‐-]\s*/g, " ");
+  name = name.replace(/\s{2,}/g, " ");
+  name = name.replace(/^\s*[,:;/]\s*|\s*[,:;/]\s*$/g, "");
+  return name.trim() || String(nameFr || "").trim();
+}
+
+/** Titre affiché : N° + nom (sans taille ni tirets). */
+function displayTitle(it) {
+  const name = displayNameWithoutSize(it.name_fr || it.product_id || "");
+  if (it.product_number != null && it.product_number !== "") {
+    return `N° ${it.product_number} ${name}`;
+  }
+  return name;
+}
+
+const SIZE_GROUP_FR = { homme: "Homme", femme: "Femme", enfant: "Enfant" };
+
+function sizeGroupInfo(s, sizeGroups) {
+  const fromList = Array.isArray(sizeGroups)
+    ? sizeGroups.find((g) => g.id === s.group)
+    : null;
+  if (fromList) return { id: fromList.id, label: fromList.label_fr || fromList.id };
+  if (s.group && SIZE_GROUP_FR[s.group]) return { id: s.group, label: SIZE_GROUP_FR[s.group] };
+  const code = String(s.code || "");
+  if (/^H-/i.test(code)) return { id: "homme", label: "Homme" };
+  if (/^F-/i.test(code)) return { id: "femme", label: "Femme" };
+  if (/^E-/i.test(code)) return { id: "enfant", label: "Enfant" };
+  return null;
+}
+
+function isHalfPointure(s) {
+  const code = String(s.code || "");
+  const label = String(s.label_fr || "");
+  return /\.5\b/.test(code) || /½/.test(label) || /1\/2/.test(label);
+}
+
+/** Semelles : pointure seule dans l’accordéon (le titre dit déjà Homme/Femme/Enfant). */
+function displaySizeLabel(s, groupInfo, shortInAccordion) {
+  const code = String(s.code || "");
+  const m = code.match(/^[HFE]-([\d.]+)$/i);
+  if (m) {
+    const n = String(m[1]).replace(/\.5$/, "½");
+    if (shortInAccordion) return n;
+    if (groupInfo?.label) return `${groupInfo.label} ${n}`;
+  }
+  return s.label_fr || s.code;
+}
+
+function renderSizeRow(s, sizeGroups, shortLabel) {
+  const qNum = sizeQtyNumber(s);
+  const q = s.qty_on_hand == null ? "—" : String(qNum);
+  const sold = qNum === 0 ? " is-sold" : "";
+  const groupInfo = sizeGroupInfo(s, sizeGroups);
+  const half = isHalfPointure(s) ? " is-half" : "";
+  const label = displaySizeLabel(s, groupInfo, shortLabel);
+  return `<div class="size-row${sold}${half}" data-size="${escapeHtml(s.code)}">
+    <span class="size-code"><b>${escapeHtml(label)}</b></span>
+    <span class="size-qty">${escapeHtml(q)}</span>
+    <div class="size-steps">
+      <button type="button" class="btn btn-step" data-act="size-minus" data-size="${escapeHtml(s.code)}" aria-label="Retirer un ${escapeHtml(label)}"${qNum <= 0 ? " disabled" : ""}>−</button>
+      <button type="button" class="btn btn-step" data-act="size-plus" data-size="${escapeHtml(s.code)}" aria-label="Ajouter un ${escapeHtml(label)}">+</button>
+    </div>
   </div>`;
 }
 
 function renderSizesBlock(it) {
   const sizes = Array.isArray(it.sizes) ? it.sizes : [];
   if (!sizes.length) return "";
-  const multi = sizes.length > 1 || it.size_selector;
-  const rows = sizes
-    .map((s) => {
-      const q = s.qty_on_hand == null ? "—" : String(s.qty_on_hand);
-      const sold = s.qty_on_hand === 0 ? " is-sold" : "";
-      return `<div class="size-row${sold}" data-size="${escapeHtml(s.code)}">
-        <span class="size-code"><b>${escapeHtml(s.label_fr || s.code)}</b>${multi ? ` <small>(${escapeHtml(s.code)})</small>` : ""}</span>
-        <span class="size-qty">${escapeHtml(q)}</span>
-        <div class="size-steps">
-          <button type="button" class="btn btn-step" data-act="size-minus" data-size="${escapeHtml(s.code)}" aria-label="Retirer un ${escapeHtml(s.code)}">−</button>
-          <button type="button" class="btn btn-step" data-act="size-plus" data-size="${escapeHtml(s.code)}" aria-label="Ajouter un ${escapeHtml(s.code)}">+</button>
-        </div>
-        ${
-          multi
-            ? `<button type="button" class="btn btn-ghost btn-xs" data-act="size-remove" data-size="${escapeHtml(s.code)}">Retirer taille</button>`
-            : ""
-        }
-      </div>`;
-    })
-    .join("");
+  const sizeGroups = it.size_groups || null;
+  const total = currentStockNumber(it);
+
+  const buckets = { femme: [], homme: [], enfant: [], other: [] };
+  for (const s of sizes) {
+    const g = sizeGroupInfo(s, sizeGroups);
+    if (g?.id === "femme") buckets.femme.push(s);
+    else if (g?.id === "homme") buckets.homme.push(s);
+    else if (g?.id === "enfant") buckets.enfant.push(s);
+    else buckets.other.push(s);
+  }
+
+  const hasAudienceGroups =
+    buckets.femme.length + buckets.homme.length + buckets.enfant.length > 0;
+
+  if (hasAudienceGroups) {
+    // Ordre demandé : Femme → Homme → Enfant
+    const order = [
+      { id: "femme", label: "Femme", list: buckets.femme },
+      { id: "homme", label: "Homme", list: buckets.homme },
+      { id: "enfant", label: "Enfant", list: buckets.enfant },
+    ];
+    const accordions = order
+      .filter((g) => g.list.length)
+      .map((g, idx) => {
+        const subtotal = g.list.reduce((n, s) => n + sizeQtyNumber(s), 0);
+        const openAttr = idx === 0 ? " open" : "";
+        const rows = g.list.map((s) => renderSizeRow(s, sizeGroups, true)).join("");
+        return `<details class="size-acc"${openAttr}>
+          <summary class="size-acc-summary">${escapeHtml(g.label)} <span class="size-acc-count">${subtotal} en stock</span></summary>
+          <div class="size-acc-body">${rows}</div>
+        </details>`;
+      })
+      .join("");
+    const otherRows = buckets.other.map((s) => renderSizeRow(s, sizeGroups, false)).join("");
+    return `<div class="sizes-panel sizes-panel--acc" data-sizes>
+      ${accordions}
+      ${otherRows}
+      <p class="stock-total">Total : <b>${total}</b> en stock</p>
+    </div>`;
+  }
+
+  const rows = sizes.map((s) => renderSizeRow(s, sizeGroups, false)).join("");
   return `<div class="sizes-panel" data-sizes>
-    <div class="sizes-head">Tailles / formats ${it.size_selector ? "(sélecteur boutique actif)" : "(sans sélecteur)"}</div>
     ${rows}
-    <div class="size-add">
-      <input class="add-input size-code-input" type="text" placeholder="Code (ex. M)" data-act="new-size-code" aria-label="Code taille">
-      <input class="add-input size-label-input" type="text" placeholder="Libellé FR" data-act="new-size-label" aria-label="Libellé taille">
-      <button type="button" class="btn btn-ghost" data-act="size-add">Ajouter une taille</button>
+    <p class="stock-total">Total : <b>${total}</b> en stock</p>
+  </div>`;
+}
+
+function renderSimpleQty(it) {
+  const stock = currentStockNumber(it);
+  const qtyLabel = qtyDisplayLabel(it.qty_on_hand);
+  const status = stockStatusLabelFr(it);
+  const shown = status === "Rupture de stock" ? "0" : qtyLabel;
+  return `<div class="qty-panel qty-panel--simple">
+    <button type="button" class="btn btn-step" data-act="minus" aria-label="Retirer un exemplaire"${stock <= 0 ? " disabled" : ""}>−</button>
+    <div class="qty-simple-mid">
+      <span class="qty-live">${escapeHtml(shown)}</span>
+      <span class="stock-total">Total : <b>${stock}</b> en stock</span>
     </div>
+    <button type="button" class="btn btn-step" data-act="plus" aria-label="Ajouter un exemplaire">+</button>
   </div>`;
 }
 
@@ -244,46 +349,14 @@ function renderList() {
   listEl.innerHTML = rows
     .map((it) => {
       const b = badge(it);
-      const qty = qtyDisplayLabel(it.qty_on_hand);
-      const status = stockStatusLabelFr(it);
-      const img = photoUrl(it.image);
       const alertClass = it.below_min || it.out_of_stock ? " is-alert" : "";
       const stock = currentStockNumber(it);
-      const multi = Array.isArray(it.sizes) && it.sizes.length > 1;
+      const hasSizes = Array.isArray(it.sizes) && it.sizes.length > 0;
       return `<article class="product-card${alertClass}" role="listitem" data-id="${escapeHtml(it.product_id)}" data-qty="${stock}">
-        <img class="photo" src="${escapeHtml(img)}" alt="" loading="lazy"
-          onerror="this.style.opacity='0.25'">
         <div class="body">
           <span class="badge ${b.cls}">${b.text}</span>
-          <h3 class="name">${it.product_number != null ? `<span class="product-code">N° ${escapeHtml(String(it.product_number))}</span> ` : ""}${escapeHtml(it.name_fr)}</h3>
-          <div class="facts">
-            <span>Stock actuel : <b class="qty-live">${escapeHtml(status === "Rupture de stock" ? "0 — rupture" : qty)}</b>${multi ? " <small>(somme des tailles)</small>" : ""}</span>
-            <span>${escapeHtml(categoryLabelFr(it.category))}</span>
-            <span>${escapeHtml(it.audience ? AUDIENCE_FR[it.audience] || it.audience : "Clientèle à confirmer")}</span>
-          </div>
-          ${renderAudienceEdit(it)}
-          ${renderSizesBlock(it)}
-        </div>
-        ${
-          multi
-            ? ""
-            : `<div class="qty-panel">
-          <button type="button" class="btn btn-step" data-act="minus" aria-label="Retirer un exemplaire">−</button>
-          <span class="step-label">±1</span>
-          <button type="button" class="btn btn-step" data-act="plus" aria-label="Ajouter un exemplaire">+</button>
-        </div>`
-        }
-        <div class="add-panel">
-          ${
-            multi
-              ? `<p class="hint">Utilisez + / − sur chaque taille ci-dessus. Le total se met à jour automatiquement.</p>`
-              : `<label class="add-label" for="add-${escapeHtml(it.product_id)}">Quantité à ajouter</label>
-          <input id="add-${escapeHtml(it.product_id)}" class="add-input" type="number" min="1" step="1" inputmode="numeric"
-            placeholder="ex. 5, 10, 22" data-act="add-qty" aria-label="Quantité à ajouter">
-          <p class="preview" data-preview hidden></p>
-          <button type="button" class="btn btn-primary btn-lg btn-add-stock" data-act="add-stock">Ajouter au stock</button>
-          <button type="button" class="btn btn-ghost btn-correct" data-act="correct">Corriger le stock total</button>`
-          }
+          <h3 class="name">${escapeHtml(displayTitle(it))}</h3>
+          ${hasSizes ? renderSizesBlock(it) : renderSimpleQty(it)}
         </div>
       </article>`;
     })
@@ -305,39 +378,6 @@ async function refresh() {
 }
 
 const busyIds = new Set();
-let correctCurrent = null;
-
-function parsePositiveInt(raw) {
-  const s = String(raw || "").trim();
-  if (!s) return null;
-  const n = Number(s);
-  if (!Number.isFinite(n) || n < 1 || Math.floor(n) !== n) return null;
-  return Math.floor(n);
-}
-
-function updatePreview(card) {
-  const preview = card.querySelector("[data-preview]");
-  const input = card.querySelector(".add-input");
-  if (!preview || !input) return;
-  const raw = String(input.value || "").trim();
-  if (!raw) {
-    preview.hidden = true;
-    preview.textContent = "";
-    return;
-  }
-  const n = parsePositiveInt(raw);
-  if (n == null) {
-    preview.hidden = false;
-    preview.classList.add("preview-bad");
-    preview.textContent = "Entrez un nombre entier positif (ex. 5, 10, 22).";
-    return;
-  }
-  const current = Number(card.dataset.qty || 0);
-  const next = current + n;
-  preview.hidden = false;
-  preview.classList.remove("preview-bad");
-  preview.innerHTML = `Stock actuel : <b>${current}</b> · À ajouter : <b>+${n}</b> · Nouveau stock : <b>${next}</b>`;
-}
 
 async function withBusy(id, btn, fn) {
   if (busyIds.has(id)) return;
@@ -361,9 +401,15 @@ async function adjust(id, delta, btn, sizeCode) {
   const it = items.find((i) => i.product_id === id);
   if (!it) return;
   let expected = it.qty_on_hand;
+  let current = currentStockNumber(it);
   if (sizeCode && Array.isArray(it.sizes)) {
     const sz = it.sizes.find((s) => s.code === sizeCode);
     expected = sz ? sz.qty_on_hand : expected;
+    current = sizeQtyNumber(sz);
+  }
+  if (delta < 0 && current <= 0) {
+    showToast("Impossible : la quantité ne peut pas être négative.", false);
+    return;
   }
   await withBusy(id + (sizeCode ? "|" + sizeCode : ""), btn, async () => {
     try {
@@ -386,127 +432,6 @@ async function adjust(id, delta, btn, sizeCode) {
   });
 }
 
-async function addSize(id, card, btn) {
-  const code = card.querySelector("[data-act='new-size-code']")?.value?.trim();
-  const label = card.querySelector("[data-act='new-size-label']")?.value?.trim() || code;
-  if (!code) {
-    showToast("Indiquez un code de taille (ex. M, L).", false);
-    return;
-  }
-  await withBusy(id + "|add-size", btn, async () => {
-    try {
-      const data = await api(`/api/inventory/${encodeURIComponent(id)}/sizes`, {
-        method: "POST",
-        body: JSON.stringify({
-          code,
-          label_fr: label,
-          label_en: label,
-          qty_on_hand: 3,
-          selector: true,
-          confirm: true,
-        }),
-      });
-      showToast(data.message_fr || "Taille ajoutée.");
-      await refresh();
-    } catch (err) {
-      showToast(err.message, false);
-    }
-  });
-}
-
-async function removeSize(id, sizeCode, btn) {
-  if (!window.confirm(`Retirer la taille « ${sizeCode} » ?`)) return;
-  await withBusy(id + "|rm|" + sizeCode, btn, async () => {
-    try {
-      const data = await api(`/api/inventory/${encodeURIComponent(id)}/sizes/${encodeURIComponent(sizeCode)}`, {
-        method: "DELETE",
-        body: JSON.stringify({ confirm: true }),
-      });
-      showToast(data.message_fr || "Taille retirée.");
-      await refresh();
-    } catch (err) {
-      showToast(err.message, false);
-    }
-  });
-}
-
-async function addStock(id, card, btn) {
-  const it = items.find((i) => i.product_id === id);
-  if (!it) return;
-  const input = card.querySelector(".add-input");
-  const n = parsePositiveInt(input?.value);
-  if (n == null) {
-    showToast("Entrez un nombre entier positif à ajouter (ex. 5, 10, 22).", false);
-    updatePreview(card);
-    return;
-  }
-  const current = currentStockNumber(it);
-  const next = current + n;
-  const ok = window.confirm(
-    `Confirmer l’ajout ?\n\nStock actuel : ${current}\nQuantité à ajouter : +${n}\nNouveau stock : ${next}\n\n(Ceci ajoute au stock, sans remplacer le total.)`,
-  );
-  if (!ok) return;
-
-  await withBusy(id, btn, async () => {
-    try {
-      const data = await api(`/api/inventory/${encodeURIComponent(id)}/add`, {
-        method: "POST",
-        body: JSON.stringify({
-          delta: n,
-          confirm: true,
-          expected_qty: it.qty_on_hand,
-        }),
-      });
-      showToast(data.message_fr || `Ajouté : ${current} → ${next}`);
-      await refresh();
-    } catch (err) {
-      showToast(err.message, false);
-      if (err.status === 409) await refresh();
-    }
-  });
-}
-
-function openCorrect(id) {
-  const it = items.find((i) => i.product_id === id);
-  if (!it) return;
-  correctCurrent = it;
-  $("dlg-correct-title").textContent = it.name_fr;
-  $("dlg-correct-meta").textContent = `Stock actuel : ${qtyDisplayLabel(it.qty_on_hand)} — vous allez FIXER le total (pas ajouter).`;
-  $("fld-correct-qty").value = it.qty_on_hand == null ? "" : String(it.qty_on_hand);
-  $("dlg-correct-error").hidden = true;
-  $("dlg-correct").showModal();
-}
-
-function pickAudience(id, card, next) {
-  const it = items.find((i) => i.product_id === id);
-  if (!it || !next) return;
-  const saved = it.audience || "";
-  if (next === saved) pendingAudience.delete(id);
-  else pendingAudience.set(id, next);
-  const dirty = pendingAudience.has(id);
-  card.querySelectorAll("[data-act='aud-pick']").forEach((b) => {
-    b.classList.toggle("is-on", b.dataset.audience === next);
-  });
-  const note = card.querySelector(".aud-dirty");
-  const save = card.querySelector("[data-act='aud-save']");
-  if (note) note.hidden = !dirty;
-  if (save) save.hidden = !dirty;
-}
-
-async function saveAudience(id, btn) {
-  const next = pendingAudience.get(id);
-  if (!next) return;
-  await withBusy(id + "|aud", btn, async () => {
-    const data = await api(`/api/inventory/${encodeURIComponent(id)}/audience`, {
-      method: "POST",
-      body: JSON.stringify({ audience: next }),
-    });
-    pendingAudience.delete(id);
-    showToast(data.message_fr || "Clientèle enregistrée.");
-    await refresh();
-  });
-}
-
 listEl.addEventListener("click", (e) => {
   const btn = e.target.closest("button[data-act]");
   if (!btn || btn.disabled) return;
@@ -517,73 +442,19 @@ listEl.addEventListener("click", (e) => {
   if (btn.dataset.act === "minus") adjust(id, -1, btn);
   if (btn.dataset.act === "size-plus") adjust(id, 1, btn, btn.dataset.size);
   if (btn.dataset.act === "size-minus") adjust(id, -1, btn, btn.dataset.size);
-  if (btn.dataset.act === "size-add") addSize(id, card, btn);
-  if (btn.dataset.act === "size-remove") removeSize(id, btn.dataset.size, btn);
-  if (btn.dataset.act === "add-stock") addStock(id, card, btn);
-  if (btn.dataset.act === "correct") openCorrect(id);
-  if (btn.dataset.act === "aud-pick") pickAudience(id, card, btn.dataset.audience);
-  if (btn.dataset.act === "aud-save") saveAudience(id, btn);
 });
 
-listEl.addEventListener("input", (e) => {
-  const input = e.target.closest(".add-input");
-  if (!input) return;
-  const card = input.closest("[data-id]");
-  if (card) updatePreview(card);
-});
-
-listEl.addEventListener("keydown", (e) => {
-  if (e.key !== "Enter") return;
-  const input = e.target.closest(".add-input");
-  if (!input) return;
-  e.preventDefault();
-  const card = input.closest("[data-id]");
-  if (!card) return;
-  const btn = card.querySelector('[data-act="add-stock"]');
-  addStock(card.dataset.id, card, btn);
-});
-
-$("btn-save-correct").addEventListener("click", async () => {
-  if (!correctCurrent) return;
-  const raw = $("fld-correct-qty").value;
-  const qty = Math.floor(Number(raw));
-  if (raw === "" || !Number.isFinite(qty) || qty < 0 || Number(raw) !== qty) {
-    $("dlg-correct-error").hidden = false;
-    $("dlg-correct-error").textContent = "Entrez un total entier (0 ou plus).";
-    return;
-  }
-  const prev = currentStockNumber(correctCurrent);
-  if (
-    !window.confirm(
-      `Corriger le stock total ?\n\nAncien stock : ${prev}\nNouveau total fixé : ${qty}\n\n(Ceci remplace le total — ce n’est pas un ajout.)`,
-    )
-  ) {
-    return;
-  }
-  const id = correctCurrent.product_id;
-  const btn = $("btn-save-correct");
-  await withBusy(id, btn, async () => {
-    try {
-      $("dlg-correct-error").hidden = true;
-      const data = await api(`/api/inventory/${encodeURIComponent(id)}/qty`, {
-        method: "POST",
-        body: JSON.stringify({
-          qty,
-          confirm: true,
-          expected_qty: correctCurrent.qty_on_hand,
-          note: "Correction inventaire physique",
-        }),
-      });
-      $("dlg-correct").close();
-      showToast(data.message_fr || `Total corrigé : ${qty}`);
-      await refresh();
-    } catch (err) {
-      $("dlg-correct-error").hidden = false;
-      $("dlg-correct-error").textContent = err.message;
-      if (err.status === 409) await refresh();
-    }
+/** Un seul accordéon ouvert à la fois (Femme / Homme / Enfant). */
+listEl.addEventListener("toggle", (e) => {
+  const opened = e.target;
+  if (!(opened instanceof HTMLDetailsElement) || !opened.classList.contains("size-acc")) return;
+  if (!opened.open) return;
+  const panel = opened.closest(".sizes-panel");
+  if (!panel) return;
+  panel.querySelectorAll("details.size-acc").forEach((other) => {
+    if (other !== opened) other.open = false;
   });
-});
+}, true);
 
 $("login-form").addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -688,7 +559,7 @@ $("btn-reset").addEventListener("click", async () => {
   }
 });
 
-$("btn-logout").addEventListener("click", async () => {
+$("btn-logout")?.addEventListener("click", async () => {
   try {
     await api("/api/logout", { method: "POST", body: "{}" });
   } catch {

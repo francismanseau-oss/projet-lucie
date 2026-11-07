@@ -42,11 +42,11 @@
 
   const els = {
     categoryPick: document.getElementById("sm-category-pick"),
+    audienceBar: document.getElementById("sm-audience-bar"),
     productsWrap: document.getElementById("sm-products-wrap"),
     changeCat: document.getElementById("sm-change-cat"),
     catCurrent: document.getElementById("sm-cat-current"),
     productsTitle: document.getElementById("sm-products-title"),
-    step1Lead: document.getElementById("sm-step1-lead"),
     products: document.getElementById("sm-products"),
     productsStatus: document.getElementById("sm-products-status"),
     step1: document.getElementById("sm-step-1"),
@@ -99,10 +99,15 @@
     catalog: null,
     config: null,
     illustrations: null,
+    limits: null,
     filter: null,
+    audienceFilter: "tous",
     productId: null,
     unit: "cm",
     measurements: {},
+    measurementsCm: {},
+    measureOutOfRange: {},
+    openWheelField: null,
     _lastUnit: null,
     chaleur: false,
     comments: "",
@@ -110,6 +115,7 @@
     requestedSize: null,
     linkedProductId: null,
     audienceById: {},
+    productSizes: null,
   };
 
   const LETTERS = {
@@ -122,6 +128,17 @@
   function audienceOf(productId) {
     const row = state.audienceById[productId];
     return row && row.audience ? row.audience : "";
+  }
+
+  /** Même logique boutique : unisexe = F+H ; tous = F+H+Enfants (ex. cache-oreilles 8-14). */
+  function matchesAudienceFilter(productId) {
+    const want = state.audienceFilter || "tous";
+    if (want === "tous") return true;
+    const aud = audienceOf(productId);
+    if (!aud) return false;
+    if (aud === "tous" || aud === "all") return true;
+    if (aud === "unisexe") return want === "femmes" || want === "hommes";
+    return aud === want;
   }
 
   function chaleurEligible(product) {
@@ -213,7 +230,12 @@
   function categories() {
     const present = new Set(
       (state.catalog.products || [])
-        .filter((p) => p.active !== false)
+        .filter(
+          (p) =>
+            p.active !== false &&
+            matchesAudienceFilter(p.id) &&
+            !isBabyMukluk(p),
+        )
         .map((p) => p.category),
     );
     const ordered = CAT_ORDER.filter((c) => present.has(c));
@@ -239,17 +261,53 @@
     return stripSizeTokens(raw);
   }
 
-  /**
-   * Si deux SKU ont le même libellé sans taille (ex. mitaines renard M vs M-L),
-   * on garde deux cartes + photo de chaque SKU ; distinction par réf. catalogue
-   * (pas de sélecteur S/M/L/XL). Décision Francis 2026-11-01 : ne pas fusionner
-   * tant que Lucie n’a pas tranché.
-   */
-  function displayProductNameDisambiguated(p, list) {
-    const base = displayProductName(p);
-    const twins = (list || []).filter((x) => displayProductName(x) === base);
-    if (twins.length <= 1) return base;
-    return base + " · " + t("réf.", "ref.") + " " + p.id;
+  function isBabyMukluk(p) {
+    if (!p || p.category !== "mukluks") return false;
+    const key = String(p.id || "") + " " + String(p.name_fr || "");
+    return /bebe|bébé/i.test(key);
+  }
+
+  /** Ex. mukluks-bebe-7-18-mois-vison → « 7-18 mois » */
+  function babyMuklukAgeLabel(p) {
+    if (!isBabyMukluk(p)) return "";
+    const src = String(p.id || "") + " " + String(p.image || "");
+    let m = src.match(/(\d+)\s*-\s*(\d+)\s*-?\s*mois/i);
+    if (m) {
+      return eng() ? m[1] + "-" + m[2] + " months" : m[1] + "-" + m[2] + " mois";
+    }
+    m =
+      src.match(/(?:^|-)a-(\d+)-mois/i) ||
+      src.match(/(?:^|-)(\d+)-mois/i) ||
+      src.match(/(\d+)\s*mois/i);
+    if (m) {
+      return eng() ? m[1] + " months" : m[1] + " mois";
+    }
+    return "";
+  }
+
+  /** Format taille pour la carte (sans réf. catalogue). */
+  function productTileSizeLabel(p) {
+    if (!p) return "";
+    const age = babyMuklukAgeLabel(p);
+    if (age) return age;
+    const id = String(p.id || "");
+    const combo = id.match(/-(s-m|m-l|l-xl)(?:-|$)/i);
+    if (combo) return combo[1].toUpperCase().replace(/-/g, "-");
+    const entry =
+      (state.productSizes &&
+        state.productSizes.products &&
+        state.productSizes.products[p.id]) ||
+      null;
+    const sizes = entry && Array.isArray(entry.sizes) ? entry.sizes : [];
+    if (sizes.length) {
+      return sizes
+        .map((s) => (eng() ? s.label_en || s.code : s.label_fr || s.code))
+        .filter(Boolean)
+        .join(" · ");
+    }
+    const letter = id.match(/-(xxl|xl|[sml])(?:-|$)/i);
+    if (letter) return letter[1].toUpperCase();
+    return "";
   }
 
   function categoryLabel(c) {
@@ -259,13 +317,40 @@
 
   function productsInCategory(cat) {
     return (state.catalog.products || []).filter(
-      (p) => p.active !== false && p.category === cat,
+      (p) =>
+        p.active !== false &&
+        p.category === cat &&
+        matchesAudienceFilter(p.id) &&
+        !isBabyMukluk(p),
     );
   }
 
   function firstImageInCategory(cat) {
     const p = productsInCategory(cat)[0];
     return p?.image || "";
+  }
+
+  function renderAudienceBar() {
+    if (!els.audienceBar) return;
+    els.audienceBar.querySelectorAll(".audience-filter").forEach((btn) => {
+      const aud = btn.dataset.audience || "tous";
+      btn.classList.toggle("active", aud === state.audienceFilter);
+      btn.setAttribute("aria-pressed", String(aud === state.audienceFilter));
+    });
+  }
+
+  function setAudienceFilter(aud) {
+    const next = aud || "tous";
+    if (state.audienceFilter === next) return;
+    state.audienceFilter = next;
+    renderAudienceBar();
+    if (state.filter && !productsInCategory(state.filter).length) {
+      clearCategory();
+      return;
+    }
+    renderCategoryPick();
+    renderProducts();
+    updateStep1Copy();
   }
 
   function updateStep1Copy() {
@@ -275,17 +360,6 @@
         : t("Choisir une catégorie", "Choose a category");
       els.productsTitle.dataset.fr = state.filter ? "Choisir un modèle" : "Choisir une catégorie";
       els.productsTitle.dataset.en = state.filter ? "Choose a model" : "Choose a category";
-    }
-    if (els.step1Lead) {
-      const fr = state.filter
-        ? "Photo, prix officiel du catalogue. Les tailles S/M/L/XL ne s’appliquent pas : vous indiquerez vos mesures."
-        : "Choisissez d’abord le type de création, puis le modèle. Les mensurations remplacent les tailles standards.";
-      const en = state.filter
-        ? "Photo and official catalog price. Standard S/M/L/XL sizes do not apply — you will enter your measurements."
-        : "First choose the type of creation, then the model. Measurements replace standard sizes.";
-      els.step1Lead.textContent = t(fr, en);
-      els.step1Lead.dataset.fr = fr;
-      els.step1Lead.dataset.en = en;
     }
   }
 
@@ -417,14 +491,14 @@
       const body = document.createElement("span");
       body.className = "sm-product-tile-body";
       const name = document.createElement("strong");
-      name.textContent = displayProductNameDisambiguated(p, list);
+      name.textContent = displayProductName(p);
+      body.appendChild(name);
       const price = document.createElement("span");
       price.className = "sm-product-tile-price";
       price.textContent = money(p.price_cad_cents);
       const cta = document.createElement("span");
       cta.className = "sm-product-tile-cta";
       cta.textContent = t("Personnaliser", "Customize");
-      body.appendChild(name);
       body.appendChild(price);
       body.appendChild(cta);
       btn.appendChild(img);
@@ -481,6 +555,9 @@
     if (state.linkedProductId && id !== state.linkedProductId) state.requestedSize = null;
     state.productId = id;
     state.measurements = {};
+    state.measurementsCm = {};
+    state.measureOutOfRange = {};
+    state.openWheelField = null;
     state._lastUnit = null;
     state.unit = null;
     state.chaleur = false;
@@ -505,6 +582,111 @@
     gotoStep(2);
   }
 
+  function limitAudienceKey() {
+    const aliases = state.limits?.audience_aliases || {
+      enfants: "enfant",
+      femmes: "femme",
+      hommes: "homme",
+      unisexe: "femme",
+      tous: "femme",
+      all: "femme",
+    };
+    const aud = audienceOf(state.productId);
+    if (aud && aliases[aud]) return aliases[aud];
+    const filter = state.audienceFilter;
+    if (filter && filter !== "tous" && aliases[filter]) return aliases[filter];
+    return "femme";
+  }
+
+  function fieldLimitsCm(fieldId) {
+    const entry = state.limits?.by_field?.[fieldId];
+    if (!entry?.limits_cm) return null;
+    const key = limitAudienceKey();
+    return entry.limits_cm[key] || entry.limits_cm.femme || null;
+  }
+
+  function formatCmLabel(cm) {
+    const n = Math.round(Number(cm) * 10) / 10;
+    return String(n).replace(/\.0$/, "");
+  }
+
+  function formatInchFromEighths(eighths) {
+    const whole = Math.floor(eighths / 8);
+    const rem = eighths - whole * 8;
+    const frac = { 1: "1/8", 2: "1/4", 3: "3/8", 4: "1/2", 5: "5/8", 6: "3/4", 7: "7/8" }[rem];
+    if (!frac) return String(whole);
+    if (!whole) return frac;
+    return whole + " " + frac;
+  }
+
+  /** Ticks respectant les limites cm exactes (jamais au-delà). */
+  function buildMeasureTicks(fieldId) {
+    const lim = fieldLimitsCm(fieldId);
+    if (!lim || !Number.isFinite(lim.min) || !Number.isFinite(lim.max)) return [];
+    const min = Number(lim.min);
+    const max = Number(lim.max);
+    if (state.unit === "in") {
+      const ticks = [];
+      const startE = Math.ceil((min / 2.54) * 8 - 1e-12);
+      const endE = Math.floor((max / 2.54) * 8 + 1e-12);
+      for (let e = startE; e <= endE; e++) {
+        const cm = (e / 8) * 2.54;
+        if (cm < min - 1e-9 || cm > max + 1e-9) continue;
+        ticks.push({ cm, label: formatInchFromEighths(e) });
+      }
+      return ticks;
+    }
+    const step = state.limits?.increments?.cm ?? 0.5;
+    const ticks = [];
+    const start = Math.ceil(min / step - 1e-12) * step;
+    for (let v = start; v <= max + 1e-9; v = Math.round((v + step) * 1000) / 1000) {
+      if (v < min - 1e-9) continue;
+      ticks.push({ cm: v, label: formatCmLabel(v) });
+    }
+    return ticks;
+  }
+
+  function syncDisplayMeasurements() {
+    const out = {};
+    for (const [id, cm] of Object.entries(state.measurementsCm || {})) {
+      if (cm == null || !Number.isFinite(Number(cm))) continue;
+      if (state.measureOutOfRange?.[id]) continue;
+      const shown = api.fromCm(Number(cm), state.unit);
+      if (shown == null) continue;
+      out[id] = state.unit === "in" ? Number(shown.toFixed(6)) : Number(Number(cm).toFixed(6));
+    }
+    state.measurements = out;
+  }
+
+  function displayMeasureValue(fieldId) {
+    if (state.measureOutOfRange?.[fieldId]) {
+      return t("Mesure hors liste — Lucie me contactera", "Out-of-list measure — Lucie will contact me");
+    }
+    const cm = state.measurementsCm?.[fieldId];
+    if (cm == null || !Number.isFinite(Number(cm))) return null;
+    if (state.unit === "in") return formatInches(Number(cm)) + " " + t("po", "in");
+    return formatCmLabel(cm) + " cm";
+  }
+
+  function setMeasureCm(fieldId, cm) {
+    state.measureOutOfRange[fieldId] = false;
+    delete state.measureOutOfRange[fieldId];
+    state.measurementsCm[fieldId] = Number(cm);
+    syncDisplayMeasurements();
+  }
+
+  function setMeasureOutOfRange(fieldId) {
+    state.measureOutOfRange[fieldId] = true;
+    delete state.measurementsCm[fieldId];
+    syncDisplayMeasurements();
+  }
+
+  function clearMeasureChoice(fieldId) {
+    delete state.measureOutOfRange[fieldId];
+    delete state.measurementsCm[fieldId];
+    syncDisplayMeasurements();
+  }
+
   function clearMeasureErrors() {
     if (!els.measureErrors) return;
     els.measureErrors.hidden = true;
@@ -527,8 +709,8 @@
     }
     if (can.reason === "measurement_required") {
       return t(
-        "Indiquez la mesure requise : ",
-        "Enter the required measurement: ",
+        "Choisissez une mesure (liste ou hors liste) : ",
+        "Choose a measurement (list or out-of-list): ",
       ) + fieldLabel(spec, can.field);
     }
     if (can.reason === "measurement_invalid") {
@@ -547,18 +729,23 @@
     return state.illustrations?.categories?.[category] || null;
   }
 
-  const HAND_ADULT = [
-    { size: "S", tour: [16, 18], len: [17, 18] },
-    { size: "M", tour: [18, 20], len: [18, 19] },
-    { size: "L", tour: [20, 22], len: [19, 20] },
-    { size: "XL", tour: [22, 24], len: [20, 21] },
+  const HAND_FEMME = [
+    { size: "S", tour: [15, 17], len: [17, 18] },
+    { size: "M", tour: [17, 19], len: [18, 19] },
+    { size: "L", tour: [19, 20], len: [19, 20] },
+    { size: "XL", tour: [20, 21.5], len: [20, 21] },
   ];
-  const HAND_CHILD = [
-    { fr: "8 – 24 mois", en: "8–24 months", tour: [11, 13], len: [10, 12] },
-    { fr: "2 – 4 ans", en: "2–4 years", tour: [13, 15], len: [12, 14] },
-    { fr: "5 – 7 ans", en: "5–7 years", tour: [15, 17], len: [14, 16] },
-    { fr: "8 – 10 ans", en: "8–10 years", tour: [17, 18], len: [16, 17] },
-    { fr: "11 – 14 ans (junior)", en: "11–14 years (junior)", tour: [18, 20], len: [17, 19] },
+  const HAND_HOMME = [
+    { size: "S", tour: [18, 20.5], len: [18, 19] },
+    { size: "M", tour: [20.5, 23], len: [19, 20] },
+    { size: "L", tour: [23, 24], len: [20, 21] },
+    { size: "XL", tour: [24, 25.5], len: [21, 22] },
+  ];
+  const HAND_ENFANT = [
+    { size: "S", tour: [14, 15], len: [13.5, 14.5] },
+    { size: "M", tour: [15, 16.5], len: [14.5, 15.5] },
+    { size: "L", tour: [16.5, 18], len: [15.5, 16.5] },
+    { size: "XL", tour: [18, 19], len: [16.5, 17.5] },
   ];
 
   function formatInches(cm) {
@@ -576,18 +763,90 @@
     return pair[0] + " – " + pair[1];
   }
 
+  function wireSoftAccordion(root) {
+    const items = Array.from(root.querySelectorAll(".sg-page-accordion-item"));
+    function setExpanded(details, expanded, animate) {
+      const body = details.querySelector(".sg-page-accordion-body");
+      if (!body) return;
+      if (details.dataset.animating === "1") return;
+      if (!animate) {
+        details.open = expanded;
+        details.classList.toggle("is-collapsed", !expanded);
+        body.style.height = expanded ? "auto" : "0px";
+        body.style.opacity = expanded ? "1" : "0";
+        return;
+      }
+      details.dataset.animating = "1";
+      if (expanded) {
+        details.classList.remove("is-collapsed");
+        details.open = true;
+        body.style.height = "0px";
+        body.style.opacity = "0";
+        const target = body.scrollHeight;
+        requestAnimationFrame(function () {
+          body.style.height = target + "px";
+          body.style.opacity = "1";
+        });
+        const onEnd = function (ev) {
+          if (ev.propertyName !== "height") return;
+          body.style.height = "auto";
+          details.dataset.animating = "0";
+          body.removeEventListener("transitionend", onEnd);
+        };
+        body.addEventListener("transitionend", onEnd);
+      } else {
+        const start = body.scrollHeight;
+        body.style.height = start + "px";
+        body.style.opacity = "1";
+        requestAnimationFrame(function () {
+          details.classList.add("is-collapsed");
+          body.style.height = "0px";
+          body.style.opacity = "0";
+        });
+        const onEnd = function (ev) {
+          if (ev.propertyName !== "height") return;
+          details.open = false;
+          details.dataset.animating = "0";
+          body.removeEventListener("transitionend", onEnd);
+        };
+        body.addEventListener("transitionend", onEnd);
+      }
+    }
+    items.forEach(function (details, index) {
+      const summary = details.querySelector(".sg-page-accordion-summary");
+      if (!summary) return;
+      setExpanded(details, index === 0, false);
+      summary.addEventListener("click", function (e) {
+        e.preventDefault();
+        const willOpen = !details.open || details.classList.contains("is-collapsed");
+        if (willOpen) {
+          items.forEach(function (other) {
+            if (other !== details && other.open && !other.classList.contains("is-collapsed")) {
+              setExpanded(other, false, true);
+            }
+          });
+          setExpanded(details, true, true);
+        } else {
+          setExpanded(details, false, true);
+        }
+      });
+    });
+  }
+
   function fillHandTable(table, headers, rows) {
-    const caption = document.createElement("caption");
-    const title = document.createElement("span");
-    title.textContent = headers.caption;
-    const provisional = document.createElement("span");
-    provisional.className = "sm-hand-provisional";
-    provisional.textContent = t(
-      "Mesures indicatives — à confirmer avec Lucie",
-      "Indicative measurements — to be confirmed with Lucie",
-    );
-    caption.append(title, provisional);
-    table.appendChild(caption);
+    if (headers.caption) {
+      const caption = document.createElement("caption");
+      const title = document.createElement("span");
+      title.textContent = headers.caption;
+      const provisional = document.createElement("span");
+      provisional.className = "sm-hand-provisional";
+      provisional.textContent = t(
+        "Mesures indicatives — à confirmer avec Lucie",
+        "Indicative measurements — to be confirmed with Lucie",
+      );
+      caption.append(title, provisional);
+      table.appendChild(caption);
+    }
     const thead = document.createElement("thead");
     const hr = document.createElement("tr");
     headers.cols.forEach((label) => {
@@ -625,8 +884,8 @@
     }
     if (els.handSub) {
       els.handSub.textContent = t(
-        "Deux mesures seulement — validées pour la fabrication",
-        "Two measurements only — confirmed for crafting",
+        "Deux mesures — tour et longueur — selon la grille fabricant Auclair",
+        "Two measurements — circumference and length — per Auclair manufacturer chart",
       );
     }
     if (els.handPhoto) {
@@ -648,8 +907,8 @@
         {
           title: t("Longueur de la main", "Hand length"),
           text: t(
-            "Mesurez du pli du poignet (base de la paume) jusqu’au bout du majeur.",
-            "Measure from the wrist crease (base of the palm) to the tip of the middle finger.",
+            "Du pli du poignet jusqu’au bout du majeur. Si les mesures diffèrent, privilégiez la longueur.",
+            "From the wrist crease to the tip of the middle finger. If the two measurements differ, prefer length.",
           ),
         },
       ];
@@ -681,35 +940,43 @@
             "Grandeurs en centimètres. Le bouton Pouces convertit le tableau.",
             "Sizes in centimetres. The Inches button converts the table.",
           );
-      const adult = document.createElement("table");
-      adult.className = "sm-hand-table";
-      fillHandTable(
-        adult,
-        {
-          caption: t("Correspondance des grandeurs (adultes)", "Adult size match"),
-          cols: [
-            t("Grandeur", "Size"),
-            t("Tour", "Around") + " (" + unitName + ")",
-            t("Longueur", "Length") + " (" + unitName + ")",
-          ],
-        },
-        HAND_ADULT.map((row) => [row.size, handSpan(row.tour), handSpan(row.len)]),
-      );
-      const child = document.createElement("table");
-      child.className = "sm-hand-table";
-      fillHandTable(
-        child,
-        {
-          caption: t("Repères enfants (à titre indicatif)", "Children’s guide (approximate)"),
-          cols: [
-            t("Âge", "Age"),
-            t("Tour", "Around") + " (" + unitName + ")",
-            t("Longueur", "Length") + " (" + unitName + ")",
-          ],
-        },
-        HAND_CHILD.map((row) => [eng() ? row.en : row.fr, handSpan(row.tour), handSpan(row.len)]),
-      );
-      els.handTables.append(note, adult, child);
+      const accordion = document.createElement("div");
+      accordion.className = "sg-page-accordion";
+      const cols = [
+        t("Grandeur", "Size"),
+        t("Tour", "Around") + " (" + unitName + ")",
+        t("Longueur", "Length") + " (" + unitName + ")",
+      ];
+      const groups = [
+        { key: "femme", label: t("Femme — S à XL", "Women — S to XL"), rows: HAND_FEMME },
+        { key: "homme", label: t("Homme — S à XL", "Men — S to XL"), rows: HAND_HOMME },
+        { key: "enfant", label: t("Enfant — S à XL", "Kids — S to XL"), rows: HAND_ENFANT },
+      ];
+      groups.forEach(function (group) {
+        const details = document.createElement("details");
+        details.className = "sg-page-accordion-item";
+        details.dataset.group = group.key;
+        const summary = document.createElement("summary");
+        summary.className = "sg-page-accordion-summary";
+        summary.textContent = group.label;
+        const body = document.createElement("div");
+        body.className = "sg-page-accordion-body";
+        const table = document.createElement("table");
+        table.className = "sm-hand-table";
+        fillHandTable(
+          table,
+          { caption: "", cols: cols },
+          group.rows.map(function (row) {
+            return [row.size, handSpan(row.tour), handSpan(row.len)];
+          }),
+        );
+        body.appendChild(table);
+        details.appendChild(summary);
+        details.appendChild(body);
+        accordion.appendChild(details);
+      });
+      els.handTables.append(note, accordion);
+      wireSoftAccordion(accordion);
     }
     if (els.handAdvice) {
       els.handAdvice.textContent = t(
@@ -788,7 +1055,11 @@
 
     const markers = entry?.markers || [];
     const legend = markers
-      .map((m) => m.n + " · " + (eng() ? m.label_en : m.label_fr))
+      .map((m) => {
+        const lab = eng() ? m.label_en : m.label_fr;
+        return m.n != null ? m.n + " · " + lab : lab;
+      })
+      .filter(Boolean)
       .join(" · ");
 
     if (!ready) {
@@ -902,25 +1173,23 @@
   }
 
   function setUnit(unit) {
-    if (state._lastUnit && state._lastUnit !== unit) {
-      const converted = {};
-      for (const [id, val] of Object.entries(state.measurements)) {
-        if (val === "" || val == null) continue;
-        const cm = api.toCm(val, state._lastUnit);
-        const shown = api.fromCm(cm, unit);
-        converted[id] = shown == null ? "" : Number(shown.toFixed(3));
-      }
-      state.measurements = converted;
-    }
+    // Les cm internes restent exacts — jamais de réécriture / substitution de mesure.
     state.unit = unit;
     state._lastUnit = unit;
+    syncDisplayMeasurements();
     els.unitIn?.setAttribute("aria-pressed", String(unit === "in"));
     els.unitCm?.setAttribute("aria-pressed", String(unit === "cm"));
     if (els.unitHint) {
       els.unitHint.textContent =
         unit === "in"
-          ? t("Saisie en pouces — équivalent cm affiché sous chaque champ.", "Enter inches — cm equivalent shown under each field.")
-          : t("Saisie en centimètres — équivalent pouces affiché sous chaque champ.", "Enter centimetres — inch equivalent shown under each field.");
+          ? t(
+              "Choisissez une valeur en pouces (⅛). L’équivalent cm s’affiche sous chaque mesure.",
+              "Pick a value in inches (⅛). The cm equivalent appears under each measure.",
+            )
+          : t(
+              "Choisissez une valeur en centimètres (pas de 0,5). L’équivalent pouces s’affiche sous chaque mesure.",
+              "Pick a value in centimetres (0.5 steps). The inch equivalent appears under each measure.",
+            );
     }
     renderMeasureFields();
     if (currentProduct()?.category === "mitaines") paintHandGuide();
@@ -971,17 +1240,35 @@
   function measureHelpText(f) {
     const bits = [];
     if (f.help_fr) bits.push(eng() ? f.help_en || f.help_fr : f.help_fr);
-    if (state.measurements[f.id]) {
+    if (state.measureOutOfRange?.[f.id]) {
+      bits.push(
+        t(
+          "Demande hors liste — Lucie vous contactera avec les coordonnées du paiement.",
+          "Out-of-list request — Lucie will contact you using the payment details.",
+        ),
+      );
+      return bits.join(" · ");
+    }
+    const cm = state.measurementsCm?.[f.id];
+    if (cm != null && Number.isFinite(Number(cm))) {
       const other = state.unit === "in" ? "cm" : "in";
-      const cm = api.toCm(state.measurements[f.id], state.unit);
-      const alt = api.fromCm(cm, other);
+      const alt = api.fromCm(Number(cm), other);
       if (alt != null) {
-        const shown = other === "in" ? formatInches(cm) : alt.toFixed(2);
+        const shown = other === "in" ? formatInches(Number(cm)) : formatCmLabel(alt);
         bits.push(
           t("Équivaut à ", "Equals ") +
             shown +
             " " +
             (other === "in" ? t("po", "in") : "cm"),
+        );
+      }
+      const lim = fieldLimitsCm(f.id);
+      if (lim) {
+        bits.push(
+          t("Limites : ", "Limits: ") +
+            (state.unit === "in"
+              ? formatInches(lim.min) + " – " + formatInches(lim.max) + " " + t("po", "in")
+              : formatCmLabel(lim.min) + " – " + formatCmLabel(lim.max) + " cm"),
         );
       }
     }
@@ -1004,16 +1291,27 @@
       els.measures.appendChild(p);
       return;
     }
-    const suffix = state.unit === "in" ? t("po", "in") : "cm";
-    const meas = api.validateMeasurements(spec, state.unit, state.measurements);
+    const meas = api.validateMeasurements(spec, state.unit, state.measurements, {
+      measurementsCm: state.measurementsCm,
+      measureOutOfRange: state.measureOutOfRange,
+    });
+    const unitSuffix = state.unit === "in" ? t("po", "in") : "cm";
     for (const f of fields) {
       const row = document.createElement("div");
-      row.className = "sm-input-row";
+      row.className = "sm-wheel-field";
       row.dataset.field = f.id;
-      const inputId = "sm-m-" + f.id;
+      const triggerId = "sm-m-" + f.id;
       const helpId = "sm-h-" + f.id;
+      const panelId = "sm-w-" + f.id;
+      const isOpen = state.openWheelField === f.id;
+      const isOor = !!state.measureOutOfRange?.[f.id];
+      const invalid = !meas.ok && meas.field === f.id;
+      row.classList.toggle("is-open", isOpen);
+      row.classList.toggle("is-oor", isOor);
+      row.classList.toggle("is-error", invalid);
+
       const lab = document.createElement("label");
-      lab.htmlFor = inputId;
+      lab.htmlFor = triggerId;
       if (f.diagram_number != null) {
         const num = document.createElement("span");
         num.className = "sm-field-num";
@@ -1024,38 +1322,159 @@
       lab.appendChild(
         document.createTextNode((eng() ? f.label_en : f.label_fr) + (f.required ? " *" : "")),
       );
-      const wrap = document.createElement("div");
-      wrap.className = "sm-input-wrap";
-      const input = document.createElement("input");
-      input.type = "number";
-      input.inputMode = "decimal";
-      input.step = "any";
-      input.min = "0";
-      input.id = inputId;
-      input.value = state.measurements[f.id] ?? "";
-      input.setAttribute("aria-required", String(!!f.required));
-      input.setAttribute("aria-describedby", helpId);
-      const invalid = !meas.ok && meas.field === f.id;
-      input.setAttribute("aria-invalid", String(invalid));
-      row.classList.toggle("is-error", invalid);
-      input.addEventListener("input", () => {
-        state.measurements[f.id] = input.value;
-        const helpEl = document.getElementById(helpId);
-        if (helpEl) helpEl.textContent = measureHelpText(f);
-        refreshSummary();
+
+      const trigger = document.createElement("button");
+      trigger.type = "button";
+      trigger.id = triggerId;
+      trigger.className = "sm-wheel-trigger";
+      trigger.setAttribute("aria-expanded", String(isOpen));
+      trigger.setAttribute("aria-controls", panelId);
+      trigger.setAttribute("aria-required", String(!!f.required));
+      trigger.setAttribute("aria-describedby", helpId);
+      trigger.setAttribute("aria-invalid", String(invalid));
+      const shown = displayMeasureValue(f.id);
+      trigger.textContent = shown || t("Choisir une mesure…", "Choose a measurement…");
+      trigger.addEventListener("click", () => {
+        state.openWheelField = isOpen ? null : f.id;
+        renderMeasureFields();
+        if (!isOpen) {
+          const panel = document.getElementById(panelId);
+          panel?.querySelector(".sm-wheel-item.is-selected")?.scrollIntoView({ block: "center" });
+        }
       });
-      const suf = document.createElement("span");
-      suf.className = "sm-unit-suffix";
-      suf.textContent = suffix;
-      wrap.appendChild(input);
-      wrap.appendChild(suf);
+
       const help = document.createElement("p");
       help.className = "sm-help";
       help.id = helpId;
       help.textContent = measureHelpText(f);
+
       row.appendChild(lab);
-      row.appendChild(wrap);
+      row.appendChild(trigger);
       row.appendChild(help);
+
+      if (isOpen) {
+        const panel = document.createElement("div");
+        panel.className = "sm-wheel-panel";
+        panel.id = panelId;
+        panel.setAttribute("role", "listbox");
+        panel.setAttribute(
+          "aria-label",
+          (eng() ? f.label_en : f.label_fr) + " — " + unitSuffix,
+        );
+
+        const ticks = buildMeasureTicks(f.id);
+        const controls = document.createElement("div");
+        controls.className = "sm-wheel-controls";
+
+        const minus = document.createElement("button");
+        minus.type = "button";
+        minus.className = "sm-wheel-step";
+        minus.setAttribute("aria-label", t("Valeur précédente", "Previous value"));
+        minus.textContent = "−";
+
+        const plus = document.createElement("button");
+        plus.type = "button";
+        plus.className = "sm-wheel-step";
+        plus.setAttribute("aria-label", t("Valeur suivante", "Next value"));
+        plus.textContent = "+";
+
+        const viewport = document.createElement("div");
+        viewport.className = "sm-wheel-viewport";
+        const list = document.createElement("ul");
+        list.className = "sm-wheel-list";
+
+        let selectedIdx = -1;
+        const curCm = state.measurementsCm?.[f.id];
+        if (curCm != null && !isOor) {
+          selectedIdx = ticks.findIndex((tick) => Math.abs(tick.cm - Number(curCm)) < 1e-6);
+        }
+        if (selectedIdx < 0 && ticks.length) selectedIdx = Math.floor(ticks.length / 2);
+
+        ticks.forEach((tick, idx) => {
+          const li = document.createElement("li");
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "sm-wheel-item" + (idx === selectedIdx && !isOor ? " is-selected" : "");
+          btn.setAttribute("role", "option");
+          btn.setAttribute("aria-selected", String(idx === selectedIdx && !isOor));
+          btn.textContent = tick.label + " " + unitSuffix;
+          btn.addEventListener("click", () => {
+            setMeasureCm(f.id, tick.cm);
+            state.openWheelField = null;
+            renderMeasureFields();
+            refreshSummary();
+          });
+          li.appendChild(btn);
+          list.appendChild(li);
+        });
+
+        if (!ticks.length) {
+          const empty = document.createElement("p");
+          empty.className = "sm-help";
+          empty.textContent = t(
+            "Aucune valeur dans la liste pour cette clientèle. Utilisez « hors liste ».",
+            "No listed values for this audience. Use the out-of-list option.",
+          );
+          viewport.appendChild(empty);
+        } else {
+          viewport.appendChild(list);
+        }
+
+        function stepBy(delta) {
+          if (!ticks.length) return;
+          let idx = selectedIdx;
+          if (idx < 0) idx = Math.floor(ticks.length / 2);
+          idx = Math.max(0, Math.min(ticks.length - 1, idx + delta));
+          selectedIdx = idx;
+          setMeasureCm(f.id, ticks[idx].cm);
+          renderMeasureFields();
+          refreshSummary();
+          requestAnimationFrame(() => {
+            document
+              .getElementById(panelId)
+              ?.querySelector(".sm-wheel-item.is-selected")
+              ?.scrollIntoView({ block: "center" });
+          });
+        }
+        minus.addEventListener("click", () => stepBy(-1));
+        plus.addEventListener("click", () => stepBy(1));
+
+        controls.appendChild(minus);
+        controls.appendChild(viewport);
+        controls.appendChild(plus);
+        panel.appendChild(controls);
+
+        const oor = document.createElement("button");
+        oor.type = "button";
+        oor.className = "sm-wheel-oor" + (isOor ? " is-active" : "");
+        oor.textContent = t(
+          "Mesure hors liste — Lucie me contactera",
+          "Out-of-list measure — Lucie will contact me",
+        );
+        oor.addEventListener("click", () => {
+          setMeasureOutOfRange(f.id);
+          state.openWheelField = null;
+          renderMeasureFields();
+          refreshSummary();
+        });
+        panel.appendChild(oor);
+
+        if (shown) {
+          const clear = document.createElement("button");
+          clear.type = "button";
+          clear.className = "sm-wheel-clear";
+          clear.textContent = t("Effacer ce choix", "Clear this choice");
+          clear.addEventListener("click", () => {
+            clearMeasureChoice(f.id);
+            renderMeasureFields();
+            refreshSummary();
+          });
+          panel.appendChild(clear);
+        }
+
+        row.appendChild(panel);
+      }
+
       els.measures.appendChild(row);
     }
   }
@@ -1078,7 +1497,10 @@
     const price = api.officialPrice(state.catalog, product.id);
     const totalCents = price.ok ? price.total_cad_cents : null;
     const spec = api.categoryMeasures(state.config, product.category);
-    const meas = api.validateMeasurements(spec, state.unit, state.measurements);
+    const meas = api.validateMeasurements(spec, state.unit, state.measurements, {
+      measurementsCm: state.measurementsCm,
+      measureOutOfRange: state.measureOutOfRange,
+    });
     const can = api.canAddToCart(state.catalog, state.config, product.id, state);
 
     const rows = [
@@ -1101,12 +1523,21 @@
           : "—",
     ]);
     for (const f of spec?.fields || []) {
-      const v = state.measurements[f.id];
       rows.push([
         eng() ? f.label_en : f.label_fr,
-        v
-          ? v + " " + (state.unit === "in" ? t("po", "in") : "cm")
-          : "—",
+        displayMeasureValue(f.id) || "—",
+      ]);
+    }
+    const oorIds = Object.keys(state.measureOutOfRange || {}).filter(
+      (k) => state.measureOutOfRange[k],
+    );
+    if (oorIds.length) {
+      rows.push([
+        t("Demande particulière", "Special request"),
+        t(
+          "Mesure hors liste — Lucie contactera le client (coordonnées du paiement).",
+          "Out-of-list measure — Lucie will contact the client (payment details).",
+        ),
       ]);
     }
     if (els.chaleurWrap && !els.chaleurWrap.hidden) {
@@ -1137,11 +1568,11 @@
       els.summary.appendChild(li);
     }
 
-    els.measures?.querySelectorAll(".sm-input-row").forEach((row) => {
+    els.measures?.querySelectorAll(".sm-wheel-field").forEach((row) => {
       const bad = meas.field === row.dataset.field && !meas.ok;
       row.classList.toggle("is-error", bad);
-      const input = row.querySelector("input");
-      if (input) input.setAttribute("aria-invalid", String(bad));
+      const trigger = row.querySelector(".sm-wheel-trigger");
+      if (trigger) trigger.setAttribute("aria-invalid", String(bad));
     });
 
     const errText = errorMessage(can, spec);
@@ -1193,8 +1624,8 @@
       if (check.reason === "unit_required") gotoStep(3);
       else if (check.field) {
         gotoStep(3, { focus: false });
-        const input = document.getElementById("sm-m-" + check.field);
-        input?.focus();
+        const trigger = document.getElementById("sm-m-" + check.field);
+        trigger?.focus();
       }
       return;
     }
@@ -1220,6 +1651,23 @@
       ? product.name_en || "Adapted mukluks – Made to order"
       : "Custom — " + stripSizeTokens(product.name_en || product.name_fr);
 
+    syncDisplayMeasurements();
+    const measureOutOfRange = adapted
+      ? {}
+      : Object.fromEntries(
+          Object.entries(state.measureOutOfRange || {}).filter(([, v]) => !!v),
+        );
+    const measurementsCm = adapted
+      ? null
+      : Object.fromEntries(
+          Object.entries(state.measurementsCm || {}).filter(
+            ([k, v]) =>
+              !measureOutOfRange[k] && v != null && Number.isFinite(Number(v)),
+          ),
+        );
+    const special_requests = Object.keys(measureOutOfRange).map(
+      (fieldId) => "mesure_hors_liste:" + fieldId,
+    );
     const productNumber =
       product.product_number != null ? Number(product.product_number) : null;
     const item = {
@@ -1240,13 +1688,9 @@
         category: product.category,
         unit: adapted ? null : state.unit,
         measurements: adapted ? {} : { ...state.measurements },
-        measurements_cm: adapted
-          ? null
-          : Object.fromEntries(
-              Object.entries(state.measurements)
-                .filter(([, v]) => v !== "" && v != null)
-                .map(([k, v]) => [k, api.toCm(v, state.unit)]),
-            ),
+        measurements_cm: measurementsCm,
+        measure_out_of_range: measureOutOfRange,
+        special_requests,
         measurement_labels,
         chaleur: adapted ? false : !!state.chaleur,
         comments: state.comments.trim(),
@@ -1336,6 +1780,12 @@
 
   els.changeCat?.addEventListener("click", () => clearCategory());
 
+  els.audienceBar?.addEventListener("click", (ev) => {
+    const btn = ev.target.closest(".audience-filter");
+    if (!btn || !els.audienceBar.contains(btn)) return;
+    setAudienceFilter(btn.dataset.audience || "tous");
+  });
+
   function boot() {
     if (location.protocol === "file:") {
       setProductsStatus(
@@ -1358,6 +1808,8 @@
     const configUrl = new URL("catalog/sur-mesure-config.json", document.baseURI).href;
     const illusUrl = new URL("catalog/sur-mesure-illustrations.json", document.baseURI).href;
     const audienceUrl = new URL("catalog/audience.json", document.baseURI).href;
+    const sizesUrl = new URL("catalog/product-sizes.json", document.baseURI).href;
+    const limitsUrl = new URL("catalog/sur-mesure-limits.json", document.baseURI).href;
     Promise.all([
       fetch(productsUrl, { cache: "no-store" }).then((r) => {
         if (!r.ok) throw new Error("products HTTP " + r.status);
@@ -1372,8 +1824,10 @@
         return r.json();
       }),
       fetch(audienceUrl, { cache: "no-store" }).then((r) => (r.ok ? r.json() : { products: {} })),
+      fetch(sizesUrl, { cache: "no-store" }).then((r) => (r.ok ? r.json() : { products: {} })),
+      fetch(limitsUrl, { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)),
     ])
-      .then(([catalog, config, illustrations, audience]) => {
+      .then(([catalog, config, illustrations, audience, productSizes, limits]) => {
         const n = Array.isArray(catalog?.products) ? catalog.products.length : 0;
         if (!n) {
           throw new Error("catalog empty");
@@ -1381,9 +1835,13 @@
         state.catalog = catalog;
         state.config = config;
         state.illustrations = illustrations;
+        state.limits = limits;
         state.audienceById = audience && audience.products ? audience.products : {};
+        state.productSizes = productSizes && productSizes.products ? productSizes : { products: {} };
         clearMsg();
         state.filter = null;
+        state.audienceFilter = "tous";
+        renderAudienceBar();
         renderCategoryPick();
         renderProducts();
         updateStep1Copy();
@@ -1395,6 +1853,10 @@
           state.linkedProductId = linked.id;
           state.requestedSize = link.taille || null;
           if (link.chaleur && !chaleurEligible(linked)) stripChaleurFromUrl();
+          const linkedAud = audienceOf(linked.id);
+          state.audienceFilter =
+            linkedAud && linkedAud !== "unisexe" ? linkedAud : "tous";
+          renderAudienceBar();
           state.filter = linked.category;
           if (els.categoryPick) els.categoryPick.hidden = true;
           if (els.productsWrap) els.productsWrap.hidden = false;

@@ -1,16 +1,13 @@
-# Mesures — 14 illustrations (7 × FR/EN)
+# Mesures — illustrations boutique / créations
 
-**Règle :** une seule langue par image.
+**Règle :** une seule langue par image (sauf main : repères numériques partagés FR/EN).
 
-| Catégorie | FR | EN | Statut | Lucie |
-|-----------|----|----|--------|-------|
-| Mitaines | `mitaines-mesures-fr.webp` | `mitaines-mesures-en.webp` | pret | **validé** |
-| Pantoufles | `pantoufles-mesures-fr.webp` | `pantoufles-mesures-en.webp` | pret | provisoire |
-| Mukluks | `mukluks-mesures-fr.webp` | `mukluks-mesures-en.webp` | pret | provisoire |
-| Chapeaux | `chapeaux-mesures-fr.webp` | `chapeaux-mesures-en.webp` | pret | provisoire |
-| Cache-oreilles | `cache-oreilles-mesures-fr.webp` | `cache-oreilles-mesures-en.webp` | pret | provisoire |
-| Semelles | `semelles-mesures-fr.webp` | `semelles-mesures-en.webp` | pret | provisoire |
-| Foulards | `foulards-mesures-fr.webp` | `foulards-mesures-en.webp` | pret | provisoire |
+| Catégorie | FR | EN | Statut |
+|-----------|----|----|--------|
+| Mitaines | `guide-main-schema.jpg` | idem | photo humain à jour |
+| Pantoufles / semelles | `pied-mesures-humain-fr.jpg` | `pied-mesures-humain-en.jpg` | photo humain |
+| Chapeaux / cache-oreilles | `tete-mesures-humain-fr.jpg` | `tete-mesures-humain-en.jpg` | photo humain |
+| Foulards | `foulards-mesures-fr.webp` | `foulards-mesures-en.webp` | schéma (pas de photo) |
+| Mukluks | — | — | pas de schéma (hide_diagram) |
 
-Générateurs : `scripts/generate-mitaines-mesures.py` · `scripts/generate-mesures-categories.py`  
-Optimisation : `scripts/optimize-mesures-webp.py` (copies dans `_originals/` avant recompression).
+Anciens webp (ligne / mannequin dessin) conservés dans le dossier et `_originals/` pour archive — **ne plus les brancher** sur le « i » boutique.
