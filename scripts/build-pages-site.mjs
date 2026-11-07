@@ -197,7 +197,7 @@ console.log(
 );
 
 if (leaks.length) process.exit(2);
-if (produitCount !== 66 || catCount !== 7 || sitemapUrls < 79) {
+if (produitCount !== 65 || catCount !== 7 || sitemapUrls < 78) {
   console.error("Contrôle quantités SEO échoué");
   process.exit(3);
 }

@@ -19,11 +19,11 @@ const provisional = JSON.parse(
   fs.readFileSync(path.join(root, "inventory/provisional-inventory.json"), "utf8"),
 );
 
-test("66 unique permanent product numbers in family ranges", () => {
-  assert.equal(catalog.products.length, 66);
-  assert.equal(numbers.items.length, 66);
+test("65 unique permanent product numbers in family ranges", () => {
+  assert.equal(catalog.products.length, 65);
+  assert.equal(numbers.items.length, 65);
   const nums = catalog.products.map((p) => p.product_number);
-  assert.equal(new Set(nums).size, 66);
+  assert.equal(new Set(nums).size, 65);
   const ranges = {
     mitaines: [100, 199],
     chapeaux: [200, 299],
@@ -40,9 +40,9 @@ test("66 unique permanent product numbers in family ranges", () => {
   }
 });
 
-test("provisional inventory is 66×3=198 and not live-sale", () => {
+test("provisional inventory is 65×3=195 and not live-sale", () => {
   assert.equal(provisional.totals.units_provisional, 198);
-  assert.equal(provisional.items.length, 66);
+  assert.equal(provisional.items.length, 65);
   assert.ok(provisional.warning_fr.includes("PROVISOIRE"));
   assert.ok(provisional.items.every((i) => i.qty_physical_provisional === 3));
   assert.ok(provisional.items.every((i) => i.lucie_validated === false));
@@ -91,8 +91,8 @@ test("CSM label formatting and email highlight", () => {
   assert.match(mail.text, /Mensurations/);
 });
 
-test("boutique shows product-code badges for all 66", () => {
+test("boutique shows product-code badges for all 65", () => {
   const html = fs.readFileSync(path.join(root, "boutique.html"), "utf8");
   const badges = html.match(/class="product-code"/g) || [];
-  assert.equal(badges.length, 66);
+  assert.equal(badges.length, 65);
 });

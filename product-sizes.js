@@ -64,17 +64,6 @@
     const raw = normalizeSizeCode(code);
     const fromRowFr = sizeRow?.label_fr ? String(sizeRow.label_fr).trim() : "";
     const fromRowEn = sizeRow?.label_en ? String(sizeRow.label_en).trim() : "";
-    if (
-      fromRowFr &&
-      /universelle|universal|découper|cut to fit|pointures\s*5|sizes\s*5/i.test(
-        fromRowFr + " " + fromRowEn,
-      )
-    ) {
-      return {
-        fr: fromRowFr,
-        en: fromRowEn || "Universal (sizes 5–12, cut to fit)",
-      };
-    }
     const key = raw.toUpperCase() === "SMALL" ? "S" : raw;
     const letter = SIZE_WORD_LABELS[key] || SIZE_WORD_LABELS[raw];
     if (letter) return { fr: letter.fr, en: letter.en };
@@ -91,9 +80,6 @@
       en = fromRowEn && !/\bans\b/i.test(fromRowEn)
         ? fromRowEn
         : fr.replace(/\bà\s+/gi, "to ").replace(/\bans\b/gi, "years");
-    } else if (/universelle|universal|découper|cut to fit|pointures|sizes/i.test(fromRowFr + fromRowEn + raw)) {
-      fr = fromRowFr || "Universelle (pointures 5 à 12, à découper)";
-      en = fromRowEn || "Universal (sizes 5–12, cut to fit)";
     } else if (!fromRowEn || fromRowEn === fromRowFr || fromRowEn === raw) {
       fr = fromRowFr || raw;
       en = fromRowEn && fromRowEn !== fromRowFr ? fromRowEn : fr;

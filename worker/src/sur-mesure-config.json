@@ -13,8 +13,14 @@
     "chaleur_renforcee": {
       "status": "actif",
       "apply_to_order": true,
-      "applies_to_categories": ["mitaines", "pantoufles"],
-      "applies_to_audiences": ["femmes", "hommes"],
+      "applies_to_categories": [
+        "mitaines",
+        "pantoufles"
+      ],
+      "applies_to_audiences": [
+        "femmes",
+        "hommes"
+      ],
       "price_addon_cad_cents": 2000,
       "price_applied": false,
       "label_fr": "Chaleur renforcée",
@@ -179,5 +185,19 @@
         }
       ]
     }
+  },
+  "skip_measures_product_ids": [
+    "mukluks-adulte-mobilite-reduite-8-9-vison-et-renard"
+  ],
+  "adapted_contact": {
+    "product_ids": [
+      "mukluks-adulte-mobilite-reduite-8-9-vison-et-renard"
+    ],
+    "label_fr": "Création adaptée — Lucie communiquera pour les mesures",
+    "label_en": "Adapted creation — Lucie will contact you for measurements",
+    "confirm_title_fr": "Votre commande personnalisée est confirmée !",
+    "confirm_title_en": "Your custom order is confirmed!",
+    "confirm_body_fr": "Merci pour votre confiance !\n\nLucie communiquera personnellement avec vous dans un délai de 3 à 5 jours ouvrables afin de discuter de vos besoins et de vous guider dans la prise des mesures nécessaires.\n\nChaque création est confectionnée spécialement pour vous, avec soin et attention.\n\nPrévoyez un délai minimum d'une semaine pour la confection, à compter de la confirmation des mesures. Ce délai peut être prolongé pendant les périodes achalandées.",
+    "confirm_body_en": "Thank you for your trust!\n\nLucie will personally contact you within 3 to 5 business days to discuss your needs and guide you through taking the necessary measurements.\n\nEach creation is made especially for you, with care and attention.\n\nAllow at least one week for making, starting from measurement confirmation. This timeline may be longer during busy periods."
   }
 }

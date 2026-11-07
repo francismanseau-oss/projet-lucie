@@ -32,19 +32,6 @@ export function displaySizeLabels(code, sizeRow = null) {
   const fromRowFr = sizeRow?.label_fr ? String(sizeRow.label_fr).trim() : "";
   const fromRowEn = sizeRow?.label_en ? String(sizeRow.label_en).trim() : "";
 
-  // Libellés explicites (ex. semelles universelles) : prioritaire sur le code « unique »
-  if (
-    fromRowFr &&
-    /universelle|universal|découper|cut to fit|pointures\s*5|sizes\s*5/i.test(
-      fromRowFr + " " + fromRowEn,
-    )
-  ) {
-    return {
-      fr: fromRowFr,
-      en: fromRowEn || "Universal (sizes 5–12, cut to fit)",
-    };
-  }
-
   const key = raw.toUpperCase() === "SMALL" ? "S" : raw;
   const letter = SIZE_WORD_LABELS[key] || SIZE_WORD_LABELS[raw];
   if (letter) {
@@ -66,9 +53,6 @@ export function displaySizeLabels(code, sizeRow = null) {
       fromRowEn && !/\bans\b/i.test(fromRowEn)
         ? fromRowEn
         : fr.replace(/\bà\s+/gi, "to ").replace(/\bans\b/gi, "years");
-  } else if (/universelle|universal|découper|cut to fit|pointures|sizes/i.test(fromRowFr + fromRowEn + raw)) {
-    fr = fromRowFr || "Universelle (pointures 5 à 12, à découper)";
-    en = fromRowEn || "Universal (sizes 5–12, cut to fit)";
   } else if (!fromRowEn || fromRowEn === fromRowFr || fromRowEn === raw) {
     // pointures numériques / codes âge sans unité : même valeur
     fr = fromRowFr || raw;

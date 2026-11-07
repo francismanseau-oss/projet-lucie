@@ -32,6 +32,14 @@
     return;
   }
 
+  function isAdaptedProduct(product) {
+    if (!product) return false;
+    if (product.order_flow === "adapted_contact") return true;
+    if (api.isSkipMeasuresProduct) return api.isSkipMeasuresProduct(state.config, product.id);
+    const ids = state.config?.skip_measures_product_ids || state.config?.adapted_contact?.product_ids || [];
+    return Array.isArray(ids) && ids.includes(product.id);
+  }
+
   const els = {
     categoryPick: document.getElementById("sm-category-pick"),
     productsWrap: document.getElementById("sm-products-wrap"),
@@ -428,7 +436,8 @@
 
   function gotoStep(n, { focus = true } = {}) {
     const max = state.productId ? 4 : 1;
-    const step = Math.max(1, Math.min(Number(n) || 1, max));
+    let step = Math.max(1, Math.min(Number(n) || 1, max));
+    if (isAdaptedProduct(currentProduct()) && step === 3) step = 4;
     state.viewStep = step;
     updateProgress();
     const map = { 1: els.step1, 2: els.step2, 3: els.step3, 4: els.step4 };
@@ -448,9 +457,17 @@
   }
 
   function updateProgress() {
+    const product = currentProduct();
+    const adapted = isAdaptedProduct(product);
     const unlocked = state.productId ? 4 : 1;
     els.progress?.querySelectorAll("[data-sm-goto]").forEach((btn) => {
       const n = Number(btn.getAttribute("data-sm-goto"));
+      if (adapted && n === 3) {
+        btn.hidden = true;
+        btn.disabled = true;
+        return;
+      }
+      btn.hidden = false;
       const enabled = n <= unlocked;
       btn.disabled = !enabled;
       btn.classList.toggle("is-current", n === state.viewStep);
@@ -477,7 +494,12 @@
     clearMeasureErrors();
     renderProducts();
     renderPersonalization();
-    setUnit("cm");
+    if (isAdaptedProduct(product)) {
+      state.unit = null;
+      renderMeasures();
+    } else {
+      setUnit("cm");
+    }
     renderIllustration();
     refreshSummary();
     gotoStep(2);
@@ -703,13 +725,14 @@
     const img = els.measureImg;
     const caption = els.measureCaption;
     if (!figure || !img) return;
-    if (!product) {
+    if (!product || isAdaptedProduct(product)) {
       figure.hidden = true;
-      figure.classList.remove("is-hand");
+      figure.classList.remove("is-hand", "is-pending", "is-no-diagram");
       if (els.handGuide) els.handGuide.hidden = true;
-      img.hidden = false;
+      img.hidden = true;
       img.removeAttribute("src");
       img.alt = "";
+      if (caption) caption.hidden = true;
       return;
     }
     if (product.category === "mitaines") {
@@ -845,25 +868,37 @@
     updateProgress();
 
     if (els.configName) els.configName.textContent = clientFacingName(product);
+    const adapted = isAdaptedProduct(product);
     if (els.configLead) {
-      els.configLead.textContent = t(
-        "Fabrication selon vos mensurations.",
-        "Made to your measurements.",
-      );
+      els.configLead.textContent = adapted
+        ? t(
+            "Photo modèle seulement. Aucune mesure à saisir ici — Lucie vous contactera après le paiement.",
+            "Example photo only. No measurements to enter here — Lucie will contact you after payment.",
+          )
+        : t(
+            "Fabrication selon vos mensurations.",
+            "Made to your measurements.",
+          );
     }
     if (els.comments) {
-      els.comments.placeholder = t(
-        "Précisions pour la fabrication…",
-        "Notes for manufacturing…",
-      );
+      els.comments.placeholder = adapted
+        ? t(
+            "Besoins, confort ou précisions utiles pour Lucie (optionnel)…",
+            "Needs, comfort notes or details for Lucie (optional)…",
+          )
+        : t(
+            "Précisions pour la fabrication…",
+            "Notes for manufacturing…",
+          );
     }
 
-    const showHeat = chaleurEligible(product);
+    const showHeat = !adapted && chaleurEligible(product);
     if (els.chaleurWrap) els.chaleurWrap.hidden = !showHeat;
     if (!showHeat) {
       state.chaleur = false;
       if (els.chaleur) els.chaleur.checked = false;
     }
+    if (els.step3) els.step3.hidden = adapted;
   }
 
   function setUnit(unit) {
@@ -895,6 +930,21 @@
   function renderMeasures() {
     const product = currentProduct();
     if (!product || !els.measures) return;
+    if (isAdaptedProduct(product)) {
+      els.measures.hidden = true;
+      els.measures.innerHTML = "";
+      if (els.measureNote) els.measureNote.hidden = true;
+      if (els.measureErrors) {
+        els.measureErrors.hidden = true;
+        els.measureErrors.textContent = "";
+      }
+      if (els.unitIn) els.unitIn.closest?.(".sm-unit-row")?.setAttribute("hidden", "");
+      document.getElementById("sm-unit-row")?.setAttribute("hidden", "");
+      document.querySelector(".sm-unit-toggle")?.setAttribute("hidden", "");
+      return;
+    }
+    document.getElementById("sm-unit-row")?.removeAttribute("hidden");
+    document.querySelector(".sm-unit-toggle")?.removeAttribute("hidden");
     const spec = api.categoryMeasures(state.config, product.category);
     if (els.measureNote) {
       if (spec?.note_fr && !(spec.fields || []).length) {
@@ -1149,6 +1199,7 @@
       return;
     }
     const product = check.product;
+    const adapted = !!(check.skip_measures || isAdaptedProduct(product));
     const price = {
       ...check.price,
       total_cad_cents: check.price.total_cad_cents,
@@ -1157,12 +1208,17 @@
       "custom:" + product.id + ":" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
     const spec = api.categoryMeasures(state.config, product.category);
     const measurement_labels = {};
-    for (const f of spec?.fields || []) {
-      measurement_labels[f.id] = { fr: f.label_fr, en: f.label_en };
+    if (!adapted) {
+      for (const f of spec?.fields || []) {
+        measurement_labels[f.id] = { fr: f.label_fr, en: f.label_en };
+      }
     }
-    const name_fr = "Sur mesure — " + stripSizeTokens(product.name_fr);
-    const name_en =
-      "Custom — " + stripSizeTokens(product.name_en || product.name_fr);
+    const name_fr = adapted
+      ? product.name_fr
+      : "Sur mesure — " + stripSizeTokens(product.name_fr);
+    const name_en = adapted
+      ? product.name_en || "Adapted mukluks – Made to order"
+      : "Custom — " + stripSizeTokens(product.name_en || product.name_fr);
 
     const productNumber =
       product.product_number != null ? Number(product.product_number) : null;
@@ -1182,31 +1238,39 @@
         product_id: product.id,
         product_number: productNumber,
         category: product.category,
-        unit: state.unit,
-        measurements: { ...state.measurements },
-        measurements_cm: Object.fromEntries(
-          Object.entries(state.measurements)
-            .filter(([, v]) => v !== "" && v != null)
-            .map(([k, v]) => [k, api.toCm(v, state.unit)]),
-        ),
+        unit: adapted ? null : state.unit,
+        measurements: adapted ? {} : { ...state.measurements },
+        measurements_cm: adapted
+          ? null
+          : Object.fromEntries(
+              Object.entries(state.measurements)
+                .filter(([, v]) => v !== "" && v != null)
+                .map(([k, v]) => [k, api.toCm(v, state.unit)]),
+            ),
         measurement_labels,
-        chaleur: !!state.chaleur,
+        chaleur: adapted ? false : !!state.chaleur,
         comments: state.comments.trim(),
         leather: "noir",
-        requested_size: state.requestedSize || null,
-        requested_size_label_fr: state.requestedSize ? LETTERS[state.requestedSize].fr : null,
-        requested_size_label_en: state.requestedSize ? LETTERS[state.requestedSize].en : null,
-        lead_time_fr:
-          state.requestedSize && state.config?.made_to_order
+        requested_size: adapted ? null : state.requestedSize || null,
+        requested_size_label_fr:
+          !adapted && state.requestedSize ? LETTERS[state.requestedSize].fr : null,
+        requested_size_label_en:
+          !adapted && state.requestedSize ? LETTERS[state.requestedSize].en : null,
+        lead_time_fr: adapted
+          ? "Lucie communiquera sous 3 à 5 jours ouvrables pour les mesures. Confection : minimum 1 semaine après confirmation des mesures."
+          : state.requestedSize && state.config?.made_to_order
             ? state.config.made_to_order.delay_fr
             : null,
-        lead_time_en:
-          state.requestedSize && state.config?.made_to_order
+        lead_time_en: adapted
+          ? "Lucie will contact you within 3 to 5 business days for measurements. Making: at least 1 week after measurement confirmation."
+          : state.requestedSize && state.config?.made_to_order
             ? state.config.made_to_order.delay_en
             : null,
         priced_ok: true,
         price_source: "catalog/products.json",
         csm_code: productNumber != null ? productNumber + "-CSM" : "CSM",
+        skip_measures: adapted,
+        adapted_contact: adapted,
       },
     };
 
@@ -1223,8 +1287,12 @@
     if (window.refreshCartCount) window.refreshCartCount({ bounce: true });
     showMsg(
       "ok",
-      "Ajouté au panier avec vos mesures. Ce n’est pas encore un paiement.",
-      "Added to cart with your measurements. This is not a payment yet.",
+      adapted
+        ? "Ajouté au panier. Passez au paiement — Lucie vous contactera ensuite pour les mesures."
+        : "Ajouté au panier avec vos mesures. Ce n’est pas encore un paiement.",
+      adapted
+        ? "Added to cart. Proceed to payment — Lucie will then contact you for measurements."
+        : "Added to cart with your measurements. This is not a payment yet.",
     );
     gotoStep(4, { focus: false });
     els.msg?.focus?.();

@@ -24,9 +24,9 @@
       "selector": false,
       "sizes": [
         {
-          "code": "L",
-          "label_fr": "Grand",
-          "label_en": "Large",
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
           "qty_on_hand": 3
         }
       ]
@@ -34,18 +34,12 @@
     "chapeau-dame-m-l-fourrure-recyclee": {
       "product_number": 203,
       "category": "chapeaux",
-      "selector": true,
+      "selector": false,
       "sizes": [
         {
           "code": "M",
           "label_fr": "Moyen",
           "label_en": "Medium",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "L",
-          "label_fr": "Grand",
-          "label_en": "Large",
           "qty_on_hand": 3
         }
       ]
@@ -53,18 +47,12 @@
     "chapeau-dame-m-l-renard-argente": {
       "product_number": 204,
       "category": "chapeaux",
-      "selector": true,
+      "selector": false,
       "sizes": [
         {
           "code": "M",
           "label_fr": "Moyen",
           "label_en": "Medium",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "L",
-          "label_fr": "Grand",
-          "label_en": "Large",
           "qty_on_hand": 3
         }
       ]
@@ -72,18 +60,12 @@
     "chapeau-dame-m-l-renard-norvegien": {
       "product_number": 205,
       "category": "chapeaux",
-      "selector": true,
+      "selector": false,
       "sizes": [
         {
           "code": "M",
           "label_fr": "Moyen",
           "label_en": "Medium",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "L",
-          "label_fr": "Grand",
-          "label_en": "Large",
           "qty_on_hand": 3
         }
       ]
@@ -104,18 +86,12 @@
     "chapeau-dame-m-l-vison": {
       "product_number": 207,
       "category": "chapeaux",
-      "selector": true,
+      "selector": false,
       "sizes": [
         {
           "code": "M",
           "label_fr": "Moyen",
           "label_en": "Medium",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "L",
-          "label_fr": "Grand",
-          "label_en": "Large",
           "qty_on_hand": 3
         }
       ]
@@ -126,9 +102,9 @@
       "selector": false,
       "sizes": [
         {
-          "code": "unique",
-          "label_fr": "Format unique",
-          "label_en": "One size",
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
           "qty_on_hand": 3
         }
       ]
@@ -155,31 +131,6 @@
           "code": "M",
           "label_fr": "Moyen",
           "label_en": "Medium",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "L",
-          "label_fr": "Grand",
-          "label_en": "Large",
-          "qty_on_hand": 3
-        }
-      ]
-    },
-    "chapeau-homme-m-l-renard-argente": {
-      "product_number": 212,
-      "category": "chapeaux",
-      "selector": true,
-      "sizes": [
-        {
-          "code": "M",
-          "label_fr": "Moyen",
-          "label_en": "Medium",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "L",
-          "label_fr": "Grand",
-          "label_en": "Large",
           "qty_on_hand": 3
         }
       ]
@@ -216,9 +167,9 @@
       "selector": false,
       "sizes": [
         {
-          "code": "unique",
-          "label_fr": "Format unique",
-          "label_en": "One size",
+          "code": "8-12",
+          "label_fr": "8 à 12 ans",
+          "label_en": "8 to 12 years",
           "qty_on_hand": 3
         }
       ]
@@ -385,9 +336,9 @@
       "selector": false,
       "sizes": [
         {
-          "code": "L",
-          "label_fr": "Grand",
-          "label_en": "Large",
+          "code": "M",
+          "label_fr": "Moyen",
+          "label_en": "Medium",
           "qty_on_hand": 3
         }
       ]
@@ -464,8 +415,8 @@
       "sizes": [
         {
           "code": "8-10",
-          "label_fr": "8-10",
-          "label_en": "8-10",
+          "label_fr": "8 à 10 ans",
+          "label_en": "8 to 10 years",
           "qty_on_hand": 3
         }
       ]
@@ -512,18 +463,12 @@
     "mitaines-m-l-renard": {
       "product_number": 120,
       "category": "mitaines",
-      "selector": true,
+      "selector": false,
       "sizes": [
         {
           "code": "M",
           "label_fr": "Moyen",
           "label_en": "Medium",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "L",
-          "label_fr": "Grand",
-          "label_en": "Large",
           "qty_on_hand": 3
         }
       ]
@@ -531,18 +476,12 @@
     "mitaines-m-l-vison-et-chat-sauvage": {
       "product_number": 121,
       "category": "mitaines",
-      "selector": true,
+      "selector": false,
       "sizes": [
         {
           "code": "M",
           "label_fr": "Moyen",
           "label_en": "Medium",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "L",
-          "label_fr": "Grand",
-          "label_en": "Large",
           "qty_on_hand": 3
         }
       ]
@@ -550,18 +489,12 @@
     "mitaines-m-l-vison-et-renard": {
       "product_number": 122,
       "category": "mitaines",
-      "selector": true,
+      "selector": false,
       "sizes": [
         {
           "code": "M",
           "label_fr": "Moyen",
           "label_en": "Medium",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "L",
-          "label_fr": "Grand",
-          "label_en": "Large",
           "qty_on_hand": 3
         }
       ]
@@ -569,18 +502,12 @@
     "mitaines-motoneige-m-l-renard-norvegien": {
       "product_number": 124,
       "category": "mitaines",
-      "selector": true,
+      "selector": false,
       "sizes": [
         {
           "code": "M",
           "label_fr": "Moyen",
           "label_en": "Medium",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "L",
-          "label_fr": "Grand",
-          "label_en": "Large",
           "qty_on_hand": 3
         }
       ]
@@ -588,18 +515,12 @@
     "mitaines-style-inuit-coyote": {
       "product_number": 126,
       "category": "mitaines",
-      "selector": true,
+      "selector": false,
       "sizes": [
         {
           "code": "M",
           "label_fr": "Moyen",
           "label_en": "Medium",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "L",
-          "label_fr": "Grand",
-          "label_en": "Large",
           "qty_on_hand": 3
         }
       ]
@@ -685,12 +606,198 @@
     "semelles-fourrure-recyclee-pointures-5-a-12": {
       "product_number": 700,
       "category": "semelles",
-      "selector": false,
+      "selector": true,
+      "size_groups": [
+        {
+          "id": "homme",
+          "label_fr": "Homme",
+          "label_en": "Men"
+        },
+        {
+          "id": "femme",
+          "label_fr": "Femme",
+          "label_en": "Women"
+        },
+        {
+          "id": "enfant",
+          "label_fr": "Enfant",
+          "label_en": "Kids"
+        }
+      ],
       "sizes": [
         {
-          "code": "unique",
-          "label_fr": "Universelle (pointures 5 à 12, à découper)",
-          "label_en": "Universal (sizes 5–12, cut to fit)",
+          "code": "H-9",
+          "label_fr": "9",
+          "label_en": "9",
+          "group": "homme",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "H-9.5",
+          "label_fr": "9½",
+          "label_en": "9½",
+          "group": "homme",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "H-10",
+          "label_fr": "10",
+          "label_en": "10",
+          "group": "homme",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "H-10.5",
+          "label_fr": "10½",
+          "label_en": "10½",
+          "group": "homme",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "H-11",
+          "label_fr": "11",
+          "label_en": "11",
+          "group": "homme",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "H-11.5",
+          "label_fr": "11½",
+          "label_en": "11½",
+          "group": "homme",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "H-12",
+          "label_fr": "12",
+          "label_en": "12",
+          "group": "homme",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "H-12.5",
+          "label_fr": "12½",
+          "label_en": "12½",
+          "group": "homme",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "H-13",
+          "label_fr": "13",
+          "label_en": "13",
+          "group": "homme",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "F-5",
+          "label_fr": "5",
+          "label_en": "5",
+          "group": "femme",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "F-5.5",
+          "label_fr": "5½",
+          "label_en": "5½",
+          "group": "femme",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "F-6",
+          "label_fr": "6",
+          "label_en": "6",
+          "group": "femme",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "F-6.5",
+          "label_fr": "6½",
+          "label_en": "6½",
+          "group": "femme",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "F-7",
+          "label_fr": "7",
+          "label_en": "7",
+          "group": "femme",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "F-7.5",
+          "label_fr": "7½",
+          "label_en": "7½",
+          "group": "femme",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "F-8",
+          "label_fr": "8",
+          "label_en": "8",
+          "group": "femme",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "F-8.5",
+          "label_fr": "8½",
+          "label_en": "8½",
+          "group": "femme",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "F-9",
+          "label_fr": "9",
+          "label_en": "9",
+          "group": "femme",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "F-9.5",
+          "label_fr": "9½",
+          "label_en": "9½",
+          "group": "femme",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "F-10",
+          "label_fr": "10",
+          "label_en": "10",
+          "group": "femme",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "F-10.5",
+          "label_fr": "10½",
+          "label_en": "10½",
+          "group": "femme",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "F-11",
+          "label_fr": "11",
+          "label_en": "11",
+          "group": "femme",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "E-4",
+          "label_fr": "4",
+          "label_en": "4",
+          "group": "enfant",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "E-5",
+          "label_fr": "5",
+          "label_en": "5",
+          "group": "enfant",
+          "qty_on_hand": 3
+        },
+        {
+          "code": "E-6",
+          "label_fr": "6",
+          "label_en": "6",
+          "group": "enfant",
           "qty_on_hand": 3
         }
       ]
@@ -776,21 +883,10 @@
     "mukluks-adulte-mobilite-reduite-8-9-vison-et-renard": {
       "product_number": 400,
       "category": "mukluks",
-      "selector": true,
-      "sizes": [
-        {
-          "code": "8",
-          "label_fr": "8",
-          "label_en": "8",
-          "qty_on_hand": 3
-        },
-        {
-          "code": "9",
-          "label_fr": "9",
-          "label_en": "9",
-          "qty_on_hand": 3
-        }
-      ]
+      "selector": false,
+      "skip_inventory": true,
+      "adapted_contact": true,
+      "sizes": []
     },
     "pantoufles-bebe-0-7-mois-fourrure-recyclee": {
       "product_number": 300,
@@ -825,14 +921,14 @@
       "sizes": [
         {
           "code": "2",
-          "label_fr": "2",
-          "label_en": "2",
+          "label_fr": "Pointure 2",
+          "label_en": "Size 2",
           "qty_on_hand": 3
         },
         {
           "code": "3",
-          "label_fr": "3",
-          "label_en": "3",
+          "label_fr": "Pointure 3",
+          "label_en": "Size 3",
           "qty_on_hand": 3
         }
       ]
@@ -844,14 +940,14 @@
       "sizes": [
         {
           "code": "2",
-          "label_fr": "2",
-          "label_en": "2",
+          "label_fr": "Pointure 2",
+          "label_en": "Size 2",
           "qty_on_hand": 3
         },
         {
           "code": "3",
-          "label_fr": "3",
-          "label_en": "3",
+          "label_fr": "Pointure 3",
+          "label_en": "Size 3",
           "qty_on_hand": 3
         }
       ]
@@ -863,8 +959,8 @@
       "sizes": [
         {
           "code": "13-1",
-          "label_fr": "13-1",
-          "label_en": "13-1",
+          "label_fr": "Pointure 13-1",
+          "label_en": "Size 13-1",
           "qty_on_hand": 3
         }
       ]

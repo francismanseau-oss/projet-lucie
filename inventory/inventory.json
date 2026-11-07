@@ -178,22 +178,6 @@
       "availability_status": "contact"
     },
     {
-      "product_id": "chapeau-homme-m-l-renard-argente",
-      "name_fr": "Chapeau homme M-L — renard argenté",
-      "category": "chapeaux",
-      "fulfillment_type": "pending_lucie",
-      "qty_on_hand": null,
-      "qty_reserved": 0,
-      "min_stock_target": 3,
-      "lucie_confirmed": false,
-      "notes_lucie": "",
-      "updated_at": null,
-      "product_number": 212,
-      "provisional_qty_on_hand": 3,
-      "qty_sold": 0,
-      "availability_status": "contact"
-    },
-    {
       "product_id": "chapeau-homme-m-l-renard-roux",
       "name_fr": "Chapeau dame M-L — renard roux",
       "category": "chapeaux",
@@ -771,7 +755,7 @@
     },
     {
       "product_id": "semelles-fourrure-recyclee-pointures-5-a-12",
-      "name_fr": "Semelles fourrure recyclée — pointures 5 à 12",
+      "name_fr": "Semelles fourrure recyclée",
       "category": "semelles",
       "fulfillment_type": "pending_lucie",
       "qty_on_hand": null,
@@ -783,7 +767,24 @@
       "product_number": 700,
       "provisional_qty_on_hand": 3,
       "qty_sold": 0,
-      "availability_status": "contact"
+      "availability_status": "contact",
+      "size_groups": [
+        {
+          "id": "homme",
+          "label_fr": "Homme",
+          "label_en": "Men"
+        },
+        {
+          "id": "femme",
+          "label_fr": "Femme",
+          "label_en": "Women"
+        },
+        {
+          "id": "enfant",
+          "label_fr": "Enfant",
+          "label_en": "Kids"
+        }
+      ]
     },
     {
       "product_id": "mukluks-bebe-7-18-mois-vison",
@@ -883,19 +884,25 @@
     },
     {
       "product_id": "mukluks-adulte-mobilite-reduite-8-9-vison-et-renard",
-      "name_fr": "Mukluks adulte mobilité réduite 8-9 — vison et renard",
+      "name_fr": "Mukluks adaptés – Sur mesure",
       "category": "mukluks",
       "fulfillment_type": "pending_lucie",
-      "qty_on_hand": null,
+      "qty_on_hand": 0,
       "qty_reserved": 0,
       "min_stock_target": 3,
       "lucie_confirmed": false,
       "notes_lucie": "",
       "updated_at": null,
       "product_number": 400,
-      "provisional_qty_on_hand": 3,
+      "provisional_qty_on_hand": 0,
       "qty_sold": 0,
-      "availability_status": "contact"
+      "availability_status": "contact",
+      "sizes": [],
+      "size_selector": false,
+      "skip_inventory": true,
+      "adapted_contact": true,
+      "out_of_stock": false,
+      "below_min": false
     },
     {
       "product_id": "pantoufles-bebe-0-7-mois-fourrure-recyclee",

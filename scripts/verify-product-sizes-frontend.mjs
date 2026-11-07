@@ -17,7 +17,7 @@ function ok(name, cond, detail = "") {
   checks.push({ name, ok: !!cond, detail });
 }
 
-ok("66 produits tailles", Object.keys(sizes.products).length === 66);
+ok("65 produits tailles", Object.keys(sizes.products).length === 65);
 ok(
   "sélecteurs ≥ 3 (formats combinés séparés)",
   Object.values(sizes.products).filter((p) => p.selector).length >= 3,

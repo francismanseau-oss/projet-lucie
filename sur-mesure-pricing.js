@@ -76,11 +76,19 @@
     return { ok: true };
   }
 
+  function isSkipMeasuresProduct(config, productId) {
+    const ids = config?.skip_measures_product_ids || config?.adapted_contact?.product_ids || [];
+    return Array.isArray(ids) && ids.includes(productId);
+  }
+
   function canAddToCart(catalog, config, productId, state) {
     const product = findProduct(catalog, productId);
     if (!product) return { ok: false, reason: "no_product" };
     const price = officialPrice(catalog, productId);
     if (!price.ok) return { ok: false, reason: price.reason };
+    if (isSkipMeasuresProduct(config, productId) || product.order_flow === "adapted_contact") {
+      return { ok: true, price, product, skip_measures: true };
+    }
     const spec = categoryMeasures(config, product.category);
     const meas = validateMeasurements(spec, state.unit, state.measurements);
     if (!meas.ok) return { ok: false, reason: meas.reason, field: meas.field };
@@ -95,6 +103,7 @@
     categoryMeasures,
     officialPrice,
     validateMeasurements,
+    isSkipMeasuresProduct,
     canAddToCart,
   };
 })(typeof window !== "undefined" ? window : globalThis);

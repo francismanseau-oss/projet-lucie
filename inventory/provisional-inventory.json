@@ -3,9 +3,9 @@
   "data_mode": "provisional",
   "warning_fr": "INVENTAIRE PROVISOIRE — 3 unités/produit pour travail local uniquement. Non validé par Lucie. Interdit pour vente réelle / AVAILABILITY_CONFIGURED.",
   "totals": {
-    "products": 66,
-    "units_provisional": 198,
-    "formula": "66 × 3 = 198"
+    "products": 65,
+    "units_provisional": 195,
+    "formula": "65 × 3 = 195"
   },
   "items": [
     {
@@ -555,20 +555,6 @@
       "lucie_validated": false
     },
     {
-      "product_number": 212,
-      "product_id": "chapeau-homme-m-l-renard-argente",
-      "name_fr": "Chapeau homme M-L — renard argenté",
-      "category": "chapeaux",
-      "price_cad": 180,
-      "qty_physical_provisional": 3,
-      "qty_reserved": 0,
-      "qty_available_provisional": 3,
-      "qty_sold": 0,
-      "min_stock_target": 3,
-      "availability_status": "contact",
-      "lucie_validated": false
-    },
-    {
       "product_number": 213,
       "product_id": "chapeau-homme-m-l-renard-roux",
       "name_fr": "Chapeau dame M-L — renard roux",
@@ -739,7 +725,7 @@
     {
       "product_number": 400,
       "product_id": "mukluks-adulte-mobilite-reduite-8-9-vison-et-renard",
-      "name_fr": "Mukluks adulte mobilité réduite 8-9 — vison et renard",
+      "name_fr": "Mukluks adaptés – Sur mesure",
       "category": "mukluks",
       "price_cad": 140,
       "qty_physical_provisional": 3,
@@ -748,7 +734,14 @@
       "qty_sold": 0,
       "min_stock_target": 3,
       "availability_status": "contact",
-      "lucie_validated": false
+      "lucie_validated": false,
+      "sizes": [],
+      "size_selector": false,
+      "qty_on_hand": 0,
+      "skip_inventory": true,
+      "adapted_contact": true,
+      "out_of_stock": false,
+      "below_min": false
     },
     {
       "product_number": 401,
@@ -921,7 +914,7 @@
     {
       "product_number": 700,
       "product_id": "semelles-fourrure-recyclee-pointures-5-a-12",
-      "name_fr": "Semelles fourrure recyclée — pointures 5 à 12",
+      "name_fr": "Semelles fourrure recyclée",
       "category": "semelles",
       "price_cad": 20,
       "qty_physical_provisional": 3,
@@ -930,7 +923,24 @@
       "qty_sold": 0,
       "min_stock_target": 3,
       "availability_status": "contact",
-      "lucie_validated": false
+      "lucie_validated": false,
+      "size_groups": [
+        {
+          "id": "homme",
+          "label_fr": "Homme",
+          "label_en": "Men"
+        },
+        {
+          "id": "femme",
+          "label_fr": "Femme",
+          "label_en": "Women"
+        },
+        {
+          "id": "enfant",
+          "label_fr": "Enfant",
+          "label_en": "Kids"
+        }
+      ]
     }
   ]
 }

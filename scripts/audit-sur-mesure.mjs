@@ -27,8 +27,8 @@ const warn = (m) => report.warn.push(m);
 const fail = (m) => report.fail.push(m);
 
 const list = products.products || [];
-if (list.length !== 66) fail(`Produits: attendu 66, reçu ${list.length}`);
-else pass("66 produits catalogue");
+if (list.length !== 65) fail(`Produits: attendu 65, reçu ${list.length}`);
+else pass("65 produits catalogue");
 
 const cats = [...new Set(list.map((p) => p.category))].sort();
 const expectedCats = ["cache-oreilles", "chapeaux", "foulards", "mitaines", "mukluks", "pantoufles", "semelles"];
@@ -47,8 +47,8 @@ for (const p of list) {
     badMeta++;
   }
 }
-if (!badPrice) pass("66 prix entiers CAD");
-if (!badMeta) pass("66 noms FR + chemins image");
+if (!badPrice) pass("65 prix entiers CAD");
+if (!badMeta) pass("65 noms FR + chemins image");
 
 const wp = JSON.stringify(workerProducts.products.map((p) => [p.id, p.price_cad_cents]));
 const bp = JSON.stringify(list.map((p) => [p.id, p.price_cad_cents]));

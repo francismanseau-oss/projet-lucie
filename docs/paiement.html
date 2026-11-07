@@ -2,7 +2,7 @@
 <html lang="fr-CA">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Paiement — Les Fourrures Boréales (Stripe Checkout mode test).">
 <meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="https://lesfourruresboreales.ca/paiement">
@@ -189,6 +189,9 @@
           chaleur: !!x.custom_config.chaleur,
           comments: String(x.custom_config.comments || "").slice(0, 800),
           leather: x.custom_config.leather || "noir",
+          skip_measures: !!(x.custom_config.skip_measures || x.custom_config.adapted_contact),
+          adapted_contact: !!(x.custom_config.adapted_contact || x.custom_config.skip_measures),
+          priced_ok: x.custom_config.priced_ok === true,
         };
       }
       return row;

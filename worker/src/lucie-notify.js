@@ -94,7 +94,18 @@ export function buildPaidOrderEmail(sessionObj, pending, env, archive = null) {
       ? pending.items
       : [];
   const hasCustom = items.some((i) => i.custom || String(i.id || "").startsWith("custom:"));
-  const kindLabel = hasCustom ? "COMMANDE SUR MESURE" : "COMMANDE BOUTIQUE";
+  const hasAdapted = items.some(
+    (i) =>
+      i?.custom_config?.adapted_contact ||
+      i?.custom_config?.skip_measures ||
+      Number(i?.product_number) === 400 ||
+      Number(i?.custom_config?.product_number) === 400,
+  );
+  const kindLabel = hasAdapted
+    ? "COMMANDE ADAPTÉE (SUIVI MESURES)"
+    : hasCustom
+      ? "COMMANDE SUR MESURE"
+      : "COMMANDE BOUTIQUE";
   const subject = `Bon de commande ${orderNumber} — ${kindLabel} — ${name}`;
 
   const shipMethod =
@@ -135,14 +146,24 @@ export function buildPaidOrderEmail(sessionObj, pending, env, archive = null) {
     let extra = "";
     if (it.custom_config) {
       const c = it.custom_config;
-      extra =
-        `\n    Code CSM : ${c.csm_code || (pn != null ? pn + "-CSM" : "CSM")}` +
-        `\n    Réf. boutique : ${c.product_id || "—"}` +
-        `\n    Unité : ${c.unit || "—"}` +
-        `\n    Mensurations : ${formatMeasurements(c)}` +
-        `\n    Chaleur renforcée : ${c.chaleur ? "oui (+20 $ non inclus dans le total). Fait à partir de zéro : 1 semaine de fabrication, environ 3 semaines avant Noël." : "non"}` +
-        `\n    Cuir / matière : ${c.leather || "noir"}` +
-        (c.comments ? `\n    Instructions : ${c.comments}` : "");
+      if (c.adapted_contact || c.skip_measures) {
+        extra =
+          `\n    Code CSM : ${c.csm_code || (pn != null ? pn + "-CSM" : "CSM")}` +
+          `\n    Réf. boutique : ${c.product_id || "—"}` +
+          `\n    ★ CRÉATION ADAPTÉE — aucune mesure fournie par le client` +
+          `\n    ★ Contacter le client sous 3 à 5 jours ouvrables pour besoins et mesures` +
+          `\n    Cuir / matière : ${c.leather || "noir"}` +
+          (c.comments ? `\n    Instructions client : ${c.comments}` : "");
+      } else {
+        extra =
+          `\n    Code CSM : ${c.csm_code || (pn != null ? pn + "-CSM" : "CSM")}` +
+          `\n    Réf. boutique : ${c.product_id || "—"}` +
+          `\n    Unité : ${c.unit || "—"}` +
+          `\n    Mensurations : ${formatMeasurements(c)}` +
+          `\n    Chaleur renforcée : ${c.chaleur ? "oui (+20 $ non inclus dans le total). Fait à partir de zéro : 1 semaine de fabrication, environ 3 semaines avant Noël." : "non"}` +
+          `\n    Cuir / matière : ${c.leather || "noir"}` +
+          (c.comments ? `\n    Instructions : ${c.comments}` : "");
+      }
     } else if (pn != null) {
       extra = `\n    N° produit : ${pn}`;
     }
@@ -186,6 +207,9 @@ export function buildPaidOrderEmail(sessionObj, pending, env, archive = null) {
     `  ${archive?.financial?.tax_label_fr || "Taxes : non configurées — à valider"}`,
     `  TOTAL PAYÉ : ${moneyCad(amountTotal, currency)}`,
     "",
+    hasAdapted
+      ? "★ SUIVI REQUIS : creation personnalisée adaptée — communiquer avec le client pour les mesures."
+      : null,
     "Ce message est envoyé seulement après vérification du paiement Stripe (webhook).",
     "Les Fourrures Boréales",
   ]
@@ -215,7 +239,15 @@ export function buildPaidOrderEmail(sessionObj, pending, env, archive = null) {
             let detail = "";
             if (it.custom_config) {
               const c = it.custom_config;
-              detail = `<div style="font-size:13px;color:#5c4f44;margin-top:6px;line-height:1.45;">
+              detail =
+                c.adapted_contact || c.skip_measures
+                  ? `<div style="font-size:13px;color:#5c4f44;margin-top:6px;line-height:1.45;">
+                Réf. : ${escapeHtml(c.product_id || "—")}<br>
+                <strong style="color:#b00020;">Création adaptée — aucune mesure fournie.</strong><br>
+                Contacter le client sous 3 à 5 jours ouvrables pour besoins et mesures.
+                ${c.comments ? `<br>Instructions client : ${escapeHtml(c.comments)}` : ""}
+              </div>`
+                  : `<div style="font-size:13px;color:#5c4f44;margin-top:6px;line-height:1.45;">
                 Réf. : ${escapeHtml(c.product_id || "—")} · Unité : ${escapeHtml(c.unit || "—")}<br>
                 Mensurations : ${escapeHtml(formatMeasurements(c))}<br>
                 Chaleur renforcée : ${c.chaleur ? "oui (+20 $ non inclus dans le total). Fait à partir de zéro : 1 semaine de fabrication, environ 3 semaines avant Noël." : "non"} · Matière : ${escapeHtml(c.leather || "noir")}
@@ -326,6 +358,88 @@ export async function sendResendEmail(env, body, fetchImpl = fetch) {
   return { ok: true, mocked: false, id: data.id || null };
 }
 
+/** Courriel client — produit adapté sans mesures (ex. n° 400). */
+export function buildCustomerAdaptedConfirmEmail(sessionObj, pending, env, archive = null) {
+  const email =
+    archive?.customer?.email ||
+    sessionObj?.customer_details?.email ||
+    sessionObj?.customer_email ||
+    pending?.customer_email ||
+    null;
+  if (!email) return null;
+  const name =
+    archive?.customer?.name ||
+    sessionObj?.customer_details?.name ||
+    pending?.customer_name ||
+    "Client";
+  const orderNumber = archive?.order_number || sessionObj?.metadata?.order_number || "—";
+  const from =
+    env.SUGGESTION_FROM_EMAIL ||
+    "Les Fourrures Boréales <onboarding@resend.dev>";
+  const subject = `Votre commande personnalisée ${orderNumber} est confirmée — Les Fourrures Boréales`;
+  const text = [
+    "Votre commande personnalisée est confirmée !",
+    "",
+    `Bonjour ${name},`,
+    "",
+    "Merci pour votre confiance !",
+    "",
+    "Lucie communiquera personnellement avec vous dans un délai de 3 à 5 jours ouvrables afin de discuter de vos besoins et de vous guider dans la prise des mesures nécessaires.",
+    "",
+    "Chaque création est confectionnée spécialement pour vous, avec soin et attention.",
+    "",
+    "Prévoyez un délai minimum d'une semaine pour la confection, à compter de la confirmation des mesures. Ce délai peut être prolongé pendant les périodes achalandées.",
+    "",
+    "Vous n’avez aucune démarche supplémentaire à effectuer pour le moment.",
+    "",
+    `N° de commande : ${orderNumber}`,
+    "",
+    "Les Fourrures Boréales",
+  ].join("\n");
+  const html = `<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><title>${escapeHtml(subject)}</title></head>
+<body style="margin:0;background:#f3ebe3;font-family:Georgia,serif;color:#2b2420;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="padding:28px 12px;"><tr><td align="center">
+  <table width="100%" style="max-width:640px;background:#fffcf8;border:1px solid #e5d8c8;border-radius:12px;">
+    <tr><td style="padding:28px;">
+      <p style="margin:0;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:#965035;">Les Fourrures Boréales</p>
+      <h1 style="margin:14px 0 0;font-size:26px;font-weight:400;">Votre commande personnalisée est confirmée !</h1>
+      <p style="margin:18px 0 0;font-size:16px;line-height:1.55;">Bonjour ${escapeHtml(name)},</p>
+      <p style="margin:14px 0 0;font-size:16px;line-height:1.55;">Merci pour votre confiance !</p>
+      <p style="margin:14px 0 0;font-size:16px;line-height:1.55;">Lucie communiquera personnellement avec vous dans un délai de <strong>3 à 5 jours ouvrables</strong> afin de discuter de vos besoins et de vous guider dans la prise des mesures nécessaires.</p>
+      <p style="margin:14px 0 0;font-size:16px;line-height:1.55;">Chaque création est confectionnée spécialement pour vous, avec soin et attention.</p>
+      <p style="margin:14px 0 0;font-size:16px;line-height:1.55;">Prévoyez un délai minimum d'une semaine pour la confection, à compter de la confirmation des mesures. Ce délai peut être prolongé pendant les périodes achalandées.</p>
+      <p style="margin:14px 0 0;font-size:16px;line-height:1.55;"><strong>Vous n’avez aucune démarche supplémentaire à effectuer pour le moment.</strong></p>
+      <p style="margin:22px 0 0;font-size:15px;color:#5c4f44;">N° de commande : <strong>${escapeHtml(orderNumber)}</strong></p>
+    </td></tr>
+  </table>
+  </td></tr></table>
+</body></html>`;
+  return {
+    to: email,
+    from,
+    subject,
+    text,
+    html,
+    order_number: orderNumber,
+  };
+}
+
+function orderHasAdaptedContact(archive, pending) {
+  const items = Array.isArray(archive?.items)
+    ? archive.items
+    : Array.isArray(pending?.items)
+      ? pending.items
+      : [];
+  return items.some(
+    (i) =>
+      i?.custom_config?.adapted_contact ||
+      i?.custom_config?.skip_measures ||
+      Number(i?.product_number) === 400 ||
+      Number(i?.custom_config?.product_number) === 400,
+  );
+}
+
 /**
  * Après webhook payé : archive + envoi bon (sauf si déjà envoyé).
  */
@@ -372,10 +486,24 @@ export async function notifyLucieOrderPaid(env, sessionObj, fetchImpl = fetch, o
 
   const mail = buildPaidOrderEmail(sessionObj, pending, env, archive);
   const sent = await sendResendEmail(env, mail, fetchImpl);
-  await markNotifyResult(env, sessionObj.id, sent);
+  let customer_notify = { skipped: true, reason: "not_adapted" };
+  if (orderHasAdaptedContact(archive, pending)) {
+    const customerMail = buildCustomerAdaptedConfirmEmail(sessionObj, pending, env, archive);
+    if (customerMail) {
+      customer_notify = await sendResendEmail(env, customerMail, fetchImpl);
+    } else {
+      customer_notify = { skipped: true, reason: "no_customer_email" };
+    }
+  }
+  await markNotifyResult(env, sessionObj.id, { ...sent, customer_notify });
   return {
     ...sent,
-    kind: mail.subject.includes("SUR MESURE") ? "custom" : "shop",
+    customer_notify,
+    kind: mail.subject.includes("ADAPTÉE")
+      ? "adapted"
+      : mail.subject.includes("SUR MESURE")
+        ? "custom"
+        : "shop",
     order_number: mail.order_number,
   };
 }

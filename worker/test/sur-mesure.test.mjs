@@ -24,8 +24,8 @@ test("conversion pouces → cm précise (×2.54) — 20 cm ≈ 7,87 po", () => {
   assert.ok(Math.abs(inches - 7.874015748) < 1e-9);
 });
 
-test("catalogue Boutique : 66 produits, 66 prix entiers CAD", () => {
-  assert.equal(catalog.products.length, 66);
+test("catalogue Boutique : 65 produits, 65 prix entiers CAD", () => {
+  assert.equal(catalog.products.length, 65);
   for (const p of catalog.products) {
     assert.ok(Number.isInteger(p.price_cad_cents), p.id);
     assert.ok(p.price_cad_cents >= 0, p.id);

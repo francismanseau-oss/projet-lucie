@@ -68,7 +68,10 @@ const LETTER_LABELS={
   XL:{fr:'Très grand',en:'Extra Large',abbrFr:'TG',abbrEn:'XL'}
 };
 const FIXED_ONE_SIZE={
-  'chapeau-dame-m-l-coyote':true
+  'chapeau-dame-m-l-coyote':true,'chapeau-dame-m-l-fourrure-recyclee':true,'chapeau-dame-m-l-renard-argente':true,'chapeau-dame-m-l-renard-norvegien':true,'chapeau-dame-m-l-renard-roux':true,'chapeau-dame-m-l-vison':true,'chapeau-dame-vison-et-renard':true,'chapeau-homme-m-l-renard-roux':true,'chapeau-homme-l-xl-raton':true,'mitaines-dame-m-l-chat-sauvage':true,'mitaines-dame-m-l-fourrure-recyclee':true,'mitaines-dame-renard-roux':true,'mitaines-dame-vison-et-renard':true,'mitaines-homme-m-l-castor':true,'mitaines-homme-m-l-coyote':true,'mitaines-homme-m-l-renard-roux':true,'mitaines-small-vison':true,'mitaines-m-renard':true,'mitaines-motoneige-m-renard-argente':true,'mitaines-m-l-renard':true,'mitaines-m-l-vison-et-chat-sauvage':true,'mitaines-m-l-vison-et-renard':true,'mitaines-motoneige-m-l-renard-norvegien':true,'mitaines-style-inuit-coyote':true
+};
+const ADAPTED_CONTACT_PRODUCTS={
+  'mukluks-adulte-mobilite-reduite-8-9-vison-et-renard':true
 };
 const ORDER_FALLBACK={
   label_fr:'Sur commande',
@@ -554,7 +557,25 @@ function injectSelectors(doc){
     const cfg=doc.products[id];
     if(!cfg)return;
     const info=card.querySelector('.shop-product-info')||btn.parentElement;
-    if(info.querySelector('.size-select-wrap')||info.querySelector('.size-stock-wrap'))return;
+    if(info.querySelector('.size-select-wrap')||info.querySelector('.size-stock-wrap')||info.querySelector('.adapted-order-cta'))return;
+
+    if(ADAPTED_CONTACT_PRODUCTS[id]||cfg.adapted_contact||cfg.skip_inventory&&cfg.sizes&&!cfg.sizes.length){
+      const note=document.createElement('p');
+      note.className='size-unique-note adapted-order-note';
+      note.dataset.fr='Photo modèle. Conception unique — Lucie prend les mesures après paiement.';
+      note.dataset.en='Example photo. Unique design — Lucie takes measurements after payment.';
+      note.textContent=en()?note.dataset.en:note.dataset.fr;
+      const a=document.createElement('a');
+      a.className='button demo-add adapted-order-cta';
+      a.href='creations-personnalisees.html?modele='+encodeURIComponent(id)+'#mesure';
+      a.dataset.fr='Commander sur mesure';
+      a.dataset.en='Order made to measure';
+      a.textContent=en()?a.dataset.en:a.dataset.fr;
+      a.addEventListener('click',ev=>ev.stopPropagation());
+      btn.replaceWith(a);
+      info.insertBefore(note,a);
+      return;
+    }
 
     const category=card.dataset.category||cfg.category||'';
     function attachSizeGuideBtn(parent,sizes){
@@ -647,10 +668,30 @@ function injectSelectors(doc){
           if(row.sz)list.appendChild(buildChoice(row.sz,cfg,card,btn,hint));
           else list.appendChild(buildOrderLink(row.code,id));
         });
+        line.appendChild(list);
+      }else if(Array.isArray(cfg.size_groups)&&cfg.size_groups.length){
+        line.classList.add('is-stacked','has-size-groups');
+        cfg.size_groups.forEach(group=>{
+          const block=document.createElement('div');
+          block.className='size-group';
+          const head=document.createElement('p');
+          head.className='size-group-label';
+          head.dataset.fr=group.label_fr||group.id||'';
+          head.dataset.en=group.label_en||group.label_fr||group.id||'';
+          head.textContent=en()?head.dataset.en:head.dataset.fr;
+          const gList=document.createElement('div');
+          gList.className='size-choice-list';
+          gList.setAttribute('role','group');
+          gList.setAttribute('aria-label',head.textContent);
+          (cfg.sizes||[]).filter(sz=>sz.group===group.id).forEach(sz=>gList.appendChild(buildChoice(sz,cfg,card,btn,hint)));
+          block.appendChild(head);
+          block.appendChild(gList);
+          line.appendChild(block);
+        });
       }else{
         cfg.sizes.forEach(sz=>list.appendChild(buildChoice(sz,cfg,card,btn,hint)));
+        line.appendChild(list);
       }
-      line.appendChild(list);
       attachSizeGuideBtn(line,cfg.sizes);
       attachChaleur(line);
       inner.appendChild(line);

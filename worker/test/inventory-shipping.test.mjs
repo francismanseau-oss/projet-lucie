@@ -32,8 +32,8 @@ const root = join(__dirname, "..", "..");
 const inventoryFile = JSON.parse(readFileSync(join(root, "inventory", "inventory.json"), "utf8"));
 const shippingConfig = JSON.parse(readFileSync(join(root, "shipping", "shipping-config.json"), "utf8"));
 
-test("inventory.json : 66 articles, qty_on_hand tous null, pending_lucie", () => {
-  assert.equal(inventoryFile.items.length, 66);
+test("inventory.json : 65 articles, qty_on_hand tous null, pending_lucie", () => {
+  assert.equal(inventoryFile.items.length, 65);
   assert.equal(inventoryFile.policy.no_fictional_qty, true);
   for (const i of inventoryFile.items) {
     assert.equal(i.qty_on_hand, null);

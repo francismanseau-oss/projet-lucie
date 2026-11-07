@@ -192,6 +192,7 @@ export function publicLineFromItem(it) {
     it?.unit_amount != null && Number.isFinite(Number(it.unit_amount))
       ? Number(it.unit_amount)
       : null;
+  const cc = it?.custom_config && typeof it.custom_config === "object" ? it.custom_config : null;
   return {
     name: it?.name || it?.id || null,
     size: it?.size || null,
@@ -201,6 +202,19 @@ export function publicLineFromItem(it) {
     unit_amount_cents: unit,
     line_total_cents: unit != null ? unit * qty : null,
     custom: !!(it?.custom || it?.custom_config),
+    product_number:
+      it?.product_number != null
+        ? Number(it.product_number)
+        : cc?.product_number != null
+          ? Number(cc.product_number)
+          : null,
+    custom_config: cc
+      ? {
+          product_number: cc.product_number ?? null,
+          adapted_contact: !!(cc.adapted_contact || cc.skip_measures),
+          skip_measures: !!(cc.skip_measures || cc.adapted_contact),
+        }
+      : null,
   };
 }
 

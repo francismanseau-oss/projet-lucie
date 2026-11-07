@@ -87,13 +87,14 @@ export function buildLineItems(catalog, items, opts = {}) {
       const measureUnit = cfg.unit;
       const measurements =
         cfg.measurements && typeof cfg.measurements === "object" ? cfg.measurements : {};
-      if (validateMeasurements && opts.measureSpecForCategory) {
+      const skipMeasures = !!(cfg.skip_measures || cfg.adapted_contact || product.order_flow === "adapted_contact");
+      if (!skipMeasures && validateMeasurements && opts.measureSpecForCategory) {
         const spec = opts.measureSpecForCategory(product.category);
         const meas = validateMeasurements(spec, measureUnit, measurements);
         if (!meas.ok) {
           throw httpError("Mesures sur mesure invalides", 400, { reason: meas.reason, field: meas.field });
         }
-      } else if (!measureUnit || (measureUnit !== "in" && measureUnit !== "cm")) {
+      } else if (!skipMeasures && (!measureUnit || (measureUnit !== "in" && measureUnit !== "cm"))) {
         // catégories sans champs mesures (ex. foulards) : unité optionnelle si aucune mesure
         const hasMeas = Object.values(measurements).some((v) => v !== "" && v != null);
         if (hasMeas) throw httpError("Unité de mesure sur mesure requise (in|cm)", 400);
@@ -112,7 +113,7 @@ export function buildLineItems(catalog, items, opts = {}) {
       // CSM : skip_inventory — ne décrémente pas le stock régulier
       resolved.push({
         id,
-        name: `Sur mesure — ${product.name_fr}`,
+        name: skipMeasures ? product.name_fr : `Sur mesure — ${product.name_fr}`,
         product_number: productNumber,
         qty,
         unit_amount: charge,
@@ -125,13 +126,15 @@ export function buildLineItems(catalog, items, opts = {}) {
           product_number: productNumber,
           csm_code: productNumber != null ? `${productNumber}-CSM` : "CSM",
           category: product.category,
-          unit: measureUnit || null,
-          measurements,
-          measurements_cm: cfg.measurements_cm || null,
+          unit: skipMeasures ? null : measureUnit || null,
+          measurements: skipMeasures ? {} : measurements,
+          measurements_cm: skipMeasures ? null : cfg.measurements_cm || null,
           chaleur: chaleurAsked(cfg),
           comments: String(cfg.comments || "").slice(0, 800),
           leather: "noir",
           price_source: "catalog/products.json",
+          skip_measures: skipMeasures,
+          adapted_contact: skipMeasures,
         },
         client_price_ignored:
           raw.price != null || raw.price_cad != null || raw.price_cad_cents != null

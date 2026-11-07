@@ -97,8 +97,8 @@ if (missing.length) {
 // --- Catalogue 66 ---
 const products = JSON.parse(fs.readFileSync(path.join(root, "catalog/products.json"), "utf8"));
 const list = products.products || [];
-if (list.length !== 66) crit(`Catalogue: ${list.length} produits (attendu 66)`);
-else ok("66 produits catalogue");
+if (list.length !== 65) crit(`Catalogue: ${list.length} produits (attendu 65)`);
+else ok("65 produits catalogue");
 
 let imgMissing = 0;
 let imgHeavy = 0;
@@ -118,7 +118,7 @@ for (const p of list) {
     }
   }
 }
-if (!imgMissing) ok("66 photos produits présentes");
+if (!imgMissing) ok("65 photos produits présentes");
 if (sizes.length) {
   const total = sizes.reduce((a, b) => a + b, 0);
   ok(`Poids images boutique: ${(total / 1e6).toFixed(1)} Mo total · médiane ${(sizes.sort((a, b) => a - b)[Math.floor(sizes.length / 2)] / 1e3).toFixed(0)} Ko`);

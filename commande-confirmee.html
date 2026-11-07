@@ -2,7 +2,7 @@
 <html lang="fr-CA">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Confirmation de commande — Les Fourrures Boréales.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="https://lesfourruresboreales.ca/commande-confirmee">
@@ -121,6 +121,23 @@
   .order-status-msg { text-align: center; }
   .order-status-panel.is-waiting .order-confirm-icon,
   .order-status-panel.is-failed .order-confirm-icon { display: none; }
+  .order-adapted-note {
+    margin: 1.1rem 0 0;
+    padding: 1rem 1.1rem;
+    border-radius: 12px;
+    background: #f7f1ea;
+    border: 1px solid #e5d8c8;
+    text-align: left;
+    line-height: 1.55;
+    color: #2a221c;
+  }
+  .order-adapted-note h2 {
+    margin: 0 0 .65rem;
+    font-size: 1.12rem;
+    font-weight: 600;
+  }
+  .order-adapted-note p { margin: 0 0 .7rem; }
+  .order-adapted-note p:last-child { margin-bottom: 0; }
 </style>
 </head>
 <body class="payment-page order-status-page">
@@ -145,6 +162,7 @@
       <ul id="order-lines" class="order-lines"></ul>
       <div class="order-totals" id="order-totals"></div>
       <p class="order-ship-note" id="order-ship-msg" hidden></p>
+      <div class="order-adapted-note" id="order-adapted-msg" hidden></div>
     </div>
 
     <div class="cart-actions">
@@ -173,6 +191,7 @@
   const linesEl = document.getElementById("order-lines");
   const totalsEl = document.getElementById("order-totals");
   const shipMsg = document.getElementById("order-ship-msg");
+  const adaptedMsg = document.getElementById("order-adapted-msg");
   const params = new URLSearchParams(location.search);
   let sessionId = (params.get("session_id") || "").trim();
   if (sessionId === "{CHECKOUT_SESSION_ID}") sessionId = "";
@@ -225,6 +244,63 @@
     return null;
   }
 
+  function isAdaptedItem(it) {
+    if (!it) return false;
+    const cc = it.custom_config || {};
+    return !!(
+      cc.adapted_contact ||
+      cc.skip_measures ||
+      Number(it.product_number) === 400 ||
+      Number(cc.product_number) === 400 ||
+      /adaptés|adapted/i.test(String(it.name || ""))
+    );
+  }
+
+  function showAdaptedNote(items) {
+    if (!adaptedMsg) return;
+    if (!items.some(isAdaptedItem)) {
+      adaptedMsg.hidden = true;
+      adaptedMsg.innerHTML = "";
+      return;
+    }
+    adaptedMsg.hidden = false;
+    titleOk.textContent = t(
+      "Votre commande personnalisée est confirmée !",
+      "Your custom order is confirmed!",
+    );
+    adaptedMsg.innerHTML =
+      "<h2>" +
+      t("Votre commande personnalisée est confirmée !", "Your custom order is confirmed!") +
+      "</h2>" +
+      "<p>" +
+      t("Merci pour votre confiance !", "Thank you for your trust!") +
+      "</p>" +
+      "<p>" +
+      t(
+        "Lucie communiquera personnellement avec vous dans un délai de <strong>3 à 5 jours ouvrables</strong> afin de discuter de vos besoins et de vous guider dans la prise des mesures nécessaires.",
+        "Lucie will personally contact you within <strong>3 to 5 business days</strong> to discuss your needs and guide you through taking the necessary measurements.",
+      ) +
+      "</p>" +
+      "<p>" +
+      t(
+        "Chaque création est confectionnée spécialement pour vous, avec soin et attention.",
+        "Each creation is made especially for you, with care and attention.",
+      ) +
+      "</p>" +
+      "<p>" +
+      t(
+        "Prévoyez un délai minimum d'une semaine pour la confection, à compter de la confirmation des mesures. Ce délai peut être prolongé pendant les périodes achalandées.",
+        "Allow at least one week for making, starting from measurement confirmation. This timeline may be longer during busy periods.",
+      ) +
+      "</p>" +
+      "<p><strong>" +
+      t(
+        "Vous n’avez aucune démarche supplémentaire à effectuer pour le moment.",
+        "You don’t need to take any further steps for now.",
+      ) +
+      "</strong></p>";
+  }
+
   function showConfirmed(data) {
     panel.classList.remove("is-waiting", "is-failed");
     headingAlt.hidden = true;
@@ -242,6 +318,7 @@
     details.hidden = false;
     linesEl.innerHTML = "";
     const items = Array.isArray(data.items) ? data.items : [];
+    showAdaptedNote(items);
     if (!items.length) {
       const li = document.createElement("li");
       li.className = "order-line";

@@ -107,7 +107,7 @@ function customLine(product, suffix, measurements, extras = {}) {
 // ─── Garde-fous données officielles ─────────────────────────────────────────
 
 test("SIM — données commerciales officielles non altérées (stock null, livraison off)", () => {
-  assert.equal(inventoryOfficial.items.length, 66);
+  assert.equal(inventoryOfficial.items.length, 65);
   assert.ok(inventoryOfficial.items.every((i) => i.qty_on_hand === null));
   assert.equal(shippingConfig.methods.canada_post.enabled, true);
   assert.equal(shippingConfig.methods.canada_post.fee_cad_cents, 1800);
