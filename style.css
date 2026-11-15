@@ -1198,10 +1198,10 @@ body{
   gap:2px;
   flex:1 1 calc(25% - 8px);
   width:auto;
-  min-width:44px;
+  min-width:72px;
   max-width:calc(50% - 6px);
   min-height:48px;
-  padding:6px 4px;
+  padding:10px 14px;
   white-space:normal;
   border:1px solid #d7cdc3;
   border-radius:4px;
@@ -1405,7 +1405,7 @@ body{
 }
 @media(max-width:767px){
   .shop-products{grid-template-columns:1fr 1fr;gap:12px}
-  .size-choice{flex:1 1 calc(50% - 6px);min-width:44px;max-width:calc(50% - 6px);min-height:44px;padding:6px 3px}
+  .size-choice{flex:1 1 calc(50% - 6px);min-width:64px;max-width:calc(50% - 6px);min-height:44px;padding:8px 12px}
   .size-choice-list{gap:6px}
   .size-choice-name{font-size:15px}
   .size-choice-stock{font-size:10px}
@@ -1432,7 +1432,7 @@ body{
 }
 @media(min-width:768px) and (max-width:1023px){
   .shop-products{grid-template-columns:1fr 1fr;gap:18px}
-  .size-choice{flex:1 1 0;min-width:56px;max-width:none;min-height:58px;padding:8px 6px}
+  .size-choice{flex:1 1 0;min-width:72px;max-width:none;min-height:52px;padding:10px 14px}
   .size-choice-list{gap:10px}
   .size-choice-name{font-size:18px}
   .size-choice-stock,.size-order-caption{font-size:12px}
@@ -1441,7 +1441,7 @@ body{
 }
 @media(min-width:1024px) and (max-width:1279px){
   .shop-products{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-  .size-choice{flex:1 1 0;min-width:48px;max-width:none;min-height:54px;padding:7px 4px}
+  .size-choice{flex:1 1 0;min-width:64px;max-width:none;min-height:50px;padding:9px 12px}
   .size-choice-list{gap:8px}
   .size-choice-name{font-size:17px}
   .size-guide-dialog{max-width:min(680px,90vw)}
@@ -1449,7 +1449,7 @@ body{
 @media(min-width:1280px){
   .shop-products{grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
   .size-choice-list{flex-wrap:nowrap;gap:6px}
-  .size-choice{flex:1 1 0;min-width:0;max-width:none;min-height:50px;padding:5px 3px}
+  .size-choice{flex:1 1 0;min-width:56px;max-width:none;min-height:48px;padding:8px 10px}
   .size-choice-name{font-size:15px}
   .size-order-caption,.size-choice-stock{font-size:9px}
 }
