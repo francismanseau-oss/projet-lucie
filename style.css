@@ -1302,6 +1302,15 @@ body{
   object-fit:contain;
   display:block;
 }
+/* Inventaire public retiré (Lucie 2026-11) — masquer d’anciens restes DOM */
+.stock-availability,
+.size-choice-stock,
+.size-stock-solo,
+.size-order-icon,
+.size-order-line,
+.size-order-caption{
+  display:none !important;
+}
 .stock-availability{
   margin:0 0 8px;
   font-size:13px;

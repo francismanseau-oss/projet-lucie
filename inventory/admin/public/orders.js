@@ -115,7 +115,7 @@ function measText(cfg) {
   if (cfg.leather) lines.push(`Cuir : ${cfg.leather}`);
   if (cfg.chaleur) {
     lines.push(
-      "Chaleur renforcée : oui (+20 $ non inclus dans le total). Fait à partir de zéro : 1 semaine de fabrication, environ 3 semaines avant Noël.",
+      "Chaleur renforcée : oui (+20 $ non inclus dans le total). Prévoir 1 à 2 semaines de confection avant l'envoi.",
     );
   }
   if (cfg.comments) lines.push(`Commentaires : ${cfg.comments}`);

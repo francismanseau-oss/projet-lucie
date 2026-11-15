@@ -179,7 +179,7 @@ export function buildPaidOrderEmail(sessionObj, pending, env, archive = null) {
           `\n    Réf. boutique : ${c.product_id || "—"}` +
           `\n    Unité : ${c.unit || "—"}` +
           `\n    Mensurations : ${formatMeasurements(c)}` +
-          `\n    Chaleur renforcée : ${c.chaleur ? "oui (+20 $ non inclus dans le total). Fait à partir de zéro : 1 semaine de fabrication, environ 3 semaines avant Noël." : "non"}` +
+          `\n    Chaleur renforcée : ${c.chaleur ? "oui (+20 $ non inclus dans le total). Prévoir 1 à 2 semaines de confection avant l'envoi." : "non"}` +
           `\n    Cuir / matière : ${c.leather || "noir"}` +
           (c.comments ? `\n    Instructions : ${c.comments}` : "");
       }
@@ -269,7 +269,7 @@ export function buildPaidOrderEmail(sessionObj, pending, env, archive = null) {
                   : `<div style="font-size:13px;color:#5c4f44;margin-top:6px;line-height:1.45;">
                 Réf. : ${escapeHtml(c.product_id || "—")} · Unité : ${escapeHtml(c.unit || "—")}<br>
                 Mensurations : ${escapeHtml(formatMeasurements(c))}<br>
-                Chaleur renforcée : ${c.chaleur ? "oui (+20 $ non inclus dans le total). Fait à partir de zéro : 1 semaine de fabrication, environ 3 semaines avant Noël." : "non"} · Matière : ${escapeHtml(c.leather || "noir")}
+                Chaleur renforcée : ${c.chaleur ? "oui (+20 $ non inclus dans le total). Prévoir 1 à 2 semaines de confection avant l'envoi." : "non"} · Matière : ${escapeHtml(c.leather || "noir")}
                 ${c.comments ? `<br>Instructions : ${escapeHtml(c.comments)}` : ""}
               </div>`;
             }
@@ -544,7 +544,7 @@ export function buildCustomerAdaptedConfirmEmail(sessionObj, pending, env, archi
     "",
     "Chaque création est confectionnée spécialement pour vous, avec soin et attention.",
     "",
-    "Prévoyez un délai minimum d'une semaine pour la confection, à compter de la confirmation des mesures. Ce délai peut être prolongé pendant les périodes achalandées.",
+    "Prévoir 1 à 2 semaines de confection avant l'envoi, à compter de la confirmation des mesures.",
     "",
     "Vous n’avez aucune démarche supplémentaire à effectuer pour le moment.",
     "",
@@ -564,7 +564,7 @@ export function buildCustomerAdaptedConfirmEmail(sessionObj, pending, env, archi
       <p style="margin:14px 0 0;font-size:16px;line-height:1.55;">Merci pour votre confiance !</p>
       <p style="margin:14px 0 0;font-size:16px;line-height:1.55;">Lucie communiquera personnellement avec vous dans un délai de <strong>3 à 5 jours ouvrables</strong> afin de discuter de vos besoins et de vous guider dans la prise des mesures nécessaires.</p>
       <p style="margin:14px 0 0;font-size:16px;line-height:1.55;">Chaque création est confectionnée spécialement pour vous, avec soin et attention.</p>
-      <p style="margin:14px 0 0;font-size:16px;line-height:1.55;">Prévoyez un délai minimum d'une semaine pour la confection, à compter de la confirmation des mesures. Ce délai peut être prolongé pendant les périodes achalandées.</p>
+      <p style="margin:14px 0 0;font-size:16px;line-height:1.55;">Prévoir 1 à 2 semaines de confection avant l'envoi, à compter de la confirmation des mesures.</p>
       <p style="margin:14px 0 0;font-size:16px;line-height:1.55;"><strong>Vous n’avez aucune démarche supplémentaire à effectuer pour le moment.</strong></p>
       <p style="margin:22px 0 0;font-size:15px;color:#5c4f44;">N° de commande : <strong>${escapeHtml(orderNumber)}</strong></p>
     </td></tr>

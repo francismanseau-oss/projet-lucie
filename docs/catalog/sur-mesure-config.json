@@ -9,10 +9,10 @@
     "note_en": "Leather available: black only. Recycled fur colours may vary depending on materials on hand."
   },
   "made_to_order": {
-    "label_fr": "Sur commande",
-    "label_en": "Made to order",
-    "delay_fr": "Environ 1 semaine de fabrication, puis le délai de livraison. En période de Noël, l’attente peut aller jusqu’à 3 semaines avant la livraison.",
-    "delay_en": "About 1 week to make, then shipping time. Around Christmas, the wait can be up to 3 weeks before delivery."
+    "label_fr": "Confection",
+    "label_en": "Making time",
+    "delay_fr": "Prévoir 1 à 2 semaines de confection avant l'envoi.",
+    "delay_en": "Please allow 1 to 2 weeks of making time before shipping."
   },
   "free_options": {},
   "pending_options": {
@@ -172,7 +172,7 @@
     "label_en": "Adapted creation — Lucie will contact you for measurements",
     "confirm_title_fr": "Votre commande personnalisée est confirmée !",
     "confirm_title_en": "Your custom order is confirmed!",
-    "confirm_body_fr": "Merci pour votre confiance !\n\nLucie communiquera personnellement avec vous dans un délai de 3 à 5 jours ouvrables afin de discuter de vos besoins et de vous guider dans la prise des mesures nécessaires.\n\nChaque création est confectionnée spécialement pour vous, avec soin et attention.\n\nPrévoyez un délai minimum d'une semaine pour la confection, à compter de la confirmation des mesures. Ce délai peut être prolongé pendant les périodes achalandées.",
-    "confirm_body_en": "Thank you for your trust!\n\nLucie will personally contact you within 3 to 5 business days to discuss your needs and guide you through taking the necessary measurements.\n\nEach creation is made especially for you, with care and attention.\n\nAllow at least one week for making, starting from measurement confirmation. This timeline may be longer during busy periods."
+    "confirm_body_fr": "Merci pour votre confiance !\n\nLucie communiquera personnellement avec vous dans un délai de 3 à 5 jours ouvrables afin de discuter de vos besoins et de vous guider dans la prise des mesures nécessaires.\n\nChaque création est confectionnée spécialement pour vous, avec soin et attention.\n\nPrévoir 1 à 2 semaines de confection avant l'envoi, à compter de la confirmation des mesures.",
+    "confirm_body_en": "Thank you for your trust!\n\nLucie will personally contact you within 3 to 5 business days to discuss your needs and guide you through taking the necessary measurements.\n\nEach creation is made especially for you, with care and attention.\n\nPlease allow 1 to 2 weeks of making time before shipping, starting from measurement confirmation."
   }
 }

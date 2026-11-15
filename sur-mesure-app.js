@@ -175,8 +175,8 @@
     const d = state.config && state.config.made_to_order;
     if (d && d.delay_fr && d.delay_en) return t(d.delay_fr, d.delay_en);
     return t(
-      "Environ 1 semaine de fabrication, puis le délai de livraison. En période de Noël, l’attente peut aller jusqu’à 3 semaines avant la livraison.",
-      "About 1 week to make, then shipping time. Around Christmas, the wait can be up to 3 weeks before delivery.",
+      "Prévoir 1 à 2 semaines de confection avant l'envoi.",
+      "Please allow 1 to 2 weeks of making time before shipping.",
     );
   }
 
@@ -1701,12 +1701,12 @@
         requested_size_label_en:
           !adapted && state.requestedSize ? LETTERS[state.requestedSize].en : null,
         lead_time_fr: adapted
-          ? "Lucie communiquera sous 3 à 5 jours ouvrables pour les mesures. Confection : minimum 1 semaine après confirmation des mesures."
+          ? "Lucie communiquera sous 3 à 5 jours ouvrables pour les mesures. Prévoir 1 à 2 semaines de confection avant l'envoi, à compter de la confirmation des mesures."
           : state.requestedSize && state.config?.made_to_order
             ? state.config.made_to_order.delay_fr
             : null,
         lead_time_en: adapted
-          ? "Lucie will contact you within 3 to 5 business days for measurements. Making: at least 1 week after measurement confirmation."
+          ? "Lucie will contact you within 3 to 5 business days for measurements. Please allow 1 to 2 weeks of making time before shipping, starting from measurement confirmation."
           : state.requestedSize && state.config?.made_to_order
             ? state.config.made_to_order.delay_en
             : null,

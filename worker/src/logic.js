@@ -271,13 +271,13 @@ export function assertStripeKeyMode(env) {
         403,
       );
     }
+    // Inventaire public désactivé (Lucie 2026-11) : ne plus exiger AVAILABILITY_CONFIGURED.
     const unlocked =
       env.PRODUCTION_UNLOCKED === "true" &&
-      env.SHIPPING_CONFIGURED === "true" &&
-      env.AVAILABILITY_CONFIGURED === "true";
+      env.SHIPPING_CONFIGURED === "true";
     if (!unlocked) {
       throw httpError(
-        "Paiements réels (sk_live) bloqués : livraison, disponibilité des articles et déblocage production non configurés.",
+        "Paiements réels (sk_live) bloqués : livraison et déblocage production non configurés.",
         403,
       );
     }
@@ -463,10 +463,10 @@ export function assertProductionFullyBlocked(env) {
   const wantsLive = key.startsWith("sk_live") || env.PRODUCTION_UNLOCKED === "true";
   if (!wantsLive) return;
 
+  // Inventaire public désactivé (Lucie 2026-11) : AVAILABILITY_CONFIGURED n'est plus requis.
   const required = [
     ["PRODUCTION_UNLOCKED", env.PRODUCTION_UNLOCKED],
     ["SHIPPING_CONFIGURED", env.SHIPPING_CONFIGURED],
-    ["AVAILABILITY_CONFIGURED", env.AVAILABILITY_CONFIGURED],
     ["PACKAGE_PROFILES_CONFIGURED", env.PACKAGE_PROFILES_CONFIGURED],
     ["COMMERCIAL_TERMS_CONFIGURED", env.COMMERCIAL_TERMS_CONFIGURED],
   ];
@@ -493,9 +493,7 @@ export function assertLiveSaleAllowed(env, resolved) {
   if (env.SHIPPING_CONFIGURED !== "true" && env.FREE_SHIPPING_AUTHORIZED !== "true") {
     throw httpError("Livraison non configurée — paiement réel refusé.", 403);
   }
-  if (env.AVAILABILITY_CONFIGURED !== "true") {
-    throw httpError("Disponibilité non configurée — paiement réel refusé.", 403);
-  }
+  // Inventaire public désactivé (Lucie 2026-11) : ne plus exiger AVAILABILITY_CONFIGURED.
   if (env.PACKAGE_PROFILES_CONFIGURED !== "true") {
     throw httpError("Profils colis non confirmés par Lucie — paiement réel refusé.", 403);
   }

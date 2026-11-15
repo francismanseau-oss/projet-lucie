@@ -68,22 +68,20 @@ const LETTER_LABELS={
   L:{fr:'Grand',en:'Large',abbrFr:'G',abbrEn:'L'},
   XL:{fr:'Très grand',en:'Extra Large',abbrFr:'TG',abbrEn:'XL'}
 };
-/** Ancien blocage mono-taille retiré (2026-11-07) : les lettres S/M/L/XL
- *  affichent toujours P/M/G/TG ; le stock réel reste dans product-sizes.json. */
+/** Lettres S/M/L/XL → P/M/G/TG. Inventaire public retiré (Lucie 2026-11). */
 const FIXED_ONE_SIZE={};
 const ADAPTED_CONTACT_PRODUCTS={
   'mukluks-adulte-mobilite-reduite-8-9-vison-et-renard':true
 };
 const ORDER_FALLBACK={
-  label_fr:'Sur commande',
-  label_en:'Made to order',
-  delay_fr:'Environ 1 semaine de fabrication, puis le délai de livraison. En période de Noël, l’attente peut aller jusqu’à 3 semaines avant la livraison.',
-  delay_en:'About 1 week to make, then shipping time. Around Christmas, the wait can be up to 3 weeks before delivery.'
+  label_fr:'Confection',
+  label_en:'Making time',
+  delay_fr:"Prévoir 1 à 2 semaines de confection avant l'envoi.",
+  delay_en:'Please allow 1 to 2 weeks of making time before shipping.'
 };
 let orderCopy=Object.assign({},ORDER_FALLBACK);
 function letterScale(cfg,_id){
   // Grille P/M/G/TG dès que toutes les variantes listées sont des lettres.
-  // Les lettres absentes du JSON = Sur commande (pas de stock fictif).
   return !!(cfg&&cfg.sizes&&cfg.sizes.length&&cfg.sizes.every(sz=>LETTERS.includes(String(sz.code||'').toUpperCase())));
 }
 function isUniqueOnly(cfg){
@@ -108,9 +106,9 @@ function letterRows(cfg){
   const by={};
   (cfg.sizes||[]).forEach(sz=>{by[String(sz.code||'').toUpperCase()]=sz});
   return LETTERS.map(code=>{
-    const sz=by[code]||null;
-    const q=!sz||sz.qty_on_hand==null?null:Math.floor(Number(sz.qty_on_hand));
-    return {code,sz,q,inStock:!!(sz&&q!=null&&q>0),soldOut:!!(sz&&q!=null&&q<=0)};
+    const lab=LETTER_LABELS[code]||{fr:code,en:code};
+    const sz=by[code]||{code:code,label_fr:lab.fr,label_en:lab.en,qty_on_hand:null};
+    return {code,sz,q:null,inStock:true,soldOut:false};
   });
 }
 function orderHref(productId,code){
@@ -230,20 +228,11 @@ function availabilityCopy(cfg,id){
   if(q==null)return order;
   return {fr:stockPhraseLang(q,'fr'),en:stockPhraseLang(q,'en'),kind:q<=0?'sold':'qty',qty:q};
 }
-function placeStock(cfg,id,btn){
-  const info=btn.parentElement;
-  let el=info.querySelector(':scope > .stock-availability');
-  const copy=availabilityCopy(cfg,id);
-  if(!el){
-    el=document.createElement('p');
-    el.className='stock-availability';
-    info.insertBefore(el,btn);
-  }
-  el.dataset.fr=copy.fr;
-  el.dataset.en=copy.en;
-  el.textContent=en()?copy.en:copy.fr;
-  el.classList.toggle('is-sold',copy.kind==='sold');
-  el.classList.toggle('is-unverified',copy.kind==='unverified');
+function placeStock(_cfg,_id,btn){
+  /* Inventaire public retiré — nettoyer d’anciennes pastilles stock. */
+  const info=btn&&btn.parentElement;
+  if(!info)return;
+  info.querySelectorAll(':scope > .stock-availability, .size-stock-solo').forEach(el=>el.remove());
 }
 const ORDER_QTY_MAX=20;
 function moneyCad(n){
@@ -300,23 +289,15 @@ function attachQtyPicker(parent,card,cfg,btn){
     const id=card.dataset.productId||btn.dataset.id;
     const multi=(cfg.selector&&cfg.sizes&&cfg.sizes.length>1)||letterScale(cfg,id);
     let sizeCode=null;
-    let stockMax=null;
-    let order=false;
-    const fileRow=()=>multi?(cfg.sizes||[]).find(s=>s.code===sizeCode):(cfg.sizes&&cfg.sizes[0]);
     if(multi){
       sizeCode=selectedSize(card);
-      if(!sizeCode)return {max:null,known:false,order:false};
+      if(!sizeCode)return {max:null,known:false};
     }else{
       const only=cfg.sizes&&cfg.sizes[0];
       sizeCode=only&&only.code;
     }
-    const sz=fileRow();
-    const live=effectiveQty(id,sizeCode,sz&&sz.qty_on_hand);
-    if(live.state==='unverified')return {max:null,known:false,order:false,unverified:true};
-    if(live.state==='order'||live.qty==null){stockMax=ORDER_QTY_MAX;order=true;}
-    else stockMax=Math.max(0,live.qty);
-    const room=Math.max(0,stockMax-cartUsed(id,sizeCode));
-    return {max:room,known:true,order};
+    const room=Math.max(0,ORDER_QTY_MAX-cartUsed(id,sizeCode));
+    return {max:room,known:true};
   }
   function sync(){
     const lim=limits();
@@ -332,7 +313,7 @@ function attachQtyPicker(parent,card,cfg,btn){
     ctrl.setAttribute('aria-label',qLab);
     minus.setAttribute('aria-label',en()?'Decrease quantity':'Diminuer la quantité');
     plus.setAttribute('aria-label',en()?'Increase quantity':'Augmenter la quantité');
-    plus.title=lim.known&&lim.max!=null&&q>=lim.max?(lim.order?(en()?'Maximum for a made-to-order item':'Maximum pour un article sur commande'):(en()?'Available stock reached':'Stock disponible atteint')):'';
+    plus.title=lim.known&&lim.max!=null&&q>=lim.max?(en()?'Maximum quantity reached':'Quantité maximale atteinte'):'';
   }
   card._syncQty=sync;
   minus.addEventListener('click',(ev)=>{ev.preventDefault();ev.stopPropagation();card._qty=Math.max(1,(card._qty||1)-1);sync();});
@@ -356,101 +337,46 @@ function selectedSize(card){
 }
 function refreshAddBtn(card,cfg,btn,hint){
   const id=card&&(card.dataset.productId||(btn&&btn.dataset.id));
-  if(!usesSizeChoices(cfg,id)){
-    const only=cfg&&cfg.sizes&&cfg.sizes[0];
-    const q=only&&only.qty_on_hand!=null?Math.floor(Number(only.qty_on_hand)):null;
-    if(q!=null&&q<=0){
-      btn.disabled=true;btn.classList.add('is-sold-out');
-      const t=stockText(0);btn.textContent=t;btn.dataset.fr='Épuisé';btn.dataset.en='Sold out';
-    }else{
-      btn.disabled=false;btn.classList.remove('is-sold-out');
-      btn.textContent=en()?btn.dataset.en:btn.dataset.fr;
-    }
-    return;
-  }
-  const code=selectedSize(card);
   if(hint){hint.hidden=true;hint.textContent='';}
-  if(!code){
-    btn.disabled=false;btn.classList.remove('is-sold-out');btn.classList.add('is-await-size');
-    btn.textContent=en()?btn.dataset.en:btn.dataset.fr;
-    return;
+  btn.disabled=false;
+  btn.classList.remove('is-sold-out');
+  if(usesSizeChoices(cfg,id)){
+    const code=selectedSize(card);
+    if(!code){
+      btn.classList.add('is-await-size');
+      btn.textContent=en()?btn.dataset.en:btn.dataset.fr;
+      return;
+    }
+    btn.classList.remove('is-await-size');
   }
-  btn.classList.remove('is-await-size');
-  const sz=cfg.sizes.find(x=>x.code===code);
-  const q=sz&&sz.qty_on_hand!=null?Math.floor(Number(sz.qty_on_hand)):null;
-  if(q!=null&&q<=0){
-    btn.disabled=true;btn.classList.add('is-sold-out');
-    btn.textContent=stockText(0);
-    if(hint){hint.hidden=false;hint.textContent=stockText(0);}
-    return;
-  }
-  btn.disabled=false;btn.classList.remove('is-sold-out');
   btn.textContent=en()?btn.dataset.en:btn.dataset.fr;
 }
 function buildChoice(sz,cfg,card,btn,hint){
-  const q=sz.qty_on_hand==null?null:Math.floor(Number(sz.qty_on_hand));
-  const sold=q!=null&&q<=0;
   const b=document.createElement('button');
   b.type='button';
-  b.className='size-choice'+(sold?' is-sold-out':'');
+  b.className='size-choice';
   b.dataset.size=sz.code;
-  if(sold)b.disabled=true;
   const name=document.createElement('span');
   name.className='size-choice-name';
   name.textContent=buttonLabel(sz);
-  const stock=document.createElement('span');
-  stock.className='size-choice-stock'+(sold?' is-sold':'');
-  stock.textContent=stockText(q);
-  b.appendChild(name);b.appendChild(stock);
-  b.setAttribute('aria-label',sizeName(sz)+(stock.textContent?' , '+stock.textContent:''));
+  b.appendChild(name);
+  b.setAttribute('aria-label',sizeName(sz));
   b.title=sizeName(sz);
-  if(!sold){
-    b.addEventListener('click',(ev)=>{
-      ev.stopPropagation();
-      card.querySelectorAll('.size-choice').forEach(x=>x.classList.remove('is-selected'));
-      b.classList.add('is-selected');
-      refreshAddBtn(card,cfg,btn,hint);
-      if(typeof card._syncQty==='function')card._syncQty();
-    });
-  }
+  b.addEventListener('click',(ev)=>{
+    ev.stopPropagation();
+    card.querySelectorAll('.size-choice').forEach(x=>x.classList.remove('is-selected'));
+    b.classList.add('is-selected');
+    refreshAddBtn(card,cfg,btn,hint);
+    if(typeof card._syncQty==='function')card._syncQty();
+  });
   return b;
 }
-function buildOrderLink(code,productId){
-  const labels=LETTER_LABELS[code]||{fr:code,en:code,abbrFr:code,abbrEn:code};
-  const a=document.createElement('a');
-  a.className='size-choice size-choice-order';
-  a.href=orderHref(productId,code);
-  a.dataset.size=code;
-  a.dataset.labelFr=orderCopy.label_fr;
-  a.dataset.labelEn=orderCopy.label_en;
-  a.dataset.delayFr=orderCopy.delay_fr;
-  a.dataset.delayEn=orderCopy.delay_en;
-  const name=document.createElement('span');
-  name.className='size-choice-name';
-  name.dataset.fr=labels.abbrFr;
-  name.dataset.en=labels.abbrEn;
-  name.dataset.fullFr=labels.fr;
-  name.dataset.fullEn=labels.en;
-  name.textContent=en()?labels.abbrEn:labels.abbrFr;
-  const line=document.createElement('span');
-  line.className='size-order-line';
-  const mark=document.createElement('img');
-  mark.className='size-order-icon';
-  mark.src=iconSrc('machine-coudre.png');
-  mark.alt='';
-  mark.width=26;
-  mark.height=26;
-  mark.setAttribute('aria-hidden','true');
-  const caption=document.createElement('span');
-  caption.className='size-order-caption';
-  caption.textContent=en()?orderCopy.label_en:orderCopy.label_fr;
-  line.appendChild(mark);
-  line.appendChild(caption);
-  a.appendChild(name);
-  a.appendChild(line);
-  paintOrderLink(a);
-  a.addEventListener('click',ev=>ev.stopPropagation());
-  return a;
+function ensureCatalogSize(cfg,code){
+  const upper=String(code||'').toUpperCase();
+  const sz=(cfg.sizes||[]).find(s=>String(s.code||'').toUpperCase()===upper);
+  if(sz)return sz;
+  const lab=LETTER_LABELS[upper]||{fr:upper,en:upper};
+  return {code:upper,label_fr:lab.fr,label_en:lab.en,qty_on_hand:null};
 }
 function bindSizeReveal(card,wrap){
   const line=wrap.querySelector('.size-line');
@@ -690,8 +616,8 @@ function injectSelectors(doc){
       hint.hidden=true;
       if(letter){
         letterRows(cfg).forEach(row=>{
-          if(row.sz)list.appendChild(buildChoice(row.sz,cfg,card,btn,hint));
-          else list.appendChild(buildOrderLink(row.code,id));
+          const sz=ensureCatalogSize(cfg,row.code);
+          list.appendChild(buildChoice(sz,cfg,card,btn,hint));
         });
         line.appendChild(list);
       }else if(Array.isArray(cfg.size_groups)&&cfg.size_groups.length){
@@ -719,9 +645,9 @@ function injectSelectors(doc){
       }
       attachChaleur(line);
       inner.appendChild(line);
-      if(letter&&letterRows(cfg).some(row=>!row.sz)){
+      if(letter){
         const note=document.createElement('p');
-        note.className='size-order-note';
+        note.className='size-order-note confection-delay-note';
         note.dataset.fr=orderCopy.delay_fr;
         note.dataset.en=orderCopy.delay_en;
         note.textContent=en()?orderCopy.delay_en:orderCopy.delay_fr;
@@ -870,19 +796,12 @@ document.querySelectorAll('.demo-add').forEach(b=>b.addEventListener('click',()=
   if(usesSizeChoices(cfg,id)){
     const code=selectedSize(card);
     if(!code){if(card&&typeof card._setSizeOpen==='function')card._setSizeOpen(true);return}
-    const sz=cfg.sizes.find(s=>s.code===code);
-    if(!sz)return;
-    const live=effectiveQty(id,code,sz.qty_on_hand);
-    if(live.state==='unverified'){alert(unverifiedPhrase());return}
-    if(live.qty!=null&&live.qty<=0){alert(stockText(0));return}
+    const sz=ensureCatalogSize(cfg,code);
     size=code;
     const L=api&&api.labelsForCart?api.labelsForCart(code,sz):{fr:sz.label_fr||code,en:sz.label_en||code};
     size_label_fr=L.fr;size_label_en=L.en;
   }else if(cfg&&cfg.sizes&&cfg.sizes[0]){
     const sz=cfg.sizes[0];
-    const live=effectiveQty(id,sz.code,sz.qty_on_hand);
-    if(live.state==='unverified'){alert(unverifiedPhrase());return}
-    if(live.qty!=null&&live.qty<=0){alert(stockText(0));return}
     size=sz.code;
     const L=api&&api.labelsForCart?api.labelsForCart(sz.code,sz):{fr:sz.label_fr||sz.code,en:sz.label_en||sz.code};
     size_label_fr=L.fr;size_label_en=L.en;
@@ -891,19 +810,14 @@ document.querySelectorAll('.demo-add').forEach(b=>b.addEventListener('click',()=
   let cart=[];try{cart=JSON.parse(localStorage.getItem(key)||'[]')}catch(e){cart=[]}
   if(!Array.isArray(cart))cart=[];
   const addQty=Math.max(1,Math.floor(Number(card&&card._qty)||1));
-  const liveCap=size?effectiveQty(id,size,cfg&&cfg.sizes&&(cfg.sizes.find(s=>s.code===size)||{}).qty_on_hand):null;
-  let cap=null;
-  if(size){
-    if(!liveCap||liveCap.state==='order'||liveCap.qty==null)cap=ORDER_QTY_MAX;
-    else cap=liveCap.qty;
-  }
+  const cap=ORDER_QTY_MAX;
   const draft={id,name,name_fr,name_en,price,price_cad_cents:Math.round(Number(price)*100),product_number:b.dataset.productNumber?Number(b.dataset.productNumber):null,qty:addQty,size,size_label_fr,size_label_en};
   const lk=cartLineKey(draft);
   const found=cart.find(x=>!x.custom&&cartLineKey(x)===lk);
   const already=found?Math.floor(Number(found.qty)||0):0;
-  if(cap!=null&&already+addQty>cap){
+  if(already+addQty>cap){
     const left=Math.max(0,cap-already);
-    alert(en()?(left?('Only '+left+' more for this size.'):('Only '+cap+' left for this size.')):(left?('Il ne reste que '+left+' de plus pour cette taille.'):('Il ne reste que '+cap+' pour cette taille.')));
+    alert(en()?(left?('You can add up to '+left+' more of this item.'):('Maximum quantity is '+cap+'.')):(left?('Vous pouvez encore ajouter '+left+' de cet article.'):('La quantité maximale est '+cap+'.')));
     return;
   }
   if(found)found.qty=already+addQty;
@@ -966,28 +880,21 @@ function repaintAvailability(doc){
     const cfg=id&&doc.products[id];
     if(!cfg||!btn)return;
     placeStock(cfg,id,btn);
-    card.querySelectorAll('.size-choice:not(.size-choice-order)').forEach(b=>{
-      const sz=(cfg.sizes||[]).find(x=>x.code===b.dataset.size);
-      const stock=b.querySelector('.size-choice-stock');
-      if(!sz||!stock)return;
-      const live=effectiveQty(id,sz.code,sz.qty_on_hand);
-      const q=live.state==='live'||live.state==='file'?live.qty:null;
-      stock.textContent=live.state==='unverified'?unverifiedPhrase():(q==null?'':stockText(q));
-      stock.classList.toggle('is-sold',q!=null&&q<=0);
-      b.classList.toggle('is-sold-out',q!=null&&q<=0);
-      b.disabled=q!=null&&q<=0;
-      b.setAttribute('aria-label',sizeName(sz)+(stock.textContent?' , '+stock.textContent:''));
+    card.querySelectorAll('.size-choice-stock, .size-order-icon, .size-order-line, .size-order-caption').forEach(el=>el.remove());
+    card.querySelectorAll('.size-choice').forEach(b=>{
+      b.classList.remove('is-sold-out','size-choice-order');
+      b.disabled=false;
+      if(b.tagName==='A'){
+        b.removeAttribute('href');
+        b.setAttribute('role','button');
+      }
+      const sz=(cfg.sizes||[]).find(x=>x.code===b.dataset.size)||ensureCatalogSize(cfg,b.dataset.size);
+      if(sz)b.setAttribute('aria-label',sizeName(sz));
     });
-    card.querySelectorAll('.size-stock-solo').forEach(el=>{
-      const only=cfg.sizes&&cfg.sizes[0];
-      const live=effectiveQty(id,only&&only.code,only&&only.qty_on_hand);
-      const q=live.state==='live'||live.state==='file'?live.qty:null;
-      el.dataset.qty=q==null?'':String(q);
-      el.textContent=live.state==='unverified'?unverifiedPhrase():(q==null?'':stockText(q));
-      el.classList.toggle('is-sold',q!=null&&q<=0);
-    });
+    card.querySelectorAll('.size-stock-solo').forEach(el=>el.remove());
     const hint=card.querySelector('.size-select-hint');
     refreshAddBtn(card,cfg,btn,hint);
+    if(typeof card._syncQty==='function')card._syncQty();
   });
 }
 document.addEventListener('visibilitychange',()=>{
