@@ -873,9 +873,9 @@
       "selector": false,
       "sizes": [
         {
-          "code": "unique",
-          "label_fr": "Format unique",
-          "label_en": "One size",
+          "code": "7-24 mois",
+          "label_fr": "7 à 24 mois",
+          "label_en": "7 to 24 months",
           "qty_on_hand": 3
         }
       ]
