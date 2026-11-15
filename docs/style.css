@@ -1448,9 +1448,9 @@ body{
 }
 @media(min-width:1280px){
   .shop-products{grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
-  .size-choice-list{flex-wrap:nowrap;gap:6px}
-  .size-choice{flex:1 1 0;min-width:56px;max-width:none;min-height:48px;padding:8px 10px}
-  .size-choice-name{font-size:15px}
+  .size-choice-list{flex-wrap:nowrap;gap:8px}
+  .size-choice{flex:1 1 0;min-width:72px;max-width:none;min-height:52px;padding:10px 14px}
+  .size-choice-name{font-size:16px}
   .size-order-caption,.size-choice-stock{font-size:9px}
 }
 @media(min-width:1440px){
