@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Paiement — Les Fourrures Boréales (Stripe Checkout mode test).">
+<meta name="description" content="Paiement sécurisé — Les Fourrures Boréales.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="https://lesfourruresboreales.ca/paiement">
 <!-- SEO-GEN-START -->
@@ -11,12 +11,12 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Les Fourrures Boréales">
 <meta property="og:title" content="Paiement | Les Fourrures Boréales">
-<meta property="og:description" content="Paiement — Les Fourrures Boréales (Stripe Checkout mode test).">
+<meta property="og:description" content="Paiement sécurisé — Les Fourrures Boréales.">
 <meta property="og:url" content="https://lesfourruresboreales.ca/paiement">
 <meta property="og:image" content="https://lesfourruresboreales.ca/assets/logo-fourrures-boreales.webp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Paiement | Les Fourrures Boréales">
-<meta name="twitter:description" content="Paiement — Les Fourrures Boréales (Stripe Checkout mode test).">
+<meta name="twitter:description" content="Paiement sécurisé — Les Fourrures Boréales.">
 <meta name="twitter:image" content="https://lesfourruresboreales.ca/assets/logo-fourrures-boreales.webp">
 
 <!-- SEO-GEN-END -->
@@ -59,7 +59,7 @@
 <main>
   <section class="page-heading">
     <h1><span data-fr="Paiement" data-en="Payment">Paiement</span></h1>
-    <p id="pay-lead">Essais seulement : paiements Stripe simulés (mode TEST) — aucun paiement réel.</p>
+    <p id="pay-lead" data-fr="Vérifiez votre commande, puis payez en toute sécurité." data-en="Review your order, then pay securely.">Vérifiez votre commande, puis payez en toute sécurité.</p>
   </section>
 
   <section class="story payment-demo">
@@ -105,15 +105,12 @@
           <button type="button" id="btn-quote" class="button button-ghost">Confirmer l'adresse et le total</button>
         </p>
       </div>
-      <p class="cart-secure"><span class="cart-secure-icon" aria-hidden="true">🧪</span>
-        <span>Essais seulement : paiement Stripe simulé (TEST). Le total inclut les articles et 18,00&nbsp;$ de livraison.</span>
-      </p>
     </div>
     <div class="cart-actions">
       <a class="button button-ghost" href="panier.html">← Retour au panier</a>
       <button type="button" id="pay-stripe" class="button button-checkout" hidden disabled>
         <span class="pay-icon" aria-hidden="true">💳</span>
-        <span>Payer le total (test)</span>
+        <span data-fr="Payer le total" data-en="Pay total">Payer le total</span>
         <span aria-hidden="true">→</span>
       </button>
       <a class="button button-ghost" href="boutique.html">Continuer vos achats</a>
@@ -416,15 +413,15 @@
         holdBanner.innerHTML = en()
           ? "<strong>Confirmed.</strong> Shipping " +
             money(shippingFeeCents / 100) +
-            " — same fee either method. You can pay below (Stripe TEST)."
+            " — same fee either method. You can pay below."
           : "<strong>Confirmé.</strong> Livraison " +
             money(shippingFeeCents / 100) +
-            " — même frais peu importe le mode. Vous pouvez payer ci-dessous (essai Stripe TEST).";
+            " — même frais peu importe le mode. Vous pouvez payer ci-dessous.";
         setQuoteConfirmedUI(true);
         setStatus(
           en()
-            ? "Total ready. You can pay (Stripe TEST)."
-            : "Total prêt. Vous pouvez payer (essai Stripe TEST).",
+            ? "Total ready. You can pay."
+            : "Total prêt. Vous pouvez payer.",
         );
         holdBanner.scrollIntoView({ behavior: "smooth", block: "nearest" });
       } else if (data.status === "quote_required") {
@@ -487,9 +484,9 @@
       holdBanner.innerHTML =
         "Livraison confirmée : <strong>" +
         money(shippingFeeCents / 100) +
-        "</strong>. Total articles + livraison prêt (essai TEST).";
+        "</strong>. Total articles + livraison prêt.";
       setQuoteConfirmedUI(true);
-      setStatus("Total prêt (Stripe TEST).");
+      setStatus("Total prêt.");
       renderTotals();
     } catch (e) {
       setStatus("Reprise devis : " + (e.message || e));
@@ -552,7 +549,7 @@
       return;
     }
     btn.disabled = true;
-    setStatus("Création de la session Stripe (paiement unique, test)…");
+    setStatus("Création de la session de paiement…");
     try {
       const cartNow = load();
       const blocked = cartNow.find(
