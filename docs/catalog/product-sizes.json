@@ -180,9 +180,9 @@
       "selector": false,
       "sizes": [
         {
-          "code": "8-24 mois",
-          "label_fr": "8-24 mois",
-          "label_en": "8-24 months",
+          "code": "7-24 mois",
+          "label_fr": "7 à 24 mois",
+          "label_en": "7 to 24 months",
           "qty_on_hand": 3
         }
       ]
@@ -193,9 +193,9 @@
       "selector": false,
       "sizes": [
         {
-          "code": "8-24 mois",
-          "label_fr": "8-24 mois",
-          "label_en": "8-24 months",
+          "code": "7-24 mois",
+          "label_fr": "7 à 24 mois",
+          "label_en": "7 to 24 months",
           "qty_on_hand": 3
         }
       ]
@@ -206,9 +206,9 @@
       "selector": false,
       "sizes": [
         {
-          "code": "8-24 mois",
-          "label_fr": "8 à 24 mois",
-          "label_en": "8 to 24 months",
+          "code": "7-24 mois",
+          "label_fr": "7 à 24 mois",
+          "label_en": "7 to 24 months",
           "qty_on_hand": 3
         }
       ]
