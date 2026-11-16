@@ -25,32 +25,84 @@
 <link rel="icon" type="image/png" href="favicon.png" sizes="64x64">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
-  .ship-box { margin: 1.25rem 0; padding: 1rem 1.1rem; border: 1px solid #e5d8c8; border-radius: 12px; background: #fffcf8; }
-  .ship-box h2 { margin: 0 0 .75rem; font-size: 1.1rem; font-weight: 600; }
-  .ship-methods { display: grid; gap: .55rem; margin-bottom: .9rem; }
-  .ship-methods label { display: flex; gap: .65rem; align-items: flex-start; padding: .65rem .75rem; border: 1px solid #e5d8c8; border-radius: 10px; cursor: pointer; background: #fff; }
-  .ship-methods label:has(input:checked) { border-color: #965035; background: #f7f1ea; }
-  .ship-fields { display: grid; gap: .65rem; grid-template-columns: 1fr 1fr; }
-  .ship-fields label { display: flex; flex-direction: column; gap: .25rem; font-size: .92rem; }
-  .ship-fields input, .ship-fields select { padding: .55rem .65rem; border: 1px solid #d4c4b4; border-radius: 8px; font: inherit; }
-  .ship-fields .full { grid-column: 1 / -1; }
-  .tot-lines { margin: .75rem 0 0; font-size: 1rem; line-height: 1.55; }
-  .tot-lines strong { font-size: 1.15rem; }
-  .hold-banner { margin-top: .85rem; padding: .85rem; border-radius: 10px; background: #fff4e8; border: 1px solid #e8c9a0; font-size: .95rem; }
-  .hold-banner.is-ok { background: #e8f5e9; border-color: #4caf50; color: #1b5e20; }
-  #btn-quote.is-confirmed {
-    background: #2e7d32 !important;
-    color: #fff !important;
-    border-color: #1b5e20 !important;
+  /* Compact paiement — overrides locaux seulement */
+  .payment-page .page-heading{
+    padding:28px 6% 6px;
+    max-width:900px;
+    margin:0 auto;
   }
-  #btn-quote.is-confirmed:hover { filter: brightness(1.05); }
-  #pay-stripe:disabled {
-    opacity: .45;
-    filter: grayscale(.35);
-    cursor: not-allowed;
-    box-shadow: none;
+  .payment-page .page-heading h1{
+    font-size:clamp(28px,3.6vw,40px);
+    margin:0;
+    line-height:1.15;
   }
-  @media (max-width: 560px) { .ship-fields { grid-template-columns: 1fr; } }
+  .payment-page .story.payment-demo{
+    padding:6px 6% 40px;
+    min-height:0;
+    max-width:900px;
+    margin:0 auto;
+  }
+  .payment-page #pay-status:empty{display:none;margin:0;padding:0}
+  .payment-page #pay-status{
+    margin:0 0 8px;
+    max-width:none;
+  }
+  .payment-page .cart-summary{
+    margin-top:4px;
+    width:100%;
+    align-items:stretch;
+  }
+  .payment-page .cart-actions{margin-top:14px}
+  .ship-box{
+    margin:.35rem 0 0;
+    padding:.85rem 1rem;
+    border:1px solid #e5d8c8;
+    border-radius:12px;
+    background:#fffcf8;
+    width:100%;
+    box-sizing:border-box;
+  }
+  .ship-box h2{margin:0 0 .5rem;font-size:1.05rem;font-weight:600}
+  .ship-box .cart-ship-note{margin:0 0 .35rem}
+  .ship-methods{display:grid;gap:.45rem;margin:.55rem 0 .7rem}
+  .ship-methods label{display:flex;gap:.65rem;align-items:flex-start;padding:.55rem .7rem;border:1px solid #e5d8c8;border-radius:10px;cursor:pointer;background:#fff}
+  .ship-methods label:has(input:checked){border-color:#965035;background:#f7f1ea}
+  .ship-fields{display:grid;gap:.55rem;grid-template-columns:1fr 1fr}
+  .ship-fields label{display:flex;flex-direction:column;gap:.2rem;font-size:.92rem}
+  .ship-fields input,.ship-fields select{padding:.5rem .6rem;border:1px solid #d4c4b4;border-radius:8px;font:inherit}
+  .ship-fields .full{grid-column:1 / -1}
+  .tot-lines{margin:.65rem 0 0;font-size:1rem;line-height:1.5}
+  .tot-lines strong{font-size:1.12rem}
+  .hold-banner{margin-top:.7rem;padding:.75rem;border-radius:10px;background:#fff4e8;border:1px solid #e8c9a0;font-size:.95rem}
+  .hold-banner.is-ok{background:#e8f5e9;border-color:#4caf50;color:#1b5e20}
+  #btn-quote.is-confirmed{
+    background:#2e7d32 !important;
+    color:#fff !important;
+    border-color:#1b5e20 !important;
+  }
+  #btn-quote.is-confirmed:hover{filter:brightness(1.05)}
+  #pay-stripe:disabled{
+    opacity:.45;
+    filter:grayscale(.35);
+    cursor:not-allowed;
+    box-shadow:none;
+  }
+  @media (min-width:768px) and (max-width:1023px){
+    .payment-page .page-heading{padding:22px 5% 4px}
+    .payment-page .story.payment-demo{padding:4px 5% 32px}
+    .ship-box{padding:.8rem .9rem}
+  }
+  @media (max-width:767px){
+    .payment-page .page-heading{padding:16px 4% 2px}
+    .payment-page .page-heading h1{font-size:clamp(24px,7vw,32px)}
+    .payment-page .story.payment-demo{padding:2px 4% 28px}
+    .ship-box{margin:.25rem 0 0;padding:.75rem .8rem;border-radius:10px}
+    .ship-fields{grid-template-columns:1fr;gap:.5rem}
+    .payment-page .cart-actions{margin-top:12px;gap:10px}
+  }
+  @media (max-width:560px){
+    .ship-fields{grid-template-columns:1fr}
+  }
 </style>
 </head>
 <body class="payment-page">
@@ -59,7 +111,6 @@
 <main>
   <section class="page-heading">
     <h1><span data-fr="Paiement" data-en="Payment">Paiement</span></h1>
-    <p id="pay-lead" data-fr="Vérifiez votre commande, puis payez en toute sécurité." data-en="Review your order, then pay securely.">Vérifiez votre commande, puis payez en toute sécurité.</p>
   </section>
 
   <section class="story payment-demo">
