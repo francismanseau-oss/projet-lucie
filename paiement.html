@@ -530,9 +530,6 @@
       (en() ? "Products subtotal: " : "Sous-total produits : ") + money(productsSum);
     productsEl.appendChild(strong);
   }
-  setStatus(
-    "Choisissez la livraison, puis calculez le tarif réel avant de payer (un seul paiement).",
-  );
   renderTotals();
   loadMethods().then(() => tryResumeFromUrl());
 
