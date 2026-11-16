@@ -627,7 +627,8 @@
       "description_fr": "Fourrure coyote recyclée",
       "availability": "contact",
       "active": true,
-      "product_number": 406
+      "product_number": 406,
+      "name_en": "Baby mukluks — coyote"
     },
     {
       "id": "mukluks-bebe-vison-fermeture-eclair",
