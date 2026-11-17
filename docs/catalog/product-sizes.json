@@ -356,19 +356,6 @@
         }
       ]
     },
-    "mitaines-dame-vison-et-renard": {
-      "product_number": 105,
-      "category": "mitaines",
-      "selector": false,
-      "sizes": [
-        {
-          "code": "M",
-          "label_fr": "Moyen",
-          "label_en": "Medium",
-          "qty_on_hand": 3
-        }
-      ]
-    },
     "mitaines-homme-m-l-castor": {
       "product_number": 115,
       "category": "mitaines",
@@ -475,19 +462,6 @@
     },
     "mitaines-m-l-vison-et-chat-sauvage": {
       "product_number": 121,
-      "category": "mitaines",
-      "selector": false,
-      "sizes": [
-        {
-          "code": "M",
-          "label_fr": "Moyen",
-          "label_en": "Medium",
-          "qty_on_hand": 3
-        }
-      ]
-    },
-    "mitaines-m-l-vison-et-renard": {
-      "product_number": 122,
       "category": "mitaines",
       "selector": false,
       "sizes": [

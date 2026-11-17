@@ -97,16 +97,6 @@
       "csm_code": "104-CSM"
     },
     {
-      "product_number": 105,
-      "product_id": "mitaines-dame-vison-et-renard",
-      "name_fr": "Mitaines dame M — vison et renard",
-      "category": "mitaines",
-      "family_label": "Mitaines",
-      "price_cad": 160,
-      "price_cad_cents": 16000,
-      "csm_code": "105-CSM"
-    },
-    {
       "product_number": 106,
       "product_id": "mitaines-dame-m-renard",
       "name_fr": "Mitaines dame M — renard",
@@ -265,16 +255,6 @@
       "price_cad": 160,
       "price_cad_cents": 16000,
       "csm_code": "121-CSM"
-    },
-    {
-      "product_number": 122,
-      "product_id": "mitaines-m-l-vison-et-renard",
-      "name_fr": "Mitaines dame M — vison et renard",
-      "category": "mitaines",
-      "family_label": "Mitaines",
-      "price_cad": 160,
-      "price_cad_cents": 16000,
-      "csm_code": "122-CSM"
     },
     {
       "product_number": 123,
