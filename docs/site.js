@@ -909,15 +909,33 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 /* Bouton retour en haut : visible après défilement */
 (()=>{const b=document.createElement('button');b.type='button';b.className='back-to-top';b.textContent='↑';b.setAttribute('aria-label','Retour en haut');b.title='Retour en haut';document.body.appendChild(b);const refresh=()=>{b.classList.toggle('visible',window.scrollY>240)};window.addEventListener('scroll',refresh,{passive:true});refresh();b.addEventListener('click',()=>window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}));})();
 
-/* Flèches latérales discrètes : navigation entre les pages principales (URLs propres /boutique OK) */
+/* Flèches latérales discrètes : pages principales (URLs propres + GitHub Pages /projet-lucie/) */
 (()=>{
   const pages=['index','boutique','creations-personnalisees','creations','lucie','contact'];
   const names=['Accueil','Boutique','Créations personnalisées','Nos créations','À propos de Lucie','Contact'];
+  const known={};
+  pages.forEach(function(p){known[p]=true;});
   const parts=location.pathname.split('/').filter(Boolean);
-  const raw=(parts.length?parts[parts.length-1]:'index').replace(/\.html$/i,'');
+  let raw='index';
+  let baseParts=[];
+  if(parts.length){
+    const last=parts[parts.length-1].replace(/\.html$/i,'');
+    if(known[last]){
+      raw=last;
+      baseParts=parts.slice(0,-1);
+    }else if(last==='index'){
+      raw='index';
+      baseParts=parts.slice(0,-1);
+    }else{
+      /* /projet-lucie/ → accueil sous le dossier du dépôt */
+      raw='index';
+      baseParts=parts.slice();
+    }
+  }
   const i=pages.indexOf(raw);
   if(i<0)return;
-  function hrefFor(slug){return slug==='index'?'/':'/'+slug;}
+  const base='/'+(baseParts.length?baseParts.join('/')+'/':'');
+  function hrefFor(slug){return slug==='index'?base:(base+slug);}
   const bar=document.createElement('nav');
   bar.className='mobile-page-arrows';
   bar.setAttribute('aria-label','Navigation entre les pages');
