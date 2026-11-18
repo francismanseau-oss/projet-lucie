@@ -30,20 +30,17 @@ body{
 /* Flèches latérales inspirées du portfolio mobile */
 .mobile-page-arrows{display:none}
 @media(max-width:760px){
-.mobile-page-arrows{display:block;position:fixed;inset:0;z-index:20;pointer-events:none}
-.mobile-page-arrows a,
-.mobile-page-arrows span.arrow-prev,
-.mobile-page-arrows span.arrow-next{
+.mobile-page-arrows{display:block;position:fixed;inset:0;z-index:40;pointer-events:none}
+.mobile-page-arrows a{
   position:fixed;
-  top:0;
-  bottom:0;
-  width:36px;
-  height:48px;
-  margin-block:auto;
+  top:50%;
+  width:40px;
+  height:52px;
+  margin-top:-26px;
   display:flex;
   align-items:center;
   justify-content:center;
-  color:rgba(111,65,43,.62);
+  color:rgba(111,65,43,.88);
   background:transparent;
   border:0;
   box-shadow:none;
@@ -51,11 +48,11 @@ body{
   pointer-events:auto;
   touch-action:manipulation;
   transform:none;
+  -webkit-tap-highlight-color:transparent;
 }
-.mobile-page-arrows .arrow-prev{left:max(4px,env(safe-area-inset-left));right:auto}
-.mobile-page-arrows .arrow-next{right:max(4px,env(safe-area-inset-right));left:auto}
-.mobile-page-arrows .is-disabled{opacity:.22;pointer-events:none}
-.mobile-page-arrows svg{width:20px;height:32px;display:block}
+.mobile-page-arrows .arrow-prev{left:max(2px,env(safe-area-inset-left));right:auto}
+.mobile-page-arrows .arrow-next{right:max(2px,env(safe-area-inset-right));left:auto}
+.mobile-page-arrows svg{width:20px;height:32px;display:block;filter:drop-shadow(0 0 1px rgba(255,255,255,.85))}
 .mobile-page-arrows a:focus-visible{outline:2px solid #865038;outline-offset:2px}
 }
 

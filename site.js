@@ -909,8 +909,31 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 /* Bouton retour en haut : visible après défilement */
 (()=>{const b=document.createElement('button');b.type='button';b.className='back-to-top';b.textContent='↑';b.setAttribute('aria-label','Retour en haut');b.title='Retour en haut';document.body.appendChild(b);const refresh=()=>{b.classList.toggle('visible',window.scrollY>240)};window.addEventListener('scroll',refresh,{passive:true});refresh();b.addEventListener('click',()=>window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}));})();
 
-/* Flèches latérales discrètes : navigation entre quatre pages */
-(()=>{const pages=['index.html','boutique.html','creations-personnalisees.html','creations.html','lucie.html','contact.html'];const names=['Accueil','Boutique','Créations personnalisées','Nos créations','À propos de Lucie','Contact'];const current=location.pathname.split('/').pop()||'index.html';const i=pages.indexOf(current);if(i<0)return;const bar=document.createElement('nav');bar.className='mobile-page-arrows';bar.setAttribute('aria-label','Navigation entre les pages');function link(n,dir,disabled){const a=document.createElement(disabled?'span':'a');a.className=(dir==='prev'?'arrow-prev':'arrow-next')+(disabled?' is-disabled':'');if(!disabled){a.href=pages[n];a.title=names[n];a.setAttribute('aria-label',(dir==='prev'?'Page précédente : ':'Page suivante : ')+names[n])}else{a.setAttribute('aria-hidden','true')}a.innerHTML='<svg viewBox="0 0 20 32" fill="none" aria-hidden="true"><path d="'+(dir==='prev'?'M15 4 L5 16 L15 28':'M5 4 L15 16 L5 28')+'" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';return a}if(i>0)bar.appendChild(link(i-1,'prev',false));if(i<pages.length-1)bar.appendChild(link(i+1,'next',false));if(bar.childElementCount)document.body.appendChild(bar)})();
+/* Flèches latérales discrètes : navigation entre les pages principales (URLs propres /boutique OK) */
+(()=>{
+  const pages=['index','boutique','creations-personnalisees','creations','lucie','contact'];
+  const names=['Accueil','Boutique','Créations personnalisées','Nos créations','À propos de Lucie','Contact'];
+  const parts=location.pathname.split('/').filter(Boolean);
+  const raw=(parts.length?parts[parts.length-1]:'index').replace(/\.html$/i,'');
+  const i=pages.indexOf(raw);
+  if(i<0)return;
+  function hrefFor(slug){return slug==='index'?'/':'/'+slug;}
+  const bar=document.createElement('nav');
+  bar.className='mobile-page-arrows';
+  bar.setAttribute('aria-label','Navigation entre les pages');
+  function link(n,dir){
+    const a=document.createElement('a');
+    a.className=dir==='prev'?'arrow-prev':'arrow-next';
+    a.href=hrefFor(pages[n]);
+    a.title=names[n];
+    a.setAttribute('aria-label',(dir==='prev'?'Page précédente : ':'Page suivante : ')+names[n]);
+    a.innerHTML='<svg viewBox="0 0 20 32" fill="none" aria-hidden="true"><path d="'+(dir==='prev'?'M15 4 L5 16 L15 28':'M5 4 L15 16 L5 28')+'" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    return a;
+  }
+  if(i>0)bar.appendChild(link(i-1,'prev'));
+  if(i<pages.length-1)bar.appendChild(link(i+1,'next'));
+  if(bar.childElementCount)document.body.appendChild(bar);
+})();
 
 /* Badge panier (à côté du lien Panier dans le menu) */
 (()=>{const KEY='boreales-cart';function readCart(){try{const c=JSON.parse(localStorage.getItem(KEY)||'[]');return Array.isArray(c)?c:[]}catch(e){return[]}}function cartQty(){return readCart().reduce((s,x)=>s+(Number(x.qty)||0),0)}function refreshCartCount(opts){const el=document.getElementById('cart-count');if(!el)return;const prev=Number(el.dataset.count||0);const n=cartQty();el.textContent=String(n);el.dataset.count=String(n);el.classList.toggle('is-empty',n<=0);el.classList.toggle('has-items',n>0);const link=el.closest('.cart-link');if(link)link.setAttribute('aria-label',(document.documentElement.lang.startsWith('en')?'Cart':'Panier')+(n?` (${n})`:''));if(opts&&opts.bounce&&n>0&&n!==prev){el.classList.remove('bounce');void el.offsetWidth;el.classList.add('bounce')}}window.refreshCartCount=refreshCartCount;window.borealesCartKey=KEY;refreshCartCount();document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshCartCount()});window.addEventListener('storage',e=>{if(e.key===KEY)refreshCartCount()});window.addEventListener('boreales-cart-updated',()=>refreshCartCount({bounce:true}))})();
