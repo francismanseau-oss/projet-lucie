@@ -935,7 +935,8 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   const i=pages.indexOf(raw);
   if(i<0)return;
   const base='/'+(baseParts.length?baseParts.join('/')+'/':'');
-  function hrefFor(slug){return slug==='index'?base:(base+slug);}
+  /* Toujours .html : GitHub Pages n’a pas les URLs propres du domaine custom */
+  function hrefFor(slug){return slug==='index'?base:(base+slug+'.html');}
   const bar=document.createElement('nav');
   bar.className='mobile-page-arrows';
   bar.setAttribute('aria-label','Navigation entre les pages');
